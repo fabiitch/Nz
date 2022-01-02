@@ -1,17 +1,33 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 group 'com.nzt.nz'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = 1.8
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = ["src/main/java"]
+sourceSets.main.resources.srcDirs = ["src/main/resources"]
+sourceSets.test.java.srcDirs = ["src/test/java"]
+sourceSets.test.resources.srcDirs = ["src/test/resources"]
+
 repositories {
+    mavenLocal()
     mavenCentral()
+    google()
+    gradlePluginPortal()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'com.badlogicgames.gdx:gdx:1.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.mockito:mockito-core:4.2.0'
 }
 
 test {
