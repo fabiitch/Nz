@@ -1,4 +1,4 @@
-package com.nzt.nz;
+package com.fabiitch.nz;
 
 public class Nz {
     private Nz() {
