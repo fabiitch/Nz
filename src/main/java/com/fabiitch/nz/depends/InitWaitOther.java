@@ -11,23 +11,23 @@ public interface InitWaitOther {
 
     List<InitWaitOther> waitingList();
 
-    void init();
+    void create();
 
     void afterAllInit();
 
     /**
      * call InitWaitOther.init() on all, init is called if all in waitingList are initialised
-     * @param serviceArray
+     * @param initWaitOtherList
      * @throws Exception
      */
-    static void initAll(Array<InitWaitOther> serviceArray) throws Exception {
+    static void initAll(Array<InitWaitOther> initWaitOtherList) throws Exception {
         Array<InitWaitOther> toInitArray = new Array<>(); //cpy
         Array<InitWaitOther> rdyArray = new Array<>(); //cpy
 
-        while (rdyArray.size < serviceArray.size) {
+        while (rdyArray.size < initWaitOtherList.size) {
             int sizeRdyBefore = rdyArray.size;
 
-            toInitArray.addAll(serviceArray);
+            toInitArray.addAll(initWaitOtherList);
             toInitArray.removeAll(rdyArray, true);
             for (InitWaitOther toInit : toInitArray) {
                 boolean canInit = true;
@@ -41,7 +41,7 @@ public interface InitWaitOther {
                     }
 
                 if (canInit) {
-                    toInit.init();
+                    toInit.create();
                     rdyArray.add(toInit);
                 }
 
@@ -55,5 +55,8 @@ public interface InitWaitOther {
             }
             toInitArray.clear();
         }
+
+        for(InitWaitOther toEndInit : initWaitOtherList)
+            toEndInit.afterAllInit();
     }
 }

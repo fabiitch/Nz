@@ -67,7 +67,7 @@ public class InitWaitOtherTest {
         }
 
         @Override
-        public void init() {
+        public void create() {
             initCount++;
         }
 
