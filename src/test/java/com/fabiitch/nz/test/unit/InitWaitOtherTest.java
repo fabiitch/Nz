@@ -1,6 +1,7 @@
-package com.fabiitch.nz.depends;
+package com.fabiitch.nz.test.unit;
 
 import com.badlogic.gdx.utils.Array;
+import com.fabiitch.nz.depends.InitWaitOther;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//TODO a move
 public class InitWaitOtherTest {
 
     @Test
