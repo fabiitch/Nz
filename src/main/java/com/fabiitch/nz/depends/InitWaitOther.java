@@ -56,7 +56,7 @@ public interface InitWaitOther {
             toInitArray.clear();
         }
 
-        for(InitWaitOther toEndInit : initWaitOtherList)
+        for (InitWaitOther toEndInit : initWaitOtherList)
             toEndInit.afterAllInit();
     }
 }
