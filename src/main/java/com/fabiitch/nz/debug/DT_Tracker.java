@@ -1,7 +1,7 @@
 package com.fabiitch.nz.debug;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.fabiitch.nz.debug.huddebug.HudDebug;
 import com.fabiitch.nz.debug.huddebug.HudDebugPosition;
 import com.fabiitch.nz.math.utils.Percentage;
@@ -18,6 +18,10 @@ public class DT_Tracker {
     private static final int FPS_DEFAULT = 100;
 
     public int[] fpsTargets;
+
+    private long nanoFrameStart;
+    private long nanoFrame;
+
 
     public DT_Tracker(int positionOnStage, Color color, int... fpsTargets) {
         this.fpsTargets = fpsTargets;
@@ -40,18 +44,19 @@ public class DT_Tracker {
         this(HudDebugPosition.TOP_LEFT, Color.WHITE, fpsTargets);
     }
 
-    private float internalTimer = 0;
+
+    public void start() {
+        this.nanoFrameStart = TimeUtils.nanoTime();
+    }
+
+    public void end() {
+        nanoFrame = TimeUtils.nanoTime() - nanoFrameStart;
+    }
 
     /**
      * Call with your total render time method
-     * @param nanoFrame
      */
-    public void update(long nanoFrame) {
-        internalTimer += Gdx.graphics.getDeltaTime();
-        if (internalTimer < 1)
-            return;
-        internalTimer = 0;
-
+    public void updateHud() {
         HudDebug.update(TOTAL_TIME, DebugDisplayUtils.printNanoToMs(nanoFrame));
         for (int fpsTarget : fpsTargets) {
             HudDebug.update(TOTAL_TIME_PERCENT,
