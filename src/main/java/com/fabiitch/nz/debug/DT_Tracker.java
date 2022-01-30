@@ -26,7 +26,7 @@ public class DT_Tracker {
     public DT_Tracker(int positionOnStage, Color color, int... fpsTargets) {
         this.fpsTargets = fpsTargets;
         HudDebug.add(TOTAL_TIME, 100000f, positionOnStage, color);
-
+//
         removeFromHudDebug();//clean older
         for (int fpsTarget : fpsTargets) {
             HudDebug.add(TOTAL_TIME_PERCENT + fpsTarget + "FPS", "100%", positionOnStage, color);

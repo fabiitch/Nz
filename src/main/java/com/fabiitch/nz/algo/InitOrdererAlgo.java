@@ -1,4 +1,4 @@
-package com.fabiitch.nz.depends;
+package com.fabiitch.nz.algo;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -7,11 +7,11 @@ import java.util.List;
 /**
  *
  */
-public interface InitWaitOther {
+public interface InitOrdererAlgo {
 
-    List<InitWaitOther> waitingList();
+    List<InitOrdererAlgo> waitingList();
 
-    void create();
+    void init();
 
     void afterAllInit();
 
@@ -20,20 +20,20 @@ public interface InitWaitOther {
      * @param initWaitOtherList
      * @throws Exception
      */
-    static void initAll(Array<InitWaitOther> initWaitOtherList) throws Exception {
-        Array<InitWaitOther> toInitArray = new Array<>(); //cpy
-        Array<InitWaitOther> rdyArray = new Array<>(); //cpy
+    static void initAll(Array<InitOrdererAlgo> initWaitOtherList) throws Exception {
+        Array<InitOrdererAlgo> toInitArray = new Array<>(); //cpy
+        Array<InitOrdererAlgo> rdyArray = new Array<>(); //cpy
 
         while (rdyArray.size < initWaitOtherList.size) {
             int sizeRdyBefore = rdyArray.size;
 
             toInitArray.addAll(initWaitOtherList);
             toInitArray.removeAll(rdyArray, true);
-            for (InitWaitOther toInit : toInitArray) {
+            for (InitOrdererAlgo toInit : toInitArray) {
                 boolean canInit = true;
-                List<InitWaitOther> waitingServicesList = toInit.waitingList();
+                List<InitOrdererAlgo> waitingServicesList = toInit.waitingList();
                 if (waitingServicesList != null)
-                    for (InitWaitOther serviceWait : waitingServicesList) {
+                    for (InitOrdererAlgo serviceWait : waitingServicesList) {
                         if (!rdyArray.contains(serviceWait, true)) {
                             canInit = false;
                             break;
@@ -41,14 +41,14 @@ public interface InitWaitOther {
                     }
 
                 if (canInit) {
-                    toInit.create();
+                    toInit.init();
                     rdyArray.add(toInit);
                 }
 
             }
             if (sizeRdyBefore == rdyArray.size) {
                 String blockedList = "";
-                for (InitWaitOther service : toInitArray) {
+                for (InitOrdererAlgo service : toInitArray) {
                     blockedList += service.getClass().getSimpleName() + " ,";
                 }
                 throw new Exception("Init blocking :" + blockedList);
@@ -56,7 +56,7 @@ public interface InitWaitOther {
             toInitArray.clear();
         }
 
-        for (InitWaitOther toEndInit : initWaitOtherList)
+        for (InitOrdererAlgo toEndInit : initWaitOtherList)
             toEndInit.afterAllInit();
     }
 }
