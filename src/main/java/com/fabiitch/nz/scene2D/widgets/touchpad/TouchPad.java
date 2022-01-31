@@ -29,11 +29,12 @@ public abstract class TouchPad {
     public Vector2 direction = new Vector2();
     public float force = 0f;
 
-    public TouchPad(Texture textureBase, Texture textureKnob, NzStage nzStage, Vector2 posInactivePercent, float sizeHPBase, float sizeHPKnob,
+    public TouchPad(NzStage nzStage, Texture textureBase, Texture textureKnob, Vector2 posInactivePercent, float sizeHPBase, float sizeHPKnob,
                     boolean fixedOnDrag) {
+        this.nzStage = nzStage;
         this.textureBase = textureBase;
         this.textureKnob = textureKnob;
-        this.nzStage = nzStage;
+
         this.posInactivePercent = posInactivePercent;
         this.fixedOnDrag = fixedOnDrag;
         this.init(textureBase, textureKnob, sizeHPBase, sizeHPKnob);
