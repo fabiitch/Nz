@@ -30,7 +30,7 @@ public class MathTestUtils {
 //        return new Segment(aX, aY, bX, bY);
 //    }
 
-    public Vector2 v2() {
+    public static Vector2 v2() {
         return new Vector2();
     }
 
