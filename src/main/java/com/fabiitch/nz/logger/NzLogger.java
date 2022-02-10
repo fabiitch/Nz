@@ -1,20 +1,68 @@
 package com.fabiitch.nz.logger;
 
+import com.badlogic.gdx.Gdx;
+
+import java.util.HashMap;
+
 public class NzLogger {
 
-    public static void log(int level, String tag, String msg) {
+    public static boolean log = true;
+    public static boolean logAlwaysException = true;
+    public static boolean authoriseTagStrategy = true;
 
+    private static HashMap<String, Boolean> tagMap = new HashMap<>();
+
+    public static void addTag(String tag) {
+        tagMap.put(tag, true);
     }
 
-    public static void debug(String tag, String msg) {
-
+    public static void removeTag(String tag) {
+        tagMap.put(tag, false);
     }
 
-    public static void info(String tag, String msg) {
-
+    public static void addTag(String[] tags) {
+        for (String tag : tags)
+            tagMap.put(tag, true);
     }
 
-    public static void error(String tag, String msg) {
-
+    public static void removeTag(String[] tags) {
+        for (String tag : tags)
+            tagMap.put(tag, false);
     }
+
+    private static boolean accept(String tag) {
+        Boolean tagBool = tagMap.get(tag);
+        return tagBool == true || (tagBool == null && authoriseTagStrategy);
+    }
+
+    public static void debug(String tag, String message) {
+        if (log && accept(tag))
+            Gdx.app.debug(tag, message);
+    }
+
+    public static void debug(String tag, String message, Throwable exception) {
+        if (logAlwaysException || (log && accept(tag)))
+            Gdx.app.debug(tag, message, exception);
+    }
+
+    public static void log(String tag, String message) {
+        if (log && accept(tag))
+            Gdx.app.log(tag, message);
+    }
+
+    public static  void log(String tag, String message, Throwable exception) {
+        if (logAlwaysException || (log && accept(tag)))
+            Gdx.app.log(tag, message, exception);
+    }
+
+    public static void error(String tag, String message) {
+        if (log && accept(tag))
+            Gdx.app.error(tag, message);
+    }
+
+    public static void error(String tag, String message, Throwable exception) {
+        if (logAlwaysException || (log && accept(tag)))
+            Gdx.app.error(tag, message, exception);
+    }
+
 }
