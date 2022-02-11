@@ -32,7 +32,11 @@ public class NzLogger {
 
     private static boolean accept(String tag) {
         Boolean tagBool = tagMap.get(tag);
-        return tagBool == true || (tagBool == null && authoriseTagStrategy);
+        if(tagBool == null){
+            return authoriseTagStrategy;
+        }else{
+            return tagBool;
+        }
     }
 
     public static void debug(String tag, String message) {
