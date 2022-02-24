@@ -15,7 +15,7 @@ public class RectangleUtils {
     }
 
     public static Vector2 getRandomPos(Rectangle rect, Vector2 posReturn) {
-        return posReturn.set(MathUtils.random(rect.x, rect.x + rect.width), rect.y + rect.height);
+        return posReturn.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y, rect.y + rect.height));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.fabiitch.nz.scene2D.widgets.touchpad;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -29,7 +30,10 @@ public abstract class TouchPad {
     public Vector2 direction = new Vector2();
     public float force = 0f;
 
-    public TouchPad(NzStage nzStage, Texture textureBase, Texture textureKnob, Vector2 posInactivePercent, float sizeHPBase, float sizeHPKnob,
+    public TouchPad(NzStage nzStage,
+                    Texture textureBase, Texture textureKnob,
+                    Vector2 posInactivePercent,
+                    float sizeHPBase, float sizeHPKnob,
                     boolean fixedOnDrag) {
         this.nzStage = nzStage;
         this.textureBase = textureBase;
