@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.math.AngleUtils;
 import com.fabiitch.nz.math.NzMath;
 import com.fabiitch.nz.math.shapes.Segment;
+import com.fabiitch.nz.math.vectors.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
 
@@ -83,6 +84,10 @@ public class RectangleUtils {
         return center.set(rect.width / 2, rect.height / 2);
     }
 
+    public static Vector2 getCenter(Rectangle rect) {
+        return V2.v(rect.x + rect.width / 2, rect.y + rect.height / 2);
+    }
+
     public static Vector2 getCenter(Rectangle rect, Vector2 center) {
         return center.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
     }
@@ -96,7 +101,7 @@ public class RectangleUtils {
         rect.y = newCenterY - rect.height / 2;
     }
 
-    public static Rectangle create(float x , float y, float witdh, float height) {
+    public static Rectangle create(float x, float y, float witdh, float height) {
         return new Rectangle(x, y, witdh, height);
     }
 
@@ -518,7 +523,7 @@ public class RectangleUtils {
     }
 
     public static Vector2 getRandomPos(Rectangle rect, Vector2 v) {
-        return v.set(MathUtils.random(rect.x, rect.x + rect.width), rect.y + rect.height);
+        return v.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y + rect.height));
     }
 
     /**
