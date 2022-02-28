@@ -1,11 +1,11 @@
-package com.fabiitch.nz.math.shape.builder;
+package com.fabiitch.nz.unit.math.shape.builder;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.math.shapes.builders.PolygonBuilder;
 import com.fabiitch.nz.math.shapes.utils.PolygonUtils;
 import com.fabiitch.nz.math.vectors.V2;
-import com.fabiitch.nz.math.vectors.VTestUtils;
+import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

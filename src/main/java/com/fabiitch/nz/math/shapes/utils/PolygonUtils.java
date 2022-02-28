@@ -2,6 +2,7 @@ package com.fabiitch.nz.math.shapes.utils;
 
 import com.badlogic.gdx.math.GeometryUtils;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.math.NzMath;
 import com.fabiitch.nz.math.shapes.Segment;
@@ -249,5 +250,28 @@ public class PolygonUtils {
             vertices[other] = x;
             vertices[other + 1] = y;
         }
+    }
+
+    public static Rectangle getBoundingRectangle(Polygon polygon, Rectangle bounds){
+        float[] vertices = polygon.getTransformedVertices();
+
+        float minX = vertices[0];
+        float minY = vertices[1];
+        float maxX = vertices[0];
+        float maxY = vertices[1];
+
+        final int numFloats = vertices.length;
+        for (int i = 2; i < numFloats; i += 2) {
+            minX = minX > vertices[i] ? vertices[i] : minX;
+            minY = minY > vertices[i + 1] ? vertices[i + 1] : minY;
+            maxX = maxX < vertices[i] ? vertices[i] : maxX;
+            maxY = maxY < vertices[i + 1] ? vertices[i + 1] : maxY;
+        }
+        bounds.x = minX;
+        bounds.y = minY;
+        bounds.width = maxX - minX;
+        bounds.height = maxY - minY;
+
+        return bounds;
     }
 }

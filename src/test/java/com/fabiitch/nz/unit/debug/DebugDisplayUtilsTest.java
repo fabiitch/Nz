@@ -1,5 +1,6 @@
-package com.fabiitch.nz.debug;
+package com.fabiitch.nz.unit.debug;
 
+import com.fabiitch.nz.debug.DebugDisplayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

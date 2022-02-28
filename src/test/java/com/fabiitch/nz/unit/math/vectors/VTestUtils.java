@@ -1,4 +1,4 @@
-package com.fabiitch.nz.math.vectors;
+package com.fabiitch.nz.unit.math.vectors;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;

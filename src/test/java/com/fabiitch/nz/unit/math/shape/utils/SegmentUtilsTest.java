@@ -1,17 +1,18 @@
-package com.fabiitch.nz.math.shape.utils;
+package com.fabiitch.nz.unit.math.shape.utils;
 
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.AbstractMathTest;
 import com.fabiitch.nz.math.shapes.Segment;
-import com.fabiitch.nz.math.vectors.VTestUtils;
+import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.math.shapes.utils.SegmentUtils.*;
+import static com.fabiitch.nz.unit.math.MathTestUtils.s;
+import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SegmentUtilsTest extends AbstractMathTest {
+public class SegmentUtilsTest {
 
     private static final float TOLERANCE = 0.01f;
 
@@ -52,7 +53,7 @@ public class SegmentUtilsTest extends AbstractMathTest {
     @Test
     public void getAngleReflexionTest1() {
         Segment s1 = s(50, 0, 50, 50);
-        Vector2 direction = v(1, 0);
+        Vector2 direction = v2(1, 0);
         float angleReflexion = getAngleReflexionDeg(s1, direction);
         Assertions.assertEquals(0, angleReflexion, 0.1f);
     }
@@ -60,7 +61,7 @@ public class SegmentUtilsTest extends AbstractMathTest {
     @Test
     public void getAngleReflexionTest2() {
         Segment s1 = s(0, 0, 50, 0);
-        Vector2 direction = v(1, 1).nor();
+        Vector2 direction = v2(1, 1).nor();
         float angleReflexion = getAngleReflexionDeg(s1, direction);
         Assertions.assertEquals(135f, angleReflexion, 0.1f);
     }

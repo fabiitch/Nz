@@ -1,18 +1,18 @@
-package com.fabiitch.nz.math.shape;
+package com.fabiitch.nz.unit.math.shape;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.AbstractMathTest;
 import com.fabiitch.nz.math.shapes.Triangle;
-import com.fabiitch.nz.math.vectors.VTestUtils;
+import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TriangleTest extends AbstractMathTest {
+public class TriangleTest  {
     private static final float ANGLE_TOLERANCE = 1f;
     private static final float POSITION_TOLERANCE = 0.01f;
 
@@ -29,7 +29,7 @@ public class TriangleTest extends AbstractMathTest {
         v2 = new Vector2(5, 0);
         triangle = new Triangle(v0, v1, v2);
 
-        posTest = v(-100, -100);
+        posTest = v2(-100, -100);
     }
 
     private void moveAndRotate() {
@@ -47,13 +47,13 @@ public class TriangleTest extends AbstractMathTest {
     @Test
     public void getDirTest() {
         triangle.getDir(0, 1, posTest);
-        VTestUtils.assertEquals(v(0, 1), posTest, ANGLE_TOLERANCE);
+        VTestUtils.assertEquals(v2(0, 1), posTest, ANGLE_TOLERANCE);
 
         triangle.getDir(0, 2, posTest);
-        VTestUtils.assertEquals(v(1, 0), posTest, ANGLE_TOLERANCE);
+        VTestUtils.assertEquals(v2(1, 0), posTest, ANGLE_TOLERANCE);
 
         triangle.getDir(1, 2, posTest);
-        final Vector2 BCNor = v(5, 0).sub(0, 5).nor();
+        final Vector2 BCNor =v2(5, 0).sub(0, 5).nor();
         VTestUtils.assertEquals(BCNor, posTest, ANGLE_TOLERANCE);
         moveAndRotate();
     }

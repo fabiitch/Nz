@@ -1,6 +1,7 @@
-package com.fabiitch.nz.algo;
+package com.fabiitch.nz.unit.algo;
 
 import com.badlogic.gdx.utils.Array;
+import com.fabiitch.nz.algo.InitOrdererAlgo;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

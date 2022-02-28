@@ -1,11 +1,11 @@
-package com.fabiitch.nz.math;
+package com.fabiitch.nz.unit.math;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.math.shapes.Segment;
 
-public class AbstractMathTest {
+public class MathTestUtils {
 
     public static Circle c(float radius) {
         return new Circle(0, 0, radius);
@@ -19,6 +19,11 @@ public class AbstractMathTest {
         return new Rectangle(x, y, witdh, height);
     }
 
+    public static Rectangle r(Vector2 pos, float witdh, float height) {
+        return new Rectangle(pos.x, pos.y, witdh, height);
+    }
+
+
     public static Rectangle r(float witdh, float height) {
         return r(0, 0, witdh, height);
     }
@@ -27,16 +32,19 @@ public class AbstractMathTest {
         return r(0, 0, 0, 0);
     }
 
+    public static Segment s(Vector2 a, Vector2 b) {
+        return new Segment(a, b);
+    }
+
     public static Segment s(float aX, float aY, float bX, float bY) {
         return new Segment(aX, aY, bX, bY);
     }
 
-    public Vector2 v() {
+    public static Vector2 v2() {
         return new Vector2();
     }
 
-    public static Vector2 v(float a, float b) {
+    public static Vector2 v2(float a, float b) {
         return new Vector2(a, b);
     }
-
 }

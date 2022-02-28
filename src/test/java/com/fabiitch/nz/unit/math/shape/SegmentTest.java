@@ -1,4 +1,4 @@
-package com.fabiitch.nz.math.shape;
+package com.fabiitch.nz.unit.math.shape;
 
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.math.shapes.Segment;
