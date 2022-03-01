@@ -14,17 +14,30 @@ public class QuadTreeTest {
 
     @Test
     public void testAdd() {
+
+        int LOOP = 1;
+        int NB_ADD = 1000;
+
+
         Rectangle quadRect = r(500, 500);
-        for (int pp = 0; pp < 10; pp++) {
+        for (int loopStart = 0; loopStart < LOOP; loopStart++) {
+            Array<Integer> values = new Array<>();
             QuadTree<Integer> quadTree = new QuadTree<>(quadRect, 5, 10);
-            for (int i = 0; i < 500; i++) {
+            for (int i = 0; i < NB_ADD; i++) {
                 Rectangle rect = r(RectangleUtils.getRandomPos(quadRect, v2()), 1, 1);
                 quadTree.add(i, rect);
             }
 
-            Array<Integer> values = new Array<>();
             quadTree.getAllValues(values);
-            Assertions.assertEquals(500, values.size);
+            Assertions.assertEquals(NB_ADD, values.size);
+
+
+            values = new Array<>();
+            for (int i = 0; i < NB_ADD; i++) {
+                quadTree.remove(i);
+            }
+            quadTree.getAllValues(values);
+            Assertions.assertEquals(0, values.size);
         }
     }
 }

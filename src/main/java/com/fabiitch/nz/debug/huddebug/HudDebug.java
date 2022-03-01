@@ -133,6 +133,9 @@ public class HudDebug {
         addTopLeft(null, name, value, color);
     }
 
+    public static void addTopMiddle(String name) {
+        addTopLeft(null, name, "", Color.WHITE);
+    }
     public static void addTopLeft(String name, Object value) {
         addTopLeft(null, name, value, Color.WHITE);
     }

@@ -523,9 +523,26 @@ public class RectangleUtils {
     }
 
     public static Vector2 getRandomPos(Rectangle rect, Vector2 v) {
-        return v.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y + rect.height));
+        return v.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y, rect.y + rect.height));
     }
 
+    public static float getXMax(Rectangle rectangle) {
+        return rectangle.x + rectangle.width;
+    }
+
+    public static float getYMax(Rectangle rectangle) {
+        return rectangle.y + rectangle.height;
+    }
+
+    public static Rectangle scale(float scale, Rectangle rect) {
+        return rect.setSize(rect.width * scale, rect.height * scale);
+    }
+
+    public static Rectangle add(float x, float y, Rectangle rect) {
+        rect.x += x;
+        rect.y += y;
+        return rect;
+    }
     /**
      * intersection between ray from center and edge
      */
