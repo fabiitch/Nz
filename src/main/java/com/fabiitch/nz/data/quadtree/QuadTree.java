@@ -11,24 +11,26 @@ public class QuadTree<T> {
     public Rectangle boundingRect;
 
     public int depth;
+
+    public int maxDepth;
     public int maxValues;
     public Array<T> values;
     public Array<Rectangle> rectValues;
 
-    public QuadTree(Rectangle rect, int depth, int maxValues) {
+    public QuadTree(Rectangle rect, int maxDepth, int maxValues) {
         this.boundingRect = new Rectangle(rect);
         this.values = new Array<>(maxValues);
         this.rectValues = new Array<>(maxValues);
-        build(rect, depth, maxValues);
+        build(rect, maxDepth, maxValues);
     }
 
     public QuadTree cpy() {
         return null;
     }
 
-    public void build(Rectangle rect, int depth, int maxValues) {
+    public void build(Rectangle rect, int maxDepth, int maxValues) {
         this.boundingRect.set(rect);
-        this.depth = depth;
+        this.maxDepth = maxDepth;
         this.maxValues = maxValues;
         rebuild();
     }
@@ -55,6 +57,7 @@ public class QuadTree<T> {
         } else {
             RectangleUtils.mergeFloorCeil(this.boundingRect, rect);
             rebuild();
+            add(value, rect);
         }
     }
 
@@ -75,15 +78,15 @@ public class QuadTree<T> {
 
     private boolean shouldSplit() {
         if (isSplitted()
-                || this.depth == maxValues
-                || values.size + 1 <= maxValues) {
+                || this.depth == maxDepth
+                || values.size < maxValues) {
             return false;
         }
-        return values.size + 1 >= maxValues;
+        return true;
     }
 
     private boolean shouldRegroup() {
-        return isSplitted() && values.size < maxValues / 2;
+        return depth > 0 && isSplitted() && values.size < maxValues / 2;
     }
 
     public void split() {
@@ -91,15 +94,17 @@ public class QuadTree<T> {
             return;
 
         int newDepth = this.depth + 1;
-        this.nw = new QuadTree(QuadTreeUtils.getNW(this.boundingRect, new Rectangle()), newDepth, this.maxValues);
-        this.ne = new QuadTree(QuadTreeUtils.getNE(this.boundingRect, new Rectangle()), newDepth, this.maxValues);
-        this.sw = new QuadTree(QuadTreeUtils.getSW(this.boundingRect, new Rectangle()), newDepth, this.maxValues);
-        this.se = new QuadTree(QuadTreeUtils.getSE(this.boundingRect, new Rectangle()), newDepth, this.maxValues);
+        this.nw = new QuadTree(QuadTreeUtils.getNW(this.boundingRect, new Rectangle()), this.maxDepth, this.maxValues);
+        this.ne = new QuadTree(QuadTreeUtils.getNE(this.boundingRect, new Rectangle()), this.maxDepth, this.maxValues);
+        this.sw = new QuadTree(QuadTreeUtils.getSW(this.boundingRect, new Rectangle()), this.maxDepth, this.maxValues);
+        this.se = new QuadTree(QuadTreeUtils.getSE(this.boundingRect, new Rectangle()), this.maxDepth, this.maxValues);
+        this.nw.depth = newDepth;
+        this.ne.depth = newDepth;
+        this.sw.depth = newDepth;
+        this.se.depth = newDepth;
 
-        Array<T> allValues = new Array<>();
-        Array<Rectangle> allRectValues = new Array<>();
-        this.getAllValues(allValues, allRectValues);
-
+        Array<T> allValues = new Array<>(this.values);
+        Array<Rectangle> allRectValues = new Array<>(this.rectValues);
         this.values.clear();
         this.rectValues.clear();
 
@@ -130,19 +135,18 @@ public class QuadTree<T> {
             this.nw.getAllValues(valueResults);
             this.ne.getAllValues(valueResults);
             this.sw.getAllValues(valueResults);
-            this.ne.getAllValues(valueResults);
+            this.se.getAllValues(valueResults);
         }
     }
 
     public void getAllValues(Array<T> valueResults, Array<Rectangle> rectResults) {
         valueResults.addAll(this.values);
         rectResults.addAll(this.rectValues);
-
         if (isSplitted()) {
             this.nw.getAllValues(valueResults, rectResults);
             this.ne.getAllValues(valueResults, rectResults);
             this.sw.getAllValues(valueResults, rectResults);
-            this.ne.getAllValues(valueResults, rectResults);
+            this.se.getAllValues(valueResults, rectResults);
         }
     }
 

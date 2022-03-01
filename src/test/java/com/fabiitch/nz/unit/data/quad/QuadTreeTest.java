@@ -15,16 +15,16 @@ public class QuadTreeTest {
     @Test
     public void testAdd() {
         Rectangle quadRect = r(500, 500);
-        QuadTree<Integer> quadTree = new QuadTree<>(quadRect, 5, 10);
+        for (int pp = 0; pp < 10; pp++) {
+            QuadTree<Integer> quadTree = new QuadTree<>(quadRect, 5, 10);
+            for (int i = 0; i < 500; i++) {
+                Rectangle rect = r(RectangleUtils.getRandomPos(quadRect, v2()), 1, 1);
+                quadTree.add(i, rect);
+            }
 
-        for (int i = 0; i < 500; i++) {
-            Rectangle rect = r(RectangleUtils.getRandomPos(quadRect, v2()), 1, 1);
-            quadTree.add(i, rect);
+            Array<Integer> values = new Array<>();
+            quadTree.getAllValues(values);
+            Assertions.assertEquals(500, values.size);
         }
-
-        Array<Integer> values = new Array<>();
-        quadTree.getAllValues(values);
-        Assertions.assertEquals(500, values.size);
-
     }
 }
