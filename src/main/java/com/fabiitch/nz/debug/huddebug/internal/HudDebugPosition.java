@@ -1,4 +1,4 @@
-package com.fabiitch.nz.debug.huddebug;
+package com.fabiitch.nz.debug.huddebug.internal;
 
 /**
  * Mapping for order on HudDebug

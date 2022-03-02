@@ -1,8 +1,8 @@
 package com.fabiitch.nz.utils;
 
 public class TimeLocker {
-    private float duration;//s
-    private float accumulator;
+    public float duration;//seconds
+    public float accumulator;
 
     public TimeLocker(float duration) {
         this.duration = duration;

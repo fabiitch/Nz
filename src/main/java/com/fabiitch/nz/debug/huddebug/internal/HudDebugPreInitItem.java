@@ -1,4 +1,4 @@
-package com.fabiitch.nz.debug.huddebug;
+package com.fabiitch.nz.debug.huddebug.internal;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;

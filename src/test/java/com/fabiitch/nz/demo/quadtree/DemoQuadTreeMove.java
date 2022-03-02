@@ -16,7 +16,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
         inputMultiplexer.addProcessor(getInput());
         quadRender.drawQuadData = false;
         quadRender.drawUserData = false;
-        quadTree.build(quadTree.boundingRect, 500, 5);
+        quadT.build(quadT.boundingRect, 500, 5);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
 
         for (QuadData quadData : values) {
             Vector2 dir = (Vector2) quadData.data;
-            Rectangle rectangle = quadTree.getRectangle(quadData);
-            Rectangle quadRect = quadTree.boundingRect;
+            Rectangle rectangle = quadT.getRectangle(quadData);
+            Rectangle quadRect = quadT.boundingRect;
             RectangleUtils.add(dir.x, dir.y, rectangle);
             if (RectangleUtils.getXMax(rectangle) > RectangleUtils.getXMax(quadRect)) {
                 dir.x = -dir.x;
@@ -49,7 +49,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             }
 
         }
-        quadTree.update();
+        quadT.update();
     }
 
     Rectangle rectBodyDestruction = null;
@@ -90,7 +90,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
 
-                    Array<QuadData<Vector2>> result = quadTree.query(new Array<>(), rectBodyDestruction);
+                    Array<QuadData<Vector2>> result = quadT.query(new Array<>(), rectBodyDestruction);
                     quadRemove(result);
                     rectBodyDestruction = null;
                 }

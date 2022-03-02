@@ -5,6 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.debug.DebugDisplayUtils;
+import com.fabiitch.nz.debug.huddebug.internal.HudDebugContainer;
+import com.fabiitch.nz.debug.huddebug.internal.HudDebugLabel;
+import com.fabiitch.nz.debug.huddebug.internal.HudDebugPosition;
+import com.fabiitch.nz.debug.huddebug.internal.HudDebugPreInitItem;
 
 public class HudDebug {
     public static HudDebug instance;

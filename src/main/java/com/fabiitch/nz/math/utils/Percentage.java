@@ -14,7 +14,7 @@ public class Percentage {
      * @return number 0-100
      */
     public static float getPercent(float part, float total) {
-        return part * 100 / total;
+        return part / total * 100;
     }
 
     public static float getAlpha(float part, float total) {
