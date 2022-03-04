@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.fabiitch.nz.debug.huddebug.HudDebug;
 import com.fabiitch.nz.input.InputUtils;
 import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
 
@@ -17,11 +18,14 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
         quadRender.drawQuadData = false;
         quadRender.drawUserData = false;
         quadTree.build(quadTree.boundingRect, 500, 5);
+
+        HudDebug.addTopMiddle("MaxDepth", Color.RED);
     }
 
     @Override
     public void render(float dt) {
         super.render(dt);
+        HudDebug.update("MaxDepth", quadTree.getCurrentMaxDepth(0));
         if (rectBodyDestruction != null) {
             shapeRenderer.setProjectionMatrix(camera.combined);
             shapeRenderer.setColor(Color.RED);
