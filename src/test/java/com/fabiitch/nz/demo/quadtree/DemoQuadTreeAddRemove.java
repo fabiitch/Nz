@@ -13,9 +13,6 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
     public DemoQuadTreeAddRemove() {
         super();
         inputMultiplexer.addProcessor(addRemoveController());
-        hudMsg("arrow for move, mouse for zoom");
-        hudMsg("Left for create rect");
-        hudMsg("Right Click destroy");
     }
 
     @Override
@@ -67,8 +64,8 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
                 } else if (rectBodyDestruction != null) {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
-                    Array<Integer> result = quadTree.query(new Array<>(), rectBodyDestruction);
-                    quadTree.remove(result);
+                    Array<Integer> result = quadT.query(new Array<>(), rectBodyDestruction);
+                    quadT.remove(result);
 
                     rectBodyDestruction = null;
                 }

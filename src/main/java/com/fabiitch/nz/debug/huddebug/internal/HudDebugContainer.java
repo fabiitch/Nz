@@ -1,16 +1,17 @@
-package com.fabiitch.nz.debug.huddebug;
+package com.fabiitch.nz.debug.huddebug.internal;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.debug.DebugDisplayUtils;
+import com.fabiitch.nz.debug.huddebug.HudDebug;
 
 import java.util.HashMap;
 import java.util.Map;
 
 //TODO padding on android
-class HudDebugContainer {
+public class HudDebugContainer {
 
     private final Skin skin;
     private final Stage stage;

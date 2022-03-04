@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
 
     public NzShapeRenderer shapeRenderer;
-    public QuadTree<QuadData<T>> quadTree;
+    public QuadTree<QuadData<T>> quadT;
     public OrthographicCamera camera;
     protected QuadTreeRenderer quadRender;
     public InputMultiplexer inputMultiplexer = new InputMultiplexer();
@@ -35,15 +35,20 @@ public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
 
     public BaseDemoQuadTree() {
         super();
+        hudGlProfiler();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         quadRender = new QuadTreeRenderer();
 
-        quadTree = new QuadTree<>(NzUtils.screenAsRectangle(camera, true), 5, 5);
+        quadT = new QuadTree<>(NzUtils.screenAsRectangle(camera, true), 5, 5);
 
         shapeRenderer = new NzShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.addProcessor(cameraController());
+
+        hudMsg("arrow for move, mouse for zoom");
+        hudMsg("Left for create rect");
+        hudMsg("Right Click destroy");
     }
 
     @Override
@@ -58,7 +63,7 @@ public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
         HudDebug.update("QuadEntryCount", values.size());
         camera.update();
         V3.add(camera.position, tmpVel.set(cameraVelocity).scl(camera.zoom));
-        quadRender.render(quadTree, camera);
+        quadRender.render(quadT, camera);
     }
 
     protected void quadRemove(Array<QuadData<T>> quadDatas) {
@@ -68,14 +73,14 @@ public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
 
     protected void quadRemove(QuadData<T> quadData) {
         this.values.remove(quadData);
-        quadTree.remove(quadData);
+        quadT.remove(quadData);
     }
 
     protected void quadAdd(T data, Rectangle rect) {
         indexQuad += 1;
         QuadData quadData = new QuadData(indexQuad, rect, data);
         this.values.add(quadData);
-        this.quadTree.add(quadData, rect);
+        this.quadT.add(quadData, rect);
     }
 
     public InputProcessor cameraController() {

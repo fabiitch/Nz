@@ -57,7 +57,7 @@ public class QuadTreeRenderer {
 
     private Array tmpArray = new Array();
 
-    private void renderQuadData(QuadTree<?> quad) {
+    protected void renderQuadData(QuadTree<?> quad) {
         tmpArray.clear();
         quad.getAllValues(tmpArray);
         RectangleUtils.getCenter(quad.boundingRect, tmpV2);
@@ -74,7 +74,7 @@ public class QuadTreeRenderer {
 
     private final Vector2 tmpV2 = new Vector2();
 
-    private void renderUserData(QuadTree<?> quad) {
+    protected void renderUserData(QuadTree<?> quad) {
         for (int i = 0, n = quad.values.size; i < n; i++) {
             Rectangle rect = quad.rectValues.get(i);
             Object o = quad.values.get(i);
@@ -90,7 +90,7 @@ public class QuadTreeRenderer {
         }
     }
 
-    private void renderRects(QuadTree<?> quad) {
+    protected void renderRects(QuadTree<?> quad) {
         for (Rectangle rectValue : quad.rectValues) {
             shapeRenderer.rect(rectValue);
         }
@@ -111,5 +111,11 @@ public class QuadTreeRenderer {
         } else {
             shapeRenderer.rect(quad.boundingRect);
         }
+    }
+
+    public void dispose(){
+        shapeRenderer.dispose();
+        spriteBatch.dispose();
+        bitmapFont.dispose();
     }
 }
