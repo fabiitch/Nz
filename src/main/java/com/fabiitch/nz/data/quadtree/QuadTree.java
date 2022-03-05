@@ -264,11 +264,16 @@ public class QuadTree<T> {
         }
     }
 
-    /*** min=0*/
-    public int getCurrentMaxDepth(int depthStart){
+    public int getCurrentMaxDepth(int depthStart) {
         depthStart++;
-        if(isSplit()){
-            return nw.getCurrentMaxDepth(depthStart);
+        if (isSplit()) {
+            int dephtNw = nw.getCurrentMaxDepth(depthStart);
+            int dephtNe = ne.getCurrentMaxDepth(depthStart);
+            int dephtSw = sw.getCurrentMaxDepth(depthStart);
+            int dephtSe = se.getCurrentMaxDepth(depthStart);
+            int maxNorth = Math.max(dephtNw, dephtNe);
+            int maxSouth = Math.max(dephtSw, dephtSe);
+            return Math.max(maxNorth,maxSouth);
         }
         return depthStart;
     }

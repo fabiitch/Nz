@@ -1,5 +1,6 @@
 package com.fabiitch.nz.unit.data.quad;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.data.quadtree.QuadTree;
@@ -47,7 +48,15 @@ public class QuadTreeTest {
         QuadTree quadTree = new QuadTree<>(r(50, 50), 5, 500);
         QuadTree quadTreeOrig = quadTree;
         for (int i = 0; i < 9; i++) {
-            quadTree = quadTree.split().nw;
+            int random = MathUtils.random(1, 4);
+            if (random == 1)
+                quadTree = quadTree.split().nw;
+            if (random == 2)
+                quadTree = quadTree.split().ne;
+            if (random == 3)
+                quadTree = quadTree.split().se;
+            if (random == 4)
+                quadTree = quadTree.split().sw;
         }
         Assertions.assertEquals(10, quadTreeOrig.getCurrentMaxDepth(0));
     }
