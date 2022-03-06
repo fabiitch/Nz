@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
+import com.fabiitch.nz.math.shapes.builders.RectangleBuilder;
 
 public class NzUtils {
 
@@ -15,7 +15,7 @@ public class NzUtils {
     public static Rectangle screenAsRectangle(boolean centerAs0) {
         Rectangle rect = new Rectangle();
         if (centerAs0) {
-            return RectangleUtils.createFromCenter(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            return RectangleBuilder.fromCenter(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         } else {
             return rect.set(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
@@ -24,7 +24,7 @@ public class NzUtils {
     public static Rectangle screenAsRectangle(Camera camera, boolean centerAs0) {
         Rectangle rect = new Rectangle();
         if (centerAs0) {
-            return RectangleUtils.createFromCenter(0, 0, camera.viewportWidth, camera.viewportHeight);
+            return RectangleBuilder.fromCenter(0, 0, camera.viewportWidth, camera.viewportHeight);
         } else {
             return rect.set(0, 0, camera.viewportWidth, camera.viewportHeight);
         }
