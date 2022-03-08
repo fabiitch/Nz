@@ -60,4 +60,13 @@ public class QuadTreeUtils {
         return count;
     }
 
+//TODO
+//    public static QuadTree getBorders(QuadTree quadTree) {
+//        if (quadTree.isSplitted()) {
+//
+//        }else{
+//            return quadTree;
+//        }
+//
+//    }
 }

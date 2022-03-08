@@ -52,7 +52,7 @@ public class QuadTree<T> {
         }
     }
 
-    public void add(T value, Rectangle rect) {
+    public QuadTree add(T value, Rectangle rect) {
         QuadTree quad = getQuad(rect);
         if (quad != null) {
             quad.values.add(value);
@@ -64,6 +64,7 @@ public class QuadTree<T> {
             this.rebuild();
             this.add(value, rect);
         }
+        return quad;
     }
 
     /**
