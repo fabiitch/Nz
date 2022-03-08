@@ -89,7 +89,7 @@ public class QuadTree<T> {
                 return true;
             }
         }
-        if (isSplitted()) {
+        if (isSplit()) {
             if (nw.remove(value))
                 return true;
             if (ne.remove(value))
@@ -102,12 +102,12 @@ public class QuadTree<T> {
         return false;
     }
 
-    public boolean isSplitted() { //TODO rename 
+    public boolean isSplit() { //TODO rename
         return ne != null || nw != null || sw != null || se != null;
     }
 
     private boolean shouldSplit() {
-        if (isSplitted()
+        if (isSplit()
                 || this.depth >= maxDepth
                 || values.size < maxValues) {
             return false;
@@ -116,12 +116,12 @@ public class QuadTree<T> {
     }
 
     private boolean shouldRegroup() {
-        return isSplitted() && values.size < maxValues / 2;
+        return isSplit() && values.size < maxValues / 2;
     }
 
-    public void split() {
-        if (isSplitted())
-            return;
+    public QuadTree split() {
+        if (isSplit())
+            return this;
 
         int newDepth = this.depth + 1;
         this.nw = new QuadTree(QuadTreeUtils.getNW(this.boundingRect, new Rectangle()), this.maxValues, this.maxDepth);
@@ -141,10 +141,11 @@ public class QuadTree<T> {
         for (int i = 0, n = allValues.size; i < n; i++) {
             add(allValues.get(i), allRectValues.get(i));
         }
+        return this;
     }
 
     public void regroup() {
-        if (!isSplitted())
+        if (!isSplit())
             return;
 
         Array<T> allValues = new Array<>();
@@ -161,7 +162,7 @@ public class QuadTree<T> {
 
     public Array<T> getAllValues(Array<T> valueResults) {
         valueResults.addAll(this.values);
-        if (isSplitted()) {
+        if (isSplit()) {
             this.nw.getAllValues(valueResults);
             this.ne.getAllValues(valueResults);
             this.sw.getAllValues(valueResults);
@@ -173,7 +174,7 @@ public class QuadTree<T> {
     public Array<T> getAllValues(Array<T> valueResults, Array<Rectangle> rectResults) {
         valueResults.addAll(this.values);
         rectResults.addAll(this.rectValues);
-        if (isSplitted()) {
+        if (isSplit()) {
             this.nw.getAllValues(valueResults, rectResults);
             this.ne.getAllValues(valueResults, rectResults);
             this.sw.getAllValues(valueResults, rectResults);
@@ -188,7 +189,7 @@ public class QuadTree<T> {
             if (values.get(i) == value)
                 return rectValues.get(i);
         }
-        if (isSplitted()) {
+        if (isSplit()) {
             Rectangle rectangle;
             rectangle = this.nw.getRectangle(value);
             if (rectangle != null)
@@ -233,7 +234,7 @@ public class QuadTree<T> {
                 result.add(values.get(i));
             }
         }
-        if (isSplitted()) {
+        if (isSplit()) {
             this.nw.query(result, rectangle);
             this.ne.query(result, rectangle);
             this.sw.query(result, rectangle);
@@ -244,7 +245,7 @@ public class QuadTree<T> {
 
     public QuadTree getQuad(Rectangle rectangle) {
         if (RectangleUtils.containsStick(this.boundingRect, rectangle)) {
-            if (!isSplitted())
+            if (!isSplit())
                 return this;
             QuadTree child = nw.getQuad(rectangle);
             if (child != null)
@@ -262,6 +263,20 @@ public class QuadTree<T> {
         } else {
             return null;
         }
+    }
+
+    public int getCurrentMaxDepth(int depthStart) {
+        depthStart++;
+        if (isSplit()) {
+            int dephtNw = nw.getCurrentMaxDepth(depthStart);
+            int dephtNe = ne.getCurrentMaxDepth(depthStart);
+            int dephtSw = sw.getCurrentMaxDepth(depthStart);
+            int dephtSe = se.getCurrentMaxDepth(depthStart);
+            int maxNorth = Math.max(dephtNw, dephtNe);
+            int maxSouth = Math.max(dephtSw, dephtSe);
+            return Math.max(maxNorth,maxSouth);
+        }
+        return depthStart;
     }
 
     public QuadTree getQuad(Vector2 v) {

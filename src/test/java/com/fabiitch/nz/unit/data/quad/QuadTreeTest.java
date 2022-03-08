@@ -1,9 +1,12 @@
 package com.fabiitch.nz.unit.data.quad;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.data.quadtree.QuadTree;
 import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
+import com.fabiitch.nz.math.vectors.V2;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +16,10 @@ import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 public class QuadTreeTest {
 
     @Test
-    public void testAdd() {
+    public void addTest() {
 
         int LOOP = 1;
         int NB_ADD = 1000;
-
 
         Rectangle quadRect = r(500, 500);
         for (int loopStart = 0; loopStart < LOOP; loopStart++) {
@@ -39,5 +41,35 @@ public class QuadTreeTest {
             quadTree.getAllValues(values);
             Assertions.assertEquals(0, values.size);
         }
+    }
+
+    @Test
+    public void currentMaxDepthTest() {
+        QuadTree quadTree = new QuadTree<>(r(50, 50), 5, 500);
+        QuadTree quadTreeOrig = quadTree;
+        for (int i = 0; i < 9; i++) {
+            int random = MathUtils.random(1, 4);
+            if (random == 1)
+                quadTree = quadTree.split().nw;
+            if (random == 2)
+                quadTree = quadTree.split().ne;
+            if (random == 3)
+                quadTree = quadTree.split().se;
+            if (random == 4)
+                quadTree = quadTree.split().sw;
+        }
+        Assertions.assertEquals(10, quadTreeOrig.getCurrentMaxDepth(0));
+    }
+
+    @Ignore
+    @Test
+    public void maxDepthTry() {
+        QuadTree<Integer> quadTree = new QuadTree<>(r(50, 50), 1, 500);
+        Rectangle Rdm = r(1, 1, 49, 49);
+        for (int i = 0; i < 1_000_000; i++) {
+            Rectangle rect = r(RectangleUtils.getRandomPos(Rdm, V2.tmp), 0.00001f, 0.00001f);
+            quadTree.add(i, rect);
+        }
+        System.err.println("MaxDepth=" + quadTree.getCurrentMaxDepth(0));
     }
 }

@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
 import com.fabiitch.nz.render.NzShapeRenderer;
-import com.fabiitch.nz.utils.GdxUtils;
-import com.fabiitch.nz.utils.NzUtils;
 
 public class QuadTreeRenderer {
 
@@ -66,7 +64,7 @@ public class QuadTreeRenderer {
         bitmapFont.draw(spriteBatch, "depth " + quad.depth, tmpV2.x, tmpV2.y - 20);
         bitmapFont.draw(spriteBatch, "total " + tmpArray.size, tmpV2.x, tmpV2.y);
         bitmapFont.draw(spriteBatch, "this " + quad.values.size, tmpV2.x, tmpV2.y + 20);
-        if (quad.isSplitted()) {
+        if (quad.isSplit()) {
             renderQuadData(quad.ne);
             renderQuadData(quad.nw);
             renderQuadData(quad.se);
@@ -84,7 +82,7 @@ public class QuadTreeRenderer {
             bitmapFont.draw(spriteBatch, o.toString(), tmpV2.x, tmpV2.y);
         }
 
-        if (quad.isSplitted()) {
+        if (quad.isSplit()) {
             renderUserData(quad.ne);
             renderUserData(quad.nw);
             renderUserData(quad.se);
@@ -96,7 +94,7 @@ public class QuadTreeRenderer {
         for (Rectangle rectValue : quad.rectValues) {
             shapeRenderer.rect(rectValue);
         }
-        if (quad.isSplitted()) {
+        if (quad.isSplit()) {
             renderRects(quad.ne);
             renderRects(quad.nw);
             renderRects(quad.se);
@@ -105,7 +103,7 @@ public class QuadTreeRenderer {
     }
 
     public void renderQuad(QuadTree<?> quad) {
-        if (quad.isSplitted()) {
+        if (quad.isSplit()) {
             renderQuad(quad.ne);
             renderQuad(quad.nw);
             renderQuad(quad.se);
