@@ -20,6 +20,10 @@ public class InputUtils {
 
     }
 
+    public static Vector2 getClickPos(Camera camera, Vector2 screenXy) {
+        return V2.set(screenXy , camera.unproject(V3.tmp(screenXy.x, screenXy.y)));
+    }
+
     public static Vector2 getClickPos(Camera camera, int screenX, int screenY) {
         return V2.set(new Vector2(), camera.unproject(V3.tmp(screenX, screenY)));
     }
