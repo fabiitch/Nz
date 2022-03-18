@@ -2,14 +2,10 @@ package com.fabiitch.nz.debug;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.fabiitch.nz.debug.huddebug.HudDebug;
 import com.fabiitch.nz.debug.huddebug.internal.HudDebugPosition;
-import com.fabiitch.nz.math.utils.Percentage;
-import com.fabiitch.nz.utils.TimeLocker;
-
-import java.util.concurrent.TimeUnit;
+import com.fabiitch.nz.utils.time.TimeLocker;
 
 public class DT_Tracker {
 
