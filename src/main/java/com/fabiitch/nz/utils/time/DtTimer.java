@@ -2,20 +2,28 @@ package com.fabiitch.nz.utils.time;
 
 import com.fabiitch.nz.math.utils.Percentage;
 
-public class Duration {
+public class DtTimer {
     public float duration;//seconds
     public float accumulator;
 
-    public Duration(float duration) {
+    public DtTimer(float duration) {
         this.duration = duration;
     }
 
-    public void update(float dt) {
+    /**
+     * true if duration is reach
+     */
+    public boolean update(float dt) {
         accumulator += dt;
+        return done();
     }
 
     public void reset() {
         accumulator = 0;
+    }
+
+    public boolean done() {
+        return accumulator >= duration;
     }
 
     public float getAlpha(float time) {

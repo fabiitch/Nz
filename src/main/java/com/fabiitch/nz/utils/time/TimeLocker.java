@@ -1,6 +1,9 @@
 package com.fabiitch.nz.utils.time;
 
-public class TimeLocker extends Duration {
+/**
+ * Locked during duration time
+ */
+public class TimeLocker extends DtTimer {
 
     public boolean active = true;
 
@@ -14,18 +17,17 @@ public class TimeLocker extends Duration {
     }
 
     public boolean isLock(float dt) {
-        accumulator += dt;
-        if (isLock() == false) {
-            accumulator = 0;
-            return false;
+        boolean unlock = update(dt);
+        if (unlock) {
+            accumulator -= duration;
         }
-        return true;
+        return !unlock;
     }
 
+
     @Override
-    public void update(float dt) {
-        if (active)
-            super.update(dt);
+    public boolean update(float dt) {
+        return active && super.update(dt);
     }
 
     public boolean isLock() {

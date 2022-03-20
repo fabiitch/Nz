@@ -54,7 +54,6 @@ public class RectangleBuilder {
 
         float width = Math.min(MathUtils.random(maxWidth), maxWidth);
         float height = Math.min(MathUtils.random(maxHeight), maxHeight);
-        System.out.println(new Rectangle(randomPos.x, randomPos.y, width, height));
         return new Rectangle(randomPos.x, randomPos.y, width, height);
     }
 }

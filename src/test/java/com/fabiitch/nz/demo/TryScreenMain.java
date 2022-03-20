@@ -24,7 +24,7 @@ public class TryScreenMain extends Game {
     @Override
     public void render() {
         float dt = Gdx.graphics.getDeltaTime();
-//        if (dt > 1)  //for debug breakpoint
+//        if (dt > 1)  //for debug breakpoint //SmootDtDebug
 //            dt = 1 / 60f;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {

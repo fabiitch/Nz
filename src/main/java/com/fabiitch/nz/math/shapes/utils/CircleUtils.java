@@ -63,7 +63,6 @@ public class CircleUtils {
     public static Vector2 posWithAngleRad(Circle cirle, float angleRadian, Vector2 returnV) {
         return posWithAngleRad(cirle.x, cirle.y, cirle.radius, angleRadian, returnV);
     }
-
     public static Vector2 posWithAngleDeg(Vector2 center, float radius, float angleDeg, Vector2 returnV) {
         return posWithAngleRad(center.x, center.y, radius, MathUtils.degreesToRadians * angleDeg, returnV);
     }
