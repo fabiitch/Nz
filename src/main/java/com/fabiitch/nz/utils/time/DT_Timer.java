@@ -2,11 +2,11 @@ package com.fabiitch.nz.utils.time;
 
 import com.fabiitch.nz.math.utils.Percentage;
 
-public class DtTimer {
+public class DT_Timer {
     public float duration;//seconds
     public float accumulator;
 
-    public DtTimer(float duration) {
+    public DT_Timer(float duration) {
         this.duration = duration;
     }
 

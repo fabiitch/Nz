@@ -3,7 +3,7 @@ package com.fabiitch.nz.utils.time;
 /**
  * Locked during duration time
  */
-public class TimeLocker extends DtTimer {
+public class TimeLocker extends DT_Timer {
 
     public boolean active = true;
 
