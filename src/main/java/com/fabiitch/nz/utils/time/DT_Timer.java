@@ -26,6 +26,12 @@ public class DT_Timer {
         return accumulator >= duration;
     }
 
+    public float getRest(){
+        if(done())
+            return 0;
+        return duration -accumulator;
+    }
+
     public float getAlpha(float time) {
         return Percentage.getAlpha(time, duration);
     }
