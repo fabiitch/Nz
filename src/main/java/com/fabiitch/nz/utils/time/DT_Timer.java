@@ -26,10 +26,10 @@ public class DT_Timer {
         return accumulator >= duration;
     }
 
-    public float getRest(){
-        if(done())
+    public float getResidual() {
+        if (done())
             return 0;
-        return duration -accumulator;
+        return duration - accumulator;
     }
 
     public float getAlpha(float time) {
