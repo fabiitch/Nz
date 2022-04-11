@@ -1,5 +1,7 @@
 package com.fabiitch.nz.math.shapes.builders;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -55,5 +57,24 @@ public class RectangleBuilder {
         float width = Math.min(MathUtils.random(maxWidth), maxWidth);
         float height = Math.min(MathUtils.random(maxHeight), maxHeight);
         return new Rectangle(randomPos.x, randomPos.y, width, height);
+    }
+
+
+    public static Rectangle screen(boolean centerAs0) {
+        Rectangle rect = new Rectangle();
+        if (centerAs0) {
+            return RectangleBuilder.fromCenter(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        } else {
+            return rect.set(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+    }
+
+    public static Rectangle screen(Camera camera, boolean centerAs0) {
+        Rectangle rect = new Rectangle();
+        if (centerAs0) {
+            return RectangleBuilder.fromCenter(0, 0, camera.viewportWidth, camera.viewportHeight);
+        } else {
+            return rect.set(0, 0, camera.viewportWidth, camera.viewportHeight);
+        }
     }
 }
