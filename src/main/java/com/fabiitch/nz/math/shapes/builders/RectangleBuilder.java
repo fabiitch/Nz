@@ -59,6 +59,9 @@ public class RectangleBuilder {
         return new Rectangle(randomPos.x, randomPos.y, width, height);
     }
 
+    public static Rectangle screen() {
+        return screen(false);
+    }
 
     public static Rectangle screen(boolean centerAs0) {
         Rectangle rect = new Rectangle();
