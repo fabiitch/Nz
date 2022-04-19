@@ -75,9 +75,9 @@ public class RectangleBuilder {
     public static Rectangle screen(Camera camera, boolean centerAs0) {
         Rectangle rect = new Rectangle();
         if (centerAs0) {
-            return RectangleBuilder.fromCenter(0, 0, camera.viewportWidth, camera.viewportHeight);
+            return RectangleBuilder.fromCenter(camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
         } else {
-            return rect.set(0, 0, camera.viewportWidth, camera.viewportHeight);
+            return rect.set(camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
         }
     }
 }
