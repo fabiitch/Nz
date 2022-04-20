@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public class FontDrawHelper {
     public BitmapFont font;
     public SpriteBatch sb;
-    GlyphLayout layout = new GlyphLayout();
+    public GlyphLayout layout = new GlyphLayout();
 
     public FontDrawHelper(BitmapFont font, SpriteBatch sb) {
         this.font = font;
@@ -30,8 +30,7 @@ public class FontDrawHelper {
     public void drawCenter(float x, float y, String str) {
         layout.setText(font, str);
         font.draw(sb, str,
-                x - layout.width / 2,
-                y - layout.height / 2);
+                x - layout.width / 2, y + layout.height / 2);
     }
 
 
