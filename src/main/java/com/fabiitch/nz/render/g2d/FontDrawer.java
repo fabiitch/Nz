@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class FontDrawHelper {
+public class FontDrawer {
     public BitmapFont font;
     public SpriteBatch sb;
     public GlyphLayout layout = new GlyphLayout();
 
-    public FontDrawHelper(BitmapFont font, SpriteBatch sb) {
+    public FontDrawer(BitmapFont font, SpriteBatch sb) {
         this.font = font;
         this.sb = sb;
     }

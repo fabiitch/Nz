@@ -3,7 +3,10 @@ package com.fabiitch.nz.render.g2d.utils;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class G2D {
+public class SpriteUtils {
+    public static void size(Sprite sprite, Vector2 size) {
+        sprite.setSize(size.x, size.y);
+    }
 
     public static void center(Sprite sprite, Vector2 position) {
         sprite.setPosition(position.x - sprite.getWidth() / 2, position.y - sprite.getHeight() / 2);
