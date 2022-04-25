@@ -3,10 +3,15 @@ package com.fabiitch.nz.utils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 public class Randoms {
     private Randoms() {
 
+    }
+
+    public static <T> T rdm(Array<T> array) {
+        return array.get(MathUtils.random(array.size));
     }
 
     public static Vector2 v2(float maxX, float maxY) {
