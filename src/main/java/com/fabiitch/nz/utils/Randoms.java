@@ -5,13 +5,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.List;
+
 public class Randoms {
     private Randoms() {
 
     }
-
+    public static <T> T rdm(List<T> list) {
+        return list.get(MathUtils.random(list.size()-1));
+    }
     public static <T> T rdm(Array<T> array) {
-        return array.get(MathUtils.random(array.size));
+        return array.get(MathUtils.random(array.size-1));
     }
 
     public static Vector2 v2(float maxX, float maxY) {

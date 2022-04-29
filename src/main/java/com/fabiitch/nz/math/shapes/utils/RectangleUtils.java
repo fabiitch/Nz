@@ -62,6 +62,12 @@ public class RectangleUtils {
         return segment;
     }
 
+    public static Segment getAC(Rectangle rect, Segment segment) {
+        getA(rect, segment.a);
+        getC(rect, segment.b);
+        return segment;
+    }
+
     public static Segment getBC(Rectangle rect, Segment segment) {
         getB(rect, segment.a);
         getC(rect, segment.b);
@@ -77,6 +83,12 @@ public class RectangleUtils {
     public static Segment getAD(Rectangle rect, Segment segment) {
         getA(rect, segment.a);
         getD(rect, segment.b);
+        return segment;
+    }
+
+    public static Segment getDB(Rectangle rect, Segment segment) {
+        getD(rect, segment.a);
+        getB(rect, segment.b);
         return segment;
     }
 

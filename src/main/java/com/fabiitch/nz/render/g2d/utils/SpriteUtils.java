@@ -9,10 +9,16 @@ public class SpriteUtils {
     }
 
     public static void center(Sprite sprite, Vector2 position) {
-        sprite.setPosition(position.x - sprite.getWidth() / 2, position.y - sprite.getHeight() / 2);
+        center(sprite, position.x, position.y);
+    }
+
+    public static void center(Sprite sprite, float posX, float poxY) {
+        sprite.setPosition(posX - sprite.getWidth() / 2, poxY - sprite.getHeight() / 2);
     }
 
     public static void centerX(Sprite sprite, Vector2 position) {
         sprite.setPosition(position.x - sprite.getWidth() / 2, position.y);
     }
+
+
 }

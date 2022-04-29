@@ -33,5 +33,10 @@ public class FontDrawer {
                 x - layout.width / 2, y + layout.height / 2);
     }
 
+    public float getWitdh(String str){
+        layout.setText(font, str);
+        return layout.width;
+    }
+
 
 }
