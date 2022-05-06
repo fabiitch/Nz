@@ -377,6 +377,16 @@ public class RectangleUtils {
         return root;
     }
 
+    public static boolean containsStick(Rectangle rect, float x, float y) {
+        float xMinA = rect.x, xMaxA = xMinA + rect.width;
+        float yMinA = rect.y, yMaxA = yMinA + rect.height;
+        return ((x >= xMinA && x <= xMaxA) && (y >= yMinA && y <= yMaxA));
+    }
+
+    public static boolean containsStick(Rectangle rect, Vector2 pos) {
+        return containsStick(rect, pos.x, pos.y);
+    }
+
     public static boolean containsStick(Rectangle rectA, Rectangle rectB) {
         float xMinA = rectA.x, xMaxA = xMinA + rectA.width;
         float yMinA = rectA.y, yMaxA = yMinA + rectA.height;

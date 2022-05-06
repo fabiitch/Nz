@@ -59,7 +59,8 @@ public class DebugDisplayUtils {
             return split[0];
         if (split[0].length() > 5)
             return split[0];
-        return split[0] + "," + split[1].substring(0, 4);
+        int indexFloatting = Math.min(split[1].length(),4);
+        return split[0] + "," + split[1].substring(0, indexFloatting);
     }
 
     public static String printVector2(Vector2 v) {
