@@ -62,6 +62,12 @@ public class RectangleUtils {
         return segment;
     }
 
+    public static Segment getAC(Rectangle rect, Segment segment) {
+        getA(rect, segment.a);
+        getC(rect, segment.b);
+        return segment;
+    }
+
     public static Segment getBC(Rectangle rect, Segment segment) {
         getB(rect, segment.a);
         getC(rect, segment.b);
@@ -77,6 +83,12 @@ public class RectangleUtils {
     public static Segment getAD(Rectangle rect, Segment segment) {
         getA(rect, segment.a);
         getD(rect, segment.b);
+        return segment;
+    }
+
+    public static Segment getDB(Rectangle rect, Segment segment) {
+        getD(rect, segment.a);
+        getB(rect, segment.b);
         return segment;
     }
 
@@ -365,6 +377,16 @@ public class RectangleUtils {
         return root;
     }
 
+    public static boolean containsStick(Rectangle rect, float x, float y) {
+        float xMinA = rect.x, xMaxA = xMinA + rect.width;
+        float yMinA = rect.y, yMaxA = yMinA + rect.height;
+        return ((x >= xMinA && x <= xMaxA) && (y >= yMinA && y <= yMaxA));
+    }
+
+    public static boolean containsStick(Rectangle rect, Vector2 pos) {
+        return containsStick(rect, pos.x, pos.y);
+    }
+
     public static boolean containsStick(Rectangle rectA, Rectangle rectB) {
         float xMinA = rectA.x, xMaxA = xMinA + rectA.width;
         float yMinA = rectA.y, yMaxA = yMinA + rectA.height;
@@ -499,6 +521,7 @@ public class RectangleUtils {
         return rectangle.y + rectangle.height;
     }
 
+<<<<<<< HEAD
     public static Rectangle scale(Rectangle rect, float scale) {
         return scale(rect, scale, false);
     }
@@ -515,6 +538,18 @@ public class RectangleUtils {
     }
 
     public static Rectangle translate(Rectangle rect,float x, float y) {
+=======
+    public static Rectangle scale(float scale, Rectangle rect, boolean pos) {
+        if (pos) {
+            rect.x *= scale;
+            rect.y *= scale;
+        }
+        return rect.setSize(rect.width * scale, rect.height * scale);
+    }
+
+
+    public static Rectangle add(float x, float y, Rectangle rect) {
+>>>>>>> 829df2697876b5ad826081b9f321c6d5b079fe44
         rect.x += x;
         rect.y += y;
         return rect;

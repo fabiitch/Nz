@@ -5,31 +5,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.fabiitch.nz.utils.CommonStrings;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.FieldPosition;
-
 /**
  * not thread safe //TODO thread local
  */
 public class DebugDisplayUtils {
-    private static final DecimalFormat floatFormatter = new DecimalFormat();
-    private static final DecimalFormat msFormatter = new DecimalFormat();
 
-    private static StringBuffer sb = new StringBuffer();
-    private static FieldPosition fieldPosition = new FieldPosition(0);
     private static final Float nan = Float.valueOf(Float.NaN);//TODO ??
-
-  static  {
-      floatFormatter.setMaximumFractionDigits(3);
-      floatFormatter.setGroupingUsed(false);
-      DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
-      decimalFormatSymbols.setDecimalSeparator(',');
-      floatFormatter.setDecimalFormatSymbols(decimalFormatSymbols);
-
-      msFormatter.setMaximumFractionDigits(0);
-      msFormatter.setGroupingUsed(false);
-  }
 
     public static String printNano(float f) {
         return f + "ns";
@@ -44,12 +25,10 @@ public class DebugDisplayUtils {
     }
 
     public static String printValue(Object o) {
-      if(o == null)
-          return CommonStrings.Null;
+        if (o == null)
+            return CommonStrings.Null;
         if (o instanceof Number) {
-            String s = floatFormatter.format(o, sb, fieldPosition).toString();
-            sb.setLength(0);
-            return s;
+            return String.valueOf(o);
         }
         if (o instanceof Vector2)
             return printVector2((Vector2) o);
@@ -75,9 +54,13 @@ public class DebugDisplayUtils {
             return "Nan";
         if (Float.isInfinite(f))
             return "Infinite";
-        String s = floatFormatter.format(f, sb, fieldPosition).toString();
-        sb.setLength(0);
-        return s;
+        String[] split = String.valueOf(f).split("\\.");
+        if (split.length == 1)
+            return split[0];
+        if (split[0].length() > 5)
+            return split[0];
+        int indexFloatting = Math.min(split[1].length(),4);
+        return split[0] + "," + split[1].substring(0, indexFloatting);
     }
 
     public static String printVector2(Vector2 v) {

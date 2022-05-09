@@ -289,12 +289,30 @@ public class QuadTree<T> {
         return depthStart;
     }
 
-    public QuadTree getQuad(Vector2 v) {
-        return null;
+    public QuadTree getQuad(Vector2 pos) {
+        return getQuad(pos.x, pos.y);
     }
 
     public QuadTree getQuad(float x, float y) {
-        return null;
+        if (RectangleUtils.containsStick(this.boundingRect, x, y)) {
+            if (!isSplit())
+                return this;
+            QuadTree child = nw.getQuad(x, y);
+            if (child != null)
+                return child;
+            child = ne.getQuad(x, y);
+            if (child != null)
+                return child;
+            child = sw.getQuad(x, y);
+            if (child != null)
+                return child;
+            child = se.getQuad(x, y);
+            if (child != null)
+                return child;
+            return this;
+        } else {
+            return null;
+        }
     }
 
 }

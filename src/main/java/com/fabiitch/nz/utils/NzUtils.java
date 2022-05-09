@@ -13,21 +13,11 @@ public class NzUtils {
     }
 
     public static Rectangle screenAsRectangle(boolean centerAs0) {
-        Rectangle rect = new Rectangle();
-        if (centerAs0) {
-            return RectangleBuilder.fromCenter(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        } else {
-            return rect.set(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        }
+        return RectangleBuilder.screen(centerAs0);
     }
 
     public static Rectangle screenAsRectangle(Camera camera, boolean centerAs0) {
-        Rectangle rect = new Rectangle();
-        if (centerAs0) {
-            return RectangleBuilder.fromCenter(0, 0, camera.viewportWidth, camera.viewportHeight);
-        } else {
-            return rect.set(0, 0, camera.viewportWidth, camera.viewportHeight);
-        }
+        return RectangleBuilder.screen(camera, centerAs0);
     }
 
     public static Vector2 getScreenCenter(Vector2 pos) {
