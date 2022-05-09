@@ -487,7 +487,6 @@ public class RectangleUtils {
     }
 
 
-
     public static Vector2 getRandomPos(Rectangle rect, Vector2 v) {
         return v.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y, rect.y + rect.height));
     }
@@ -500,11 +499,22 @@ public class RectangleUtils {
         return rectangle.y + rectangle.height;
     }
 
-    public static Rectangle scale(float scale, Rectangle rect) {
-        return rect.setSize(rect.width * scale, rect.height * scale);
+    public static Rectangle scale(Rectangle rect, float scale) {
+        return scale(rect, scale, false);
     }
 
-    public static Rectangle add(float x, float y, Rectangle rect) {
+    public static Rectangle scale(Rectangle rect, float scale, boolean replacePosition) {
+        float newWitdh = rect.width * scale;
+        float newHeight = rect.height * scale;
+        if (replacePosition) {
+            float diffX = rect.width - newWitdh;
+            float diffY = rect.height - newHeight;
+            translate(rect, diffX, diffY);
+        }
+        return rect.setSize(newWitdh, newHeight);
+    }
+
+    public static Rectangle translate(Rectangle rect,float x, float y) {
         rect.x += x;
         rect.y += y;
         return rect;

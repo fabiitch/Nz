@@ -1,4 +1,4 @@
-package com.fabiitch.nz.unit.math.shape.builder;
+package com.fabiitch.nz.unit.math.shape.builders;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.fabiitch.nz.math.shapes.builders.RectangleBuilder;

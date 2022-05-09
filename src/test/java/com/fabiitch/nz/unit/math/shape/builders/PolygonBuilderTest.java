@@ -1,4 +1,4 @@
-package com.fabiitch.nz.unit.math.shape.builder;
+package com.fabiitch.nz.unit.math.shape.builders;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;

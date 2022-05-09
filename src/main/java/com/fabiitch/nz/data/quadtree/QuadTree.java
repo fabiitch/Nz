@@ -7,7 +7,7 @@ import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
 
 public class QuadTree<T> {
 
-    public QuadTree<T> ne, nw, se, sw;
+    public QuadTree<T> parent, ne, nw, se, sw;
     public Rectangle boundingRect;
 
     public int depth;
@@ -18,10 +18,15 @@ public class QuadTree<T> {
     public Array<Rectangle> rectValues;
 
     public QuadTree() {
-        this(Rectangle.tmp, 10, 5);
+        this(null, Rectangle.tmp, 10, 5);
     }
 
     public QuadTree(Rectangle rect, int maxValues, int maxDepth) {
+        this(null, rect, maxValues, maxDepth);
+    }
+
+    protected QuadTree(QuadTree<T> parent, Rectangle rect, int maxValues, int maxDepth) {
+        this.parent = parent;
         this.boundingRect = new Rectangle(rect);
         this.values = new Array<>(maxValues);
         this.rectValues = new Array<>(maxValues);
@@ -60,9 +65,13 @@ public class QuadTree<T> {
             if (quad.shouldSplit())
                 quad.split();
         } else {
-            RectangleUtils.mergeFloorCeil(this.boundingRect, rect);
-            this.rebuild();
-            this.add(value, rect);
+            if(parent != null){
+                parent.add(value, rect);
+            }else{
+                RectangleUtils.mergeFloorCeil(this.boundingRect, rect);
+                this.rebuild();
+                this.add(value, rect);
+            }
         }
         return quad;
     }
@@ -102,7 +111,7 @@ public class QuadTree<T> {
         return false;
     }
 
-    public boolean isSplit() { //TODO rename
+    public boolean isSplit() {
         return ne != null || nw != null || sw != null || se != null;
     }
 
@@ -124,19 +133,19 @@ public class QuadTree<T> {
             return this;
 
         int newDepth = this.depth + 1;
-        this.nw = new QuadTree(QuadTreeUtils.getNW(this.boundingRect, new Rectangle()), this.maxValues, this.maxDepth);
-        this.ne = new QuadTree(QuadTreeUtils.getNE(this.boundingRect, new Rectangle()), this.maxValues, this.maxDepth);
-        this.sw = new QuadTree(QuadTreeUtils.getSW(this.boundingRect, new Rectangle()), this.maxValues, this.maxDepth);
-        this.se = new QuadTree(QuadTreeUtils.getSE(this.boundingRect, new Rectangle()), this.maxValues, this.maxDepth);
-        this.nw.depth = newDepth;
-        this.ne.depth = newDepth;
-        this.sw.depth = newDepth;
-        this.se.depth = newDepth;
+        nw = new QuadTree(this, QuadTreeUtils.getNW(boundingRect, new Rectangle()), maxValues, maxDepth);
+        ne = new QuadTree(this, QuadTreeUtils.getNE(boundingRect, new Rectangle()), maxValues, maxDepth);
+        sw = new QuadTree(this, QuadTreeUtils.getSW(boundingRect, new Rectangle()), maxValues, maxDepth);
+        se = new QuadTree(this, QuadTreeUtils.getSE(boundingRect, new Rectangle()), maxValues, maxDepth);
+        nw.depth = newDepth;
+        ne.depth = newDepth;
+        sw.depth = newDepth;
+        se.depth = newDepth;
 
-        Array<T> allValues = new Array<>(this.values);
-        Array<Rectangle> allRectValues = new Array<>(this.rectValues);
-        this.values.clear();
-        this.rectValues.clear();
+        Array<T> allValues = new Array<>(values);
+        Array<Rectangle> allRectValues = new Array<>(rectValues);
+        values.clear();
+        rectValues.clear();
 
         for (int i = 0, n = allValues.size; i < n; i++) {
             add(allValues.get(i), allRectValues.get(i));
@@ -219,6 +228,7 @@ public class QuadTree<T> {
         }
     }
 
+    //reset pas un update
     public void update() {
         Array<T> allValues = new Array<>();
         Array<Rectangle> allRects = new Array<>();
@@ -274,7 +284,7 @@ public class QuadTree<T> {
             int dephtSe = se.getCurrentMaxDepth(depthStart);
             int maxNorth = Math.max(dephtNw, dephtNe);
             int maxSouth = Math.max(dephtSw, dephtSe);
-            return Math.max(maxNorth,maxSouth);
+            return Math.max(maxNorth, maxSouth);
         }
         return depthStart;
     }

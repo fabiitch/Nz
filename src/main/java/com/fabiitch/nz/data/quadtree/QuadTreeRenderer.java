@@ -20,9 +20,9 @@ public class QuadTreeRenderer {
     public boolean drawUserData = true;
     public boolean drawQuadData = true;
 
-    public NzShapeRenderer shapeRenderer;
-    public SpriteBatch spriteBatch;
-    public BitmapFont bitmapFont;
+    private NzShapeRenderer shapeRenderer;
+    private SpriteBatch spriteBatch;
+    private BitmapFont bitmapFont;
 
     public QuadTreeRenderer() {
         this.shapeRenderer = new NzShapeRenderer();

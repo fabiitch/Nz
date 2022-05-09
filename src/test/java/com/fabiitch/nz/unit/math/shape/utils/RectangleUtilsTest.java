@@ -335,12 +335,12 @@ public class RectangleUtilsTest {
     @Test
     public void getRegionInsideTest() {
         Rectangle rect = r(200, 100);
-        assertEquals(0, getRegionInside(rect,v2(-10, -10)));
-        assertEquals(1, getRegionInside(rect,v2(50, 25)));
-        assertEquals(2, getRegionInside(rect,v2(150, 25)));
-        assertEquals(3, getRegionInside(rect,v2(150, 75)));
-        assertEquals(4, getRegionInside(rect,v2(50, 75)));
-        assertEquals(5, getRegionInside(rect,v2(100, 50)));
+        assertEquals(0, getRegionInside(rect, v2(-10, -10)));
+        assertEquals(1, getRegionInside(rect, v2(50, 25)));
+        assertEquals(2, getRegionInside(rect, v2(150, 25)));
+        assertEquals(3, getRegionInside(rect, v2(150, 75)));
+        assertEquals(4, getRegionInside(rect, v2(50, 75)));
+        assertEquals(5, getRegionInside(rect, v2(100, 50)));
     }
 
     /**
@@ -357,21 +357,21 @@ public class RectangleUtilsTest {
         Rectangle rect = r(200, 100);
         float lowX = -50, hightX = 250, inX = 100;
         float lowY = -25, hightY = 125, inY = 50;
-        assertEquals(0, getRegionOutside(rect,v2(inX, inY)));
-        assertEquals(1, getRegionOutside(rect,v2(hightX, inY)));
-        assertEquals(2, getRegionOutside(rect,v2(hightX, hightY)));
-        assertEquals(3, getRegionOutside(rect,v2(inX, hightY)));
-        assertEquals(4, getRegionOutside(rect,v2(lowX, hightY)));
-        assertEquals(5, getRegionOutside(rect,v2(lowX, inY)));
-        assertEquals(6, getRegionOutside(rect,v2(lowX, lowY)));
-        assertEquals(7, getRegionOutside(rect,v2(inX, lowY)));
-        assertEquals(8, getRegionOutside(rect,v2(hightX, lowY)));
+        assertEquals(0, getRegionOutside(rect, v2(inX, inY)));
+        assertEquals(1, getRegionOutside(rect, v2(hightX, inY)));
+        assertEquals(2, getRegionOutside(rect, v2(hightX, hightY)));
+        assertEquals(3, getRegionOutside(rect, v2(inX, hightY)));
+        assertEquals(4, getRegionOutside(rect, v2(lowX, hightY)));
+        assertEquals(5, getRegionOutside(rect, v2(lowX, inY)));
+        assertEquals(6, getRegionOutside(rect, v2(lowX, lowY)));
+        assertEquals(7, getRegionOutside(rect, v2(inX, lowY)));
+        assertEquals(8, getRegionOutside(rect, v2(hightX, lowY)));
 
         //vertex
-        assertEquals(0, getRegionOutside(rect,v2(0, 0)));
-        assertEquals(0, getRegionOutside(rect,v2(rect.width, rect.height)));
-        assertEquals(0, getRegionOutside(rect,v2(0, rect.height)));
-        assertEquals(0, getRegionOutside(rect,v2(rect.width, 0)));
+        assertEquals(0, getRegionOutside(rect, v2(0, 0)));
+        assertEquals(0, getRegionOutside(rect, v2(rect.width, rect.height)));
+        assertEquals(0, getRegionOutside(rect, v2(0, rect.height)));
+        assertEquals(0, getRegionOutside(rect, v2(rect.width, 0)));
     }
 
     @Test
@@ -379,20 +379,31 @@ public class RectangleUtilsTest {
         Rectangle rect = r(200, 100);
         float lowX = -50, hightX = 250, inX = 100;
         float lowY = -25, hightY = 125, inY = 50;
-        assertEquals(1, getRegion(rect,v2(hightX, inY)));
-        assertEquals(2, getRegion(rect,v2(hightX, hightY)));
-        assertEquals(3, getRegion(rect,v2(inX, hightY)));
-        assertEquals(4, getRegion(rect,v2(lowX, hightY)));
-        assertEquals(5, getRegion(rect,v2(lowX, inY)));
-        assertEquals(6, getRegion(rect,v2(lowX, lowY)));
-        assertEquals(7, getRegion(rect,v2(inX, lowY)));
-        assertEquals(8, getRegion(rect,v2(hightX, lowY)));
+        assertEquals(1, getRegion(rect, v2(hightX, inY)));
+        assertEquals(2, getRegion(rect, v2(hightX, hightY)));
+        assertEquals(3, getRegion(rect, v2(inX, hightY)));
+        assertEquals(4, getRegion(rect, v2(lowX, hightY)));
+        assertEquals(5, getRegion(rect, v2(lowX, inY)));
+        assertEquals(6, getRegion(rect, v2(lowX, lowY)));
+        assertEquals(7, getRegion(rect, v2(inX, lowY)));
+        assertEquals(8, getRegion(rect, v2(hightX, lowY)));
 
-        assertEquals(9, getRegion(rect,v2(50, 25)));
-        assertEquals(10, getRegion(rect,v2(150, 25)));
-        assertEquals(11, getRegion(rect,v2(150, 75)));
-        assertEquals(12, getRegion(rect,v2(50, 75)));
-        assertEquals(13, getRegion(rect,v2(100, 50)));
+        assertEquals(9, getRegion(rect, v2(50, 25)));
+        assertEquals(10, getRegion(rect, v2(150, 25)));
+        assertEquals(11, getRegion(rect, v2(150, 75)));
+        assertEquals(12, getRegion(rect, v2(50, 75)));
+        assertEquals(13, getRegion(rect, v2(100, 50)));
+    }
+
+    @Test
+    public void scaleTest() {
+        assertEquals(r(20, 20), RectangleUtils.scale(r(10, 10), 2));
+        assertEquals(r(5, 5), RectangleUtils.scale(r(10, 10), 0.5f));
+
+        Rectangle scale2 = scale(r(10, 10, 10, 10), 2, true);
+        assertEquals(r(0,0, 20, 20), scale2);
+        Rectangle scale05 = scale(r(10, 10, 10, 10), 0.5f, true);
+        assertEquals(r(15, 15, 5, 5),scale05);
     }
 
     @Test
@@ -438,13 +449,11 @@ public class RectangleUtilsTest {
     }
 
 
-
-
     @Test
     public void getRandomPosTest() {
         Rectangle rect1 = r(0, 0, 100, 50);
         for (int i = 0; i < 100; i++)
-            Assertions.assertTrue(rect1.contains(RectangleUtils.getRandomPos(rect1,v2())));
+            Assertions.assertTrue(rect1.contains(RectangleUtils.getRandomPos(rect1, v2())));
     }
 
     //TODO marche pas
