@@ -521,7 +521,6 @@ public class RectangleUtils {
         return rectangle.y + rectangle.height;
     }
 
-<<<<<<< HEAD
     public static Rectangle scale(Rectangle rect, float scale) {
         return scale(rect, scale, false);
     }
@@ -537,8 +536,12 @@ public class RectangleUtils {
         return rect.setSize(newWitdh, newHeight);
     }
 
-    public static Rectangle translate(Rectangle rect,float x, float y) {
-=======
+    public static Rectangle translate(Rectangle rect, float x, float y) {
+        rect.x += x;
+        rect.y += y;
+        return rect;
+    }
+
     public static Rectangle scale(float scale, Rectangle rect, boolean pos) {
         if (pos) {
             rect.x *= scale;
@@ -547,13 +550,6 @@ public class RectangleUtils {
         return rect.setSize(rect.width * scale, rect.height * scale);
     }
 
-
-    public static Rectangle add(float x, float y, Rectangle rect) {
->>>>>>> 829df2697876b5ad826081b9f321c6d5b079fe44
-        rect.x += x;
-        rect.y += y;
-        return rect;
-    }
     /**
      * intersection between ray from center and edge
      */

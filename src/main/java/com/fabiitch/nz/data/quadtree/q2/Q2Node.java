@@ -4,7 +4,12 @@ public class Q2Node<T> {
 
     public Q2 q2;
     public Q2Node ne, nw, se, sw;
-    public int depth;
+    public int id;
+
+    public Q2Node(Q2 q2, int id) {
+        this.q2 = q2;
+        this.id = id;
+    }
 
     public boolean isSplit() {
         return false;
@@ -25,6 +30,7 @@ public class Q2Node<T> {
     public boolean shouldGroup() {
         return false;
     }
+
     public void add(){
 
     }
