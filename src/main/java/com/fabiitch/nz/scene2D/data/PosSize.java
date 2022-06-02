@@ -17,6 +17,11 @@ public class PosSize {
         this.size = new Vector2(size);
     }
 
+    public PosSize(Vector2 pos, float size) {
+        this.pos = new Vector2(pos);
+        this.size = new Vector2(size, size);
+    }
+
     public PosSize(float x, float y, float witdh, float height) {
         this.pos = new Vector2(x, y);
         this.size = new Vector2(witdh, height);
@@ -39,6 +44,9 @@ public class PosSize {
         return new PosSize(pos, size);
     }
 
+    public static PosSize get(Vector2 pos, float size) {
+        return new PosSize(pos, size);
+    }
 
     public Vector2 getPos() {
         return pos;

@@ -3,6 +3,7 @@ package com.fabiitch.nz.scene2D.nz;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.fabiitch.nz.math.utils.Percentage;
+import com.fabiitch.nz.scene2D.data.PosSize;
 
 public class NzActorPositionner {
     private float width;
@@ -39,6 +40,12 @@ public class NzActorPositionner {
         }
     }
 
+    public NzActorPositionner set(PosSize posSize) {
+        setPosition(posSize.getX(), posSize.getY());
+        actor.setSize(posSize.getWitdh(), posSize.getHeight());
+        return this;
+    }
+
     public NzActorPositionner setPosition(float x, float y) {
         if (centerActor) {
             StagePlacementUtils.placeCenter(actor, x, y);
@@ -66,6 +73,18 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner setByPercent(PosSize posSize) {
+        setPositionByPercent(posSize.getX(), posSize.getY());
+        setSizeByPercent(posSize.getWitdh(), posSize.getHeight());
+        return this;
+    }
+
+    public NzActorPositionner setSizeByWitdhPercent(float percentW, float percentH) {
+        actor.setWidth(Percentage.getValue(percentW, this.width));
+        actor.setHeight(Percentage.getValue(percentH, this.width));
+        return this;
+    }
+
     public NzActorPositionner setSizeByWitdhPercent(float percentWitdh) {
         float value = Percentage.getValue(percentWitdh, this.width);
         actor.setWidth(value);
@@ -77,6 +96,12 @@ public class NzActorPositionner {
         float value = Percentage.getValue(percentHeight, this.height);
         actor.setWidth(value);
         actor.setHeight(value);
+        return this;
+    }
+
+    public NzActorPositionner setSizeByHeightPercent(float percentW, float percentH) {
+        actor.setWidth(Percentage.getValue(percentW, this.height));
+        actor.setHeight(Percentage.getValue(percentH, this.height));
         return this;
     }
 
@@ -116,4 +141,24 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner set(NzPlacement placement) {
+        if (placement.sizePercent) {
+            if (placement.witdhAsSizePercentTotal)
+                setSizeByWitdhPercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
+            else if (placement.heightAsSizePercentTotal)
+                setSizeByHeightPercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
+            else
+                setSizeByPercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
+
+        } else {
+            actor.setSize(placement.posSize.getWitdh(), placement.posSize.getHeight());
+        }
+
+        if (placement.posPercent)
+            setPositionByPercent(placement.posSize.getX(), placement.posSize.getY());
+        else
+            setPosition(placement.posSize.getX(), placement.posSize.getY());
+
+        return this;
+    }
 }
