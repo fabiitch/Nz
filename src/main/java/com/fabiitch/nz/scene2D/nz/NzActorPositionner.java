@@ -79,6 +79,16 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner setSize(float witdh, float height) {
+        actor.setSize(witdh, height);
+        return this;
+    }
+
+    public NzActorPositionner setSize(float size) {
+        actor.setSize(size, size);
+        return this;
+    }
+
     public NzActorPositionner setSizeByWitdhPercent(float percentW, float percentH) {
         actor.setWidth(Percentage.getValue(percentW, this.width));
         actor.setHeight(Percentage.getValue(percentH, this.width));

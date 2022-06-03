@@ -30,11 +30,17 @@ public class NzLogger {
             tagMap.put(tag, false);
     }
 
+    public static void acceptOnly(String... tags) {
+        authoriseTagStrategy = false;
+        for (String tag : tags)
+            addTag(tag);
+    }
+
     private static boolean accept(String tag) {
         Boolean tagBool = tagMap.get(tag);
-        if(tagBool == null){
+        if (tagBool == null) {
             return authoriseTagStrategy;
-        }else{
+        } else {
             return tagBool;
         }
     }
@@ -49,12 +55,20 @@ public class NzLogger {
             Gdx.app.debug(tag, message, exception);
     }
 
+    public static void log(Enum tag, String message) {
+        log(tag.name(), message);
+    }
+
     public static void log(String tag, String message) {
         if (log && accept(tag))
             Gdx.app.log(tag, message);
     }
 
-    public static  void log(String tag, String message, Throwable exception) {
+    public static void log(Enum tag, String message, Throwable exception) {
+        log(tag.name(), message, exception);
+    }
+
+    public static void log(String tag, String message, Throwable exception) {
         if (logAlwaysException || (log && accept(tag)))
             Gdx.app.log(tag, message, exception);
     }

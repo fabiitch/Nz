@@ -1,10 +1,8 @@
 package com.fabiitch.nz.scene2D.widgets.touchpad;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.fabiitch.nz.math.vectors.V;
 import com.fabiitch.nz.scene2D.nz.NzActorPositionner;
 import com.fabiitch.nz.scene2D.nz.NzStage;
@@ -23,7 +21,7 @@ public abstract class TouchPad {
 
     protected final Vector2 posBase = new Vector2();
     protected final Vector2 posKnob = new Vector2();
-    protected final Vector2 posInactivePercent;
+    protected final Vector2 posInactive;
 
     protected float sizeBase;
 
@@ -32,29 +30,29 @@ public abstract class TouchPad {
 
     public TouchPad(NzStage nzStage,
                     Texture textureBase, Texture textureKnob,
-                    Vector2 posInactivePercent,
-                    float sizeHPBase, float sizeHPKnob,
+                    Vector2 posInactive,
+                    float sizeBase, float sizeKnob,
                     boolean fixedOnDrag) {
         this.nzStage = nzStage;
         this.textureBase = textureBase;
         this.textureKnob = textureKnob;
+        this.sizeBase = sizeBase;
 
-        this.posInactivePercent = posInactivePercent;
+        this.posInactive = posInactive;
         this.fixedOnDrag = fixedOnDrag;
-        this.init(textureBase, textureKnob, sizeHPBase, sizeHPKnob);
+        this.init(textureBase, textureKnob, sizeBase, sizeKnob);
     }
 
-    private void init(Texture textureBase, Texture textureKnob, float sizeHPBase, float sizeHPKnob) {
+    private void init(Texture textureBase, Texture textureKnob, float sizeBase, float sizeKnob) {
         imageBase = new Image(textureBase);
         NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
-        positionner.setSizeByHeightPercent(sizeHPBase).setPositionByPercent(posInactivePercent.x, posInactivePercent.y);
+        positionner.setSize(sizeBase).setPosition(posInactive.x, posInactive.y);
         positionner.getPosition(posBase);
-        sizeBase = imageBase.getWidth();
         nzStage.addActor(imageBase);
 
         imageKnob = new Image(textureKnob);
         positionner = nzStage.getPositionner(imageKnob, true);
-        positionner.setSizeByHeightPercent(sizeHPKnob).setPositionByPercent(posInactivePercent.x, posInactivePercent.y);
+        positionner.setSize(sizeKnob).setPosition(posInactive.x, posInactive.y);
         nzStage.addActor(imageKnob);
         desactive();
     }
@@ -68,8 +66,8 @@ public abstract class TouchPad {
     public void desactive() {
         imageKnob.setColor(1, 1, 1, 0.2f);
         imageBase.setColor(1, 1, 1, 0.2f);
-        nzStage.getPositionner(imageBase, true).setPositionByPercent(posInactivePercent.x, posInactivePercent.y);
-        nzStage.getPositionner(imageKnob, true).setPositionByPercent(posInactivePercent.x, posInactivePercent.y);
+        nzStage.getPositionner(imageBase, true).setPosition(posInactive.x, posInactive.y);
+        nzStage.getPositionner(imageKnob, true).setPosition(posInactive.x, posInactive.y);
     }
 
     public void active() {
@@ -90,7 +88,7 @@ public abstract class TouchPad {
         positionner.getPosition(posKnob);
         float dstToBase = posKnob.dst(posBase);
         if (dstToBase > sizeBase / 2) {
-            Vector2 directionTo = V.directionTo(posKnob, posBase, new Vector2()); //TODO
+            Vector2 directionTo = V.directionTo(posKnob, posBase, new Vector2()); //TODO newV2
             if (fixedOnDrag) {
                 posKnob.set(posBase).add(directionTo.scl(sizeBase / 2));
                 nzStage.getPositionner(imageKnob, true).setPosition(posKnob);

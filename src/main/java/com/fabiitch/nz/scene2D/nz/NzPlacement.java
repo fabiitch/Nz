@@ -36,13 +36,13 @@ public class NzPlacement {
         return this;
     }
 
-    public NzPlacement witdhAsSizePercentTotal() {
+    public NzPlacement witdhAsPercentTotal() {
         this.witdhAsSizePercentTotal = true;
         this.heightAsSizePercentTotal = false;
         return this;
     }
 
-    public NzPlacement heightAsSizePercentTotal() {
+    public NzPlacement heightAsPercentTotal() {
         this.witdhAsSizePercentTotal = false;
         this.heightAsSizePercentTotal = true;
         return this;

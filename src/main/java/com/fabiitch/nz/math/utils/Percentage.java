@@ -1,5 +1,7 @@
 package com.fabiitch.nz.math.utils;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Percentage {
 
     private Percentage() {
@@ -23,6 +25,13 @@ public class Percentage {
 
     public static float getValue(float percent, float total) {
         return percent * total / 100;
+    }
+
+
+    public static Vector2 getValue(Vector2 percent, float total, Vector2 result) {
+        result.x = getValue(percent.x, total);
+        result.y = getValue(percent.y, total);
+        return result;
     }
 
     public static float addXPercentTo(float percent, float total) {
