@@ -393,7 +393,6 @@ public class RectangleUtilsTest {
         assertEquals(11, getRegion(rect, v2(150, 75)));
         assertEquals(12, getRegion(rect, v2(50, 75)));
         assertEquals(13, getRegion(rect, v2(100, 50)));
-<<<<<<< HEAD
     }
 
     @Test
@@ -405,8 +404,6 @@ public class RectangleUtilsTest {
         assertEquals(r(0,0, 20, 20), scale2);
         Rectangle scale05 = scale(r(10, 10, 10, 10), 0.5f, true);
         assertEquals(r(15, 15, 5, 5),scale05);
-=======
->>>>>>> 829df2697876b5ad826081b9f321c6d5b079fe44
     }
 
     @Test
