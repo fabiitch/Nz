@@ -3,6 +3,7 @@ package com.fabiitch.nz.scene2D.widgets.touchpad;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.fabiitch.nz.math.utils.Percentage;
 import com.fabiitch.nz.math.vectors.V;
 import com.fabiitch.nz.scene2D.nz.NzActorPositionner;
 import com.fabiitch.nz.scene2D.nz.NzStage;
@@ -24,6 +25,7 @@ public abstract class TouchPad {
     protected final Vector2 posInactive;
 
     protected float sizeBase;
+    protected float sizeKnob;
 
     public Vector2 direction = new Vector2();
     public float force = 0f;
@@ -37,13 +39,14 @@ public abstract class TouchPad {
         this.textureBase = textureBase;
         this.textureKnob = textureKnob;
         this.sizeBase = sizeBase;
+        this.sizeKnob = sizeKnob;
 
         this.posInactive = posInactive;
         this.fixedOnDrag = fixedOnDrag;
-        this.init(textureBase, textureKnob, sizeBase, sizeKnob);
+        this.init(textureBase, textureKnob);
     }
 
-    private void init(Texture textureBase, Texture textureKnob, float sizeBase, float sizeKnob) {
+    private void init(Texture textureBase, Texture textureKnob) {
         imageBase = new Image(textureBase);
         NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
         positionner.setSize(sizeBase).setPosition(posInactive.x, posInactive.y);
@@ -60,7 +63,7 @@ public abstract class TouchPad {
     public void updateDirForce() {
         this.direction.set(posKnob).sub(posBase).nor();
         float dst = posBase.dst(posKnob);
-        this.force = Math.min(1, dst / sizeBase / 2);
+        this.force = Percentage.getAlpha(dst, sizeBase / 2);
     }
 
     public void desactive() {

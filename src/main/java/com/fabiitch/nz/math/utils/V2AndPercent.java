@@ -25,9 +25,11 @@ public class V2AndPercent {
         this.xGiver = xGiver;
         this.yGiver = yGiver;
     }
+    public Vector2 getPercents() {
+        return this.percents;
+    }
 
-
-    public Vector2 value() {
+    public Vector2 getValues() {
         return this.value.set(xGiver.value(percents.x), yGiver.value(percents.y));
     }
 

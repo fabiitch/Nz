@@ -2,6 +2,7 @@ package com.fabiitch.nz.scene2D.data;
 
 import com.badlogic.gdx.math.Vector2;
 
+// ??? fufu
 public class PosSize {
 
     public final Vector2 pos;

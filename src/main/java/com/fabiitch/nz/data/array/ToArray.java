@@ -1,4 +1,4 @@
-package com.fabiitch.nz.utils.array;
+package com.fabiitch.nz.data.array;
 
 import com.badlogic.gdx.utils.Array;
 
