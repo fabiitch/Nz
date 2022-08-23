@@ -27,7 +27,9 @@ public abstract class TouchPad {
     protected float sizeBase;
     protected float sizeKnob;
 
-    public Vector2 direction = new Vector2();
+    private final Vector2 internalV2 = new Vector2();
+
+    public Vector2 direction = new Vector2(); //always nor
     public float force = 0f;
 
     public TouchPad(NzStage nzStage,
@@ -91,7 +93,7 @@ public abstract class TouchPad {
         positionner.getPosition(posKnob);
         float dstToBase = posKnob.dst(posBase);
         if (dstToBase > sizeBase / 2) {
-            Vector2 directionTo = V.directionTo(posKnob, posBase, new Vector2()); //TODO newV2
+            Vector2 directionTo = V.directionTo(posKnob, posBase, internalV2); //TODO newV2
             if (fixedOnDrag) {
                 posKnob.set(posBase).add(directionTo.scl(sizeBase / 2));
                 nzStage.getPositionner(imageKnob, true).setPosition(posKnob);
