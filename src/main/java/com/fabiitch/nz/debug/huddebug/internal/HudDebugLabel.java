@@ -43,6 +43,10 @@ public class HudDebugLabel<T> extends Label {
         updateValue(value);
     }
 
+    public void updateValue(){
+        this.updateValue(value);
+    }
+
     public void updateValue(T value) {
         this.setText(this.name + SEPARATOR + DebugDisplayUtils.printValue(value));
         //cancel shake

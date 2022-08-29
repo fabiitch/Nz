@@ -38,6 +38,8 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             Vector2 dir = (Vector2) quadData.data;
             Rectangle rectangle = quadT.getRectangle(quadData);
             Rectangle quadRect = quadT.boundingRect;
+            if(rectangle ==null)
+                rectangle = quadData.rectangle;
             RectangleUtils.translate(rectangle, dir.x, dir.y);
             if (RectangleUtils.getXMax(rectangle) > RectangleUtils.getXMax(quadRect)) {
                 dir.x = -dir.x;

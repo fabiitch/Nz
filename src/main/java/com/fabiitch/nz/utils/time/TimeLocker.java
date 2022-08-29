@@ -3,34 +3,54 @@ package com.fabiitch.nz.utils.time;
 /**
  * Locked during duration time
  */
-public class TimeLocker extends DT_Timer {
+public class TimeLocker {
 
+    public boolean autoReset = true;
     public boolean active = true;
 
+    public float duration;
+    private float accumulator;
+
     public TimeLocker(float duration) {
-        super(duration);
+        this.duration = duration;
     }
 
-    public TimeLocker(float duration, boolean active) {
-        super(duration);
-        this.active = active;
-    }
-
-    public boolean isLock(float dt) {
-        boolean unlock = update(dt);
-        if (unlock) {
-            accumulator -= duration;
-        }
-        return !unlock;
-    }
-
-
-    @Override
-    public boolean update(float dt) {
-        return active && super.update(dt);
+    public boolean isOpen() {
+        return accumulator >= duration;
     }
 
     public boolean isLock() {
-        return active && accumulator < duration;
+        return accumulator < duration;
+    }
+
+    public boolean isOpen(float dt) {
+        return update(dt);
+    }
+
+    public boolean isLock(float dt) {
+        return !update(dt);
+    }
+
+    private boolean update(float dt) {
+        if (active) {
+            accumulator += dt;
+            boolean end = accumulator >= duration;
+            if (end && autoReset) {
+                accumulator = 0;
+            }
+            return end;
+        }
+        return false;
+    }
+
+
+    public TimeLocker config(boolean autoReset, boolean active) {
+        this.autoReset = autoReset;
+        this.active = active;
+        return this;
+    }
+
+    public void reset() {
+        duration = 0;
     }
 }

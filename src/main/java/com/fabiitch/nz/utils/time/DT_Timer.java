@@ -4,39 +4,21 @@ import com.fabiitch.nz.math.utils.Percentage;
 
 public class DT_Timer {
     public float duration;//seconds
-    public float accumulator;
 
-    public DT_Timer(float duration) {
-        this.duration = duration;
+    public DT_Timer() {
     }
 
-    /**
-     * true if duration is reach
-     */
-    public boolean update(float dt) {
-        accumulator += dt;
-        return done();
-    }
-
-    public void reset() {
-        accumulator = 0;
-    }
-
-    public boolean done() {
-        return accumulator >= duration;
-    }
-
-    public float getResidual() {
-        if (done())
-            return 0;
-        return duration - accumulator;
+    public float update(float dt) {
+        duration += dt;
+        return duration;
     }
 
     public float getAlpha(float time) {
         return Percentage.getAlpha(time, duration);
     }
 
-    public float getAlpha() {
-        return Percentage.getAlpha(accumulator, duration);
+    public void reset() {
+        duration = 0;
     }
+
 }

@@ -10,7 +10,7 @@ import com.fabiitch.nz.demo.quadtree.DemoQuadTreeMove;
 import java.lang.reflect.Constructor;
 
 public class TryScreenMain extends Game {
-    private static final Class screenTestClass = DemoQuadTreeMove.class;
+    private static final Class screenTestClass = HudDebugEventDemo.class;
 
     private static final boolean SmootDtDebug = true;
     private static final int WITDH = 800;

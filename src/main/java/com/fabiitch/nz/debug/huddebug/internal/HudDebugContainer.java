@@ -91,7 +91,8 @@ public class HudDebugContainer {
     }
 
     public void update(String key, Object value) {
-        update(key, key, DebugDisplayUtils.printValue(value));
+        HudDebugLabel hudDebugLabel = get(key);
+        update(key, hudDebugLabel.name, DebugDisplayUtils.printValue(value));
     }
 
     public void updateColor(String key, Color color) {

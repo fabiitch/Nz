@@ -1,0 +1,34 @@
+package com.fabiitch.nz.demo;
+
+import com.badlogic.gdx.graphics.Color;
+import com.fabiitch.nz.debug.huddebug.event.HudDebugEvent;
+import com.fabiitch.nz.debug.huddebug.event.HudDebugEventManager;
+import com.fabiitch.nz.demo.base.BaseTryScreen;
+import com.fabiitch.nz.utils.time.TimeLocker;
+
+/**
+ * Test Hud event display and remove well
+ */
+public class HudDebugEventDemo extends BaseTryScreen {
+
+
+    HudDebugEventManager hudDebugEventManager = new HudDebugEventManager();
+    TimeLocker timeLocker = new TimeLocker(2);
+    int count = 1;
+
+    @Override
+    public void show() {
+        hudDebugEventManager.addEvent(HudDebugEvent.get("toot "+count, "gogogo", 5, Color.BLUE));
+    }
+
+    @Override
+    public void render(float dt) {
+        super.render(dt);
+
+        if (timeLocker.isOpen(dt)) {
+            count++;
+            hudDebugEventManager.addEvent(HudDebugEvent.get("toot "+count, "gogogo", 5, Color.BLUE));
+        }
+        hudDebugEventManager.update(System.currentTimeMillis());
+    }
+}
