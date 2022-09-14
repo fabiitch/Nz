@@ -16,7 +16,6 @@ public class HudDebugEventManager {
         for (int i = 0; i < debugEvents.size; i++) {
             HudDebugEvent event = debugEvents.get(i);
 
-            System.out.println(event.millisStart + ((long) event.duration * 1000) + "---" + currentTimeMillis);
             if (event.millisStart + ((long) event.duration * 1000) <= currentTimeMillis) {
                 HudDebug.remove(KEY_HUD_DEBUG_EVENT + event.id);
             } else {

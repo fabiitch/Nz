@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.fabiitch.nz.debug.huddebug.HudDebug;
 import com.fabiitch.nz.debug.huddebug.internal.HudDebugPosition;
-import com.fabiitch.nz.utils.time.TimeLocker;
+import com.fabiitch.nz.utils.time.timers.TimeLocker;
 
 public class DT_Tracker {
 

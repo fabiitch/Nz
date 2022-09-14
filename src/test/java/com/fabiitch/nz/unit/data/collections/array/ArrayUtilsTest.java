@@ -1,13 +1,44 @@
-package com.fabiitch.nz.unit.data.array;
+package com.fabiitch.nz.unit.data.collections.array;
 
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.data.array.ArrayUtils;
+import com.fabiitch.nz.data.collections.ArrayUtils;
+import com.fabiitch.nz.data.collections.ToArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ArrayUtilsTest {
+
+    private static <T> void assertArrayEquals(Array<T> array1, Array<T> array2) {
+        assertEquals(array1.size, array2.size);
+        for (int i = 0; i < array1.size; i++) {
+            assertEquals(array1.get(i), array2.get(i));
+        }
+    }
+
+    @Test
+    public void getRangeFromEndTest() {
+        Array<Integer> array = new Array<>();
+        array.add(0, 1, 2, 3);
+        array.add(4, 5, 6, 7);
+
+        //normal
+        assertArrayEquals(ToArray.get(7, 6, 5), ArrayUtils.getRangeFromEnd(array, 0, 2, new Array<>()));
+        assertArrayEquals(ToArray.get(5, 4, 3), ArrayUtils.getRangeFromEnd(array, 3, 5, new Array<>()));
+
+    }
+
+    @Test
+    public void getFromEndTest() {
+        Array<Integer> array = new Array<>();
+        array.add(1, 2, 3);
+        array.add(4, 5, 6);
+
+        assertEquals(6, ArrayUtils.getFromEnd(array, 0));
+        assertEquals(1, ArrayUtils.getFromEnd(array, 5));
+        assertNull(ArrayUtils.getFromEnd(array, 7));
+    }
 
     @Test
     public void getLastTest() {

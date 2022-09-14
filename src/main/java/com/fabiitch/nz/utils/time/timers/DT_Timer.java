@@ -1,4 +1,4 @@
-package com.fabiitch.nz.utils.time;
+package com.fabiitch.nz.utils.time.timers;
 
 import com.fabiitch.nz.math.utils.Percentage;
 

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.fabiitch.nz.debug.huddebug.event.HudDebugEvent;
 import com.fabiitch.nz.debug.huddebug.event.HudDebugEventManager;
 import com.fabiitch.nz.demo.base.BaseTryScreen;
-import com.fabiitch.nz.utils.time.TimeLocker;
+import com.fabiitch.nz.utils.time.timers.TimeLocker;
 
 /**
  * Test Hud event display and remove well
