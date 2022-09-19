@@ -3,17 +3,17 @@ package com.fabiitch.nz.data.collections;
 import com.badlogic.gdx.utils.Array;
 
 public class ArrayUtils {
-    public static <T> Array<T> reverse(final Array<T> array) {
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        Object tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
+//    public static <T> Array<T> reverse(final Array<T> array) {
+//        int j = Math.min(array.length, endIndexExclusive) - 1;
+//        Object tmp;
+//        while (j > i) {
+//            tmp = array[j];
+//            array[j] = array[i];
+//            array[i] = tmp;
+//            j--;
+//            i++;
+//        }
+//    }
 
 
     public static <T> T getLast(Array<T> array) {

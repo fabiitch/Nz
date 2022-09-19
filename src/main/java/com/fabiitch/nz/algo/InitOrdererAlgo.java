@@ -17,6 +17,7 @@ public interface InitOrdererAlgo {
 
     /**
      * call InitWaitOther.init() on all, init is called if all in waitingList are initialised
+     *
      * @param initWaitOtherList
      * @throws Exception
      */
@@ -34,7 +35,7 @@ public interface InitOrdererAlgo {
                 List<InitOrdererAlgo> waitingServicesList = toInit.waitingList();
                 if (waitingServicesList != null)
                     for (InitOrdererAlgo serviceWait : waitingServicesList) {
-                        if (!rdyArray.contains(serviceWait, true)) {
+                        if (!rdyArray.contains(serviceWait, true) && serviceWait != toInit) {
                             canInit = false;
                             break;
                         }
