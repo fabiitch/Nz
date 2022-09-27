@@ -1,7 +1,7 @@
-package com.fabiitch.nz.unit.data.collections.array;
+package com.fabiitch.nz.unit.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.data.collections.ArrayUtils;
+import com.fabiitch.nz.data.collections.utils.ArrayUtils;
 import com.fabiitch.nz.data.collections.ToArray;
 import org.junit.jupiter.api.Test;
 

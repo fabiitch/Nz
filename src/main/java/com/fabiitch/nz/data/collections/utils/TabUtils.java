@@ -1,4 +1,4 @@
-package com.fabiitch.nz.data.collections;
+package com.fabiitch.nz.data.collections.utils;
 
 public class TabUtils {
     private TabUtils() {

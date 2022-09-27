@@ -1,6 +1,6 @@
-package com.fabiitch.nz.unit.data.collections.array;
+package com.fabiitch.nz.unit.data.collections.utils;
 
-import com.fabiitch.nz.data.collections.TabUtils;
+import com.fabiitch.nz.data.collections.utils.TabUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
