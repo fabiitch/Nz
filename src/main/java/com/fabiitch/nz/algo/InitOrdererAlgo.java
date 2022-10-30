@@ -1,8 +1,9 @@
 package com.fabiitch.nz.algo;
 
-import com.badlogic.gdx.utils.Array;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,48 +17,45 @@ public interface InitOrdererAlgo {
     void afterAllInit();
 
     /**
-     * call InitWaitOther.init() on all, init is called if all in waitingList are initialised
      *
      * @param initWaitOtherList
      * @throws Exception
      */
-    static void initAll(Array<InitOrdererAlgo> initWaitOtherList) throws Exception {
-        Array<InitOrdererAlgo> toInitArray = new Array<>(); //cpy
-        Array<InitOrdererAlgo> rdyArray = new Array<>(); //cpy
+    static void initAll(List<InitOrdererAlgo> initWaitOtherList) throws Exception {
+        List<InitOrdererAlgo> toInitArray = new ArrayList<>(initWaitOtherList);
+        List<InitOrdererAlgo> rdyArray = new ArrayList<>();
 
-        while (rdyArray.size < initWaitOtherList.size) {
-            int sizeRdyBefore = rdyArray.size;
+        Map<InitOrdererAlgo, List<InitOrdererAlgo>> mapWaitingList = new HashMap<>();
+        for (InitOrdererAlgo init : toInitArray) {
+            List<InitOrdererAlgo> waitingList = init.waitingList();
+            if (waitingList != null)
+                waitingList.remove(init);
+            mapWaitingList.put(init, waitingList);
+        }
 
-            toInitArray.addAll(initWaitOtherList);
-            toInitArray.removeAll(rdyArray, true);
-            for (InitOrdererAlgo toInit : toInitArray) {
-                boolean canInit = true;
-                List<InitOrdererAlgo> waitingServicesList = toInit.waitingList();
-                if (waitingServicesList != null)
-                    for (InitOrdererAlgo serviceWait : waitingServicesList) {
-                        if (!rdyArray.contains(serviceWait, true) && serviceWait != toInit) {
-                            canInit = false;
-                            break;
-                        }
-                    }
-
-                if (canInit) {
-                    toInit.init();
-                    rdyArray.add(toInit);
+        while (!toInitArray.isEmpty()) {
+            InitOrdererAlgo toAdd = null;
+            for (InitOrdererAlgo tryToInit : toInitArray) {
+                List<InitOrdererAlgo> servicesWaitingForThis = mapWaitingList.get(tryToInit);
+                if (servicesWaitingForThis == null || servicesWaitingForThis.isEmpty() || rdyArray.containsAll(servicesWaitingForThis)) {
+                    toAdd = tryToInit;
                 }
-
             }
-            if (sizeRdyBefore == rdyArray.size) {
+            if (toAdd != null) {
+                toAdd.init();
+                rdyArray.add(toAdd);
+                toInitArray.remove(toAdd);
+            } else {
                 String blockedList = "";
                 for (InitOrdererAlgo service : toInitArray) {
                     blockedList += service.getClass().getSimpleName() + " ,";
                 }
                 throw new Exception("Init blocking :" + blockedList);
             }
-            toInitArray.clear();
         }
 
-        for (InitOrdererAlgo toEndInit : initWaitOtherList)
-            toEndInit.afterAllInit();
+        for (InitOrdererAlgo toInit : rdyArray)
+            toInit.afterAllInit();
     }
+
 }

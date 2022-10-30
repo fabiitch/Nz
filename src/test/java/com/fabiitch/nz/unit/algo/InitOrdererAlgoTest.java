@@ -2,6 +2,8 @@ package com.fabiitch.nz.unit.algo;
 
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.algo.InitOrdererAlgo;
+import com.fabiitch.nz.data.collections.utils.ArrayUtils;
+import com.fabiitch.nz.data.collections.utils.TabUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -25,7 +27,7 @@ public class InitOrdererAlgoTest {
         array.add(s1, s2, s3, s4);
         array.add(s5, s6, s7);
 
-        assertDoesNotThrow(() -> InitOrdererAlgo.initAll(array));
+        assertDoesNotThrow(() -> InitOrdererAlgo.initAll(ArrayUtils.toList(array)));
 
         array.forEach(s -> {
             InitOrdererAlgoMock mock = (InitOrdererAlgoMock) s;
@@ -45,7 +47,7 @@ public class InitOrdererAlgoTest {
         Array<InitOrdererAlgo> array = new Array<>();
         array.add(s1, s2, s3);
 
-        assertThrows(Exception.class, () -> InitOrdererAlgo.initAll(array));
+        assertThrows(Exception.class, () -> InitOrdererAlgo.initAll(ArrayUtils.toList(array)));
 
     }
 

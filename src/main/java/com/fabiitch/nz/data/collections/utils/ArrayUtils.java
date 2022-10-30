@@ -2,6 +2,9 @@ package com.fabiitch.nz.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArrayUtils {
 //    public static <T> Array<T> reverse(final Array<T> array) {
 //        int j = Math.min(array.length, endIndexExclusive) - 1;
@@ -15,6 +18,21 @@ public class ArrayUtils {
 //        }
 //    }
 
+    public static <T> List<T> toList(Array<T> array) {
+        List<T> list = new ArrayList<>(array.size);
+        for (int i = 0, n = array.size; i < n; i++) {
+            list.add(array.get(i));
+        }
+        return list;
+    }
+
+    public static <T> Array<T> fromList(List<T> list) {
+        Array<T> array = new Array<>(list.size());
+        for (int i = 0, n = list.size(); i < n; i++) {
+            array.add(list.get(i));
+        }
+        return array;
+    }
 
     public static <T> T getLast(Array<T> array) {
         if (array.size == 0)
