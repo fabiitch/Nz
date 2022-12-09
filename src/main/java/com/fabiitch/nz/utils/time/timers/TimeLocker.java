@@ -51,6 +51,6 @@ public class TimeLocker {
     }
 
     public void reset() {
-        duration = 0;
+        accumulator = 0;
     }
 }
