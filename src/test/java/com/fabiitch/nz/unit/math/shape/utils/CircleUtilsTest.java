@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.math.shapes.utils.CircleUtils.*;
-import static com.fabiitch.nz.unit.math.MathTestUtils.*;
+import static com.fabiitch.nz.unit.math.MathTestUtils.c;
+import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 
 
 public class CircleUtilsTest {

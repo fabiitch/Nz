@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.fabiitch.nz.demo.base.launcher.StarterTestConfig;
-import com.fabiitch.nz.demo.quadtree.DemoQuadTreeMove;
 
 import java.lang.reflect.Constructor;
 
