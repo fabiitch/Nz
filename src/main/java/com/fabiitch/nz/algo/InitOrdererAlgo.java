@@ -50,7 +50,7 @@ public interface InitOrdererAlgo {
             } else {
                 String blockedList = "";
                 for (InitOrdererAlgo service : toInitArray) {
-                    blockedList += service.getClass().getSimpleName() + " ,";
+                    blockedList += service.getClass().getSimpleName() + ", ";
                 }
                 throw new Exception("Init blocking :" + blockedList);
             }

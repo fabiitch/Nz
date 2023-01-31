@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.AngleUtils;
+import com.fabiitch.nz.math.angle.AngleUtils;
 import com.fabiitch.nz.math.NzMath;
 import com.fabiitch.nz.math.shapes.Segment;
 import com.fabiitch.nz.math.vectors.V2;

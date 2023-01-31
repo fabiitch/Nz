@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
  * Static method for Vector2 using mathUtils (no jni)
  */
 public class V2 {
-    public static Vector2 tmp = new Vector2(); // TODO use ? server pb?
+    public static Vector2 tmp = new Vector2(); // TODO use ? server pb? //TODO threadLOCAL
 
     private V2() {
 
@@ -21,6 +21,10 @@ public class V2 {
 
     public static Vector2 v(float x, float y) {
         return new Vector2(x, y);
+    }
+
+    public static Vector2 v(Vector3 vector3) {
+        return new Vector2(vector3.x, vector3.y);
     }
 
     public static Vector2 tmp(float x, float y) {

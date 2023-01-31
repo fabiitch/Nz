@@ -1,4 +1,4 @@
-package com.fabiitch.nz.math;
+package com.fabiitch.nz.math.angle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -62,6 +62,11 @@ public class AngleUtils {
         return V2.angleRad(normal) - (V2.angleRad(dirBullet) - V2.angleRad(normal));
     }
 
+    public static int distanceAbs(int alpha, int beta) {
+        int phi = Math.abs(beta - alpha) % 360; // This is either the distance or 360 - distance
+        return phi > 180 ? 360 - phi : phi;
+    }
+
     public static float distanceAbs(float alpha, float beta) {
         float phi = Math.abs(beta - alpha) % 360; // This is either the distance or 360 - distance
         return phi > 180 ? 360 - phi : phi;
@@ -107,6 +112,27 @@ public class AngleUtils {
      */
     public static float normaliseRadPiNPi(float angleRad) {
         return angleRad - MathUtils.PI2 * MathUtils.floor((angleRad + MathUtils.PI) / MathUtils.PI2);
+    }
+
+    //TODO maybe opimise
+
+    /**
+     * angle in deg
+     */
+    public static boolean isSameLine(float a1, float a2, float tolerance) {
+        a1 = normaliseDeg(a1);
+        a2 = normaliseDeg(a2);
+        if (MathUtils.isEqual(a1, a2, tolerance)) {
+            return true;
+        }
+        a1 = normaliseDeg(a1 + 180);
+        return MathUtils.isEqual(a1, a2, tolerance);
+    }
+    public static boolean isReverse(float a1, float a2, float tolerance){
+        a1 = normaliseDeg(a1 +180);
+        a2 = normaliseDeg(a2);
+
+        return MathUtils.isEqual(a1, a2, tolerance);
     }
 
 }

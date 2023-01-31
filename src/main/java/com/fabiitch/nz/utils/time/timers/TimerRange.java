@@ -15,6 +15,9 @@ public class TimerRange {
         this.minTime = minTime;
         this.maxTime = maxTime;
     }
+    public static TimerRange of(float minTime, float maxTime){
+        return new TimerRange(minTime, maxTime);
+    }
 
     public void reset() {
         internalTimer = 0;

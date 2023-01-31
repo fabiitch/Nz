@@ -1,5 +1,7 @@
 package com.fabiitch.nz.utils.time.timers;
 
+import com.fabiitch.nz.utils.GameTick;
+
 /**
  * Locked during duration time
  */
@@ -25,6 +27,10 @@ public class TimeLocker {
 
     public boolean isOpen(float dt) {
         return update(dt);
+    }
+
+    public boolean isOpen(GameTick gameTick) {
+        return update(gameTick.dt);
     }
 
     public boolean isLock(float dt) {

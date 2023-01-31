@@ -6,9 +6,9 @@ import com.badlogic.gdx.utils.Pool;
 public class HudDebugEvent implements Pool.Poolable {
 
     public Color color;
-    public String name;
+    public String key;
     public Object value;
-    public float duration;
+    public float duration;//seconds
     public long millisStart;
     public long id;
 
@@ -16,9 +16,9 @@ public class HudDebugEvent implements Pool.Poolable {
 
     }
 
-    public static HudDebugEvent get(String name, Object value, float duration, Color color) {
-        HudDebugEvent event = new HudDebugEvent();
-        event.name = name;
+    public static HudDebugEvent get(String key, Object value, float duration, Color color) {
+        HudDebugEvent event = new HudDebugEvent(); //TODO pools
+        event.key = key;
         event.value = value;
         event.duration = duration;
         event.color = color;
