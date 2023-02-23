@@ -1,7 +1,5 @@
 package com.fabiitch.nz.utils.time.timers;
 
-import com.fabiitch.nz.utils.GameTick;
-
 public class TimerRange {
 
     public float minTime;
@@ -21,10 +19,6 @@ public class TimerRange {
 
     public void reset() {
         internalTimer = 0;
-    }
-
-    public State update(GameTick gameTick) {
-        return update(gameTick.dt);
     }
 
     public State update(float dt) {

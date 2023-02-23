@@ -22,7 +22,7 @@ public class HudDebugEvent implements Pool.Poolable {
         event.value = value;
         event.duration = duration;
         event.color = color;
-        event.millisStart = System.currentTimeMillis();
+        event.millisStart = System.currentTimeMillis(); //TODO
         return event;
     }
 

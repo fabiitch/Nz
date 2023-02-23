@@ -68,19 +68,11 @@ public class HudContainerUtils {
         }
     }
 
-    public static void changeColorBeforeInit(String label, Color color, Array<HudDebugPreInitItem> arrayBeforeInit) {
-        for (HudDebugPreInitItem item : arrayBeforeInit.items) {
-            if (item.name.equals(label))
-                item.color = color;
-        }
-    }
 
     public static void changeColor(String key, Color color, Map<String, HudDebugLabel> mapLabels) {
-        for (Map.Entry<String, HudDebugLabel> entry : mapLabels.entrySet()) {
-            if (entry.getKey().equals(key)) {
-                entry.getValue().setColor(color);
-            }
-        }
+        HudDebugLabel hudDebugLabel = mapLabels.get(key);
+        if (hudDebugLabel != null)
+            hudDebugLabel.setColor(color);
     }
 
 }

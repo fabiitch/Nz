@@ -36,7 +36,9 @@ public class HudDebugEventManager {
         HudDebugEvent existEvent = eventMap.get(event.key);
 
         if (existEvent != null) {
+            existEvent.value = event.value;
             HudDebug.update(PREFIX_KEY + existEvent.id, event.value);
+            existEvent.millisStart = System.currentTimeMillis(); //TODO
         } else {
             if (idCount == Long.MAX_VALUE)
                 idCount = 0;

@@ -92,7 +92,8 @@ public class HudDebugContainer {
 
     public void update(String key, Object value) {
         HudDebugLabel hudDebugLabel = get(key);
-        update(key, hudDebugLabel.name, DebugDisplayUtils.printValue(value));
+        if (hudDebugLabel != null)
+            update(key, hudDebugLabel.name, DebugDisplayUtils.printValue(value));
     }
 
     public void updateColor(String key, Color color) {
@@ -105,6 +106,7 @@ public class HudDebugContainer {
         HudDebugLabel label = new HudDebugLabel(name, positionOnstage, positionCounts[positionOnstage]++, value, skin);
         if (key == null)
             key = name;
+
         mapLabels.put(key, label);
         stage.addActor(label);
         label.setColor(color);

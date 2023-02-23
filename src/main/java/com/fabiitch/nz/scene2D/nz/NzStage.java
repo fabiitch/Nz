@@ -28,6 +28,11 @@ public class NzStage extends Stage {
         this.nzPositionner = new NzActorPositionner(this.getWidth(), this.getHeight());
     }
 
+    public NzActorPositionner getPositionner(Actor actor) {
+        nzPositionner.giveActor(actor, true);
+        return nzPositionner;
+    }
+
     public NzActorPositionner getPositionner(Actor actor, boolean center) {
         nzPositionner.giveActor(actor, center);
         return nzPositionner;

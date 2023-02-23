@@ -1,7 +1,6 @@
 package com.fabiitch.nz.utils.time.timers;
 
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.utils.GameTick;
 
 public class CountDown {
     public float duration;
@@ -34,16 +33,6 @@ public class CountDown {
             }
         }
         return true;
-    }
-
-    /**
-     * return true if end
-     *
-     * @param gameTick
-     * @return
-     */
-    public void update(GameTick gameTick) {
-        update(gameTick.dt);
     }
 
     public void reset() {

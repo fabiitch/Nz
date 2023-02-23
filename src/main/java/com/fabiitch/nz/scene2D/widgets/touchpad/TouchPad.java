@@ -81,7 +81,7 @@ public abstract class TouchPad {
     public boolean touchDown(float x, float y) {
         if (fixedOnTouchDown) {
             float dstToBase = posBase.dst(x, y);
-            if (dstToBase > sizeBase / 2)
+            if (dstToBase > (sizeBase / 2) + Percentage.getValue(10, sizeBase))
                 return false;
         } else {
             NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
