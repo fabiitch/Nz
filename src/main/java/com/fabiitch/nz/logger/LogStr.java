@@ -1,0 +1,22 @@
+package com.fabiitch.nz.logger;
+
+import com.badlogic.gdx.utils.StringBuilder;
+
+public class LogStr {
+
+    public static final String SEPARATOR = "=================================================";
+
+    public static String separator(String title) {
+        return SEPARATOR + "\n" + "                       " + title + "\n" + SEPARATOR;
+    }
+
+    public static String separator(int n) {
+        StringBuilder sb = new StringBuilder(); //TODO pools ?
+        sb.append(SEPARATOR);
+        for (int i = 1; i < n; i++) {
+            sb.append("\n");
+            sb.append(SEPARATOR);
+        }
+        return sb.toString();
+    }
+}

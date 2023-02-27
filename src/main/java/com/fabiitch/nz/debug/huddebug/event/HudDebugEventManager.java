@@ -16,7 +16,9 @@ public class HudDebugEventManager {
 
     private long idCount;
 
-    public void update(long currentTimeMillis) {
+    public void update() {
+        long currentTimeMillis = System.currentTimeMillis();
+
         for (int i = 0; i < events.size; i++) {
             HudDebugEvent event = events.get(i);
             if (event.millisStart + ((long) event.duration * 1000) <= currentTimeMillis) {
