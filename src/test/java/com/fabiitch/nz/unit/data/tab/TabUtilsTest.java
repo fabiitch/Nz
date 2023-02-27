@@ -1,6 +1,6 @@
 package com.fabiitch.nz.unit.data.tab;
 
-import com.fabiitch.nz.data.tab.TabUtils;
+import com.fabiitch.nz.java.data.tab.TabUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package com.fabiitch.nz.unit.debug;
 
-import com.fabiitch.nz.debug.DebugDisplayUtils;
+import com.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

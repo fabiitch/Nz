@@ -4,7 +4,7 @@ package com.fabiitch.nz.unit.math.shape.utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.math.shapes.utils.TriangleRectUtils.hypoFromAdjacent;
+import static com.fabiitch.nz.java.math.shapes.utils.TriangleRectUtils.hypoFromAdjacent;
 
 public class TriangleRectUtilsTest {
 

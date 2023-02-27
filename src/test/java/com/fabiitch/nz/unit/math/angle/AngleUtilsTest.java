@@ -1,14 +1,12 @@
 package com.fabiitch.nz.unit.math.angle;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.angle.AngleUtils;
+import com.fabiitch.nz.java.math.angle.AngleUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.math.angle.AngleUtils.*;
-
-import static com.fabiitch.nz.math.vectors.V2.v;
+import static com.fabiitch.nz.java.math.angle.AngleUtils.*;
+import static com.fabiitch.nz.java.math.vectors.V2.v;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AngleUtilsTest {
@@ -34,7 +32,7 @@ public class AngleUtilsTest {
     public void distanceSignedTest() {
         float dst1 = distanceSigned(50, 100);
         assertEquals(dst1, -50, DELTA_0);
-        float dst2 = AngleUtils.distanceSigned(100, 50);
+        float dst2 = distanceSigned(100, 50);
         assertEquals(dst2, 50, DELTA_0);
     }
 

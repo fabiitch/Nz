@@ -3,7 +3,7 @@ package com.fabiitch.nz.unit.utils.time;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.utils.time.TimeConverter.*;
+import static com.fabiitch.nz.java.time.TimeConverter.*;
 
 public class TimeConverterTest {
 

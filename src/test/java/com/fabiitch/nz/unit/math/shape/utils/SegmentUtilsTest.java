@@ -1,12 +1,12 @@
 package com.fabiitch.nz.unit.math.shape.utils;
 
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.Segment;
+import com.fabiitch.nz.java.math.shapes.Segment;
 import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.math.shapes.utils.SegmentUtils.*;
+import static com.fabiitch.nz.java.math.shapes.utils.SegmentUtils.*;
 import static com.fabiitch.nz.unit.math.MathTestUtils.s;
 import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 import static org.junit.jupiter.api.Assertions.assertFalse;

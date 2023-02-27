@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.data.quadtree.QuadTree;
-import com.fabiitch.nz.data.quadtree.QuadTreeRenderer;
-import com.fabiitch.nz.debug.huddebug.HudDebug;
+import com.fabiitch.nz.java.data.quadtree.QuadTree;
+import com.fabiitch.nz.java.data.quadtree.QuadTreeRenderer;
+import com.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.fabiitch.nz.demo.base.BaseTryScreen;
-import com.fabiitch.nz.math.vectors.V3;
-import com.fabiitch.nz.render.NzShapeRenderer;
-import com.fabiitch.nz.utils.NzUtils;
+import com.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
+import com.fabiitch.nz.java.math.vectors.V3;
+import com.fabiitch.nz.gdx.render.NzShapeRenderer;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         quadRender = new QuadTreeRenderer();
 
-        quadT = new QuadTree<>(NzUtils.screenAsRectangle(camera, true), 5, 5);
+        quadT = new QuadTree<>(RectangleBuilder.screen(camera, true), 5, 5);
 
         shapeRenderer = new NzShapeRenderer();
         shapeRenderer.setAutoShapeType(true);

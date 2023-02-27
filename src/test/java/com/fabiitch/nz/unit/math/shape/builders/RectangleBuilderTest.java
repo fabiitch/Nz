@@ -1,7 +1,7 @@
 package com.fabiitch.nz.unit.math.shape.builders;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.fabiitch.nz.math.shapes.builders.RectangleBuilder;
+import com.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

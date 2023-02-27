@@ -2,7 +2,7 @@ package com.fabiitch.nz.unit.math.shape;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.Triangle;
+import com.fabiitch.nz.java.math.shapes.Triangle;
 import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

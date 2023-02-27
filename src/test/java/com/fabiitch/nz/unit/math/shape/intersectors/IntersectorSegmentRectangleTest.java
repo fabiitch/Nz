@@ -2,9 +2,9 @@ package com.fabiitch.nz.unit.math.shape.intersectors;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.Segment;
-import com.fabiitch.nz.math.shapes.intersectors.IntersectorSegmentRectangle;
-import com.fabiitch.nz.math.shapes.utils.RectangleUtils;
+import com.fabiitch.nz.java.math.shapes.Segment;
+import com.fabiitch.nz.java.math.shapes.intersectors.IntersectorSegmentRectangle;
+import com.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

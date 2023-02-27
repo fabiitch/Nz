@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.data.quadtree.QuadTreeUtils.*;
+import static com.fabiitch.nz.java.data.quadtree.QuadTreeUtils.*;
 import static com.fabiitch.nz.unit.math.MathTestUtils.r;
 
 public class QuadTreeUtilsTest {

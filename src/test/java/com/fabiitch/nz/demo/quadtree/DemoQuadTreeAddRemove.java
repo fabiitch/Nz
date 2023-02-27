@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.input.InputUtils;
+import com.fabiitch.nz.gdx.input.InputUtils;
 
 public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
 

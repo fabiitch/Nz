@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.fabiitch.nz.debug.DT_Tracker;
-import com.fabiitch.nz.debug.huddebug.HudDebug;
-import com.fabiitch.nz.debug.huddebug.internal.HudDebugPosition;
-import com.fabiitch.nz.scene2D.nz.NzStage;
+import com.fabiitch.nz.gdx.debug.DT_Tracker;
+import com.fabiitch.nz.gdx.debug.huddebug.HudDebug;
+import com.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
+import com.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
 public abstract class BaseTryScreen extends ScreenAdapter {
     protected NzStage nzStage;

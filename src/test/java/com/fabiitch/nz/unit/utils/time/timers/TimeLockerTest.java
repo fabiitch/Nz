@@ -1,6 +1,6 @@
 package com.fabiitch.nz.unit.utils.time.timers;
 
-import com.fabiitch.nz.utils.time.timers.TimeLocker;
+import com.fabiitch.nz.java.time.timers.TimeLocker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

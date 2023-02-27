@@ -3,12 +3,12 @@ package com.fabiitch.nz.unit.math.shape.utils;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.utils.CircleUtils;
+import com.fabiitch.nz.java.math.shapes.utils.CircleUtils;
 import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.math.shapes.utils.CircleUtils.*;
+import static com.fabiitch.nz.java.math.shapes.utils.CircleUtils.*;
 import static com.fabiitch.nz.unit.math.MathTestUtils.c;
 import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 

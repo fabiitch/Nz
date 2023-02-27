@@ -2,15 +2,15 @@ package com.fabiitch.nz.unit.math.shape.utils;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.Segment;
-import com.fabiitch.nz.math.shapes.Triangle;
-import com.fabiitch.nz.math.shapes.builders.TriangleBuilder;
-import com.fabiitch.nz.math.shapes.utils.PolygonUtils;
+import com.fabiitch.nz.java.math.shapes.Segment;
+import com.fabiitch.nz.java.math.shapes.Triangle;
+import com.fabiitch.nz.java.math.shapes.builders.TriangleBuilder;
+import com.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
 import com.fabiitch.nz.unit.math.vectors.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.math.shapes.utils.PolygonUtils.*;
+import static com.fabiitch.nz.java.math.shapes.utils.PolygonUtils.*;
 import static com.fabiitch.nz.unit.math.MathTestUtils.s;
 import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
 

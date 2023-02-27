@@ -3,7 +3,7 @@ package com.fabiitch.nz.unit.math;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.nz.math.shapes.Segment;
+import com.fabiitch.nz.java.math.shapes.Segment;
 
 public class MathTestUtils {
 
