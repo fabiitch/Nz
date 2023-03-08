@@ -46,7 +46,7 @@ public class HudDebug {
     public static boolean exist(String key) {
         if (instance == null) {
             for (HudDebugPreInitItem item : arrayBeforeInit)
-                if (key.equals(item.name))
+                if (key.equals(item.key))
                     return true;
             return false;
         } else {
@@ -122,54 +122,46 @@ public class HudDebug {
         if (arrayBeforeInit == null)
             arrayBeforeInit = new Array<>();
 
+        for (HudDebugPreInitItem item : arrayBeforeInit)
+            if (key.equals(item.key))
+                return;
         arrayBeforeInit.add(new HudDebugPreInitItem(key, name, DebugDisplayUtils.printValue(value), positionOnStage, color));
     }
 
     public static void addTopLeft(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.TOP_LEFT, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.TOP_LEFT, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.TOP_LEFT, color);
     }
 
     public static void addTopLeft(String name, Object value, Color color) {
-        addTopLeft(null, name, value, color);
+        addTopLeft(name, name, value, color);
     }
 
     public static void addTopMiddle(String name) {
-        addTopLeft(null, name, "", Color.WHITE);
+        addTopLeft(name, name, "", Color.WHITE);
     }
+
     public static void addTopLeft(String name, Object value) {
-        addTopLeft(null, name, value, Color.WHITE);
+        addTopLeft(name, name, value, Color.WHITE);
     }
 
     public static void addTopMiddle(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.TOP_MIDDLE, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.TOP_MIDDLE, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.TOP_MIDDLE, color);
     }
 
     public static void addTopMiddle(String name, Object value, Color color) {
-        addTopMiddle(null, name, value, color);
+        addTopMiddle(name, name, value, color);
     }
 
     public static void addTopMiddle(String name, Object value) {
-        addTopMiddle(null, name, value, Color.WHITE);
+        addTopMiddle(name, name, value, Color.WHITE);
     }
 
     public static void addTopRight(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.TOP_RIGHT, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.TOP_RIGHT, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.TOP_RIGHT, color);
     }
 
     public static void addTopRight(String name, Object value, Color color) {
-        addTopRight(null, name, value, color);
+        addTopRight(name, name, value, color);
     }
 
     public static void addTopRight(String name, Object value) {
@@ -177,85 +169,65 @@ public class HudDebug {
     }
 
     public static void addBotLeft(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.BOT_LEFT, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.BOT_LEFT, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.BOT_LEFT, color);
     }
 
     public static void addBotLeft(String name, Object value, Color color) {
-        addBotLeft(null, name, value, color);
+        addBotLeft(name, name, value, color);
     }
 
     public static void addBotLeft(String name, Object value) {
-        addBotLeft(null, name, value, Color.WHITE);
+        addBotLeft(name, name, value, Color.WHITE);
     }
 
     public static void addBotMiddle(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.BOT_MIDDLE, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.BOT_MIDDLE, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.BOT_MIDDLE, color);
     }
 
     public static void addBotMiddle(String name, Object value, Color color) {
-        addBotMiddle(null, name, value, color);
+        addBotMiddle(name, name, value, color);
     }
 
     public static void addBotMiddle(String name, Object value) {
-        addBotMiddle(null, name, value, Color.WHITE);
+        addBotMiddle(name, name, value, Color.WHITE);
     }
 
     public static void addBotRight(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.BOT_RIGHT, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.BOT_RIGHT, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.BOT_RIGHT, color);
     }
 
     public static void addBotRight(String name, Object value, Color color) {
-        addBotRight(null, name, value, color);
+        addBotRight(name, name, value, color);
     }
 
     public static void addBotRight(String name, Object value) {
-        addBotRight(null, name, value, Color.WHITE);
+        addBotRight(name, name, value, Color.WHITE);
     }
 
 
     public static void addMiddleLeft(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.LEFT_MIDDLE, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.LEFT_MIDDLE, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.MIDDLE_LEFT, color);
     }
 
     public static void addMiddleLeft(String name, Object value, Color color) {
-        addMiddleLeft(null, name, value, color);
+        addMiddleLeft(name, name, value, color);
     }
 
     public static void addMiddleLeft(String name, Object value) {
-        addMiddleLeft(null, name, value, Color.WHITE);
+        addMiddleLeft(name, name, value, Color.WHITE);
     }
 
 
     public static void addMiddleRight(String key, String name, Object value, Color color) {
-        if (instance == null) {
-            addInitList(key, name, value, HudDebugPosition.RIGHT_MIDDLE, color);
-        } else {
-            instance.container.createLabel(HudDebugPosition.RIGHT_MIDDLE, key, name, value, color);
-        }
+        add(key, name, value, HudDebugPosition.MIDDLE_RIFHT, color);
     }
 
     public static void addMiddleRight(String name, Object value, Color color) {
-        addMiddleRight(null, name, value, color);
+        addMiddleRight(name, name, value, color);
     }
 
     public static void addMiddleRight(String name, Object value) {
-        addMiddleRight(null, name, value, Color.WHITE);
+        addMiddleRight(name, name, value, Color.WHITE);
     }
 
     public static void add(String name, Object value, int positionOnstage) {
@@ -271,31 +243,10 @@ public class HudDebug {
     }
 
     public static void add(String key, String name, Object value, int positionOnstage, Color color) {
-        switch (positionOnstage) {
-            case HudDebugPosition.TOP_LEFT:
-                HudDebug.addTopLeft(key, name, value, color);
-                break;
-            case HudDebugPosition.TOP_MIDDLE:
-                HudDebug.addTopMiddle(key, name, value, color);
-                break;
-            case HudDebugPosition.TOP_RIGHT:
-                HudDebug.addTopRight(key, name, value, color);
-                break;
-            case HudDebugPosition.BOT_LEFT:
-                HudDebug.addBotLeft(key, name, value, color);
-                break;
-            case HudDebugPosition.BOT_MIDDLE:
-                HudDebug.addBotMiddle(key, name, value, color);
-                break;
-            case HudDebugPosition.BOT_RIGHT:
-                HudDebug.addBotRight(key, name, value, color);
-                break;
-            case HudDebugPosition.LEFT_MIDDLE:
-                HudDebug.addMiddleLeft(key, name, value, color);
-                break;
-            case HudDebugPosition.RIGHT_MIDDLE:
-                HudDebug.addMiddleRight(key, name, value, color);
-                break;
+        if (instance == null) {
+            addInitList(key, name, value, positionOnstage, color);
+        } else {
+            instance.container.createLabel(positionOnstage, key, name, value, color);
         }
     }
 }

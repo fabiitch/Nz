@@ -5,11 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.fabiitch.nz.demo.base.launcher.StarterTestConfig;
+import com.fabiitch.nz.demo.quadtree.DemoQuadTreeAddRemove;
+import com.fabiitch.nz.demo.quadtree.DemoQuadTreeMove;
+import com.fabiitch.nz.demo.scene2D.HudDebugDisplayDemo;
 
 import java.lang.reflect.Constructor;
 
 public class TryScreenMain extends Game {
-    private static final Class screenTestClass = HudDebugEventDemo.class;
+    private static final Class screenTestClass = HudDebugDisplayDemo.class;
 
     private static final boolean SmootDtDebug = true;
     private static final int WITDH = 800;

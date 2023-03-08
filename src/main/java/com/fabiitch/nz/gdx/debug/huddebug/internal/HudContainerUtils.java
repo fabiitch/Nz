@@ -41,22 +41,22 @@ public class HudContainerUtils {
                         stage.getViewport().getWorldHeight() - label.getHeight() * (label.order + 1));
                 break;
             case HudDebugPosition.BOT_LEFT:
-                label.setPosition(4, label.getHeight() * (label.order - 1) + 1);
+                label.setPosition(4, label.getHeight() * (label.order) + 1);
                 break;
             case HudDebugPosition.BOT_MIDDLE:
                 float x = Math.max(label.getWidth() + 2, standartRight);
                 label.setPosition(stage.getViewport().getWorldWidth() / 2 - stage.getViewport().getWorldWidth() / 20,
-                        label.getHeight() * (label.order - 1) + 1);
+                        label.getHeight() * (label.order ) + 1);
                 break;
             case HudDebugPosition.BOT_RIGHT:
                 x = Math.max(label.getWidth(), standartRight);
-                label.setPosition(stage.getViewport().getWorldWidth() - x - right_decal_safe, label.getHeight() * (label.order - 1) + 1);
+                label.setPosition(stage.getViewport().getWorldWidth() - x - right_decal_safe, label.getHeight() * (label.order) + 1);
                 break;
-            case HudDebugPosition.LEFT_MIDDLE:
+            case HudDebugPosition.MIDDLE_LEFT:
                 label.setPosition(1, stage.getViewport().getWorldHeight() / 2 + stage.getViewport().getWorldHeight() / 6
                         - label.getHeight() * label.order - 1 - Gdx.graphics.getSafeInsetTop());
                 break;
-            case HudDebugPosition.RIGHT_MIDDLE:
+            case HudDebugPosition.MIDDLE_RIFHT:
                 x = Math.max(label.getWidth() + 2, standartRight);
                 label.setPosition(stage.getViewport().getWorldWidth() - x - right_decal_safe,
                         stage.getViewport().getWorldHeight() / 2 + stage.getViewport().getWorldHeight() / 6
