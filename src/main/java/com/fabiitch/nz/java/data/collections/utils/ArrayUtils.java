@@ -58,6 +58,14 @@ public class ArrayUtils {
         return result;
     }
 
+    /**
+     * //TODO utile cette methode ?
+     * add in result (no clear if result has entry)
+     */
+    public static <T> Array<T> getRange(Array<T> array, int from, int to, Array<T> result) {
+        result.addAll(array, from, to);
+        return result;
+    }
 
     public static <T> Array<T> addIfNotPresent(Array<T> array, T value) {
         if (!array.contains(value, true)) {

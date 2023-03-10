@@ -2,9 +2,10 @@ package com.fabiitch.nz.demo.scene2D;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.fabiitch.nz.demo.base.BaseTryScreen;
+import com.fabiitch.nz.demo.internal.BaseTryScreen;
+import com.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.fabiitch.nz.gdx.debug.huddebug.HudDebug;
-
+@DemoScreen(group = "hud.hud_debug")
 public class HudDebugDisplayDemo extends BaseTryScreen {
 
     public HudDebugDisplayDemo(){

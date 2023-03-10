@@ -177,6 +177,12 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner glueRight() {
+        setXPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        return this;
+    }
+
+
     public NzActorPositionner glueLeft() {
         setXPercent(Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
         return this;
@@ -184,6 +190,11 @@ public class NzActorPositionner {
 
     public NzActorPositionner glueBottom() {
         setYPercent(Percentage.getPercent(actor.getHeight(), stageHeight) / 2);
+        return this;
+    }
+
+    public NzActorPositionner glueTop() {
+        setYPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
         return this;
     }
 

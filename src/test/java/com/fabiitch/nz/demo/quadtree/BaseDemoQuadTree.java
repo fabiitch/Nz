@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.fabiitch.nz.java.data.quadtree.QuadTreeRenderer;
 import com.fabiitch.nz.gdx.debug.huddebug.HudDebug;
-import com.fabiitch.nz.demo.base.BaseTryScreen;
+import com.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.fabiitch.nz.java.math.vectors.V3;
 import com.fabiitch.nz.gdx.render.NzShapeRenderer;

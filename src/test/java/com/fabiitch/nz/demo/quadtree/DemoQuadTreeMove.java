@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.fabiitch.nz.gdx.input.InputUtils;
 import com.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
-
+@DemoScreen(group = "data.quadtree")
 public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
 
     public DemoQuadTreeMove() {

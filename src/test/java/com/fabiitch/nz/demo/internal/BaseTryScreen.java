@@ -1,4 +1,4 @@
-package com.fabiitch.nz.demo.base;
+package com.fabiitch.nz.demo.internal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
