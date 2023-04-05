@@ -6,6 +6,10 @@ public class LogStr {
 
     public static final String SEPARATOR = "=================================================";
 
+    public static String asTag(String tag){
+        return "["+tag+"] ";
+    }
+
     public static String separator(String title) {
         return SEPARATOR + "\n" + "                       " + title + "\n" + SEPARATOR;
     }

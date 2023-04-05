@@ -6,17 +6,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayUtils {
-//    public static <T> Array<T> reverse(final Array<T> array) {
-//        int j = Math.min(array.length, endIndexExclusive) - 1;
-//        Object tmp;
-//        while (j > i) {
-//            tmp = array[j];
-//            array[j] = array[i];
-//            array[i] = tmp;
-//            j--;
-//            i++;
-//        }
-//    }
+
+    public static <T> boolean containsOnly(Array<T> array, T... values) {
+        //TODO pools array
+        Array<T> arrayTmp = new Array<>(array);
+
+        for (T value : values) {
+            if (arrayTmp.contains(value, true))
+                arrayTmp.removeValue(value, true);
+            else
+                return false;
+        }
+        return arrayTmp.size ==0;
+    }
+
+    public static <T> boolean containsAll(Array<T> array, T... values) {
+        for (T value : values) {
+            if (!array.contains(value, true))
+                return false;
+        }
+        return true;
+    }
+
+    public static <T> boolean containsAll(Array<T> array, boolean identity, T... values) {
+        for (T value : values) {
+            if (!array.contains(value, identity))
+                return false;
+        }
+        return true;
+    }
 
     public static <T> List<T> toList(Array<T> array) {
         List<T> list = new ArrayList<>(array.size);

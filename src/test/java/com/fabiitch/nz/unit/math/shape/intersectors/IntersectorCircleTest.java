@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.java.math.shapes.Segment;
 import com.fabiitch.nz.java.math.shapes.intersectors.IntersectorCircle;
-import com.fabiitch.nz.unit.math.vectors.VTestUtils;
+import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

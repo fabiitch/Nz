@@ -3,12 +3,13 @@ package com.fabiitch.nz.unit.math.vectors;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.fabiitch.gdxunit.VTestUtils;
 import com.fabiitch.nz.java.math.vectors.V;
 import com.fabiitch.nz.java.math.vectors.V2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.MathTestUtils.v2;
 
 public class V2Test{
 

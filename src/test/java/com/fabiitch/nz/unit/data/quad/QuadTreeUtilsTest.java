@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.data.quadtree.QuadTreeUtils.*;
-import static com.fabiitch.nz.unit.math.MathTestUtils.r;
+import static com.fabiitch.gdxunit.MathTestUtils.r;
 
 public class QuadTreeUtilsTest {
 

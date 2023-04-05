@@ -3,12 +3,12 @@ package com.fabiitch.nz.unit.math.shape;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.fabiitch.nz.java.math.shapes.Triangle;
-import com.fabiitch.nz.unit.math.vectors.VTestUtils;
+import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.MathTestUtils.v2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

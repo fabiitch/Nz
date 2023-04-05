@@ -31,6 +31,7 @@ ext {
 
 dependencies {
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testImplementation project(':GdxUnit')
 
     testImplementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"

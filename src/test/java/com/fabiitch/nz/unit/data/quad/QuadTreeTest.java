@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.unit.math.MathTestUtils.r;
-import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.MathTestUtils.r;
+import static com.fabiitch.gdxunit.MathTestUtils.v2;
 
 //TODO cassé refaire le quadtree
 @Disabled

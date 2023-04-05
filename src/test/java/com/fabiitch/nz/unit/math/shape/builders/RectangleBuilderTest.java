@@ -5,7 +5,7 @@ import com.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.nz.unit.math.MathTestUtils.r;
+import static com.fabiitch.gdxunit.MathTestUtils.r;
 
 public class RectangleBuilderTest {
     @Test

@@ -6,13 +6,13 @@ import com.fabiitch.nz.java.math.shapes.Segment;
 import com.fabiitch.nz.java.math.shapes.Triangle;
 import com.fabiitch.nz.java.math.shapes.builders.TriangleBuilder;
 import com.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
-import com.fabiitch.nz.unit.math.vectors.VTestUtils;
+import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.math.shapes.utils.PolygonUtils.*;
-import static com.fabiitch.nz.unit.math.MathTestUtils.s;
-import static com.fabiitch.nz.unit.math.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.MathTestUtils.s;
+import static com.fabiitch.gdxunit.MathTestUtils.v2;
 
 public class PolygonUtilsTest {
     private static final Vector2 tmp = v2(0, 0);

@@ -6,8 +6,7 @@ import com.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayUtilsTest {
 
@@ -94,5 +93,25 @@ public class ArrayUtilsTest {
         Integer[] arrayAdd = new Integer[]{one, 55, nine};
         ArrayUtils.addIfNotPresent(arrayBase, arrayAdd);
         assertEquals(5, arrayBase.size);
+    }
+
+    @Test
+    public void containsOnlyTest() {
+        Array<Object> array = new Array<>();
+        Object a = new Object(), b = new Object(), c = new Object(), d = new Object(), e = new Object();
+        array.add(a, b, c, d);
+
+        assertTrue(ArrayUtils.containsOnly(array, a, b, c, d));
+        assertFalse(ArrayUtils.containsOnly(array, a, b, c));
+        assertFalse(ArrayUtils.containsOnly(array, a, b, c, d, e));
+
+        Object cpy = a;
+        assertTrue(ArrayUtils.containsOnly(array, cpy, b, c, d));
+        assertFalse(ArrayUtils.containsOnly(array, a, cpy, b, c));
+        assertFalse(ArrayUtils.containsOnly(array, a, cpy, b, c, d));
+
+        array.add(cpy, cpy);
+        assertTrue(ArrayUtils.containsOnly(array, a, b, c, d, a ,a));
+        assertFalse(ArrayUtils.containsOnly(array, a, b, c, d, cpy));
     }
 }

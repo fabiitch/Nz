@@ -178,24 +178,51 @@ public class NzActorPositionner {
     }
 
     public NzActorPositionner glueRight() {
-        setXPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        if (centerActor)
+            setXPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        else
+            setXPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh));
         return this;
     }
 
-
     public NzActorPositionner glueLeft() {
-        setXPercent(Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        if (centerActor)
+            setXPercent(Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        else
+            setXPercent(0);
         return this;
     }
 
     public NzActorPositionner glueBottom() {
-        setYPercent(Percentage.getPercent(actor.getHeight(), stageHeight) / 2);
+        if (centerActor)
+            setYPercent(Percentage.getPercent(actor.getHeight(), stageHeight) / 2);
+        else
+            setYPercent(0);
         return this;
     }
 
     public NzActorPositionner glueTop() {
-        setYPercent(100 - Percentage.getPercent(actor.getWidth(), stageWitdh) / 2);
+        if (centerActor)
+            setYPercent(100 - Percentage.getPercent(actor.getHeight(), stageHeight) / 2);
+        else
+            setYPercent(100 - Percentage.getPercent(actor.getHeight(), stageHeight));
         return this;
+    }
+
+    public NzActorPositionner addX(float percent) {
+        float posPercent = Percentage.getPercent(actor.getX(), stageWitdh);
+        setXPercent(posPercent + percent);
+        return this;
+    }
+
+    public NzActorPositionner addY(float percent) {
+        float posPercent = Percentage.getPercent(actor.getY(), stageHeight);
+        setYPercent(posPercent + percent);
+        return this;
+    }
+
+    public NzActorPositionner add(float percentX, float percentY) {
+        return addX(percentX).addY(percentY);
     }
 
     public void visible(boolean b) {
