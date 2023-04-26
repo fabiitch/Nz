@@ -1,6 +1,5 @@
 plugins {
     id 'java-library'
-    id "java-test-fixtures"
 }
 
 group 'com.fabiitch.nz'
@@ -25,8 +24,8 @@ repositories {
 }
 ext {
     gdxVersion = '1.11.0'
-    junitVersion = '5.8.1'
-    mockitoVersion = '4.2.0'
+    junitVersion = '5.9.2'
+    mockitoVersion = '5.2.0'
 }
 
 dependencies {

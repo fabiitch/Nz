@@ -7,6 +7,10 @@ public class Chrono implements Pool.Poolable {
     public long millisStart;
     public long millisEnd;
 
+    public Chrono() {
+        start();
+    }
+
     public void start() {
         millisStart = System.currentTimeMillis();
         millisEnd = 0;
@@ -22,13 +26,11 @@ public class Chrono implements Pool.Poolable {
     }
 
     public float getSeconds() {
-        long end = millisEnd == 0 ? System.currentTimeMillis() : millisEnd;
-        return TimeConverter.millisToSecond(end - millisStart);
+        return TimeConverter.millisToSecond(getMillis());
     }
 
     @Override
     public void reset() {
-        millisStart = 0;
-        millisEnd = 0;
+        start();
     }
 }

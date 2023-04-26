@@ -13,6 +13,8 @@ public class TimeConverterTest {
 
     @Test
     public void secondToMillisTest() {
+        Assertions.assertEquals(10_000, secondToMillis(10), MILLIS_MAX_DELTA);
+
         Assertions.assertEquals(10 * MILLIS_IN_SECOND, secondToMillis(10), MILLIS_MAX_DELTA);
         Assertions.assertEquals(MILLIS_IN_SECOND / 2, secondToMillis(0.5f), MILLIS_MAX_DELTA);
 
@@ -31,6 +33,8 @@ public class TimeConverterTest {
 
     @Test
     public void millisToSecondTest() {
+        Assertions.assertEquals(2, millisToSecond(2000), SECOND_MAX_DELTA);
+
         Assertions.assertEquals(10, millisToSecond(secondToMillis(10)), SECOND_MAX_DELTA);
         Assertions.assertEquals(0.005f, millisToSecond(secondToMillis(0.005f)), SECOND_MAX_DELTA);
         Assertions.assertEquals(0.5f, millisToSecond(MILLIS_IN_SECOND / 2), SECOND_MAX_DELTA);

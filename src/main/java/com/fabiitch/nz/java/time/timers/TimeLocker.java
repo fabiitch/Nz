@@ -43,8 +43,7 @@ public class TimeLocker {
         }
         return false;
     }
-
-
+    
     public TimeLocker config(boolean autoReset, boolean active) {
         this.autoReset = autoReset;
         this.active = active;
