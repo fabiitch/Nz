@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.StringBuilder;
 public class LogStr {
 
     public static final String SEPARATOR = "=================================================";
+    public static final String HALF_LINE = "=================";
 
     public static String asTag(String tag){
         return "["+tag+"] ";

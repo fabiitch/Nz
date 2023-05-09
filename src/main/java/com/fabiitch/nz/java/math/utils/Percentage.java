@@ -15,30 +15,29 @@ public class Percentage {
      * @param total montant total
      * @return number 0-100
      */
-    public static float getPercent(float part, float total) {
+    public static float percentage(float part, float total) {
         return part / total * 100;
     }
 
-    public static float getAlpha(float part, float total) {
+    public static float alpha(float part, float total) {
         return part / total;
     }
 
-    public static float getValue(float percent, float total) {
+    public static float value(float percent, float total) {
         return percent * total / 100;
     }
 
-
-    public static Vector2 getValue(Vector2 percent, float total, Vector2 result) {
-        result.x = getValue(percent.x, total);
-        result.y = getValue(percent.y, total);
+    public static Vector2 value(Vector2 percent, float total, Vector2 result) {
+        result.x = value(percent.x, total);
+        result.y = value(percent.y, total);
         return result;
     }
 
-    public static float addXPercentTo(float percent, float total) {
+    public static float addPercentage(float percent, float total) {
         return total + (total * percent / 100);
     }
 
-    public static float removeXPercentTo(float percent, float total) {
+    public static float removePercentage(float percent, float total) {
         return total - total * percent / 100;
     }
 

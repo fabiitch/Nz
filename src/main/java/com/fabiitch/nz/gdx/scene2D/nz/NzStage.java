@@ -20,12 +20,12 @@ public class NzStage extends Stage {
 
     public NzStage() {
         super(new ScreenViewport());
-        this.nzPositionner = new NzActorPositionner(this.getWidth(), this.getHeight());
+        this.nzPositionner = new NzActorPositionner(this);
     }
 
     public NzStage(Batch batch) {
         super(new ScreenViewport(), batch);
-        this.nzPositionner = new NzActorPositionner(this.getWidth(), this.getHeight());
+        this.nzPositionner = new NzActorPositionner(this);
     }
 
     public NzActorPositionner getPositionner(Actor actor) {
@@ -38,21 +38,28 @@ public class NzStage extends Stage {
         return nzPositionner;
     }
 
+    public NzActorPositionner add(Actor actor, boolean center) {
+        nzPositionner.giveActor(actor, center).add();
+        return nzPositionner;
+    }
+
     public float getPosX(float percent) {
-        return Percentage.getValue(percent, this.getWidth());
+        return Percentage.value(percent, this.getWidth());
     }
 
     public float getPosY(float percent) {
-        return Percentage.getValue(percent, this.getHeight());
+        return Percentage.value(percent, this.getHeight());
     }
 
     public Vector2 getPos(float percentX, float percentY) {
-        return new Vector2(Percentage.getValue(percentX, this.getWidth()), Percentage.getValue(percentY, this.getHeight()));
+        return new Vector2(Percentage.value(percentX, this.getWidth()), Percentage.value(percentY, this.getHeight()));
     }
 
-    public void addActors(Actor... actors) {
+
+    public NzStage addActors(Actor... actors) {
         for (Actor actor : actors)
             addActor(actor);
+        return this;
     }
 
     @Override
@@ -73,8 +80,8 @@ public class NzStage extends Stage {
         float oldWidth = this.getWidth();
         float oldheight = this.getHeight();
 
-        float percentWitdh = Percentage.getPercent(oldWidth, width);
-        float percentHeight = Percentage.getPercent(oldheight, height);
+        float percentWitdh = Percentage.percentage(oldWidth, width);
+        float percentHeight = Percentage.percentage(oldheight, height);
 
         for (Actor actor : actors) {
             actor.setWidth(actor.getWidth() / percentWitdh * 100);

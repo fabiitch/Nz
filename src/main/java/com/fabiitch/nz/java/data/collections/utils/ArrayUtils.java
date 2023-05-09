@@ -17,7 +17,7 @@ public class ArrayUtils {
             else
                 return false;
         }
-        return arrayTmp.size ==0;
+        return arrayTmp.size == 0;
     }
 
     public static <T> boolean containsAll(Array<T> array, T... values) {
@@ -50,6 +50,12 @@ public class ArrayUtils {
             array.add(list.get(i));
         }
         return array;
+    }
+
+    public static <T> T getFirst(Array<T> array) {
+        if (array.size == 0)
+            return null;
+        return array.get(0);
     }
 
     public static <T> T getLast(Array<T> array) {

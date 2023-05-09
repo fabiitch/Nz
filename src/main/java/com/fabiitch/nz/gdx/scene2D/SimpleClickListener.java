@@ -3,9 +3,10 @@ package com.fabiitch.nz.gdx.scene2D;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.fabiitch.nz.java.function.DoIt;
 
 
-public interface SimpleClickListener extends EventListener {
+public interface SimpleClickListener extends EventListener, DoIt {
 
     default boolean handle(Event e) {
         if (!(e instanceof InputEvent)) return false;
@@ -17,4 +18,9 @@ public interface SimpleClickListener extends EventListener {
     }
 
     void onClick();
+
+    @Override
+    default void doIt() {
+        onClick();
+    }
 }

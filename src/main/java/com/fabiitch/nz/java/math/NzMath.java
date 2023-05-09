@@ -9,6 +9,28 @@ public class NzMath {
     private NzMath() {
 
     }
+    public static boolean isLong(String strNum){
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            long l = Long.parseLong(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    public static boolean isFloat(String strNum){
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            float f = Float.parseFloat(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     //TODO plein de replace a faire sur les distance qui ne peuvent etre negative
     public static boolean isZero(float positive) {

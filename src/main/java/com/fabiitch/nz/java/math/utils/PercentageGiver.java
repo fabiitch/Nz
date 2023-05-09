@@ -9,14 +9,14 @@ public class PercentageGiver {
     }
 
     public float value(float percent) {
-        return Percentage.getValue(percent, total);
+        return Percentage.value(percent, total);
     }
 
     public float getPercent(float value) {
-        return Percentage.getPercent(value, total);
+        return Percentage.percentage(value, total);
     }
 
     public float getAlpha(float value) {
-        return Percentage.getAlpha(value, total);
+        return Percentage.alpha(value, total);
     }
 }

@@ -68,7 +68,7 @@ public abstract class TouchPad {
     public void updateDirForce() {
         this.direction.set(posKnob).sub(posBase).nor();
         float dst = posBase.dst(posKnob);
-        this.force = Percentage.getAlpha(dst, sizeBase / 2);
+        this.force = Percentage.alpha(dst, sizeBase / 2);
     }
 
 
@@ -81,7 +81,7 @@ public abstract class TouchPad {
     public boolean touchDown(float x, float y) {
         if (fixedOnTouchDown) {
             float dstToBase = posBase.dst(x, y);
-            if (dstToBase > (sizeBase / 2) + Percentage.getValue(10, sizeBase))
+            if (dstToBase > (sizeBase / 2) + Percentage.value(10, sizeBase))
                 return false;
         } else {
             NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);

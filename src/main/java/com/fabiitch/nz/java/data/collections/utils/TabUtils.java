@@ -5,6 +5,13 @@ public class TabUtils {
 
     }
 
+    public static boolean contains(final Object[] tab, Object o) {
+        for (Object object : tab)
+            if (object == o)
+                return true;
+        return false;
+    }
+
     //org/apache/commons/lang3/ArrayUtils.java:1417
     public static void reverse(final Object[] array) {
         if (array == null) {

@@ -14,7 +14,7 @@ public class DT_Timer {
     }
 
     public float getAlpha(float time) {
-        return Percentage.getAlpha(time, duration);
+        return Percentage.alpha(time, duration);
     }
 
     public void reset() {
