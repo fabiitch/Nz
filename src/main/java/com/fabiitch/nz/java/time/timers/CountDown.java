@@ -1,15 +1,16 @@
 package com.fabiitch.nz.java.time.timers;
 
-import com.badlogic.gdx.utils.Array;
+import com.fabiitch.nz.java.function.DoIt;
 
+//TODO utile ?
 public class CountDown {
     public float duration;
-    public CountDownAction countDownAction;
+    public DoIt doIt;
     public float internalTimer;
 
-    public CountDown(float duration, CountDownAction countDownAction) {
+    public CountDown(float duration, DoIt doIt) {
         this.duration = duration;
-        this.countDownAction = countDownAction;
+        this.doIt = doIt;
     }
 
     public CountDown(float duration) {
@@ -25,8 +26,9 @@ public class CountDown {
     public boolean update(float dt) {
         if (internalTimer < duration) {
             internalTimer += dt;
-            if (internalTimer >= duration && countDownAction != null) {
-                countDownAction.onEnd();
+            if (internalTimer >= duration) {
+                if (doIt != null)
+                    doIt.doIt();
                 return true;
             } else {
                 return false;
@@ -40,17 +42,3 @@ public class CountDown {
     }
 }
 
-interface CountDownAction {
-    void onEnd();
-}
-
-class MultiCountDownAction implements CountDownAction {
-    public Array<CountDownAction> actions = new Array<>();
-
-    @Override
-    public void onEnd() {
-        for (CountDownAction action : actions) {
-            action.onEnd();
-        }
-    }
-}

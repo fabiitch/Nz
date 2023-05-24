@@ -52,7 +52,6 @@ public class NzActorPositionner {
             actor.setX(x);
             actor.setY(y);
         }
-
         return this;
     }
 

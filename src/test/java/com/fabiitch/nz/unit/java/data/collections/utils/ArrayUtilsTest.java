@@ -1,7 +1,7 @@
 package com.fabiitch.nz.unit.java.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
-import com.fabiitch.nz.java.data.collections.ToArray;
+import com.fabiitch.nz.java.data.collections.utils.ToArray;
 import com.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

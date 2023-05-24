@@ -24,6 +24,13 @@ public class DebugDisplayUtils {
         return TimeUtils.nanosToMillis(nano) + "ms";
     }
 
+    public static String printSeconds(float f) {
+        String floating = printFloat(f);
+        int indexDot = floating.indexOf(",");
+        int charAfterDot = floating.length() - indexDot;
+        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)).toString()+"s";
+    }
+
     public static String printValue(Object o) {
         if (o == null)
             return CommonStrings.Null;
@@ -40,12 +47,13 @@ public class DebugDisplayUtils {
         return o.toString();
     }
 
-//    private static String printIntCounter(IntCounter o) {
+    //    private static String printIntCounter(IntCounter o) {
 //        if (o.count == 0) {
 //            return "Waiting Data ...";
 //        }
 //        return o.toStringCurrentAverage();
 //    }
+
 
     public static String printFloat(float f) {
         if (f == 0)
@@ -59,7 +67,7 @@ public class DebugDisplayUtils {
             return split[0];
         if (split[0].length() > 5)
             return split[0];
-        int indexFloatting = Math.min(split[1].length(),4);
+        int indexFloatting = Math.min(split[1].length(), 4);
         return split[0] + "," + split[1].substring(0, indexFloatting);
     }
 

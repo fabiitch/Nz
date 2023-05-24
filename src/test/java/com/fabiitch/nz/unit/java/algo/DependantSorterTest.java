@@ -23,12 +23,17 @@ public class DependantSorterTest {
         DependantSorterMock s6 = new DependantSorterMock(s5);
         DependantSorterMock s7 = new DependantSorterMock();
 
-        Array<DependantSorter> array = new Array<>();
+        Array<DependantSorterMock> array = new Array<>();
         array.add(s1, s2, s3, s4);
         array.add(s5, s6, s7);
+        array.shuffle();
 
-        List<DependantSorter> sort = DependantSorter.sort(ArrayUtils.toList(array));
-        assertDoesNotThrow(() -> DependantSorter.sort(ArrayUtils.toList(array)));
+        assertDoesNotThrow(() -> {
+            List<DependantSorterMock> sort = DependantSorter.sort(ArrayUtils.toList(array));
+            for (DependantSorterMock re : sort) {
+                re.checkDependantAreInit();
+            }
+        });
 
     }
 
@@ -48,20 +53,32 @@ public class DependantSorterTest {
 
     }
 
+    private static int countInstance = 1;
+
     private class DependantSorterMock implements DependantSorter {
 
-        private DependantSorter[] servicesToWait;
+        private DependantSorterMock[] servicesToWait;
+        public int instanceCount;
+        public boolean init = false;
 
-        public DependantSorterMock(DependantSorter... servicesToWait) {
+        public DependantSorterMock(DependantSorterMock... servicesToWait) {
             this.servicesToWait = servicesToWait;
+            this.instanceCount = countInstance++;
         }
 
-        public void setWaiting(DependantSorter... servicesToWait) {
+        public void checkDependantAreInit() {
+            for (DependantSorterMock dependantSorterMock : servicesToWait)
+                if (!dependantSorterMock.init)
+                    throw new SequenceLockException("locked !");
+            this.init = true;
+        }
+
+        public void setWaiting(DependantSorterMock... servicesToWait) {
             this.servicesToWait = servicesToWait;
         }
 
         @Override
-        public List<DependantSorter> waitingList() {
+        public List<DependantSorterMock> waitingList() {
             return Arrays.asList(servicesToWait);
         }
     }

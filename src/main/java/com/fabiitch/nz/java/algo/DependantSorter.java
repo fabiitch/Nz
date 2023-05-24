@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
  */
 public interface DependantSorter {
 
-
-    List<DependantSorter> waitingList();
+    <T extends DependantSorter> List<T> waitingList();
 
     static <T extends DependantSorter> List<T> sort(List<T> dependantsList) throws SequenceLockException {
         List<T> notInits = new ArrayList<>(dependantsList);

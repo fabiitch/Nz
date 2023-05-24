@@ -1,7 +1,8 @@
-package com.fabiitch.nz.java.data.collections;
+package com.fabiitch.nz.java.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
 
+//TODO ??
 public class ToArray {
     private ToArray() {
 
@@ -18,6 +19,12 @@ public class ToArray {
     public static <T> Array<T> get(T v1) {
         Array<T> array = new Array<>(1);
         array.add(v1);
+        return array;
+    }
+
+    public static <T> Array<T> get(T... values) {
+        Array<T> array = new Array<>(values.length);
+        array.addAll(values);
         return array;
     }
 
