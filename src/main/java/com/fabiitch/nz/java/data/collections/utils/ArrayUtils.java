@@ -112,4 +112,21 @@ public class ArrayUtils {
         return array;
     }
 
+    public static <T> Array<T> copy(Array<T> source, Array<T> target) {
+        int diff = source.size - target.size;
+        if (diff < 0) { //target bigger than source
+            for (int i = 0, n = source.size; i < n; i++) {
+                target.set(i, source.get(i));
+            }
+            target.removeRange(source.size, target.size - 1);
+        } else {
+            for (int i = 0, n = target.size; i < n; i++) {
+                target.set(i, source.get(i));
+            }
+            for (int i = target.size, n = source.size; i < n; i++) {
+                target.add(source.get(i));
+            }
+        }
+        return target;
+    }
 }

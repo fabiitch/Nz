@@ -5,7 +5,8 @@ package com.fabiitch.nz.gdx.log;
 public class StrFormat {
     static final String DELIM_STR = "{}";
 
-    public static String format(String message, Object[] args) {
+    //TODO coupe les messages voir com/nzt/mfl/engine/services/sort/OrderGameService.java:18
+    public static String format(String message, Object... args) {
         int msgIndex = 0;
         int delimIndex;
         StringBuilder sb = new StringBuilder(message.length() + 50);

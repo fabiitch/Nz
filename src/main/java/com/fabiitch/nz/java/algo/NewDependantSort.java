@@ -9,18 +9,18 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public interface DependantSorter {
+public interface NewDependantSort {
 
-    <T extends DependantSorter> List<T> dependencies();
+    <T extends NewDependantSort> List<T> dependencies();
 
-    static <T extends DependantSorter> List<T> sort(List<T> dependencies) throws DependencyLockException {
+    static <T extends NewDependantSort> List<T> sort(List<T> dependencies) throws DependencyLockException {
         List<T> notInits = new ArrayList<>(dependencies);
         List<T> res = new ArrayList<>(dependencies.size());
         while (!notInits.isEmpty()) {
             T sequenceToInit = null;
 
             for (T sequence : notInits) {
-                List<DependantSorter> needs = sequence.dependencies();
+                List<NewDependantSort> needs = sequence.dependencies();
                 if (needs == null || needs.isEmpty()) {
                     sequenceToInit = sequence;
                     break;
@@ -33,7 +33,7 @@ public interface DependantSorter {
             }
             if (sequenceToInit == null) {
                 StringBuilder sb = new StringBuilder("");
-                for (DependantSorter sequence : notInits) {
+                for (NewDependantSort sequence : notInits) {
                     sb.append(sequence.getClass().getSimpleName(), ",");
                 }
                 throw new DependencyLockException("DependantSorter" + sb);

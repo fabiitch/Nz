@@ -2,7 +2,7 @@ package com.fabiitch.nz.unit.java.algo;
 
 import com.badlogic.gdx.utils.Array;
 import com.fabiitch.nz.java.algo.DependantSorter;
-import com.fabiitch.nz.java.algo.SequenceLockException;
+import com.fabiitch.nz.java.algo.DependencyLockException;
 import com.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,7 @@ public class DependantSorterTest {
         Array<DependantSorter> array = new Array<>();
         array.add(s1, s2, s3);
 
-        assertThrows(SequenceLockException.class, () -> DependantSorter.sort(ArrayUtils.toList(array)));
+        assertThrows(DependencyLockException.class, () -> DependantSorter.sort(ArrayUtils.toList(array)));
 
     }
 
@@ -69,7 +69,7 @@ public class DependantSorterTest {
         public void checkDependantAreInit() {
             for (DependantSorterMock dependantSorterMock : servicesToWait)
                 if (!dependantSorterMock.init)
-                    throw new SequenceLockException("locked !");
+                    throw new DependencyLockException("locked !");
             this.init = true;
         }
 
@@ -78,7 +78,7 @@ public class DependantSorterTest {
         }
 
         @Override
-        public List<DependantSorterMock> waitingList() {
+        public List<DependantSorterMock> dependencies() {
             return Arrays.asList(servicesToWait);
         }
     }

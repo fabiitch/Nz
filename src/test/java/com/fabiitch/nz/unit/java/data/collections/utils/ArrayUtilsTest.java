@@ -111,7 +111,43 @@ public class ArrayUtilsTest {
         assertFalse(ArrayUtils.containsOnly(array, a, cpy, b, c, d));
 
         array.add(cpy, cpy);
-        assertTrue(ArrayUtils.containsOnly(array, a, b, c, d, a ,a));
+        assertTrue(ArrayUtils.containsOnly(array, a, b, c, d, a, a));
         assertFalse(ArrayUtils.containsOnly(array, a, b, c, d, cpy));
+    }
+
+    @Test
+    public void copyTest() {
+        Array<Integer> source = new Array<>();
+        source.add(5, 5, 6, 8);
+        {
+            //empty
+            Array<Integer> target = ArrayUtils.copy(source, new Array<>());
+            ArrayUtilsTest.assertArrayEquals(source, target);
+        }
+        {
+            //source  bigger
+            Array<Integer> target = new Array<>();
+            target.add(1, 2);
+            ArrayUtils.copy(source, target);
+            ArrayUtilsTest.assertArrayEquals(source, target);
+        }
+        {
+            //target  bigger
+            Array<Integer> target = new Array<>();
+            target.add(1, 2, 5, 9);
+            target.add(1, 2, 5, 9);
+            ArrayUtils.copy(source, target);
+            ArrayUtilsTest.assertArrayEquals(source, target);
+        }
+        {
+            //same size
+            Array<Integer> target = new Array<>();
+            source.add(5, 5, 6, 8);
+            source.add(3, 2, 6, 8);
+            ArrayUtils.copy(source, target);
+            ArrayUtilsTest.assertArrayEquals(source, target);
+        }
+
+
     }
 }
