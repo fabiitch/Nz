@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public interface DependantSorter {
+public interface DependantSorter<T extends DependantSorter<?>> {
 
-    <T extends DependantSorter> List<T> dependencies();
+    List<T> dependencies();
 
     static <T extends DependantSorter> List<T> sort(List<T> dependencies) throws DependencyLockException {
         List<T> notInits = new ArrayList<>(dependencies);

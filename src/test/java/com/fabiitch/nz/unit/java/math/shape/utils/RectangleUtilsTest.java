@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.math.shapes.utils.RectangleUtils.*;
-import static com.fabiitch.gdxunit.MathTestUtils.r;
-import static com.fabiitch.gdxunit.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.r;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RectangleUtilsTest {

@@ -1,3 +1,5 @@
 
 rootProject.name = 'Nz'
 
+include  'GdxUnit'
+project(":GdxUnit").projectDir = file("../GdxUnit")

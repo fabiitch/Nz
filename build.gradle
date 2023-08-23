@@ -35,7 +35,6 @@ dependencies {
 
     testImplementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testImplementation project(path: ':core-engine')
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"

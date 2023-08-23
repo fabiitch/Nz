@@ -9,7 +9,7 @@ import com.fabiitch.nz.java.math.vectors.V2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.fabiitch.gdxunit.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 
 public class V2Test{
 

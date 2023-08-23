@@ -7,14 +7,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.math.shapes.utils.SegmentUtils.*;
-import static com.fabiitch.gdxunit.MathTestUtils.s;
-import static com.fabiitch.gdxunit.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SegmentUtilsTest {
 
     private static final float TOLERANCE = 0.01f;
+
+    private static Segment s(Vector2 a, Vector2 b) {
+        return new Segment(a, b);
+    }
+
+    private static Segment s(float aX, float aY, float bX, float bY) {
+        return new Segment(aX, aY, bX, bY);
+    }
 
     //http://www.ambrsoft.com/MathCalc/Line/TwoLinesIntersection/TwoLinesIntersection.htm
     @Test

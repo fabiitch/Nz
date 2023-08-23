@@ -13,6 +13,10 @@ public class RectangleBuilder {
 
     }
 
+    public static Rectangle get(float witdh, float height) {
+        return new Rectangle(0, 0, witdh, height);
+    }
+
     public static Rectangle get(float x, float y, float witdh, float height) {
         return new Rectangle(x, y, witdh, height);
     }

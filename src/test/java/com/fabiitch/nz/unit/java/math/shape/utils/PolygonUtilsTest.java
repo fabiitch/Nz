@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.math.shapes.utils.PolygonUtils.*;
-import static com.fabiitch.gdxunit.MathTestUtils.s;
-import static com.fabiitch.gdxunit.MathTestUtils.v2;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.s;
+import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 
 public class PolygonUtilsTest {
     private static final Vector2 tmp = v2(0, 0);
