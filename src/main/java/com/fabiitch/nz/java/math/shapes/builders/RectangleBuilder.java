@@ -13,6 +13,10 @@ public class RectangleBuilder {
 
     }
 
+    public static Rectangle get(Rectangle rectangle) {
+        return new Rectangle(rectangle);
+    }
+
     public static Rectangle get(float witdh, float height) {
         return new Rectangle(0, 0, witdh, height);
     }
@@ -23,6 +27,10 @@ public class RectangleBuilder {
 
     public static Rectangle get(Vector2 pos, float witdh, float height) {
         return new Rectangle(pos.x, pos.y, witdh, height);
+    }
+
+    public static Rectangle get(float x, float y, Vector2 size) {
+        return new Rectangle(x, y, size.x, size.y);
     }
 
     public static Rectangle fromCenter(float centerX, float centerY, float width, float height) {
