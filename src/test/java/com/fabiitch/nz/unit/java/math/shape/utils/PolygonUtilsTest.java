@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.fabiitch.nz.java.math.shapes.utils.PolygonUtils.*;
-import static com.fabiitch.gdxunit.ShapeTestBuilder.s;
 import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 
 public class PolygonUtilsTest {
@@ -183,4 +182,7 @@ public class PolygonUtilsTest {
     }
 
 
+    private static Segment s(float aX, float aY, float bX, float bY) {
+        return new Segment(aX, aY, bX, bY);
+    }
 }
