@@ -94,7 +94,7 @@ dependencies {
 // from `api` to `testImplementation` .
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
-    implementation 'com.github.fabiitch:GdxUnit:1.0'
+    testImplementation 'com.github.fabiitch:GdxUnit:1.0'
     testImplementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
 
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
@@ -107,6 +107,8 @@ dependencies {
     testImplementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
 
 
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 }
