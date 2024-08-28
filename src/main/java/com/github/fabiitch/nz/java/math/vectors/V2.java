@@ -79,9 +79,9 @@ public class V2 {
     }
 
     public static Vector2 inv(Vector2 v) {
-        v.x = -v.x;
-        v.y = -v.y;
-        return v;
+        float newX = -v.x;
+        float newY = -v.y;
+        return v.set(newX, newY);
     }
 
     public static Vector2 directionTo(Vector2 from, Vector2 to, Vector2 result) {
@@ -149,5 +149,9 @@ public class V2 {
         v.x = Math.min(maxValue, v.x);
         v.y = Math.min(maxValue, v.y);
         return v;
+    }
+
+    public static Vector2 getMiddle(Vector2 v1, Vector2 v2, Vector2 res) {
+        return res.set((v2.x + v1.x) / 2, (v2.y + v1.y) / 2);
     }
 }
