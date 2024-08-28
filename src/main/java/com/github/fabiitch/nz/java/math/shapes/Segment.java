@@ -16,7 +16,6 @@ public class Segment implements Shape2D {
 
     public Vector2 a;
     public Vector2 b;
-    public float rotation;
 
     public Segment() {
         this.a = new Vector2();
@@ -38,16 +37,39 @@ public class Segment implements Shape2D {
         this.b.add(x, y);
     }
 
+    public void move(Vector2 add) {
+        this.a.add(add.x, add.y);
+        this.b.add(add.x, add.y);
+    }
+
     public void setRotation(float degrees) {
-        this.rotation = degrees;
         getMiddle(tmpv1);
         a.set(CircleUtils.posWithAngleDeg(tmpv1, dst() / 2, degrees, tmpv2));
         b.set(CircleUtils.posWithAngleDeg(tmpv1, dst() / 2, degrees + 180, tmpv2));
     }
 
     public void rotate(float degrees) {
-        rotation += degrees;
-        setRotation(rotation);
+        float angleDeg = getDir(tmpv1).angleDeg();
+        setRotation(angleDeg + degrees);
+    }
+
+    /**
+     * @param centerX new center position
+     * @param centerY center position
+     */
+    public void setCenter(float centerX, float centerY) {
+        float currentCenterX = (a.x + b.x) / 2;
+        float currentCenterY = (a.y + b.y) / 2;
+
+        // Calculer le décalage (vecteur de déplacement)
+        float deltaX = centerX - currentCenterX;
+        float deltaY = centerY - currentCenterY;
+
+        // Appliquer le décalage aux points a et b
+        a.x += deltaX;
+        a.y += deltaY;
+        b.x += deltaX;
+        b.y += deltaY;
     }
 
     public float dst(Vector2 point) {
@@ -58,10 +80,26 @@ public class Segment implements Shape2D {
         return SegmentUtils.closestPoint(this, point, result);
     }
 
-    public Vector2 getDir(Vector2 dir) {
+    /**
+     * from a to b
+     *
+     * @param result
+     * @return
+     */
+    public Vector2 getDir(Vector2 result) {
         float dx = b.x - a.x;
         float dy = b.y - a.y;
-        return dir.set(dx, dy).nor();
+        return result.set(dx, dy).nor();
+    }
+
+    /**
+     * from a to b
+     *
+     * @param result
+     * @return
+     */
+    public Vector2 getDirInv(Vector2 result) {
+        return V2.inv(getDir(result));
     }
 
     public Vector2 getMiddle(Vector2 result) {
@@ -166,4 +204,6 @@ public class Segment implements Shape2D {
     public boolean contains(float x, float y) {
         return contains(tmpv1.set(x, y));
     }
+
+
 }

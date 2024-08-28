@@ -71,8 +71,6 @@ public abstract class BaseTryScreen extends ScreenAdapter {
             HudDebug.update("getTextureBindings", glProfiler.getTextureBindings());
             HudDebug.update("getVertexCountAverage", glProfiler.getVertexCount().average);
         }
-
-
     }
 
     @Override
@@ -92,7 +90,7 @@ public abstract class BaseTryScreen extends ScreenAdapter {
     }
 
     @Override
-    public final void dispose() {
+    public void dispose() {
         nzStage.dispose();
         skin.dispose();
     }
