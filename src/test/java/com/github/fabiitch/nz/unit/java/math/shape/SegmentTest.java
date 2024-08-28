@@ -58,4 +58,21 @@ public class SegmentTest {
 
         assertTrue(segA.equalsPoints(segA));
     }
+
+    @Test
+    public void setCenterTest() {
+        Segment segment = new Segment(0, 0, 50, 0);
+        segment.setCenter(100, 100);
+
+        assertEquals(new Vector2(75, 100), segment.a);
+        assertEquals(new Vector2(125, 100), segment.b);
+
+
+        segment = new Segment(-50, -50, 50, 50);
+        segment.setCenter(100, 100);
+
+        assertEquals(new Vector2(50, 50), segment.a);
+        assertEquals(new Vector2(150, 150), segment.b);
+    }
+
 }
