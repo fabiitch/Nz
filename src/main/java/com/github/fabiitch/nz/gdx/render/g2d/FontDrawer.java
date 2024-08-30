@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import lombok.Getter;
 
+@Getter
 public class FontDrawer {
     private final BitmapFont font;
     private final SpriteBatch sb;
