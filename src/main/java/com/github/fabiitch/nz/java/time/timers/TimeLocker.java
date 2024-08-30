@@ -37,7 +37,7 @@ public class TimeLocker {
             accumulator += dt;
             boolean end = accumulator >= duration;
             if (end && autoReset) {
-                accumulator = 0;
+                accumulator -= duration;
             }
             return end;
         }
