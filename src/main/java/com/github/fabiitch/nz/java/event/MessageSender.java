@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class MessageSender<T> {
 
-    private Array<Listener<T>> listeners = new Array<>();
+    private final Array<Listener<T>> listeners = new Array<>();
 
     public void sendMessage(T message) {
         for (Listener<T> listener : listeners) {
