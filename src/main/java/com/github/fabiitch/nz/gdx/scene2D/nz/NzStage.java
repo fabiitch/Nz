@@ -54,7 +54,9 @@ public class NzStage extends Stage {
     public Vector2 getPos(float percentX, float percentY) {
         return new Vector2(Percentage.value(percentX, this.getWidth()), Percentage.value(percentY, this.getHeight()));
     }
-
+    public Vector2 getPos(Vector2 percent) {
+        return new Vector2(Percentage.value(percent.x, this.getWidth()), Percentage.value(percent.y, this.getHeight()));
+    }
 
     public NzStage addActors(Actor... actors) {
         for (Actor actor : actors)
