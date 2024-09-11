@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.fabiitch.nz.java.math.utils.Percentage;
 
 /**
@@ -20,6 +21,15 @@ public class NzStage extends Stage {
 
     public NzStage() {
         super(new ScreenViewport());
+        this.nzPositionner = new NzActorPositionner(this);
+    }
+
+    public NzStage(Viewport viewport, Batch batch) {
+        super(viewport, batch);
+        this.nzPositionner = new NzActorPositionner(this);
+    }
+    public NzStage(Viewport viewport) {
+        super(viewport);
         this.nzPositionner = new NzActorPositionner(this);
     }
 
@@ -54,6 +64,7 @@ public class NzStage extends Stage {
     public Vector2 getPos(float percentX, float percentY) {
         return new Vector2(Percentage.value(percentX, this.getWidth()), Percentage.value(percentY, this.getHeight()));
     }
+
     public Vector2 getPos(Vector2 percent) {
         return new Vector2(Percentage.value(percent.x, this.getWidth()), Percentage.value(percent.y, this.getHeight()));
     }
