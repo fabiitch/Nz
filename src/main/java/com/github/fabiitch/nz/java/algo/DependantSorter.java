@@ -13,6 +13,8 @@ public interface DependantSorter<T extends DependantSorter<?>> {
 
     List<T> dependencies();
 
+    String name();
+
     static <T extends DependantSorter> List<T> sort(List<T> dependencies) throws DependencyLockException {
         List<T> notInits = new ArrayList<>(dependencies);
         List<T> res = new ArrayList<>(dependencies.size());
@@ -34,9 +36,9 @@ public interface DependantSorter<T extends DependantSorter<?>> {
             if (sequenceToInit == null) {
                 StringBuilder sb = new StringBuilder("");
                 for (DependantSorter sequence : notInits) {
-                    sb.append(sequence.getClass().getSimpleName(), ",");
+                    sb.append(sequence.name(), ", ");
                 }
-                throw new DependencyLockException("DependantSorter" + sb);
+                throw new DependencyLockException("DependantSorter : " + sb);
             } else {
                 res.add(sequenceToInit);
                 notInits.remove(sequenceToInit);
