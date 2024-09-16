@@ -16,4 +16,8 @@ public class GdxUtils {
         Application.ApplicationType type = Gdx.app.getType();
         return type == Application.ApplicationType.Android || type == Application.ApplicationType.iOS;
     }
+
+    public static boolean isDesktop() {
+        return !isMobile();
+    }
 }
