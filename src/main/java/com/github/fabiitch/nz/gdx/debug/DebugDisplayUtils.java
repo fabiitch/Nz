@@ -28,7 +28,7 @@ public class DebugDisplayUtils {
         String floating = printFloat(f);
         int indexDot = floating.indexOf(",");
         int charAfterDot = floating.length() - indexDot;
-        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)).toString()+"s";
+        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)).toString() + "s";
     }
 
     public static String printValue(Object o) {
@@ -54,6 +54,11 @@ public class DebugDisplayUtils {
 //        return o.toStringCurrentAverage();
 //    }
 
+    public static String printFloat(float f, int maxDecimal) {
+        String[] split = String.valueOf(f).split("\\.");
+        int indexFloating = Math.min(split[1].length(), maxDecimal);
+        return split[0] + "," + split[1].substring(0, indexFloating);
+    }
 
     public static String printFloat(float f) {
         if (f == 0)
