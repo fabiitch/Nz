@@ -10,13 +10,7 @@ import com.github.fabiitch.nz.java.math.utils.Percentage;
 import com.github.fabiitch.nz.java.math.vectors.V;
 
 public abstract class TouchPad {
-
-    protected final Texture textureBase;
-    protected final Texture textureKnob;
-
     protected final NzStage nzStage;
-    protected boolean fixedOnDrag; //fixedOnDrag after activation
-    protected boolean fixedOnTouchDown; //fixedOnDrag after activation
 
     public Image imageBase;//TODO
     public Image imageKnob;
@@ -26,43 +20,31 @@ public abstract class TouchPad {
 
     protected final Vector2 posBase = new Vector2();
     protected final Vector2 posKnob = new Vector2();
-    protected final Vector2 posInactive;
-
-    protected float sizeBase;
-    protected float sizeKnob;
 
     private final Vector2 internalV2 = new Vector2();
 
     public Vector2 direction = new Vector2(); //always nor
-    public float force = 0f;
+    public float intensity = 0f; //alpha
+
+    protected TouchPadConfig config;
 
     public TouchPad(NzStage nzStage,
-                    Texture textureBase, Texture textureKnob,
-                    Vector2 posInactive,
-                    float sizeBase, float sizeKnob,
-                    boolean fixedOnTouchDown, boolean fixedOnDrag) {
+                    TouchPadConfig config) {
         this.nzStage = nzStage;
-        this.textureBase = textureBase;
-        this.textureKnob = textureKnob;
-        this.sizeBase = sizeBase;
-        this.sizeKnob = sizeKnob;
-
-        this.posInactive = posInactive;
-        this.fixedOnDrag = fixedOnDrag;
-        this.fixedOnTouchDown = fixedOnTouchDown;
-        this.init(textureBase, textureKnob);
+        this.config = config;
+        this.init(config);
     }
 
-    private void init(Texture textureBase, Texture textureKnob) {
-        imageBase = new Image(textureBase);
+    private void init(TouchPadConfig config) {
+        imageBase = new Image(config.getTextureBase());
         NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
-        positionner.setSize(sizeBase).setPosition(posInactive.x, posInactive.y);
+        positionner.setSize(config.getSizeBase()).setPosition(config.getPosInactive());
         positionner.getPosition(posBase);
         nzStage.addActor(imageBase);
 
-        imageKnob = new Image(textureKnob);
+        imageKnob = new Image(config.getTextureKnob());
         positionner = nzStage.getPositionner(imageKnob, true);
-        positionner.setSize(sizeKnob).setPosition(posInactive.x, posInactive.y);
+        positionner.setSize(config.getSizeKnob()).setPosition(config.getPosInactive());
         nzStage.addActor(imageKnob);
         touchUp();
     }
@@ -70,7 +52,7 @@ public abstract class TouchPad {
     private void updateDirForce() {
         this.direction.set(posKnob).sub(posBase).nor();
         float dst = posBase.dst(posKnob);
-        this.force = Percentage.alpha(dst, sizeBase / 2);
+        this.intensity = Percentage.alpha(dst, config.getSizeBase() / 2);
     }
 
 
@@ -89,15 +71,15 @@ public abstract class TouchPad {
 
     public void resetPosition() {
         direction.setZero();
-        force = 0;
-        nzStage.getPositionner(imageBase, true).setPosition(posInactive.x, posInactive.y);
-        nzStage.getPositionner(imageKnob, true).setPosition(posInactive.x, posInactive.y);
+        intensity = 0;
+        nzStage.getPositionner(imageBase, true).setPosition(config.getPosInactive());
+        nzStage.getPositionner(imageKnob, true).setPosition(config.getPosInactive());
     }
 
     public boolean touchDown(float x, float y) {
-        if (fixedOnTouchDown) {
+        if (config.isFixedOnTouchDown()) {
             float dstToBase = posBase.dst(x, y);
-            if (dstToBase > (sizeBase / 2) + Percentage.value(10, sizeBase))
+            if (dstToBase > (config.getSizeBase() / 2) + Percentage.value(10, config.getSizeBase()))
                 return false;
         } else {
             NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
@@ -117,13 +99,13 @@ public abstract class TouchPad {
         positionner.setPosition(x, y);
         positionner.getPosition(posKnob);
         float dstToBase = posKnob.dst(posBase);
-        if (dstToBase > sizeBase / 2) {
+        if (dstToBase > config.getSizeBase() / 2) {
             Vector2 directionTo = V.directionTo(posKnob, posBase, internalV2);
-            if (fixedOnDrag) {
-                posKnob.set(posBase).add(directionTo.scl(sizeBase / 2));
+            if (config.isFixedOnDrag()) {
+                posKnob.set(posBase).add(directionTo.scl(config.getSizeBase() / 2));
                 nzStage.getPositionner(imageKnob, true).setPosition(posKnob);
             } else {
-                posBase.add(directionTo.scl(dstToBase - sizeBase / 2));
+                posBase.add(directionTo.scl(dstToBase - config.getSizeBase() / 2));
                 nzStage.getPositionner(imageBase, true).setPosition(posBase);
             }
         }
@@ -134,7 +116,7 @@ public abstract class TouchPad {
         Vector2 knobPos = new Vector2(x, y);
         float dstToBase = knobPos.dst(posBase);
         Vector2 direction = this.internalV2.set(knobPos).sub(posBase).nor();
-        float force = Percentage.alpha(dstToBase, sizeBase / 2);
+        float force = Percentage.alpha(dstToBase, config.getSizeBase() / 2);
         force = Math.max(1, force);
         result.set(direction, force);
         return result;
@@ -148,7 +130,7 @@ public abstract class TouchPad {
 
     public void setStickPos(Vector2 direction, float force) {
         Vector2 center = posBase.cpy();
-        float dstToAdd = force * sizeBase / 2;
+        float dstToAdd = force * config.getSizeBase() / 2;
         Vector2 pos = center.cpy().add(new Vector2(1, 0).setAngleDeg(direction.angleDeg()).setLength(dstToAdd));
         if (this.pressed) {
             touchDragged(pos.x, pos.y);
@@ -168,7 +150,7 @@ public abstract class TouchPad {
     }
 
     public void dispose() {
-        textureKnob.dispose();
-        textureBase.dispose();
+        config.getTextureBase().dispose();
+        config.getTextureKnob().dispose();
     }
 }

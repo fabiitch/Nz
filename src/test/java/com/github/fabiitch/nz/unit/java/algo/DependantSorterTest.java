@@ -81,5 +81,10 @@ public class DependantSorterTest {
         public List<DependantSorterMock> dependencies() {
             return Arrays.asList(servicesToWait);
         }
+
+        @Override
+        public String name() {
+            return null;
+        }
     }
 }

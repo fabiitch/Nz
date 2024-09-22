@@ -3,14 +3,14 @@ package com.github.fabiitch.nz.unit.java.math.shape.utils;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
-import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.github.fabiitch.gdxunit.ShapeTestBuilder.c;
+import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
 import static com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils.*;
-import static com.fabiitch.gdxunit.ShapeTestBuilder.c;
-import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 
 
 public class CircleUtilsTest {

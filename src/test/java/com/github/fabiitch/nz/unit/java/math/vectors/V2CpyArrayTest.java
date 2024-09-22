@@ -1,7 +1,7 @@
 package com.github.fabiitch.nz.unit.java.math.vectors;
 
 import com.badlogic.gdx.math.Vector2;
-import com.fabiitch.gdxunit.VTestUtils;
+import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.vectors.V2CpyArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
