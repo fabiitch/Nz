@@ -4,15 +4,16 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
-import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.github.fabiitch.gdxunit.ShapeTestBuilder.r;
+import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
+import static com.github.fabiitch.gdxunit.VTestUtils.*;
 import static com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils.*;
-import static com.fabiitch.gdxunit.ShapeTestBuilder.r;
-import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RectangleUtilsTest {
@@ -23,15 +24,16 @@ public class RectangleUtilsTest {
     public void getVertexTest() {
         Rectangle rect = r(10, 20, 100, 50);
         Vector2 vertexPos = new Vector2();
-        VTestUtils.assertEquals(10, 20, getA(rect, vertexPos));
-        VTestUtils.assertEquals(110, 20, getB(rect, vertexPos));
-        VTestUtils.assertEquals(110, 70, getC(rect, vertexPos));
-        VTestUtils.assertEquals(10, 70, getD(rect, vertexPos));
 
-        VTestUtils.assertEquals(10, 20, getVertex(rect, 0, vertexPos));
-        VTestUtils.assertEquals(110, 20, getVertex(rect, 1, vertexPos));
-        VTestUtils.assertEquals(110, 70, getVertex(rect, 2, vertexPos));
-        VTestUtils.assertEquals(10, 70, getVertex(rect, 3, vertexPos));
+        assertEquals(10, 20, getA(rect, vertexPos));
+        assertEquals(110, 20, getB(rect, vertexPos));
+        assertEquals(110, 70, getC(rect, vertexPos));
+        assertEquals(10, 70, getD(rect, vertexPos));
+
+        assertEquals(10, 20, getVertex(rect, 0, vertexPos));
+        assertEquals(110, 20, getVertex(rect, 1, vertexPos));
+        assertEquals(110, 70, getVertex(rect, 2, vertexPos));
+        assertEquals(10, 70, getVertex(rect, 3, vertexPos));
     }
 
     @Test
@@ -49,11 +51,11 @@ public class RectangleUtilsTest {
     public void getCenterTest() {
         Rectangle rect1 = r(10, 20, 100, 50);
         Vector2 center1 = getCenter(rect1, new Vector2());
-        VTestUtils.assertEquals(60, 45, center1);
+        assertEquals(60, 45, center1);
 
         Rectangle rect2 = r(100, 200, 500, 150);
         Vector2 center2 = getCenter(rect2, new Vector2());
-        VTestUtils.assertEquals(100 + 250, 200 + 75, center2);
+        assertEquals(100 + 250, 200 + 75, center2);
     }
 
 
@@ -138,13 +140,13 @@ public class RectangleUtilsTest {
         Vector2 closestPoint = new Vector2();
 
         closestPoint(rect, new Vector2(50, 150), closestPoint);
-        VTestUtils.assertEquals(new Vector2(50, 50), closestPoint);
+        assertEquals(new Vector2(50, 50), closestPoint);
 
         closestPoint(rect, new Vector2(150, 25), closestPoint);
-        VTestUtils.assertEquals(new Vector2(100, 25), closestPoint);
+        assertEquals(new Vector2(100, 25), closestPoint);
 
         closestPoint(rect, new Vector2(-100, 25), closestPoint);
-        VTestUtils.assertEquals(new Vector2(0, 25), closestPoint);
+        assertEquals(new Vector2(0, 25), closestPoint);
     }
 
     @Test

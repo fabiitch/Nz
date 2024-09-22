@@ -1,9 +1,6 @@
 package com.github.fabiitch.nz.java.math.shapes.utils;
 
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.*;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.NzMath;
@@ -51,6 +48,7 @@ public class RectangleUtils {
     public static Vector2 getBotRight(Rectangle rect, Vector2 pos) {
         return getB(rect, pos);
     }
+
     public static Vector2 getBotLeft(Rectangle rect, Vector2 pos) {
         return getA(rect, pos);
     }
@@ -437,6 +435,7 @@ public class RectangleUtils {
         }
         return vertices;
     }
+
     public static float[] toVertices(float width, float height, boolean setCenterRect) {
         float[] vertices;
         if (setCenterRect) {
@@ -451,6 +450,18 @@ public class RectangleUtils {
         return Math.max(rect.width, rect.height);
     }
 
+    /**
+     * 1-8 = out
+     * 9-12 = inside
+     * 13 = center
+     */
+    public static int getRegion(Rectangle rect, Vector2 position) {
+        int pos = getRegionOutside(rect, position);
+        if (pos == 0)
+            pos = getRegionInside(rect, position) + 8;
+        return pos;
+    }
+
     public static Segment getEdgeWithAngle(Rectangle rect, float angleDeg, Segment result) {
         float angle = AngleUtils.normaliseDeg(angleDeg);
 
@@ -463,18 +474,6 @@ public class RectangleUtils {
         } else {
             return getHorizontalBot(rect, result);
         }
-    }
-
-    /**
-     * 1-8 = out
-     * 9-12 = inside
-     * 13 = center
-     */
-    public static int getRegion(Rectangle rect, Vector2 position) {
-        int pos = getRegionOutside(rect, position);
-        if (pos == 0)
-            pos = getRegionInside(rect, position) + 8;
-        return pos;
     }
 
     /**
@@ -578,7 +577,33 @@ public class RectangleUtils {
         return rect.setSize(rect.width * scale, rect.height * scale);
     }
 
+    public static Vector2 posOnEdgeAngle(Rectangle rect, float angleDeg) {
+        Vector2 centerRect = RectangleUtils.getCenter(rect, tmpV1);
+        float dstMax = centerRect.dst(RectangleUtils.getA(rect, new Vector2()));
+        Vector2 projectionFromCenter = new Vector2(dstMax, 0).setAngleDeg(angleDeg).add(centerRect);
 
+        Segment tmpSegment = new Segment();
+        Vector2 intersection = new Vector2();
+
+        Segment ab = RectangleUtils.getAB(rect, tmpSegment);
+        if (Intersector.intersectSegments(centerRect, projectionFromCenter, ab.a, ab.b, intersection)) {
+            return intersection;
+        }
+        Segment bc = RectangleUtils.getBC(rect, tmpSegment);
+        if (Intersector.intersectSegments(centerRect, projectionFromCenter, bc.a, bc.b, intersection)) {
+            return intersection;
+        }
+        Segment cd = RectangleUtils.getCD(rect, tmpSegment);
+        if (Intersector.intersectSegments(centerRect, projectionFromCenter, cd.a, cd.b, intersection)) {
+            return intersection;
+        }
+        Segment ad = RectangleUtils.getAD(rect, tmpSegment);
+        if (Intersector.intersectSegments(centerRect, projectionFromCenter, ad.a, ad.b, intersection)) {
+            return intersection;
+        }
+
+        return null;
+    }
     /**
      * intersection between ray from center and edge
      */

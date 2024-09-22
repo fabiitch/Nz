@@ -2,13 +2,13 @@ package com.github.fabiitch.nz.unit.java.math.shape;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Triangle;
-import com.fabiitch.gdxunit.VTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static com.fabiitch.gdxunit.ShapeTestBuilder.v2;
+import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
