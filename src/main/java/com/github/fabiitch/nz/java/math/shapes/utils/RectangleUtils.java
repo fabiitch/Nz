@@ -105,6 +105,21 @@ public class RectangleUtils {
         return segment;
     }
 
+    public static Segment getEdgeVerticalBot(Rectangle rect, Segment segment) {
+        return getAB(rect, segment);
+    }
+    public static Segment getEdgeVerticalTop(Rectangle rect, Segment segment) {
+        return getCD(rect, segment);
+    }
+
+    public static Segment getEdgeHorizontalRight(Rectangle rect, Segment segment) {
+        return getBC(rect, segment);
+    }
+
+    public static Segment getEdgeHorizontalLeft(Rectangle rect, Segment segment) {
+        return getAD(rect, segment);
+    }
+
     public static Vector2 getCenterRelative(Rectangle rect, Vector2 center) {
         return center.set(rect.width / 2, rect.height / 2);
     }
@@ -580,25 +595,27 @@ public class RectangleUtils {
     public static Vector2 posOnEdgeAngle(Rectangle rect, float angleDeg) {
         Vector2 centerRect = RectangleUtils.getCenter(rect, tmpV1);
         float dstMax = centerRect.dst(RectangleUtils.getA(rect, new Vector2()));
-        Vector2 projectionFromCenter = new Vector2(dstMax, 0).setAngleDeg(angleDeg).add(centerRect);
+        Vector2 projectionFromCenter = new Vector2(1, 0).setAngleDeg(angleDeg).setLength(dstMax).add(centerRect);
 
         Segment tmpSegment = new Segment();
         Vector2 intersection = new Vector2();
 
+        Segment segFromCenter = new Segment(centerRect, projectionFromCenter);
+
         Segment ab = RectangleUtils.getAB(rect, tmpSegment);
-        if (Intersector.intersectSegments(centerRect, projectionFromCenter, ab.a, ab.b, intersection)) {
+        if (SegmentUtils.getSegmentIntersection(segFromCenter, ab, intersection)) {
             return intersection;
         }
         Segment bc = RectangleUtils.getBC(rect, tmpSegment);
-        if (Intersector.intersectSegments(centerRect, projectionFromCenter, bc.a, bc.b, intersection)) {
+        if (SegmentUtils.getSegmentIntersection(segFromCenter, bc, intersection)) {
             return intersection;
         }
         Segment cd = RectangleUtils.getCD(rect, tmpSegment);
-        if (Intersector.intersectSegments(centerRect, projectionFromCenter, cd.a, cd.b, intersection)) {
+        if (SegmentUtils.getSegmentIntersection(segFromCenter, cd, intersection)) {
             return intersection;
         }
         Segment ad = RectangleUtils.getAD(rect, tmpSegment);
-        if (Intersector.intersectSegments(centerRect, projectionFromCenter, ad.a, ad.b, intersection)) {
+        if (SegmentUtils.getSegmentIntersection(segFromCenter, ad, intersection)) {
             return intersection;
         }
 

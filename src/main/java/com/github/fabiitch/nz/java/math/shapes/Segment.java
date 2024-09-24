@@ -53,6 +53,13 @@ public class Segment implements Shape2D {
         setRotation(angleDeg + degrees);
     }
 
+    public Segment reverse() {
+        tmpv1.set(a);
+        a.set(b);
+        b.set(tmpv1);
+        return this;
+    }
+
     /**
      * @param centerX new center position
      * @param centerY center position

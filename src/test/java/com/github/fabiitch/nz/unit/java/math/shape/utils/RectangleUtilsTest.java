@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import org.junit.jupiter.api.Assertions;
@@ -11,9 +12,11 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.r;
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
-import static com.github.fabiitch.gdxunit.VTestUtils.*;
+import static com.github.fabiitch.gdxunit.VTestUtils.assertEquals;
 import static com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RectangleUtilsTest {
 
@@ -402,9 +405,9 @@ public class RectangleUtilsTest {
         assertEquals(r(5, 5), RectangleUtils.scale(r(10, 10), 0.5f));
 
         Rectangle scale2 = scale(r(10, 10, 10, 10), 2, true);
-        assertEquals(r(0,0, 20, 20), scale2);
+        assertEquals(r(0, 0, 20, 20), scale2);
         Rectangle scale05 = scale(r(10, 10, 10, 10), 0.5f, true);
-        assertEquals(r(15, 15, 5, 5),scale05);
+        assertEquals(r(15, 15, 5, 5), scale05);
     }
 
     @Test
@@ -470,59 +473,55 @@ public class RectangleUtilsTest {
     }
 
     //TODO marche pas
-//    @Test
-//    public void posOnEdgeAngleTest() {
-//        final float TOLERANCE = 0.1f;
-//        Rectangle rect = r(0, 0, 20, 10);  //center (10,5)
-//        Vector2 point = new Vector2();
-//
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 0, point);
-////        VTestUtils.assertEquals(20, 5, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 90, point);
-////        VTestUtils.assertEquals(10, 10, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 180, point);
-////        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 270, point);
-////        VTestUtils.assertEquals(10, 0, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 360, point);
-////        VTestUtils.assertEquals(20, 5, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 540, point);
-////        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
-//
-//        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 45, point);
-//        VTestUtils.assertEquals(20, 10, point, TOLERANCE);
-//
-//        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 135, point);
-//        VTestUtils.assertEquals(-20, 10, point, TOLERANCE);
-//
-//        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 225, point);
-//        VTestUtils.assertEquals(-20, 10, point, TOLERANCE);
-//
-//        posOnEdgeAngle(rect, MathUtils.degreesToRadians * 315, point);
-//        VTestUtils.assertEquals(-20, 10, point, TOLERANCE);
-//
-//
-//        //Negatif
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * -0, point);
-////        VTestUtils.assertEquals(20, 5, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * -90, point);
-////        VTestUtils.assertEquals(10, 0, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * -180, point);
-////        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * -270, point);
-////        VTestUtils.assertEquals(10, 10, point, TOLERANCE);
-////
-////        posOnEdgeAngle(rect, MathUtils.degreesToRadians * -360, point);
-////        VTestUtils.assertEquals(20, 5, point, TOLERANCE);
-//    }
+    @Test
+    public void posOnEdgeAngleTest() {
+        final float TOLERANCE = 0.1f;
+        Rectangle rect = r(0, 0, 10, 10); // center (5,5)
+        Vector2 point;
+
+        point = posOnEdgeAngle(rect, 0);
+        VTestUtils.assertEquals(10, 5, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 90);
+        VTestUtils.assertEquals(5, 10, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 180);
+        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 270);
+        VTestUtils.assertEquals(5, 0, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 360);
+        VTestUtils.assertEquals(10, 5, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 540);
+        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 45);
+        VTestUtils.assertEquals(10, 10, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 135);
+        VTestUtils.assertEquals(0, 10, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 225);
+        VTestUtils.assertEquals(0, 0, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, 315);
+        VTestUtils.assertEquals(10, 0, point, TOLERANCE);
+
+        //Negatif
+        point = posOnEdgeAngle(rect, -90);
+        VTestUtils.assertEquals(5, 0, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, -180);
+        VTestUtils.assertEquals(0, 5, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, -270);
+        VTestUtils.assertEquals(5, 10, point, TOLERANCE);
+
+        point = posOnEdgeAngle(rect, -360);
+        VTestUtils.assertEquals(10, 5, point, TOLERANCE);
+    }
 
 
 }
