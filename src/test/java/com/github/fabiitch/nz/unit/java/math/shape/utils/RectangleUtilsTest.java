@@ -406,6 +406,7 @@ public class RectangleUtilsTest {
 
         Rectangle scale2 = scale(r(10, 10, 10, 10), 2, true);
         assertEquals(r(0, 0, 20, 20), scale2);
+
         Rectangle scale05 = scale(r(10, 10, 10, 10), 0.5f, true);
         assertEquals(r(15, 15, 5, 5), scale05);
     }

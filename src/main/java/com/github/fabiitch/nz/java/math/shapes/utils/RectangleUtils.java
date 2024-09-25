@@ -1,9 +1,10 @@
 package com.github.fabiitch.nz.java.math.shapes.utils;
 
 import com.badlogic.gdx.math.*;
-import com.github.fabiitch.nz.java.math.shapes.Segment;
-import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.NzMath;
+import com.github.fabiitch.nz.java.math.angle.AngleUtils;
+import com.github.fabiitch.nz.java.math.shapes.Segment;
+import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorRectangle;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
@@ -21,6 +22,10 @@ public class RectangleUtils {
 
 
     private RectangleUtils() {
+    }
+
+    public static boolean checkNotALine(Rectangle rectangle) {
+        return rectangle.getWidth() > 0 && rectangle.getHeight() > 0;
     }
 
     public static Vector2 getVertex(Rectangle rect, int vertexNum, Vector2 result) {
@@ -108,6 +113,7 @@ public class RectangleUtils {
     public static Segment getEdgeVerticalBot(Rectangle rect, Segment segment) {
         return getAB(rect, segment);
     }
+
     public static Segment getEdgeVerticalTop(Rectangle rect, Segment segment) {
         return getCD(rect, segment);
     }
@@ -621,48 +627,18 @@ public class RectangleUtils {
 
         return null;
     }
-    /**
-     * intersection between ray from center and edge
-     */
-//    public static Vector2 posOnEdgeAngle(Rectangle rect, float angleDeg, Vector2 result) {
-//        angleDeg = Math.abs(angleDeg % 45);
-//        Segment edgeWithAngle = getEdgeWithAngle(rect, angleDeg, tmpSegment);
-//        float hypoLen = TriangleRectUtils.hypoFromAdjacent(edgeWithAngle.dst(tmpV1) / 2, angleDeg);
-//
-//        result = getCenter(rect, result);
-//        result.add(tmpV1.set(hypoLen, 0).setAngleDeg(angleDeg));
-//
-//        return result;
-//    }
 
-    //https://stackoverflow.com/questions/4061576/finding-points-on-a-rectangle-at-a-given-angle
-//    public static Vector2 posOnEdgeAngle(Rectangle rect, float angleRad, Vector2 result)
-//    {
-//        float theta = AngleUtils.normaliseRad02Pi(angleRad);
-//        float diag = MathUtils.atan2(rect.height, rect.width);
-//        float tangent = (float)Math.tan(angleRad);
-//
-//        if (theta > -diag && theta <= diag)
-//        {
-//            result.x = rect.width / 2f;
-//            result.y = rect.width / 2f * tangent;
-//        }
-//        else if(theta > diag && theta <= MathUtils.PI - diag)
-//        {
-//            result.x = rect.height / 2f / tangent;
-//            result.y = rect.height / 2f;
-//        }
-//        else if(theta > MathUtils.PI - diag && theta <= MathUtils.PI + diag)
-//        {
-//            result.x = -rect.width / 2f;
-//            result.y = -rect.width / 2f * tangent;
-//        }
-//        else
-//        {
-//            result.x = -rect.height / 2f / tangent;
-//            result.y = -rect.height / 2f;
-//        }
-//
-//        return result;
-//    }
+    public static boolean isInsideX(Rectangle rect, float x) {
+        return x > rect.x && x < rect.x + rect.width;
+    }
+    public static boolean isInsideX(Rectangle rect, Rectangle rect2) {
+        return isInsideX(rect, rect2.x) || isInsideX(rect, rect2.x + rect2.width);
+    }
+
+    public static boolean isInsideY(Rectangle rect, float y) {
+        return y > rect.y && y < rect.y + rect.height;
+    }
+    public static boolean isInsideY(Rectangle rect, Rectangle rect2) {
+        return isInsideY(rect, rect2.y) || isInsideY(rect, rect2.y + rect2.height);
+    }
 }
