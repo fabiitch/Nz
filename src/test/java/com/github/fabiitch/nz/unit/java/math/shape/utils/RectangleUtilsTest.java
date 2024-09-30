@@ -524,5 +524,20 @@ public class RectangleUtilsTest {
         VTestUtils.assertEquals(10, 5, point, TOLERANCE);
     }
 
+    @Test
+    public void getOverlapTest() {
+        {
+            Rectangle r1 = r(0, 0, 10, 10);
+            Rectangle r2 = r(5, 5, 10, 10);
+            Rectangle overlap = getOverlap(r1, r2);
+            Assertions.assertEquals(r(5,5,5,5), overlap);
+        }
+        {
+            Rectangle r1 = r(-10, -10, 50, 50);
+            Rectangle r2 = r(0, 5, 15, 15);
+            Rectangle overlap = getOverlap(r1, r2);
+            Assertions.assertEquals(r(0,5,15,15), overlap);
+        }
+    }
 
 }
