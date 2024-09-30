@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.utils.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
+
 /**
  * D3-----C2
  * |------|
@@ -46,10 +48,13 @@ public class RectangleBuilder {
         return fromCenter(center.x, center.y, width, height);
     }
 
+    public static Rectangle[] getRectsAround(Rectangle rect, float sizeRect) {
+        return getRectsAround(rect, sizeRect, null);
+    }
     /**
      * BOT / TOP / LEFT / RIGHT
      */
-    public static Rectangle[] getRectsAround(Rectangle rect, float sizeRect) {
+    public static Rectangle[] getRectsAround(Rectangle rect, float sizeRect, Orientation orientation) {
         Rectangle[] rects = new Rectangle[4];
 
         Rectangle rectBot = new Rectangle(rect.x, rect.y - sizeRect, rect.width, sizeRect);
@@ -63,6 +68,17 @@ public class RectangleBuilder {
 
         Rectangle rectRight = new Rectangle(rect.x + rect.getWidth(), rect.y, sizeRect, rect.getHeight());
         rects[3] = rectRight;
+        if (orientation == Orientation.Vertical) {
+            rectBot.x -= rectRight.getWidth();
+            rectBot.width += rectRight.getWidth() * 2;
+            rectTop.x -= rectRight.getWidth();
+            rectTop.width += rectRight.getWidth() * 2;
+        } else if (orientation == Orientation.Horizontal) {
+            rectLeft.y -= rectBot.getHeight();
+            rectLeft.height += rectBot.getHeight() * 2;
+            rectRight.y -= rectBot.getHeight();
+            rectRight.height += rectBot.getHeight() * 2;
+        }
         return rects;
     }
 

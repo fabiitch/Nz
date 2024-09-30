@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.*;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
-import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorRectangle;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
@@ -24,8 +23,9 @@ public class RectangleUtils {
     private RectangleUtils() {
     }
 
-    public static boolean checkNotALine(Rectangle rectangle) {
-        return rectangle.getWidth() > 0 && rectangle.getHeight() > 0;
+
+    public static boolean isALine(Rectangle rectangle) {
+        return rectangle.getWidth() == 0 || rectangle.getHeight() == 0;
     }
 
     public static Vector2 getVertex(Rectangle rect, int vertexNum, Vector2 result) {
@@ -638,7 +638,25 @@ public class RectangleUtils {
     public static boolean isInsideY(Rectangle rect, float y) {
         return y > rect.y && y < rect.y + rect.height;
     }
+
     public static boolean isInsideY(Rectangle rect, Rectangle rect2) {
         return isInsideY(rect, rect2.y) || isInsideY(rect, rect2.y + rect2.height);
     }
+
+    public static Rectangle getOverlap(Rectangle rect1, Rectangle rect2) {
+        // Vérifier s'il y a un chevauchement
+        if (!rect1.overlaps(rect2)) {
+            return null; // Pas de chevauchement
+        }
+
+        // Calculer les coordonnées du rectangle de chevauchement
+        float overlapX = Math.max(rect1.x, rect2.x);
+        float overlapY = Math.max(rect1.y, rect2.y);
+        float overlapWidth = Math.min(rect1.x + rect1.width, rect2.x + rect2.width) - overlapX;
+        float overlapHeight = Math.min(rect1.y + rect1.height, rect2.y + rect2.height) - overlapY;
+
+        // Retourner le rectangle de chevauchement
+        return new Rectangle(overlapX, overlapY, overlapWidth, overlapHeight);
+    }
+
 }
