@@ -1,12 +1,11 @@
 package com.github.fabiitch.nz.gdx.scene2D.widgets.touchpad;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzActorPositionner;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
-import com.github.fabiitch.nz.java.math.utils.Percentage;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 import com.github.fabiitch.nz.java.math.vectors.V;
 
 public abstract class TouchPad {
