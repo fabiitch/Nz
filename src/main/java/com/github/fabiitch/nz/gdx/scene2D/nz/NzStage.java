@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.fabiitch.nz.java.math.utils.Percentage;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 /**
  * {@link Stage} extended with percent placement

@@ -1,6 +1,6 @@
 package com.github.fabiitch.nz.java.time.timers;
 
-import com.github.fabiitch.nz.java.math.utils.Percentage;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class DT_Timer {
     public float duration;//seconds

@@ -75,4 +75,26 @@ public class SegmentTest {
         assertEquals(new Vector2(150, 150), segment.b);
     }
 
+    @Test
+    public void isCollinearTest() {
+        Segment a = s(0, 0, 50, 0);
+        Segment b = s(5000, 0, 50000, 0);
+
+        Assertions.assertTrue(a.isCollinear(b));
+        Assertions.assertTrue(b.isCollinear(b));
+    }
+
+
+    @Test
+    public void hasCommonPart() {
+        Segment a = s(0, 0, 50, 0);
+        Segment b = s(25, 0, 80, 0);
+
+        Assertions.assertTrue(a.hasCommonPart(b));
+    }
+
+    private static Segment s(float aX, float aY, float bX, float bY) {
+        return new Segment(aX, aY, bX, bY);
+    }
+
 }

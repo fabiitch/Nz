@@ -6,16 +6,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils;
 import com.github.fabiitch.nz.java.math.vectors.V2;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class Segment implements Shape2D {
 
     private final static Vector2 tmpv1 = new Vector2(); //TODO groups pools
     private final static Vector2 tmpv2 = new Vector2(); //TODO groups pools
 
-    public Vector2 a;
-    public Vector2 b;
+    public final Vector2 a;
+    public final Vector2 b;
 
     public Segment() {
         this.a = new Vector2();
@@ -213,4 +215,27 @@ public class Segment implements Shape2D {
     }
 
 
+    public boolean isCollinear(Segment s2) {
+        Vector2 dirThis = tmpv1.set(b).sub(a);
+        Vector2 dirOther = tmpv2.set(s2.b).sub(s2.a);
+        return dirThis.isCollinear(dirOther);
+    }
+
+    public boolean isCollinear(Segment s2, float epsilon) {
+        Vector2 dirThis = tmpv1.set(b).sub(a);
+        Vector2 dirOther = tmpv2.set(s2.b).sub(s2.a);
+        return dirThis.isCollinear(dirOther, epsilon);
+    }
+
+    public boolean hasCommonPart(Segment other) {
+        // Projeter les segments sur l'axe X ou Y et vérifier s'ils se chevauchent
+
+        // Utilisation de l'axe X pour les projections
+        float min1 = Math.min(a.x, b.x);
+        float max1 = Math.max(a.x, b.x);
+        float min2 = Math.min(other.a.x, other.b.x);
+        float max2 = Math.max(other.a.x, other.b.x);
+
+        return Math.min(max1, max2) >= Math.max(min1, min2);
+    }
 }

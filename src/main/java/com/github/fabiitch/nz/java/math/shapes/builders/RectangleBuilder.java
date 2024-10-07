@@ -32,8 +32,8 @@ public class RectangleBuilder {
         return new Rectangle(x, y, witdh, height);
     }
 
-    public static Rectangle get(Vector2 pos, float witdh, float height) {
-        return new Rectangle(pos.x, pos.y, witdh, height);
+    public static Rectangle get(Vector2 pos, float width, float height) {
+        return new Rectangle(pos.x, pos.y, width, height);
     }
 
     public static Rectangle get(float x, float y, Vector2 size) {
@@ -51,6 +51,7 @@ public class RectangleBuilder {
     public static Rectangle[] getRectsAround(Rectangle rect, float sizeRect) {
         return getRectsAround(rect, sizeRect, null);
     }
+
     /**
      * BOT / TOP / LEFT / RIGHT
      */
@@ -113,4 +114,19 @@ public class RectangleBuilder {
             return rect.set(camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
         }
     }
+
+    public static Rectangle withOrientation(Orientation orientation, Vector2 position, float orientationSize, float otherSize, boolean centerPos) {
+        float width, height;
+        if (orientation == Orientation.Vertical) {
+            width = orientationSize;
+            height = otherSize;
+        } else {
+            width = otherSize;
+            height = orientationSize;
+        }
+        if (centerPos)
+            return fromCenter(position, width, height);
+        return get(position, width, height);
+    }
+
 }
