@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.github.fabiitch.nz.gdx.scene2D.data.PosSize;
-import com.github.fabiitch.nz.java.math.utils.Percentage;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
     private Stage stage;

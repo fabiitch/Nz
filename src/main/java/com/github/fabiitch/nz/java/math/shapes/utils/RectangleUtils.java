@@ -1,6 +1,9 @@
 package com.github.fabiitch.nz.java.math.shapes.utils;
 
-import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
@@ -439,6 +442,20 @@ public class RectangleUtils {
                 && rectA.y + rectA.height >= rectB.y;
     }
 
+    public static boolean stick(Rectangle rectA, Rectangle rectB) {
+        Segment segA = new Segment();
+        Segment sebB = new Segment();
+        if (getAB(rectA, segA).hasCommonPart(getAB(rectB, sebB)))
+            return true;
+        if (getBC(rectA, segA).hasCommonPart(getBC(rectB, sebB)))
+            return true;
+        if (getCD(rectA, segA).hasCommonPart(getCD(rectB, sebB)))
+            return true;
+        if (getAD(rectA, segA).hasCommonPart(getAD(rectB, sebB)))
+            return true;
+        return false;
+    }
+
     public static float[] toVertices(Rectangle rect, boolean setCenterRect) {
         return toVertices(rect.x, rect.y, rect.width, rect.height, setCenterRect);
     }
@@ -631,6 +648,7 @@ public class RectangleUtils {
     public static boolean isInsideX(Rectangle rect, float x) {
         return x > rect.x && x < rect.x + rect.width;
     }
+
     public static boolean isInsideX(Rectangle rect, Rectangle rect2) {
         return isInsideX(rect, rect2.x) || isInsideX(rect, rect2.x + rect2.width);
     }
@@ -659,4 +677,11 @@ public class RectangleUtils {
         return new Rectangle(overlapX, overlapY, overlapWidth, overlapHeight);
     }
 
+    public boolean orientationMerge(Rectangle a, Rectangle b) {
+        if (a.width == b.width) {
+        } else if (a.height == b.height) {
+
+        }
+        return false;
+    }
 }

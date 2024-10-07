@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.utils;
+package com.github.fabiitch.nz.java.math.percent;
 
 
 //TODO poolable

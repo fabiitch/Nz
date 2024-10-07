@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.github.fabiitch.nz.java.math.utils.Percentage;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 //TODO full reprise et merge avec celle de NzStage (objet new a create c'est mieux)
 // StagePlacementUtils.get(actors...).top().mid().bottom()

@@ -39,7 +39,6 @@ public enum Orientation {
     }
 
     public Segment getSegmentFrom(Vector2 position, float segmentSize) {
-
         Segment segment = new Segment();
         segment.a.set(position).add(directionA.getAddTo(segmentSize / 2));
         segment.b.set(position).add(directionB.getAddTo(segmentSize / 2));
@@ -63,7 +62,6 @@ public enum Orientation {
     public Vector2 addTo(Vector2 position, float amount) {
         return position.add(getAddTo(amount, tmp));
     }
-
 
     public abstract float getLength(Rectangle rectangle);
 
