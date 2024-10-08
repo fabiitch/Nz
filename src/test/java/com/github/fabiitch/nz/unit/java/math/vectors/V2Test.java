@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
 
 
-public class V2Test{
+public class V2Test {
 
     @Test
     public void isZeroTest() {
@@ -127,5 +127,10 @@ public class V2Test{
 
         max = V2.max(v2(50, 50), 0);
         VTestUtils.assertEquals(0, 0, max);
+    }
+
+    @Test
+    public void manhattanDistance() {
+        Assertions.assertEquals(10, V2.manhattanDistance(v2(0, 0), v2(5, 5)));
     }
 }

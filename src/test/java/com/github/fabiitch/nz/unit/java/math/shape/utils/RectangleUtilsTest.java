@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.utils.Orientation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -530,13 +531,13 @@ public class RectangleUtilsTest {
             Rectangle r1 = r(0, 0, 10, 10);
             Rectangle r2 = r(5, 5, 10, 10);
             Rectangle overlap = getOverlap(r1, r2);
-            Assertions.assertEquals(r(5, 5, 5, 5), overlap);
+            assertEquals(r(5, 5, 5, 5), overlap);
         }
         {
             Rectangle r1 = r(-10, -10, 50, 50);
             Rectangle r2 = r(0, 5, 15, 15);
             Rectangle overlap = getOverlap(r1, r2);
-            Assertions.assertEquals(r(0, 5, 15, 15), overlap);
+            assertEquals(r(0, 5, 15, 15), overlap);
         }
     }
 
@@ -547,5 +548,16 @@ public class RectangleUtilsTest {
         assertTrue(RectangleUtils.stick(r1, r2));
     }
 
+    @Test
+    public void getMiddleSegment() {
+        Rectangle r1 = r(0, 0, 10, 10);
+        assertEquals(new Segment(0, 5, 10, 5), RectangleUtils.getMiddleSegment(r1, Orientation.Horizontal));
+        assertEquals(new Segment(5, 0, 5, 10), RectangleUtils.getMiddleSegment(r1, Orientation.Vertical));
+
+
+        Rectangle r2 = r(0, 0, 20, 20);
+        assertEquals(new Segment(0, 10, 20, 10), RectangleUtils.getMiddleSegment(r1, Orientation.Horizontal));
+        assertEquals(new Segment(10, 0, 10, 20), RectangleUtils.getMiddleSegment(r1, Orientation.Vertical));
+    }
 
 }

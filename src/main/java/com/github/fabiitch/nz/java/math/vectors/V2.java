@@ -46,6 +46,7 @@ public class V2 {
     public static boolean isZero(Vector2 vector2, float tolerance) {
         return MathUtils.isZero(vector2.x, tolerance) && MathUtils.isZero(vector2.y, tolerance);
     }
+
     public static Vector2 setAngle(Vector2 v, Vector2 dir) {
         return v.setAngleRad(dir.angleRad());
     }
@@ -153,5 +154,9 @@ public class V2 {
 
     public static Vector2 getMiddle(Vector2 v1, Vector2 v2, Vector2 res) {
         return res.set((v2.x + v1.x) / 2, (v2.y + v1.y) / 2);
+    }
+
+    public static float manhattanDistance(Vector2 from, Vector2 to) {
+        return Math.abs(to.x - from.x) + Math.abs(to.y - from.y);
     }
 }
