@@ -1,25 +1,15 @@
 package com.github.fabiitch.nz.java.math.utils;
 
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public enum Direction {
 
-    Top {
+    Top(new Vector2(0, 1)) {
         @Override
         public Orientation getOrientation() {
             return Orientation.Vertical;
-        }
-
-        @Override
-        public Vector2 addTo(Vector2 position, float dst) {
-            position.y += dst;
-            return position;
-        }
-
-        @Override
-        public Vector2 getAddTo(float dst) {
-            return new Vector2(0, dst);
         }
 
         @Override
@@ -28,22 +18,12 @@ public enum Direction {
         }
     },
 
-    Bot {
+    Bot(new Vector2(0, -1)) {
         @Override
         public Orientation getOrientation() {
             return Orientation.Vertical;
         }
 
-        @Override
-        public Vector2 addTo(Vector2 position, float dst) {
-            position.y -= dst;
-            return position;
-        }
-
-        @Override
-        public Vector2 getAddTo(float dst) {
-            return new Vector2(0, -dst);
-        }
 
         @Override
         public Direction getReverse() {
@@ -51,21 +31,10 @@ public enum Direction {
         }
     },
 
-    Left {
+    Left(new Vector2(-1, 0)) {
         @Override
         public Orientation getOrientation() {
             return Orientation.Horizontal;
-        }
-
-        @Override
-        public Vector2 addTo(Vector2 position, float dst) {
-            position.x -= dst;
-            return position;
-        }
-
-        @Override
-        public Vector2 getAddTo(float dst) {
-            return new Vector2(-dst, 0f);
         }
 
         @Override
@@ -74,21 +43,10 @@ public enum Direction {
         }
     },
 
-    Right {
+    Right(new Vector2(1, 0)) {
         @Override
         public Orientation getOrientation() {
             return Orientation.Horizontal;
-        }
-
-        @Override
-        public Vector2 addTo(Vector2 position, float dst) {
-            position.x += dst;
-            return position;
-        }
-
-        @Override
-        public Vector2 getAddTo(float dst) {
-            return new Vector2(dst, 0f);
         }
 
         @Override
@@ -97,16 +55,17 @@ public enum Direction {
         }
     };
 
+    private final Vector2 direction;
 
     public abstract Orientation getOrientation();
 
-    public abstract Vector2 addTo(Vector2 position, float dst);
+    public abstract Direction getReverse();
 
-    public Vector2 getSubTo(float dst) {
-        return V2.inv(getAddTo(dst));
+    public Vector2 addTo(Vector2 position, float dst) {
+        return position.add(getAddTo(dst));
     }
 
-    public abstract Vector2 getAddTo(float dst);
-
-    public abstract Direction getReverse();
+    public Vector2 getAddTo(float dst) {
+        return new Vector2(direction).scl(dst);
+    }
 }

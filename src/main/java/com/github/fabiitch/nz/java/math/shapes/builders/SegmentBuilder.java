@@ -9,15 +9,15 @@ public class SegmentBuilder {
 
     private final static Vector2 tmpV2 = new Vector2();
 
-    public static Segment postAndDir(Vector2 pos, Vector2 dir, float lenght) {
-        tmpV2.set(dir).nor().setLength(lenght);
+    public static Segment postAndDir(Vector2 pos, Vector2 dir, float length) {
+        tmpV2.set(dir).nor().setLength(length);
         Vector2 b = pos.cpy().add(tmpV2);
 
         return new Segment(pos.cpy(), b);
     }
 
-    public static Segment posMiddleDir(Vector2 pos, Vector2 dir, float lenght) {
-        tmpV2.set(dir).nor().setLength(lenght / 2);
+    public static Segment posMiddleDir(Vector2 pos, Vector2 dir, float length) {
+        tmpV2.set(dir).nor().setLength(length / 2);
 
         Vector2 a = pos.cpy().add(tmpV2);
         Vector2 b = pos.cpy().sub(tmpV2);
