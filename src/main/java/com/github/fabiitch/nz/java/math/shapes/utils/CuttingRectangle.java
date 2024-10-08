@@ -15,6 +15,9 @@ public class CuttingRectangle {
     private Rectangle newRectangle1;
     private Rectangle newRectangle2;
 
+    public boolean isCuttingMiddle(){
+        return getNewRectangleCount() == 3;
+    }
 
     public int getNewRectangleCount() {
         int count = 0;

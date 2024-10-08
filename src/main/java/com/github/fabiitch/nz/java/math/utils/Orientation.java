@@ -9,7 +9,6 @@ import lombok.Getter;
 public enum Orientation {
 
     Vertical(Direction.Top, Direction.Bot) {
-
         @Override
         public float getLength(Rectangle rectangle) {
             return rectangle.getHeight();

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
+import com.github.fabiitch.nz.java.math.utils.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
@@ -661,27 +662,36 @@ public class RectangleUtils {
         return isInsideY(rect, rect2.y) || isInsideY(rect, rect2.y + rect2.height);
     }
 
-    public static Rectangle getOverlap(Rectangle rect1, Rectangle rect2) {
+    public static Rectangle getOverlap(Rectangle rectA, Rectangle rectB) {
         // Vérifier s'il y a un chevauchement
-        if (!rect1.overlaps(rect2)) {
+        if (!rectA.overlaps(rectB)) {
             return null; // Pas de chevauchement
         }
 
         // Calculer les coordonnées du rectangle de chevauchement
-        float overlapX = Math.max(rect1.x, rect2.x);
-        float overlapY = Math.max(rect1.y, rect2.y);
-        float overlapWidth = Math.min(rect1.x + rect1.width, rect2.x + rect2.width) - overlapX;
-        float overlapHeight = Math.min(rect1.y + rect1.height, rect2.y + rect2.height) - overlapY;
+        float overlapX = Math.max(rectA.x, rectB.x);
+        float overlapY = Math.max(rectA.y, rectB.y);
+        float overlapWidth = Math.min(rectA.x + rectA.width, rectB.x + rectB.width) - overlapX;
+        float overlapHeight = Math.min(rectA.y + rectA.height, rectB.y + rectB.height) - overlapY;
 
         // Retourner le rectangle de chevauchement
         return new Rectangle(overlapX, overlapY, overlapWidth, overlapHeight);
     }
 
-    public boolean orientationMerge(Rectangle a, Rectangle b) {
-        if (a.width == b.width) {
-        } else if (a.height == b.height) {
+    public static float getSize(Rectangle rect, Orientation orientation) {
+        if (orientation == Orientation.Horizontal)
+            return rect.getWidth();
+        return rect.getHeight();
+    }
 
+    public static Segment getMiddleSegment(Rectangle rect, Orientation orientation) {
+        if (orientation == Orientation.Vertical) {
+            Vector2 a = new Vector2(rect.x + rect.width / 2, rect.y);
+            Vector2 b = new Vector2(rect.x + rect.width / 2, rect.y + rect.getHeight());
+            return new Segment(a, b);
         }
-        return false;
+        Vector2 a = new Vector2(rect.x, rect.y + rect.getHeight() / 2);
+        Vector2 b =  new Vector2(rect.x + rect.width, rect.y + rect.getHeight() / 2);
+        return new Segment(a, b);
     }
 }
