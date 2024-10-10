@@ -115,7 +115,7 @@ public class RectangleBuilder {
         }
     }
 
-    public static Rectangle withOrientation(Orientation orientation, Vector2 position, float orientationSize, float otherSize, boolean centerPos) {
+    public static Rectangle withOrientation(Orientation orientation, float orientationSize, float otherSize) {
         float width, height;
         if (orientation == Orientation.Vertical) {
             width = orientationSize;
@@ -124,9 +124,16 @@ public class RectangleBuilder {
             width = otherSize;
             height = orientationSize;
         }
+        return get(width, height);
+    }
+
+    public static Rectangle withOrientation(Orientation orientation, Vector2 position, float orientationSize, float otherSize, boolean centerPos) {
+        Rectangle rectangle = withOrientation(orientation, orientationSize, otherSize);
         if (centerPos)
-            return fromCenter(position, width, height);
-        return get(position, width, height);
+            RectangleUtils.setPosWithCenter(rectangle, position);
+        else
+            rectangle.setPosition(position);
+        return rectangle;
     }
 
 }
