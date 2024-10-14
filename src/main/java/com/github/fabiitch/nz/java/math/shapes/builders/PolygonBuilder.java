@@ -19,6 +19,11 @@ public class PolygonBuilder {
         return new Polygon(RectangleUtils.toVertices(width, height, setCenterRect));
     }
 
+    public static Polygon rectangle(float x, float y, float width, float height, boolean setCenterRect) {
+        return new Polygon(RectangleUtils.toVertices(x, y, width, height, setCenterRect));
+    }
+
+
     public static Polygon get(float... points) {
         return new Polygon(points);
     }
