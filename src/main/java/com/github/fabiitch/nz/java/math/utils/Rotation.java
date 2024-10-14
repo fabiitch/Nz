@@ -71,6 +71,7 @@ public class Rotation {
     }
 
 
+    //TODO not tested seen PolygonRotationAroundDemo
     public Polygon rotateAround(Polygon polygon, Vector2 rotationCenter, float angleDeg) {
         Vector2 centroid = polygon.getCentroid(tmp1V2);
         Vector2 centroidAfterRotation = rotateAround(centroid, rotationCenter, angleDeg);
