@@ -142,13 +142,14 @@ public class RectangleUtils {
         return center.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
     }
 
-    public static void setPosWithCenter(Rectangle rect, Vector2 newCenter) {
-        setPosWithCenter(rect, newCenter.x, newCenter.y);
+    public static Rectangle setPosWithCenter(Rectangle rect, Vector2 newCenter) {
+        return setPosWithCenter(rect, newCenter.x, newCenter.y);
     }
 
-    public static void setPosWithCenter(Rectangle rect, float newCenterX, float newCenterY) {
+    public static Rectangle setPosWithCenter(Rectangle rect, float newCenterX, float newCenterY) {
         rect.x = newCenterX - rect.width / 2;
         rect.y = newCenterY - rect.height / 2;
+        return rect;
     }
 
 
@@ -684,6 +685,14 @@ public class RectangleUtils {
         return rect.getHeight();
     }
 
+    public static Rectangle reverseWidthHeight(Rectangle rect) {
+        float width = rect.width;
+        float height = rect.height;
+        rect.width = height;
+        rect.height = width;
+        return rect;
+    }
+
     public static Segment getMiddleSegment(Rectangle rect, Orientation orientation) {
         if (orientation == Orientation.Vertical) {
             Vector2 a = new Vector2(rect.x + rect.width / 2, rect.y);
@@ -691,7 +700,7 @@ public class RectangleUtils {
             return new Segment(a, b);
         }
         Vector2 a = new Vector2(rect.x, rect.y + rect.getHeight() / 2);
-        Vector2 b =  new Vector2(rect.x + rect.width, rect.y + rect.getHeight() / 2);
+        Vector2 b = new Vector2(rect.x + rect.width, rect.y + rect.getHeight() / 2);
         return new Segment(a, b);
     }
 }
