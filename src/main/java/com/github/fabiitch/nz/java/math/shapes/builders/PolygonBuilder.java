@@ -40,4 +40,8 @@ public class PolygonBuilder {
     public static Polygon square(float witdh, boolean setCenterRect) {
         return rectangle(witdh, witdh, setCenterRect);
     }
+
+    public static Polygon square(float x, float y, float witdh, boolean setCenterRect) {
+        return rectangle(x, y, witdh, witdh, setCenterRect);
+    }
 }

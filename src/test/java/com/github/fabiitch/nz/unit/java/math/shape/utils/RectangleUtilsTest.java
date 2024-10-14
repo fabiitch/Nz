@@ -549,15 +549,15 @@ public class RectangleUtilsTest {
     }
 
     @Test
-    public void getMiddleSegment() {
+    public void getMiddleSegmentTest() {
         Rectangle r1 = r(0, 0, 10, 10);
         assertEquals(new Segment(0, 5, 10, 5), RectangleUtils.getMiddleSegment(r1, Orientation.Horizontal));
         assertEquals(new Segment(5, 0, 5, 10), RectangleUtils.getMiddleSegment(r1, Orientation.Vertical));
 
 
         Rectangle r2 = r(0, 0, 20, 20);
-        assertEquals(new Segment(0, 10, 20, 10), RectangleUtils.getMiddleSegment(r1, Orientation.Horizontal));
-        assertEquals(new Segment(10, 0, 10, 20), RectangleUtils.getMiddleSegment(r1, Orientation.Vertical));
+        assertEquals(new Segment(0, 10, 20, 10), RectangleUtils.getMiddleSegment(r2, Orientation.Horizontal));
+        assertEquals(new Segment(10, 0, 10, 20), RectangleUtils.getMiddleSegment(r2, Orientation.Vertical));
     }
 
 }

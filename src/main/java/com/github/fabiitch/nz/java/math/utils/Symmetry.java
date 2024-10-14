@@ -15,7 +15,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Symmetry {
 
-    private final static Segment tmpSeg = new Segment();
     private final static Vector2 tmp1V2 = new Vector2();
     private final static Vector2 tmp2V2 = new Vector2();
 
@@ -73,6 +72,8 @@ public class Symmetry {
 
         return polygon;
     }
+
+
     public Polygon withSegment(Polygon polygon, Segment symmetrySegment) {
         Vector2 centerPolygon = PolygonUtils.getCenter(polygon, tmp2V2);
         Vector2 symmetryPoint = SegmentUtils.closestPoint(symmetrySegment, centerPolygon, new Vector2());

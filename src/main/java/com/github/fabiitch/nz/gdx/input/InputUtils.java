@@ -20,8 +20,15 @@ public class InputUtils {
 
     }
 
+    public static boolean isRightClick(int button) {
+        return button == RIGHT_CLICK;
+    }
+    public static boolean isLeftClick(int button) {
+        return button == LEFT_CLICK;
+    }
+
     public static Vector2 getClickPos(Camera camera, Vector2 screenXy) {
-        return V2.set(screenXy , camera.unproject(V3.tmp(screenXy.x, screenXy.y)));
+        return V2.set(screenXy, camera.unproject(V3.tmp(screenXy.x, screenXy.y)));
     }
 
     public static Vector2 getClickPos(Camera camera, int screenX, int screenY) {

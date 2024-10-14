@@ -8,9 +8,14 @@ import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.Triangle;
+import com.github.fabiitch.nz.java.math.vectors.V2;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
 public class NzShapeRenderer extends ShapeRenderer {
+
+    private final Vector2 tmp1V2 = new Vector2();
+    private final Vector2 tmp2V2 = new Vector2();
+
     public NzShapeRenderer() {
         super();
     }
@@ -53,6 +58,25 @@ public class NzShapeRenderer extends ShapeRenderer {
 
     public void randomColor() {
         this.setColor(Randoms.color(this.getColor()));
+    }
+
+
+    public void cross(Vector2 position, float lenghtCross) {
+        line(position.x - lenghtCross, position.y, position.x + lenghtCross, position.y);
+        line(position.x, position.y - lenghtCross, position.x, position.y + lenghtCross);
+    }
+
+    public void crossX(Vector2 position, float lenghtCross) {
+        Vector2 tmpDir = V2.tmp(1, 1).scl(lenghtCross);
+        tmp1V2.set(position).add(tmpDir);
+        tmp2V2.set(position).sub(tmpDir);
+        line(tmp1V2, tmp2V2);
+
+        tmpDir = V2.tmp(1, -1).scl(lenghtCross);
+        tmp1V2.set(position).add(tmpDir);
+        tmp2V2.set(position).sub(tmpDir);
+
+        line(tmp1V2, tmp2V2);
     }
 
     //TODO https://stackoverflow.com/questions/15733442/drawing-filled-polygon-with-libgdx
