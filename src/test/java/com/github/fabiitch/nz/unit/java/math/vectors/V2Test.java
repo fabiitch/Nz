@@ -131,6 +131,11 @@ public class V2Test {
 
     @Test
     public void manhattanDistance() {
-        Assertions.assertEquals(10, V2.manhattanDistance(v2(0, 0), v2(5, 5)));
+        Assertions.assertEquals(10, V2.manhattanDistance(v2(0, 0), v2(10, 0)));
+    }
+
+    @Test
+    public void getTranslationTest() {
+        Assertions.assertEquals(v2(10,0), V2.getTranslation(v2(0, 0), v2(10, 0), new Vector2()));
     }
 }

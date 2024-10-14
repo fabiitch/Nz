@@ -159,4 +159,8 @@ public class V2 {
     public static float manhattanDistance(Vector2 from, Vector2 to) {
         return Math.abs(to.x - from.x) + Math.abs(to.y - from.y);
     }
+
+    public static Vector2 getTranslation(Vector2 from, Vector2 to, Vector2 res) {
+        return res.set(to).sub(from);
+    }
 }
