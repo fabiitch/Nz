@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils;
 import com.github.fabiitch.nz.java.math.vectors.V;
 

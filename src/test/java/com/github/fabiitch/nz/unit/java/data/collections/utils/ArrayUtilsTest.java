@@ -1,8 +1,9 @@
 package com.github.fabiitch.nz.unit.java.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.java.data.collections.utils.ToArray;
 import com.github.fabiitch.nz.java.data.collections.utils.ArrayUtils;
+import com.github.fabiitch.nz.java.data.collections.utils.ToArray;
+import com.github.fabiitch.nz.java.function.Filter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -147,7 +148,18 @@ public class ArrayUtilsTest {
             ArrayUtils.copy(source, target);
             ArrayUtilsTest.assertArrayEquals(source, target);
         }
+    }
 
 
+    @Test
+    public void filterTest() {
+        Array<Integer> integerArray = new Array<>();
+        Filter<Integer> filter = integer -> integer >= 10;
+
+        integerArray.add(0, 5, 10, 15);
+        ArrayUtils.filter(integerArray, filter);
+        assertEquals(2, integerArray.size);
+        assertTrue(integerArray.contains(10, false));
+        assertTrue(integerArray.contains(15, false));
     }
 }
