@@ -1,13 +1,25 @@
-package com.github.fabiitch.nz.java.math.shapes.utils;
+package com.github.fabiitch.nz.java.math.shapes.utils.rectangle;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.math.utils.Orientation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class CuttingRectangle {
+public class CuttingRectangle implements Pool.Poolable {
+
+    /**
+     * Example vertical cut
+     *          | ---------------------|
+     *          |       |     |        |
+     *          | newR1 | Cut |  newR2 |
+     *          |       |     |        |
+     *          |----------------------|
+     */
 
     private Orientation orientation;
     private Rectangle oldRect;
@@ -86,5 +98,14 @@ public class CuttingRectangle {
         newRectangle2 = RectangleUtils.isALine(newRectangle2) ? null : newRectangle2;
         return new CuttingRectangle(Orientation.Horizontal, rectangle, cut, newRectangle1, newRectangle2);
 
+    }
+
+    @Override
+    public void reset() {
+        orientation = null;
+        cuttingRect = null;
+        newRectangle1= null;
+        newRectangle2 = null;
+        oldRect = null;
     }
 }
