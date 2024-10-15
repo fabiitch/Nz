@@ -3,7 +3,7 @@ package com.github.fabiitch.nz.java.math.shapes.intersectors;
 import com.badlogic.gdx.math.*;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 public class IntersectorCircle {

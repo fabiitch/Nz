@@ -1,11 +1,22 @@
 package com.github.fabiitch.nz.java.data.collections.utils;
 
 import com.badlogic.gdx.utils.Array;
+import com.github.fabiitch.nz.java.function.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayUtils {
+
+
+    public static <T> void filter(Array<T> array, Filter<T> filter) {
+        for(int i = 0 ; i < array.size ; i ++){
+            if(!filter.accept(array.get(i))){
+                array.removeIndex(i);
+                i--;
+            }
+        }
+    }
 
     public static <T> boolean containsOnly(Array<T> array, T... values) {
         //TODO pools array

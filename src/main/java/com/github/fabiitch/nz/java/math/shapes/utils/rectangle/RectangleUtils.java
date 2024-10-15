@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shapes.utils;
+package com.github.fabiitch.nz.java.math.shapes.utils.rectangle;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
+import com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils;
 import com.github.fabiitch.nz.java.math.utils.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
@@ -679,6 +680,13 @@ public class RectangleUtils {
         return new Rectangle(overlapX, overlapY, overlapWidth, overlapHeight);
     }
 
+
+    public static float getMax(Rectangle rect, Orientation orientation) {
+        if (orientation == Orientation.Horizontal)
+            return getXMax(rect);
+        return getYMax(rect);
+    }
+
     public static float getSize(Rectangle rect, Orientation orientation) {
         if (orientation == Orientation.Horizontal)
             return rect.getWidth();
@@ -703,4 +711,5 @@ public class RectangleUtils {
         Vector2 b = new Vector2(rect.x + rect.width, rect.y + rect.getHeight() / 2);
         return new Segment(a, b);
     }
+
 }

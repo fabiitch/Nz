@@ -2,7 +2,7 @@ package com.github.fabiitch.nz.gdx.physx;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
 
 public class V2BoudsInRect {
 
