@@ -112,7 +112,7 @@ public class IntRangeArray {
         subRange.sort();
     }
 
-    public void removeValues(int start, int end) {
+    public IntRangeArray removeValues(int start, int end) {
         IntRange rangeRemove = getRange(start, end);
         for (int i = 0; i < subRange.size; i++) {
             IntRange range = subRange.get(i);
@@ -134,6 +134,7 @@ public class IntRangeArray {
                 range.setEnd(rangeRemove.getStart() - 1);
             }
         }
+        return this;
     }
 
     private void checkRange(IntRange range) {

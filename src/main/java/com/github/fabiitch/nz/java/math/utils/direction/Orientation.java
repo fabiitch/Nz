@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.utils;
+package com.github.fabiitch.nz.java.math.utils.direction;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

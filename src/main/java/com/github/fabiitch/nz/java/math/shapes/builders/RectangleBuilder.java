@@ -6,7 +6,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
-import com.github.fabiitch.nz.java.math.utils.Orientation;
+import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
+import com.github.fabiitch.nz.java.math.utils.direction.OrientationVector;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 /**
@@ -26,6 +27,10 @@ public class RectangleBuilder {
 
     public static Rectangle get(float witdh, float height) {
         return new Rectangle(0, 0, witdh, height);
+    }
+
+    public static Rectangle get(Vector2 v2) {
+        return new Rectangle(0, 0, v2.x, v2.y);
     }
 
     public static Rectangle get(float x, float y, float witdh, float height) {
@@ -136,4 +141,12 @@ public class RectangleBuilder {
         return rectangle;
     }
 
+    public static Rectangle withOrientation(OrientationVector position, OrientationVector size, boolean centerPos) {
+        Rectangle rectangle = get(size.toV2());
+        if (centerPos)
+            RectangleUtils.setPosWithCenter(rectangle, position.toV2());
+        else
+            rectangle.setPosition(position.toV2());
+        return rectangle;
+    }
 }

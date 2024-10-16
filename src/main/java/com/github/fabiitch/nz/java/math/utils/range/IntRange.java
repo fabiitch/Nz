@@ -17,6 +17,9 @@ public class IntRange implements Comparable<IntRange>, Pool.Poolable {
     public IntRange(int start, int end) {
         set(start, end);
     }
+    public int getLenght(){
+        return end -start;
+    }
 
     public boolean contains(int value) {
         return value >= start && value <= end;
