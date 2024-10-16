@@ -8,7 +8,7 @@ import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils;
-import com.github.fabiitch.nz.java.math.utils.Orientation;
+import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
@@ -63,18 +63,30 @@ public class RectangleUtils {
         return getA(rect, pos);
     }
 
+    /**
+     * getBotLeft()
+     */
     public static Vector2 getA(Rectangle rect, Vector2 pos) {
         return pos.set(rect.x, rect.y);
     }
 
+    /**
+     * getBotRight()
+     */
     public static Vector2 getB(Rectangle rect, Vector2 pos) {
         return pos.set(rect.x + rect.width, rect.y);
     }
 
+    /**
+     * getTopRight()
+     */
     public static Vector2 getC(Rectangle rect, Vector2 pos) {
         return pos.set(rect.x + rect.width, rect.y + rect.height);
     }
 
+    /**
+     * getTopLeft()
+     */
     public static Vector2 getD(Rectangle rect, Vector2 pos) {
         return pos.set(rect.x, rect.y + rect.height);
     }

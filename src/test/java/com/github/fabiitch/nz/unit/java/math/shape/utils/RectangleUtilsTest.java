@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.gdxunit.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
-import com.github.fabiitch.nz.java.math.utils.Orientation;
+import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import org.junit.jupiter.api.Test;
 
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.r;

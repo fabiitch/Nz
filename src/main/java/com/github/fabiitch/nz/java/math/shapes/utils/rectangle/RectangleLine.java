@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 import com.github.fabiitch.nz.java.function.Filter;
-import com.github.fabiitch.nz.java.math.utils.Orientation;
+import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
