@@ -724,4 +724,9 @@ public class RectangleUtils {
         return new Segment(a, b);
     }
 
+
+    public static float getArea(Rectangle rect){
+        return rect.width * rect.height;
+    }
+
 }
