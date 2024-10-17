@@ -64,6 +64,9 @@ public enum Direction {
     public Vector2 addTo(Vector2 position, float dst) {
         return position.add(getAddTo(dst));
     }
+    public Vector2 subTo(Vector2 position, float dst) {
+        return position.sub(getAddTo(dst));
+    }
 
     public Vector2 getAddTo(float dst) {
         return new Vector2(direction).scl(dst);

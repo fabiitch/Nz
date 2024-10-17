@@ -62,6 +62,10 @@ public enum Orientation {
         return position.add(getAddTo(amount, tmp));
     }
 
+    public Vector2 subTo(Vector2 position, float amount) {
+        return position.sub(getAddTo(amount, tmp));
+    }
+
     public abstract float getLength(Rectangle rectangle);
 
     public abstract Vector2 getAddTo(float amount, Vector2 result);
