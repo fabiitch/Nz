@@ -4,22 +4,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class RectCenter implements Shape2D , Pool.Poolable {
+public class RectCenter implements Shape2D, Pool.Poolable {
 
+    @Getter
     @Setter
-    private float x, y;  //center
-    @Setter
-    private float width, height;
+    private float x, y, width, height;
 
-    private Rectangle rectangle;
+    private final Rectangle rectangle = new Rectangle();
 
     public RectCenter(Rectangle r) {
         set(r);
@@ -66,14 +62,19 @@ public class RectCenter implements Shape2D , Pool.Poolable {
 
     @Override
     public boolean contains(Vector2 point) {
-        rectangle = toRectangle(this.rectangle);
+        toRectangle(this.rectangle);
         return rectangle.contains(point);
     }
 
     @Override
     public boolean contains(float x, float y) {
-        rectangle = toRectangle(this.rectangle);
+        toRectangle(this.rectangle);
         return rectangle.contains(x, y);
+    }
+
+    public Rectangle getRectangle() {
+        toRectangle(this.rectangle);
+        return this.rectangle;
     }
 
     public Rectangle toRectangle(Rectangle rectangle) {
@@ -82,6 +83,6 @@ public class RectCenter implements Shape2D , Pool.Poolable {
 
     @Override
     public void reset() {
-        x=y=width=height=0;
+        x = y = width = height = 0;
     }
 }
