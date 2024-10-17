@@ -8,10 +8,25 @@ import java.util.List;
 
 public class ArrayUtils {
 
+    public static <T> T removeLast(Array<T> array) {
+        T last = getLast(array);
+        if (last != null) {
+            array.removeIndex(array.size - 1);
+        }
+        return last;
+    }
+
+    public static <T> T removeFirst(Array<T> array) {
+        T first = getFirst(array);
+        if (first != null) {
+            array.removeIndex(0);
+        }
+        return first;
+    }
 
     public static <T> void filter(Array<T> array, Filter<T> filter) {
-        for(int i = 0 ; i < array.size ; i ++){
-            if(!filter.accept(array.get(i))){
+        for (int i = 0; i < array.size; i++) {
+            if (!filter.accept(array.get(i))) {
                 array.removeIndex(i);
                 i--;
             }
