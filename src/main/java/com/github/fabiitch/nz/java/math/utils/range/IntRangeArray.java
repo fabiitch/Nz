@@ -87,8 +87,8 @@ public class IntRangeArray {
         int oldEnd = this.end;
         this.end = end;
 
-        if (oldEnd < this.end) {
-            removeValues(oldEnd, this.end);
+        if (this.end < oldEnd) {
+            endLess();
         } else {
             if (add)
                 addValues(oldEnd, this.end);
@@ -110,6 +110,24 @@ public class IntRangeArray {
         }
         subRange.add(newRange);
         subRange.sort();
+    }
+
+    private void endLess() {
+        for (int i = 0; i < subRange.size; i++) {
+            IntRange range = subRange.get(i);
+            if (range.contains(this.end)) {
+                range.setEnd(this.end);
+            }
+        }
+    }
+
+    private void startMore() {
+        for (int i = 0; i < subRange.size; i++) {
+            IntRange range = subRange.get(i);
+            if (range.contains(this.start)) {
+                range.setStart(this.start);
+            }
+        }
     }
 
     public IntRangeArray removeValues(int start, int end) {
