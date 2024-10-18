@@ -1,34 +1,26 @@
 package com.github.fabiitch.nz.java.data;
 
-public class Pair<T, K> {
-    public T key;
-    public K value;
+import com.badlogic.gdx.utils.Pool;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public Pair(T key, K value) {
-        this.key = key;
-        this.value = value;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Pair<T, K> implements Pool.Poolable {
+    private T key;
+    private K value;
+
+    public static <T, K> Pair<T, K> of(T key, K value) {
+        return new Pair<>(key, value);
     }
 
-    public Pair() {
-    }
-
-    public static <T, K> Pair of(T key, K value) {
-       return new Pair(key, value);
-    }
-
-    public T getKey() {
-        return key;
-    }
-
-    public void setKey(T key) {
-        this.key = key;
-    }
-
-    public K getValue() {
-        return value;
-    }
-
-    public void setValue(K value) {
-        this.value = value;
+    @Override
+    public void reset() {
+        key = null;
+        value = null;
     }
 }
