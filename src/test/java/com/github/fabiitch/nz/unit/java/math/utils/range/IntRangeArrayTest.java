@@ -76,7 +76,7 @@ public class IntRangeArrayTest {
         checkCut(2, 90, 100);
 
         //---
-        addValues(55,65);
+        addValues(55, 65);
         assertHasSize(3, subRanges);
         checkRange(0, 11, 44);
         checkRange(1, 55, 65);
@@ -89,7 +89,7 @@ public class IntRangeArrayTest {
         checkCut(3, 90, 100);
 
         //---
-        addValues(60,70);
+        addValues(60, 70);
         assertHasSize(2, subRanges);
         checkRange(0, 11, 44);
         checkRange(1, 55, 89);
@@ -100,7 +100,7 @@ public class IntRangeArrayTest {
         checkCut(2, 90, 100);
 
         //---
-        addValues(88,98);
+        addValues(88, 98);
         assertHasSize(2, subRanges);
         checkRange(0, 11, 44);
         checkRange(1, 55, 98);
@@ -111,7 +111,7 @@ public class IntRangeArrayTest {
         checkCut(2, 99, 100);
 
         //---
-        addValues(50,100);
+        addValues(50, 100);
         assertHasSize(2, subRanges);
         checkRange(0, 11, 44);
         checkRange(1, 50, 100);
@@ -121,8 +121,55 @@ public class IntRangeArrayTest {
         checkCut(1, 45, 49);
     }
 
+    @Test
+    public void testChangeEndMore() {
+        rangeArray = new IntRangeArray(0, 100);
+        rangeArray.setEnd(150, true);
+        checkSize(1, 0);
+        checkRange(0, 0, 150);
+
+        rangeArray = new IntRangeArray(0, 100);
+        rangeArray.setEnd(150, false);
+        checkSize(1, 1);
+        checkRange(0, 0, 100);
+        checkCut(0, 101, 150);
+    }
+
+    @Test
+    public void testChangeEndLess() {
+        rangeArray = new IntRangeArray(0, 100);
+        rangeArray.setEnd(50, true);
+
+        checkSize(1, 0);
+        checkRange(0, 0, 50);
+
+        rangeArray = new IntRangeArray(0, 100);
+        rangeArray.setEnd(50, true);
+
+        checkSize(1, 0);
+        checkRange(0, 0, 50);
+    }
+
+    @Test
+    public void testChangeStartLess() {
+        rangeArray = new IntRangeArray(50, 100);
+        rangeArray.setStart(0, true);
+
+        checkSize(1, 0);
+        checkRange(0, 0, 100);
+
+        rangeArray = new IntRangeArray(50, 100);
+        rangeArray.setStart(0, false);
+
+        checkSize(1, 1);
+        checkRange(0, 50, 100);
+        checkCut(0, 0, 49);
+    }
+
+
 
     private void checkSize(int subRange, int cuts) {
+        computeArrays();
         assertHasSize(subRange, subRanges);
         assertHasSize(cuts, cutRanges);
     }
@@ -143,10 +190,12 @@ public class IntRangeArrayTest {
     }
 
     private void checkRange(int rangeIndex, int start, int end) {
+        computeArrays();
         Assertions.assertEquals(new IntRange(start, end), subRanges.get(rangeIndex));
     }
 
     private void checkCut(int rangeIndex, int start, int end) {
+        computeArrays();
         Assertions.assertEquals(new IntRange(start, end), cutRanges.get(rangeIndex));
     }
 }
