@@ -17,9 +17,7 @@ import lombok.Setter;
 @Setter
 public class RectangleBorder {
 
-
     private Vector2 center;
-
     private Orientation orientation;
 
     private float insideWidth, insideHeight;
