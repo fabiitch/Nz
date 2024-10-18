@@ -71,4 +71,6 @@ public enum Direction {
     public Vector2 getAddTo(float dst) {
         return new Vector2(direction).scl(dst);
     }
+
+    public static Direction[] values = Direction.values();
 }
