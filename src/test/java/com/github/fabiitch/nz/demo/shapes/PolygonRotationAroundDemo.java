@@ -25,8 +25,6 @@ public class PolygonRotationAroundDemo extends BaseTryScreen {
 
     private Polygon polygon;
 
-    private NzShapeRenderer shapeRenderer = new NzShapeRenderer();
-
     private Vector2 rotationPosition = ScreenUtils.getScreenCenter(new Vector2());
 
     public PolygonRotationAroundDemo() {
@@ -129,12 +127,6 @@ public class PolygonRotationAroundDemo extends BaseTryScreen {
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.polygon(polygon);
         shapeRenderer.end();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-        shapeRenderer.dispose();
     }
 
 }

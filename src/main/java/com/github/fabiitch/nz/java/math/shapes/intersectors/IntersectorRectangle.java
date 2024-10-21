@@ -1,7 +1,7 @@
 package com.github.fabiitch.nz.java.math.shapes.intersectors;
 
 import com.badlogic.gdx.math.*;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class IntersectorRectangle { //TODO group tmp
     private static final Vector2 tmp1 = new Vector2();

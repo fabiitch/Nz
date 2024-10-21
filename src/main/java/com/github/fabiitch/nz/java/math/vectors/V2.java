@@ -156,6 +156,12 @@ public class V2 {
         return res.set((v2.x + v1.x) / 2, (v2.y + v1.y) / 2);
     }
 
+    /**
+     * <a href="https://fr.wikipedia.org/wiki/Distance_de_Manhattan">...</a>
+     * @param from
+     * @param to
+     * @return
+     */
     public static float manhattanDistance(Vector2 from, Vector2 to) {
         return Math.abs(to.x - from.x) + Math.abs(to.y - from.y);
     }

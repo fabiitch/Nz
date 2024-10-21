@@ -1,5 +1,6 @@
 package com.github.fabiitch.nz.gdx.debug;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -86,5 +87,12 @@ public class DebugDisplayUtils {
         if (v.isZero())
             return Vector3.Zero.toString();
         return "(" + printFloat(v.x) + " , " + printFloat(v.y) + " , " + printFloat(v.z) + ")";
+    }
+
+    public static String printFloatToInt(float f) {
+        return String.valueOf((int) f);
+    }
+    public static String printRectangleSize(Rectangle r) {
+        return "Rectangle, W=" + printFloatToInt(r.width) + ", H=" + printFloatToInt(r.height);
     }
 }

@@ -16,8 +16,6 @@ import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 public class PolygonRectangleSetRelativePosDemo extends BaseTryScreen {
 
     PolygonRectangle polygonRectangle = new PolygonRectangle(RectangleBuilder.get(300, 300, 200, 100));
-    NzShapeRenderer shapeRenderer = new NzShapeRenderer();
-
     Vector2 lastPos = new Vector2(300, 300);
 
     public PolygonRectangleSetRelativePosDemo() {
@@ -53,12 +51,6 @@ public class PolygonRectangleSetRelativePosDemo extends BaseTryScreen {
         shapeRenderer.begin();
         shapeRenderer.polygon(polygonRectangle);
         shapeRenderer.end();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-        shapeRenderer.dispose();
     }
 
 }

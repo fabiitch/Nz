@@ -2,6 +2,7 @@ package com.github.fabiitch.nz.java.math.shapes.utils.rectangle;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

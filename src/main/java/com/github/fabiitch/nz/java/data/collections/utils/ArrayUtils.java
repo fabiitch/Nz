@@ -8,6 +8,10 @@ import java.util.List;
 
 public class ArrayUtils {
 
+    public static boolean isLast(Array array, int index) {
+        return array.size == index + 1;
+    }
+
     public static <T> T removeLast(Array<T> array) {
         T last = getLast(array);
         if (last != null) {

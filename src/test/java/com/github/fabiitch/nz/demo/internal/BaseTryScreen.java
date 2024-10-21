@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
+import com.github.fabiitch.nz.gdx.render.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
 public abstract class BaseTryScreen extends ScreenAdapter {
@@ -20,11 +22,15 @@ public abstract class BaseTryScreen extends ScreenAdapter {
     private GLProfiler glProfiler;
     public FPSLogger fpsLogger;
 
+    protected SpriteBatch spriteBatch = new SpriteBatch();
+    protected NzShapeRenderer shapeRenderer = new NzShapeRenderer();
+
     public BaseTryScreen() {
         this.nzStage = new NzStage();
         this.skin = new Skin(Gdx.files.internal("skins/ui/uiskin.json"));
         this.hudDebug = new HudDebug(nzStage, skin);
         this.dt_tracker = new DT_Tracker(HudDebugPosition.TOP_LEFT, Color.WHITE);
+        shapeRenderer.setAutoShapeType(true);
 
         fpsLogger = new FPSLogger(50);
     }
@@ -93,6 +99,8 @@ public abstract class BaseTryScreen extends ScreenAdapter {
     public void dispose() {
         nzStage.dispose();
         skin.dispose();
+        spriteBatch.dispose();
+        shapeRenderer.dispose();
     }
 
 }
