@@ -4,15 +4,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.github.fabiitch.nz.demo.internal.NzUniqueScreenDemo;
-import com.github.fabiitch.nz.demo.shapes.PolygonRectangleSetRelativePosDemo;
-import com.github.fabiitch.nz.demo.shapes.PolygonRotationAroundDemo;
+import com.github.fabiitch.nz.demo.shapes.RectanglePathDemo;
 
 public class NzScreenDemoLauncher {
     private static final int WITDH = 800;
     private static final int HEIGHT = 500;
 
 
-    private final static Class<? extends Screen> screenDemoClass = PolygonRotationAroundDemo.class;
+    private final static Class<? extends Screen> screenDemoClass = RectanglePathDemo.class;
 
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration configuration = new Lwjgl3ApplicationConfiguration();

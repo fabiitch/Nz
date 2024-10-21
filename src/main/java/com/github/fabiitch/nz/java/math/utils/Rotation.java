@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 import lombok.experimental.UtilityClass;
 
