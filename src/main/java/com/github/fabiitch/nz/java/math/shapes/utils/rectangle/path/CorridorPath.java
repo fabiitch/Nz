@@ -49,5 +49,9 @@ public class CorridorPath extends RectanglePath {
             this.position = position;
             this.dirFromPos = dirFromPos;
         }
+
+        public void resetDir(Vector2 position){
+            dirFromPos = Direction.
+        }
     }
 }
