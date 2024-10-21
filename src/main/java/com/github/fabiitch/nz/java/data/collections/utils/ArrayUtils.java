@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayUtils {
+    public static boolean isNotLast(Array array, int index) {
+        return !isLast(array, index);
+    }
 
     public static boolean isLast(Array array, int index) {
         return array.size == index + 1;
@@ -158,5 +161,10 @@ public class ArrayUtils {
             }
         }
         return target;
+    }
+
+
+    public static <T> Array<T> of(T... values){
+        return new Array<>(values);
     }
 }
