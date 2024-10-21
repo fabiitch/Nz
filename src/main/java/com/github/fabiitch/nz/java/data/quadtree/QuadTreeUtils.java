@@ -2,7 +2,7 @@ package com.github.fabiitch.nz.java.data.quadtree;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.RectangleUtils;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class QuadTreeUtils {
 
