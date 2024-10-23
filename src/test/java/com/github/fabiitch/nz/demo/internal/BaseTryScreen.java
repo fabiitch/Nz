@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
-import com.github.fabiitch.nz.gdx.render.NzShapeRenderer;
+import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
 public abstract class BaseTryScreen extends ScreenAdapter {

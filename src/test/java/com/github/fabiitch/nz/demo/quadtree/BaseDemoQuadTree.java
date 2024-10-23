@@ -12,7 +12,7 @@ import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.github.fabiitch.nz.java.math.vectors.V3;
-import com.github.fabiitch.nz.gdx.render.NzShapeRenderer;
+import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 
 import java.util.ArrayList;
 

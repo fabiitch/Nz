@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.utils.direction.path;
+package com.github.fabiitch.nz.java.math.path;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;

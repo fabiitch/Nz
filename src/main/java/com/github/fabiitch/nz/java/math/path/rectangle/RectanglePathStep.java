@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shapes.utils.rectangle.path;
+package com.github.fabiitch.nz.java.math.path.rectangle;
 
 import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;

@@ -74,26 +74,38 @@ public enum Direction {
         return new Vector2(vector).scl(dst);
     }
 
-    public static Direction[] values = Direction.values();
+    public Vector2 getVector() {
+        return vector.cpy();
+    }
+    public static Direction[] VALUES = Direction.values();
 
 
     public static Direction getPureDirection(Vector2 vector) {
         float angle = vector.angleRad();
-        for (Direction direction : values)
+        for (Direction direction : VALUES)
             if (MathUtils.isEqual(angle, direction.vector.angleRad()))
                 return direction;
         return null;
     }
 
     public static Direction getClosestDirection(Vector2 vector) {
-        float vectorAngle = vector.angleDeg();
-        float minAngle = Integer.MAX_VALUE;
-        Direction result = null;
-
-        for (Direction direction : values)
-            if (Math.abs(vectorAngle - Math.abs(direction.vector.angleDeg())) < minAngle)
-                result = direction;
-
-        return result;
+        return getClosestDirectionBetween(vector, VALUES);
     }
+
+    public static Direction getClosestDirectionBetween(Vector2 vector, Direction... directions) {
+        Direction closestDirection = null;
+        float maxDotProduct = -Float.MAX_VALUE;
+
+        for (Direction direction : directions) {
+            float dotProduct = vector.dot(direction.vector);
+            // Si le produit scalaire est plus grand, on met à jour la direction la plus proche
+            if (dotProduct > maxDotProduct) {
+                maxDotProduct = dotProduct;
+                closestDirection = direction;
+            }
+        }
+        return closestDirection;
+    }
+
+
 }

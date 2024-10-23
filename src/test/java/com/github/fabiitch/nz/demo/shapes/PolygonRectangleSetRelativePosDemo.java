@@ -8,7 +8,6 @@ import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
-import com.github.fabiitch.nz.gdx.render.NzShapeRenderer;
 import com.github.fabiitch.nz.java.math.shapes.PolygonRectangle;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 

@@ -85,6 +85,12 @@ public class V2 {
         return v.set(newX, newY);
     }
 
+    public static Vector2 reverseXY(Vector2 v) {
+        float newX = v.y;
+        float newY = v.x;
+        return v.set(newX, newY);
+    }
+
     public static Vector2 directionTo(Vector2 from, Vector2 to, Vector2 result) {
         return result.set(to.x - from.x, to.y - from.y).nor();
     }

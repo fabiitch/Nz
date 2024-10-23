@@ -1,25 +1,17 @@
-package com.github.fabiitch.nz.java.math.shapes.utils.rectangle.path;
+package com.github.fabiitch.nz.java.math.path.rectangle;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
+import com.github.fabiitch.nz.java.utils.ArrayContainer;
 import lombok.Getter;
 
 @Getter
-public class RectanglePath implements Pool.Poolable {
+public class RectanglePath extends ArrayContainer<RectanglePathStep> {
 
-
-    protected final Array<RectanglePathStep> array = new Array<>();
-
-
-    /**
-     * @param start
-     * @return
-     */
     public Array<Rectangle> compute(Vector2 start) {
         Array<Rectangle> result = new Array<>();
         Vector2 cpy = start.cpy();
@@ -43,31 +35,9 @@ public class RectanglePath implements Pool.Poolable {
         return result;
     }
 
-
     public RectanglePath add(Direction direction, float length, float size) {
         array.add(new RectanglePathStep(direction, length, size));
         return this;
-    }
-
-    public RectanglePath add(RectanglePathStep step) {
-        array.add(step);
-        return this;
-    }
-
-    public RectanglePath add(RectanglePathStep... steps) {
-        array.addAll(steps);
-        return this;
-    }
-
-
-    public void remove(int index) {
-        array.removeIndex(index);
-    }
-
-
-    @Override
-    public void reset() {
-        array.clear();
     }
 
 }

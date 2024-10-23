@@ -11,7 +11,6 @@ import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
-import com.github.fabiitch.nz.gdx.render.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.java.math.shapes.builders.PolygonBuilder;
 import com.github.fabiitch.nz.java.math.utils.Rotation;
@@ -122,7 +121,7 @@ public class PolygonRotationAroundDemo extends BaseTryScreen {
         shapeRenderer.begin();
 
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.cross(rotationPosition, 20);
+        shapeRenderer.crossX(rotationPosition, 20);
 
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.polygon(polygon);

@@ -115,7 +115,7 @@ public class RectangleBorder {
 
     public Array<Pair<Direction, Rectangle>> getBordersDir() {
         Array<Pair<Direction, Rectangle>> res = new Array<>();
-        for (Direction dir : Direction.values) {
+        for (Direction dir : Direction.VALUES) {
             res.add(Pair.of(dir, getBorder(dir)));
         }
         return res;
