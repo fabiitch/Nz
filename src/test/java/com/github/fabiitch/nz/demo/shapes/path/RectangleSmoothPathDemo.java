@@ -11,8 +11,8 @@ import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.log.StrFormat;
 import com.github.fabiitch.nz.java.data.Pair;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.path.RectanglePathSmooth;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.path.RectanglePathStep;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathSmooth;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
 @DemoScreen(group = "math.shape2D.rectangle.path")
