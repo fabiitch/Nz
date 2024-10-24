@@ -10,8 +10,9 @@ import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.log.StrFormat;
 import com.github.fabiitch.nz.java.data.Pair;
-import com.github.fabiitch.nz.java.math.path.rectangle.CorridorPath;
+import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPath;
 import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
+import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
 @DemoScreen(group = "math.shape2D.rectangle.path")
@@ -22,7 +23,7 @@ public class CorridorPathDemo extends BaseTryScreen {
 
     public CorridorPathDemo() {
         super();
-        Array<RectanglePathStep> rectanglePathSteps = DemoPathUtils.pathStep();
+        Array<CorridorPathStep> rectanglePathSteps = DemoPathUtils.corridorPathStep();
 
         CorridorPath corridorPath = new CorridorPath();
         corridorPath.getArray().addAll(rectanglePathSteps);
@@ -31,8 +32,8 @@ public class CorridorPathDemo extends BaseTryScreen {
 
         for (int i = 0; i < compute.size; i += 2) {
             Color color = Randoms.color();
-            RectanglePathStep step = rectanglePathSteps.get(i / 2);
-            String format = StrFormat.format("Dir={}, length={}, size={}", step.getDirection(), step.getLength(), step.getSize());
+            CorridorPathStep step = rectanglePathSteps.get(i / 2);
+            String format = StrFormat.format("Dir={}, length={}, size={}, wallSize={}", step.getDirection(), step.getLength(), step.getWalkSize(), step.getWallSize());
             HudDebug.addTopRight(i + " ", format, color);
             colorRectArray.add(Pair.of(color, compute.get(i)));
             colorRectArray.add(Pair.of(color, compute.get(i+1)));

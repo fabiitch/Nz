@@ -1,34 +1,41 @@
-package com.github.fabiitch.nz.java.math.path.rectangle;
+package com.github.fabiitch.nz.java.math.path.rectangle.corridor;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.java.data.collections.utils.ArrayUtils;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathSmooth;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.DirectionUtils;
+import com.github.fabiitch.nz.java.utils.ArrayContainer;
 
-public class CorridorPath extends RectanglePath {
+public class CorridorPath extends ArrayContainer<CorridorPathStep> {
 
-    float walkSize = 100;
+    public void add(Direction direction, int length, int walkSize, float wallSize) {
+        array.add(new CorridorPathStep(direction, length, walkSize, wallSize));
+    }
+
 
     public Array<Rectangle> compute(Vector2 start) {
         if (array.isEmpty())
             return new Array<>();
 
-        Direction startDir = array.get(0).getDirection();
+        CorridorPathStep firstStep = array.get(0);
+        Direction startDir = firstStep.getDirection();
         Direction posPathOne = startDir.getOrientation().getOtherOrientation().getDirectionA();
         Direction postPathTwo = startDir.getOrientation().getOtherOrientation().getDirectionB();
 
-        SubPath subPath1 = new SubPath(posPathOne.addTo(start.cpy(), walkSize / 2), posPathOne);
-        SubPath subPath2 = new SubPath(postPathTwo.addTo(start.cpy(), walkSize / 2), postPathTwo);
+        SubPath subPath1 = new SubPath(posPathOne.addTo(start.cpy(), firstStep.getWalkSize() / 2 + firstStep.getWallSize() / 2), posPathOne);
+        SubPath subPath2 = new SubPath(postPathTwo.addTo(start.cpy(), firstStep.getWalkSize() / 2+ firstStep.getWallSize() / 2), postPathTwo);
         Computer computer = new Computer(start.cpy(), subPath1, subPath2);
 
         for (int i = 0; i < array.size; i++) {
-            RectanglePathStep current = array.get(i);
-            RectanglePathStep next = ArrayUtils.isNotLast(array, i) ? array.get(i + 1) : null;
+            CorridorPathStep current = array.get(i);
+            CorridorPathStep next = ArrayUtils.isNotLast(array, i) ? array.get(i + 1) : null;
             Direction nextDir = next == null ? null : next.getDirection();
 
-            computer.add(current.getDirection(), nextDir, current.getLength(), current.getSize());
+            computer.add(current, nextDir);
         }
 
         Array<Rectangle> compute1 = subPath1.compute();
@@ -48,7 +55,6 @@ public class CorridorPath extends RectanglePath {
         SubPath path2;
 
         SubPath pathOppositeLast;
-        float lenghtAddLast = 0;
 
         public Computer(Vector2 middle, SubPath path1, SubPath path2) {
             this.middle = middle;
@@ -58,7 +64,11 @@ public class CorridorPath extends RectanglePath {
 
         float lengthToAddNext;
 
-        public void add(Direction currentDir, Direction nextDir, float length, float wallSize) {
+        public void add(CorridorPathStep step, Direction nextDir) {
+            Direction currentDir = step.getDirection();
+            float length = step.getLength();
+            float walkSize = step.getWalkSize();
+            float wallSize = step.getWallSize();
 
             if (nextDir != null && currentDir != nextDir) {
                 SubPath pathOpposite = getOpposite(nextDir);
