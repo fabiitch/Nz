@@ -4,14 +4,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class OrientationVector implements Pool.Poolable {
     private Orientation orientation;
     private float orientationValue, otherOrientationValue;
+
+    private static OrientationVector TMP = new OrientationVector();
 
     public OrientationVector(Orientation orientation, Vector2 xy) {
         this.orientation = orientation;
@@ -19,8 +23,19 @@ public class OrientationVector implements Pool.Poolable {
         addY(xy.y);
     }
 
+    public OrientationVector tmp(Orientation orientation, float orientationValue, float otherOrientationValue) {
+        return TMP.set(orientation, orientationValue, otherOrientationValue);
+    }
+
     public OrientationVector cpy() {
         return new OrientationVector(orientation, orientationValue, otherOrientationValue);
+    }
+
+    public OrientationVector set(Orientation orientation, float orientationValue, float otherOrientationValue) {
+        this.orientation = orientation;
+        this.orientationValue = orientationValue;
+        this.otherOrientationValue = otherOrientationValue;
+        return this;
     }
 
     public OrientationVector addX(float x) {

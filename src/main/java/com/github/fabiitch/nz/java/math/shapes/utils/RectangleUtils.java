@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
+import com.github.fabiitch.nz.java.math.shapes.RectCenter;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
+import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
@@ -60,6 +62,22 @@ public class RectangleUtils {
 
     public static Vector2 getBotLeft(Rectangle rect, Vector2 pos) {
         return getA(rect, pos);
+    }
+
+    public static Vector2 getTopMiddle(RectCenter r, Vector2 pos) {
+        return pos.set(r.getX(), r.getY() + r.getHeight() / 2);
+    }
+
+    public static Vector2 getBotMiddle(RectCenter r, Vector2 pos) {
+        return pos.set(r.getX(), r.getY() - r.getHeight() / 2);
+    }
+
+    public static Vector2 getRightMiddle(RectCenter r, Vector2 pos) {
+        return pos.set(r.getX() + r.getWidth() / 2, r.getY());
+    }
+
+    public static Vector2 getLeftMiddle(RectCenter r, Vector2 pos) {
+        return pos.set(r.getX() - r.getWidth() / 2, r.getY());
     }
 
     /**
@@ -146,6 +164,10 @@ public class RectangleUtils {
         return center.set(rect.width / 2, rect.height / 2);
     }
 
+    public static Vector2 getCenterTmp(Rectangle rect) {
+        return getCenter(rect, tmpV1);
+    }
+
     public static Vector2 getCenter(Rectangle rect) {
         return V2.v(rect.x + rect.width / 2, rect.y + rect.height / 2);
     }
@@ -154,13 +176,21 @@ public class RectangleUtils {
         return center.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
     }
 
-    public static Rectangle setPosWithCenter(Rectangle rect, Vector2 newCenter) {
-        return setPosWithCenter(rect, newCenter.x, newCenter.y);
+    public static Vector2 getPositionTmp(Rectangle rect) {
+        return rect.getPosition(tmpV1);
     }
 
-    public static Rectangle setPosWithCenter(Rectangle rect, float newCenterX, float newCenterY) {
-        rect.x = newCenterX - rect.width / 2;
-        rect.y = newCenterY - rect.height / 2;
+    public static Vector2 getPosition(Rectangle rect) {
+        return rect.getPosition(new Vector2());
+    }
+
+    public static Rectangle setCenter(Rectangle rect, Vector2 newCenter) {
+        return setCenter(rect, newCenter.x, newCenter.y);
+    }
+
+    public static Rectangle setCenter(Rectangle rect, float x, float y) {
+        rect.x = x - rect.width / 2;
+        rect.y = y - rect.height / 2;
         return rect;
     }
 
@@ -724,8 +754,24 @@ public class RectangleUtils {
     }
 
 
-    public static float getArea(Rectangle rect){
+    public static float getArea(Rectangle rect) {
         return rect.width * rect.height;
     }
 
+
+    public static Vector2 getCornerPosTmp(Rectangle rect, Direction directionA, Direction directionB) {
+        if (directionA.getOrientation() == directionB.getOrientation())
+            throw new IllegalArgumentException("Cant get corner on same orientation=" + directionA.getOrientation());
+        Direction horizontal = directionA.isHorizontal() ? directionA : directionB;
+
+        Direction vertical = directionA.isVertical() ? directionA : directionB;
+        if (vertical == Direction.Top)
+            if (horizontal == Direction.Right)
+                return getTopRight(rect, tmpV1);
+            else
+                return getTopLeft(rect, tmpV1);
+        if (horizontal == Direction.Right)
+            return getBotRight(rect, tmpV1);
+        return getBotLeft(rect, tmpV1);
+    }
 }

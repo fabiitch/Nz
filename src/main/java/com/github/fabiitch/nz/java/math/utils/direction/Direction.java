@@ -60,6 +60,10 @@ public enum Direction {
 
     public abstract Orientation getOrientation();
 
+    public  Orientation getOtherOrientation(){
+        return getOrientation().getOtherOrientation();
+    }
+
     public abstract Direction getReverse();
 
     public Vector2 addTo(Vector2 position, float dst) {
@@ -77,7 +81,15 @@ public enum Direction {
     public Vector2 getVector() {
         return vector.cpy();
     }
-    public static Direction[] VALUES = Direction.values();
+
+    public boolean isHorizontal(){
+        return getOrientation() == Orientation.Horizontal;
+    }
+    public boolean isVertical(){
+        return getOrientation() == Orientation.Vertical;
+    }
+
+    public static final Direction[] VALUES = Direction.values();
 
 
     public static Direction getPureDirection(Vector2 vector) {

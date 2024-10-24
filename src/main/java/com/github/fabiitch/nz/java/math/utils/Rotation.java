@@ -55,7 +55,7 @@ public class Rotation {
         float finalX = rotatedX + rotationCenter.x;
         float finalY = rotatedY + rotationCenter.y;
 
-        RectangleUtils.setPosWithCenter(rect, finalX, finalY);
+        RectangleUtils.setCenter(rect, finalX, finalY);
         return rect;
     }
 

@@ -10,7 +10,6 @@ import com.github.fabiitch.nz.java.utils.Randoms;
 
 public class NzShapeRenderer extends ShapeRenderer {
 
-
     public NzShapeRenderer() {
         super();
     }
