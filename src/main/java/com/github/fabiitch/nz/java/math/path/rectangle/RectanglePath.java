@@ -12,6 +12,7 @@ import lombok.Getter;
 @Getter
 public class RectanglePath extends ArrayContainer<RectanglePathStep> {
 
+
     public Array<Rectangle> compute(Vector2 start) {
         Array<Rectangle> result = new Array<>();
         Vector2 cpy = start.cpy();

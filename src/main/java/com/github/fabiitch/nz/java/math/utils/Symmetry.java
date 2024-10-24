@@ -32,7 +32,7 @@ public class Symmetry {
     public static Rectangle withPoint(Rectangle rect, Vector2 symmetryPoint) {
         Vector2 centerRect = RectangleUtils.getCenter(rect, tmp2V2);
         Vector2 centerSymmetry = withPoint(centerRect, symmetryPoint);
-        RectangleUtils.setPosWithCenter(rect, centerSymmetry);
+        RectangleUtils.setCenter(rect, centerSymmetry);
         return rect;
     }
 
@@ -41,7 +41,7 @@ public class Symmetry {
         Vector2 symmetryPoint = SegmentUtils.closestPoint(symmetrySegment, centerRect, new Vector2());
 
         Vector2 centerSymmetry = withPoint(centerRect, symmetryPoint);
-        RectangleUtils.setPosWithCenter(rect, centerSymmetry);
+        RectangleUtils.setCenter(rect, centerSymmetry);
         return rect;
     }
 

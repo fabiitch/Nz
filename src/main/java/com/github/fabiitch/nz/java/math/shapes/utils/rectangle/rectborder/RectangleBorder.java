@@ -7,6 +7,7 @@ import com.github.fabiitch.nz.java.data.Pair;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class RectangleBorder {
+
+    private final Vector2 tmpV2 = new Vector2();
 
     private Vector2 center;
     private Orientation orientation;
@@ -25,26 +29,8 @@ public class RectangleBorder {
 
     public RectangleBorder(Vector2 center, Orientation orientation,
                            float insideWidth, float insideHeight,
-                           float borderRight, float borderLeft,
-                           float borderTop, float borderBottom) {
-        this.center = center;
-        this.orientation = orientation;
-        this.insideWidth = insideWidth;
-        this.insideHeight = insideHeight;
-        this.borderRight = borderRight;
-        this.borderLeft = borderLeft;
-        this.borderTop = borderTop;
-        this.borderBottom = borderBottom;
-    }
-
-    public RectangleBorder(Vector2 center, Orientation orientation,
-                           float insideWidth, float insideHeight,
-                           float border) {
-        this(center, orientation, insideWidth, insideHeight, border, border, border, border);
-    }
-
-    public Rectangle getInside() {
-        return RectangleBuilder.fromCenter(center, insideWidth, insideHeight);
+                           float allBorderSize) {
+        this(center, orientation, insideWidth, insideHeight, allBorderSize, allBorderSize, allBorderSize, allBorderSize);
     }
 
     public Rectangle getTotal() {
@@ -61,40 +47,40 @@ public class RectangleBorder {
 
     public Rectangle getRight() {
         if (orientation == Orientation.Vertical) {
-            Vector2 pos = center.cpy().add(insideWidth / 2, -insideHeight / 2 - borderBottom);
+            Vector2 pos = tmpV2.add(insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderRight, getTotalHeight());
         } else {
-            Vector2 pos = center.cpy().add(insideWidth / 2, -insideHeight / 2);
+            Vector2 pos = tmpV2.add(insideWidth / 2, -insideHeight / 2);
             return RectangleBuilder.get(pos, borderRight, insideHeight);
         }
     }
 
     public Rectangle getLeft() {
         if (orientation == Orientation.Vertical) {
-            Vector2 pos = center.cpy().add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
+            Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderLeft, getTotalHeight());
         } else {
-            Vector2 pos = center.cpy().add(-insideWidth / 2 - borderLeft, -insideHeight / 2);
+            Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2);
             return RectangleBuilder.get(pos, borderLeft, insideHeight);
         }
     }
 
     public Rectangle getTop() {
         if (orientation == Orientation.Vertical) {
-            Vector2 pos = center.cpy().add(-insideWidth / 2, insideHeight / 2);
+            Vector2 pos = tmpV2.add(-insideWidth / 2, insideHeight / 2);
             return RectangleBuilder.get(pos, insideWidth, borderTop);
         } else {
-            Vector2 pos = center.cpy().add(-insideWidth / 2 - borderLeft, insideHeight / 2);
+            Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, insideHeight / 2);
             return RectangleBuilder.get(pos, getTotalWidth(), borderTop);
         }
     }
 
     public Rectangle getBottom() {
         if (orientation == Orientation.Vertical) {
-            Vector2 pos = center.cpy().add(-insideWidth / 2, -insideHeight / 2 - borderBottom);
+            Vector2 pos = tmpV2.add(-insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, insideWidth, borderBottom);
         } else {
-            Vector2 pos = center.cpy().add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
+            Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, getTotalWidth(), borderBottom);
         }
     }
@@ -130,4 +116,10 @@ public class RectangleBorder {
         return res;
     }
 
+    public void setAllBorder(float size) {
+        this.borderLeft = size;
+        this.borderRight = size;
+        this.borderBottom = size;
+        this.borderTop = size;
+    }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.utils.direction.OrientationVector;
 import com.github.fabiitch.nz.java.math.vectors.V2;
@@ -135,7 +136,7 @@ public class RectangleBuilder {
     public static Rectangle withOrientation(Orientation orientation, Vector2 position, float orientationSize, float otherSize, boolean centerPos) {
         Rectangle rectangle = withOrientation(orientation, orientationSize, otherSize);
         if (centerPos)
-            RectangleUtils.setPosWithCenter(rectangle, position);
+            RectangleUtils.setCenter(rectangle, position);
         else
             rectangle.setPosition(position);
         return rectangle;
@@ -144,9 +145,19 @@ public class RectangleBuilder {
     public static Rectangle withOrientation(OrientationVector position, OrientationVector size, boolean centerPos) {
         Rectangle rectangle = get(size.toV2());
         if (centerPos)
-            RectangleUtils.setPosWithCenter(rectangle, position.toV2());
+            RectangleUtils.setCenter(rectangle, position.toV2());
         else
             rectangle.setPosition(position.toV2());
         return rectangle;
+    }
+
+    public static Rectangle getBorderRect(Rectangle rect, Direction direction, float directionSize) {
+        Orientation rectOrientation = direction.getOtherOrientation();
+
+        Vector2 centerTmp = RectangleUtils.getCenterTmp(rect);
+
+        direction.addTo(centerTmp, RectangleUtils.getSize(rect, direction.getOrientation()) /2 + directionSize/2);
+        Rectangle result = withOrientation(rectOrientation, centerTmp, RectangleUtils.getSize(rect, rectOrientation), directionSize, true);
+        return result;
     }
 }
