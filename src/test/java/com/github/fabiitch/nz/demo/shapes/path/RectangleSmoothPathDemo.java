@@ -15,7 +15,7 @@ import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathSmooth;
 import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
-@DemoScreen(group = "math.shape2D.rectangle.path")
+@DemoScreen(group = "math.path")
 public class RectangleSmoothPathDemo extends BaseTryScreen {
 
     Array<Pair<Color, Rectangle>> colorRectArray = new Array<>();
