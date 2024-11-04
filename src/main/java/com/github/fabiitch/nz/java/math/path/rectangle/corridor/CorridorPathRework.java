@@ -35,11 +35,11 @@ public class CorridorPathRework extends ArrayContainer<CorridorPathStep> {
             path1.nextPositionFromPath(currentStep.getDirection(), nextDir);
             path2.nextPositionFromPath(currentStep.getDirection(), nextDir);
 
-            Vector2 path1 = computeNext(currentStep, this.path1);
             Vector2 path2 = computePos(currentStep, this.path1.positionFromPath);
 
             currentStep.getDirection().addTo(middle, currentStep.getLength());
         }
+        return  null;
     }
 
 
