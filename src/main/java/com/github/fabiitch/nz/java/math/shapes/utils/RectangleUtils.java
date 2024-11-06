@@ -774,4 +774,17 @@ public class RectangleUtils {
             return getBotRight(rect, tmpV1);
         return getBotLeft(rect, tmpV1);
     }
+
+
+    public static Rectangle setSize(Rectangle rect, Orientation orientation, float size) {
+        if (orientation == Orientation.Horizontal)
+            rect.setWidth(size);
+        else
+            rect.setHeight(size);
+        return rect;
+    }
+
+    public static String printSize(Rectangle rectangle) {
+        return "(w=" + rectangle.width + ", h=" + rectangle.getHeight()+")";
+    }
 }

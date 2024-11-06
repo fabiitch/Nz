@@ -7,6 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayUtils {
+
+    public static <T> T getNextOf(Array<T> array, int index) {
+        return ArrayUtils.isNotLast(array, index) ? array.get(index + 1) : null;
+    }
+
+    public static <T> T getPreviousOf(Array<T> array, int index) {
+        if (index == 0) {
+            return null;
+        }
+        return array.get(index - 1);
+    }
+
     public static boolean isNotLast(Array array, int index) {
         return !isLast(array, index);
     }
@@ -164,7 +176,7 @@ public class ArrayUtils {
     }
 
 
-    public static <T> Array<T> of(T... values){
+    public static <T> Array<T> of(T... values) {
         return new Array<>(values);
     }
 }
