@@ -23,8 +23,16 @@ public class CorridorPart {
         return direction.getOrientation();
     }
 
+    public float getWallSize(Direction posWall) {
+        return RectangleUtils.getSize(getWall(posWall), direction.getOtherOrientation());
+    }
+
+    public float getWallLenght(Direction posWall) {
+        return RectangleUtils.getSize(getWall(posWall), direction.getOrientation());
+    }
+
     public Rectangle getWall(Direction posWall) {
-        if(posWall.getOrientation() == direction.getOrientation())
+        if (posWall.getOrientation() == direction.getOrientation())
             throw new IllegalArgumentException("wall and corridor part cant have same orientation");
 
         if (posWall == direction.getOtherOrientation().getDirectionA())
