@@ -11,7 +11,6 @@ import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.log.StrFormat;
 import com.github.fabiitch.nz.java.data.Pair;
 import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPath;
-import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
@@ -23,6 +22,10 @@ public class CorridorPathDemo extends BaseTryScreen {
 
     public CorridorPathDemo() {
         super();
+        init();
+    }
+
+    public void init() {
         Array<CorridorPathStep> rectanglePathSteps = DemoPathUtils.corridorPathStep();
 
         CorridorPath corridorPath = new CorridorPath();
@@ -36,7 +39,7 @@ public class CorridorPathDemo extends BaseTryScreen {
             String format = StrFormat.format("Dir={}, length={}, size={}, wallSize={}", step.getDirection(), step.getLength(), step.getWalkSize(), step.getWallSize());
             HudDebug.addTopRight(i + " ", format, color);
             colorRectArray.add(Pair.of(color, compute.get(i)));
-            colorRectArray.add(Pair.of(color, compute.get(i+1)));
+            colorRectArray.add(Pair.of(color, compute.get(i + 1)));
         }
     }
 
