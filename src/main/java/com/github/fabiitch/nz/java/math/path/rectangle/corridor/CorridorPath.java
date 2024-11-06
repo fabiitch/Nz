@@ -71,7 +71,7 @@ public class CorridorPath extends ArrayContainer<CorridorPathStep> {
             float wallSize = step.getWallSize();
 
             if (nextDir != null && currentDir != nextDir) {
-                SubPath pathOpposite = getOpposite(nextDir);
+                SubPath pathOpposite = getOppositeFromTurn(nextDir);
                 SubPath other = getOther(nextDir);
                 pathOpposite.add(currentDir, length + walkSize, wallSize);
                 other.add(currentDir, length, wallSize);
@@ -102,12 +102,12 @@ public class CorridorPath extends ArrayContainer<CorridorPathStep> {
             }
         }
 
-        private SubPath getOpposite(Direction nextDir) {
+        private SubPath getOppositeFromTurn(Direction nextDir) {
             return path1.dirFromPos.getReverse() == nextDir ? path1 : path2;
         }
 
         private SubPath getOther(Direction nextDir) {
-            return getOpposite(nextDir) == path1 ? path2 : path1;
+            return getOppositeFromTurn(nextDir) == path1 ? path2 : path1;
         }
     }
 

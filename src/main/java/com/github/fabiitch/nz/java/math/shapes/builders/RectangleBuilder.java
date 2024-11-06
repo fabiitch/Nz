@@ -133,6 +133,10 @@ public class RectangleBuilder {
         return get(width, height);
     }
 
+    public static Rectangle withOrientationCenter(Orientation orientation, Vector2 position, float orientationSize, float otherSize) {
+        return withOrientation(orientation, position, orientationSize, otherSize, true);
+    }
+
     public static Rectangle withOrientation(Orientation orientation, Vector2 position, float orientationSize, float otherSize, boolean centerPos) {
         Rectangle rectangle = withOrientation(orientation, orientationSize, otherSize);
         if (centerPos)
@@ -156,7 +160,7 @@ public class RectangleBuilder {
 
         Vector2 centerTmp = RectangleUtils.getCenterTmp(rect);
 
-        direction.addTo(centerTmp, RectangleUtils.getSize(rect, direction.getOrientation()) /2 + directionSize/2);
+        direction.addTo(centerTmp, RectangleUtils.getSize(rect, direction.getOrientation()) / 2 + directionSize / 2);
         Rectangle result = withOrientation(rectOrientation, centerTmp, RectangleUtils.getSize(rect, rectOrientation), directionSize, true);
         return result;
     }

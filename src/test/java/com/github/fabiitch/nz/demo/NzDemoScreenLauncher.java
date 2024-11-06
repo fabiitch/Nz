@@ -5,9 +5,8 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.github.fabiitch.nz.demo.internal.NzUniqueScreenDemo;
 import com.github.fabiitch.nz.demo.shapes.path.CorridorPathDemo;
-import com.github.fabiitch.nz.demo.shapes.path.RectanglePathDemo;
 
-public class NzScreenDemoLauncher {
+public class NzDemoScreenLauncher {
     private static final int WITDH = 800;
     private static final int HEIGHT = 500;
 
@@ -15,6 +14,10 @@ public class NzScreenDemoLauncher {
     private final static Class<? extends Screen> screenDemoClass = CorridorPathDemo.class;
 
     public static void main(String[] args) {
+        startScreen(screenDemoClass);
+    }
+
+    public static void startScreen(Class<? extends Screen> screenDemoClass) {
         Lwjgl3ApplicationConfiguration configuration = new Lwjgl3ApplicationConfiguration();
         configuration.setTitle("Nz Demo");
         configuration.setWindowedMode(WITDH, HEIGHT);
