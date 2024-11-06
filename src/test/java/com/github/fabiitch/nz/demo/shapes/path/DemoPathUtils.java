@@ -44,14 +44,21 @@ public class DemoPathUtils {
 
     public static Array<CorridorStepNew> stepNew(){
         Array<CorridorStepNew> array = new Array<>();
-        array.add(CorridorStepNewBuilder.top(150,20,10,5));
-        array.add(CorridorStepNewBuilder.top(150,40,30,25));
+        array.add(CorridorStepNewBuilder.top(100,20,50,5));
+        array.add(CorridorStepNewBuilder.top(50,40,30,25));
+        array.add(CorridorStepNewBuilder.top(100,20,30,25));
 
-        array.add(CorridorStepNewBuilder.right(150,40,30,25));
+        array.add(CorridorStepNewBuilder.right(150,40,200,25));
+        array.add(CorridorStepNewBuilder.bot(150,50,100,20));
+
+
+        array.add(CorridorStepNewBuilder.right(100,20,30,50));
         array.add(CorridorStepNewBuilder.right(50,80,50,50));
 
-        array.add(CorridorStepNewBuilder.bot(200,50,20,5));
+        array.add(CorridorStepNewBuilder.right(200,50,20,5));
+        array.add(CorridorStepNewBuilder.top(100,25,20,15));
         array.add(CorridorStepNewBuilder.right(100,25,20,15));
+        array.add(CorridorStepNewBuilder.top(100,25,20,15));
         return array;
     }
 }

@@ -22,9 +22,10 @@ public class CorridorComputer {
         for (int i = 0; i < steps.size; i++) {
             CorridorStepNew current = steps.get(i);
             CorridorStepNew next = ArrayUtils.getNextOf(steps, i);
-            CorridorStepNew previous = ArrayUtils.getPreviousOf(steps, i);
+            CorridorPart previousPart = ArrayUtils.getPreviousOf(result, i);
 
-            CorridorPart part = CorridorComputer.compute(start, current, previous, next);
+
+            CorridorPart part = CorridorComputer.compute(start, current, previousPart, next);
             start.set(part.getMiddleEnd());
 
             result.add(part);
@@ -32,7 +33,7 @@ public class CorridorComputer {
         return result;
     }
 
-    public static CorridorPart compute(Vector2 middleStart, CorridorStepNew current, CorridorStepNew previous, CorridorStepNew next) {
+    public static CorridorPart compute(Vector2 middleStart, CorridorStepNew current, CorridorPart previous, CorridorStepNew next) {
         CorridorPart part = null;
         if (next != null && next.getDirection() != current.getDirection()) {
             Direction dirWallA = current.getOtherOrientation().getDirectionA();
@@ -40,11 +41,12 @@ public class CorridorComputer {
 
             part = init(middleStart, current);
 
-            part.setRectWallA(computeRectangleForTurn(middleStart, dirWallA, current, previous, next));
-            part.setRectWallB(computeRectangleForTurn(middleStart, dirWallB, current, previous, next));
+            part.setRectWallA(computeRectangleForTurn(middleStart, dirWallA, current, next));
+            part.setRectWallB(computeRectangleForTurn(middleStart, dirWallB, current, next));
         } else {
             part = basicCase(middleStart, current);
         }
+
         if (previous != null && previous.getOrientation() != current.getOrientation()) {
             Direction dirWallA = current.getOtherOrientation().getDirectionA();
             Direction dirWallB = current.getOtherOrientation().getDirectionB();
@@ -54,52 +56,69 @@ public class CorridorComputer {
         return part;
     }
 
-    private static void addPreviousDecal(CorridorPart part, Direction wallPosition, CorridorStepNew current, CorridorStepNew previous) {
-        boolean isOpposite = wallPosition == previous.getDirection();
-        Rectangle rectangleWall = part.getWall(wallPosition);
-        Vector2 center = rectangleWall.getCenter(new Vector2());
-
-        if (isOpposite) {
-            float rectLength = RectangleUtils.getSize(rectangleWall, current.getOrientation()) + previous.getWalkSize();
-            RectangleUtils.setSize(rectangleWall, current.getOrientation(), rectLength);
-
-            current.getDirection().subTo(center, previous.getWalkSize());
-            RectangleUtils.setCenter(rectangleWall, center);
-
-        } else {
-            float rectLength = RectangleUtils.getSize(rectangleWall, current.getOrientation()) - previous.getWalkSize()/2;
-            RectangleUtils.setSize(rectangleWall, current.getOrientation(), rectLength);
-
-            current.getDirection().addTo(center, previous.getWalkSize() / 2);
-            RectangleUtils.setCenter(rectangleWall, center);
-
-        }
-    }
-
-    private static Rectangle computeRectangleForTurn(Vector2 middleStart, Direction wallPosition, CorridorStepNew current, CorridorStepNew previous, CorridorStepNew next) {
+    private static Rectangle computeRectangleForTurn(Vector2 middleStart, Direction wallPosition, CorridorStepNew current, CorridorStepNew next) {
         boolean isOpposite = wallPosition == next.getDirection().getReverse();
 
-        Direction nextDirOnTurn = DirectionUtils.getNextDirOnTurn(current.getPositionWallA(), current.getDirection(), next.getDirection());
-        float nextWallSize = next.getWallSize(nextDirOnTurn);
+        Direction nextDirOnTurn = DirectionUtils.getNextDirOnTurn(wallPosition, current.getDirection(), next.getDirection());
+
         float lengthWall;
 
         if (isOpposite) {
-            lengthWall = current.getLength() + next.getWalkSize() / 2 + nextWallSize / 2;
+            lengthWall = current.getLength() + next.getWalkSize() / 2;
         } else {
-            lengthWall = current.getLength() - next.getWalkSize() / 2 - nextWallSize / 2;
+            lengthWall = current.getLength() - next.getWalkSize() / 2;
         }
 
         Vector2 rectCenter = middleStart.cpy();
         current.getDirection().addTo(rectCenter, lengthWall / 2);
 
-        if (current.getOrientation() != previous.getOrientation()) {
-            current.getDirection().addTo(rectCenter, previous.getWalkSize() / 2 + 100);
-        }
-        wallPosition.addTo(rectCenter, current.getWallSize(wallPosition) + current.getWalkSize() / 2);
+        wallPosition.addTo(rectCenter, current.getWallSize(wallPosition) / 2 + current.getWalkSize() / 2);
 
         return RectangleBuilder.withOrientationCenter(current.getOrientation(), rectCenter, lengthWall, current.getWallSize(wallPosition));
     }
 
+    private static void addPreviousDecal(CorridorPart part, Direction wallPosition, CorridorStepNew current, CorridorPart previous) {
+        boolean isOpposite = wallPosition == previous.getDirection();
+        Rectangle rectangleWall = part.getWall(wallPosition);
+        Vector2 center = rectangleWall.getCenter(new Vector2());
+
+        Direction previousWallDir = DirectionUtils.getNextDirOnTurn(wallPosition, current.getDirection(), previous.getDirection());
+        Rectangle stickRectOnPrevious = previous.getWall(previousWallDir);
+
+        float rectLength = RectangleUtils.getSize(rectangleWall, current.getOrientation());
+        if (isOpposite) {
+            float lengthToAdd = previous.getWalkSize() / 2 + previous.getWallSize(previousWallDir);
+            RectangleUtils.setSize(rectangleWall, current.getOrientation(), rectLength + lengthToAdd);
+
+            current.getDirection().subTo(center, lengthToAdd / 2);
+            RectangleUtils.setCenter(rectangleWall, center);
+        } else {
+            float lengthToSub = previous.getWalkSize() / 2 + previous.getWallSize(previousWallDir);
+            RectangleUtils.setSize(rectangleWall, current.getOrientation(), rectLength -lengthToSub);
+            current.getDirection().addTo(center, lengthToSub / 2);
+            RectangleUtils.setCenter(rectangleWall, center);
+        }
+    }
+
+
+    private static CorridorPart basicCase(Vector2 middleStart, CorridorStepNew current) {
+        CorridorPart part = init(middleStart, current);
+        Vector2 middleA = middleStart.cpy();
+        {
+            Direction directionA = current.getOtherOrientation().getDirectionA();
+            current.getDirection().addTo(middleA, current.getLength() / 2);
+            directionA.addTo(middleA, current.getWalkSize() / 2 + current.getWallSize(directionA) / 2);
+            part.setRectWallA(RectangleBuilder.withOrientationCenter(part.getOrientation(), middleA, current.getLength(), current.getWallSizeA()));
+        }
+        {
+            Direction directionB = current.getOtherOrientation().getDirectionB();
+            Vector2 middleB = middleStart.cpy();
+            current.getDirection().addTo(middleB, current.getLength() / 2);
+            directionB.addTo(middleB, current.getWalkSize() / 2 + current.getWallSize(directionB) / 2);
+            part.setRectWallB(RectangleBuilder.withOrientationCenter(part.getOrientation(), middleB, current.getLength(), current.getWallSizeB()));
+        }
+        return part;
+    }
 
     private static CorridorPart init(Vector2 middleStart, CorridorStepNew current) {
         CorridorPart part = new CorridorPart();
@@ -109,24 +128,6 @@ public class CorridorComputer {
 
         Vector2 centerWalk = current.getDirection().addTo(middleStart.cpy(), current.getLength() / 2);
         part.setRectWalk(RectangleBuilder.withOrientationCenter(current.getOrientation(), centerWalk, current.getLength(), current.getWalkSize()));
-        return part;
-    }
-
-    private static CorridorPart basicCase(Vector2 middleStart, CorridorStepNew current) {
-        CorridorPart part = init(middleStart, current);
-        Vector2 middleA = middleStart.cpy();
-
-        Direction directionA = current.getOtherOrientation().getDirectionA();
-        current.getDirection().addTo(middleA, current.getLength() / 2);
-        directionA.addTo(middleA, current.getWalkSize() / 2 + current.getWallSizeA() / 2);
-        part.setRectWallA(RectangleBuilder.withOrientationCenter(part.getOrientation(), middleA, current.getLength(), current.getWallSizeA()));
-
-        Direction directionB = current.getOtherOrientation().getDirectionB();
-        Vector2 middleB = middleStart.cpy();
-        current.getDirection().addTo(middleB, current.getLength() / 2);
-        directionB.addTo(middleB, current.getWalkSize() / 2 + current.getWallSizeA() / 2);
-        part.setRectWallB(RectangleBuilder.withOrientationCenter(part.getOrientation(), middleB, current.getLength(), current.getWallSizeB()));
-
         return part;
     }
 }
