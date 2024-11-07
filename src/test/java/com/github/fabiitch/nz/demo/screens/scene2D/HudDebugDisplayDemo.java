@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.scene2D;
+package com.github.fabiitch.nz.demo.screens.scene2D;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

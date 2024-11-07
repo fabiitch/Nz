@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.shapes;
+package com.github.fabiitch.nz.demo.screens.shapes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

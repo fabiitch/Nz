@@ -32,7 +32,7 @@ public class RectanglePathStep implements Pool.Poolable {
         corridor.setDirection(step.getDirection());
         corridor.setLength(step.getLength());
         corridor.setWalkSize(step.getSize());
-        corridor.setWallSize(wallSize);
+        corridor.setWallsSize(wallSize);
         return corridor;
     }
 

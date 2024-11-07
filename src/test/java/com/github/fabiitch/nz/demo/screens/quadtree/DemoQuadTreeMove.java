@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.quadtree;
+package com.github.fabiitch.nz.demo.screens.quadtree;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;

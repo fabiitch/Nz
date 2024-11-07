@@ -1,10 +1,11 @@
-package com.github.fabiitch.nz.demo.shapes.path;
+package com.github.fabiitch.nz.demo.screens.shapes.path;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.github.fabiitch.nz.demo.NzDemoScreenLauncher;
 import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
@@ -17,6 +18,10 @@ import com.github.fabiitch.nz.java.utils.Randoms;
 
 @DemoScreen(group = "math.path")
 public class RectangleSmoothPathDemo extends BaseTryScreen {
+
+    public static void main(String[] args) {
+        NzDemoScreenLauncher.startScreen(RectangleSmoothPathDemo.class);
+    }
 
     Array<Pair<Color, Rectangle>> colorRectArray = new Array<>();
     Vector2 start = new Vector2(100, 100);
