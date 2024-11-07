@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.demo.internal.huds.HudGlProfiler;
@@ -19,7 +18,7 @@ import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
-public abstract class BaseTryScreen extends ScreenAdapter {
+public abstract class BaseDemoScreen extends ScreenAdapter {
 
     protected NzStage nzStage;
     protected Skin skin;
@@ -37,7 +36,7 @@ public abstract class BaseTryScreen extends ScreenAdapter {
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected NzShapeRenderer shapeRenderer = new NzShapeRenderer();
 
-    public BaseTryScreen() {
+    public BaseDemoScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         this.nzStage = new NzStage();

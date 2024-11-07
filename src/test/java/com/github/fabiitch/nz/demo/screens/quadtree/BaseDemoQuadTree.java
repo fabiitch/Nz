@@ -1,24 +1,18 @@
 package com.github.fabiitch.nz.demo.screens.quadtree;
 
-import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.demo.internal.inputs.KeyboardCameraController;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTreeRenderer;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
-import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
+import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
-import com.github.fabiitch.nz.java.math.vectors.V3;
-import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 
 import java.util.ArrayList;
 
 
-public abstract class BaseDemoQuadTree<T> extends BaseTryScreen {
+public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
 
     public QuadTree<QuadData<T>> quadT;
     protected QuadTreeRenderer quadRender;

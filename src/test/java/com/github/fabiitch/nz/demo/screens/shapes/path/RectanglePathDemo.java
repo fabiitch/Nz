@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
+import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
@@ -16,7 +16,7 @@ import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
 @DemoScreen(group = "math.path")
-public class RectanglePathDemo extends BaseTryScreen {
+public class RectanglePathDemo extends BaseDemoScreen {
 
     Array<Pair<Color, Rectangle>> colorRectArray = new Array<>();
     Vector2 start = new Vector2(100, 100);

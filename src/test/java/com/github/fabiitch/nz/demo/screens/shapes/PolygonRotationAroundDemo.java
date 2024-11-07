@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
+import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
@@ -17,7 +17,7 @@ import com.github.fabiitch.nz.java.math.utils.Rotation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
 
 @DemoScreen(group = "math.shape2D.rotation.polygon")
-public class PolygonRotationAroundDemo extends BaseTryScreen {
+public class PolygonRotationAroundDemo extends BaseDemoScreen {
 
 
     private Array<Polygon> polygons = new Array<>();

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
+import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
@@ -12,7 +12,7 @@ import com.github.fabiitch.nz.java.math.shapes.PolygonRectangle;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 
 @DemoScreen(group = "math.shape2D.polygon.rect")
-public class PolygonRectangleSetRelativePosDemo extends BaseTryScreen {
+public class PolygonRectangleSetRelativePosDemo extends BaseDemoScreen {
 
     PolygonRectangle polygonRectangle = new PolygonRectangle(RectangleBuilder.get(300, 300, 200, 100));
     Vector2 lastPos = new Vector2(300, 300);
