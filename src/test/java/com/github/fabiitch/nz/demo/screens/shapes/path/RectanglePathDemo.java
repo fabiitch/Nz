@@ -1,49 +1,43 @@
-package com.github.fabiitch.nz.demo.shapes.path;
+package com.github.fabiitch.nz.demo.screens.shapes.path;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.demo.NzDemoScreenLauncher;
 import com.github.fabiitch.nz.demo.internal.BaseTryScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
+import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.log.StrFormat;
 import com.github.fabiitch.nz.java.data.Pair;
-import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPath;
-import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPathStep;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePath;
+import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
 import com.github.fabiitch.nz.java.utils.Randoms;
 
 @DemoScreen(group = "math.path")
-public class CorridorPathDemo extends BaseTryScreen {
+public class RectanglePathDemo extends BaseTryScreen {
 
-    public static void main(String[] args) {
-        NzDemoScreenLauncher.startScreen(CorridorPathDemo.class);
-    }
     Array<Pair<Color, Rectangle>> colorRectArray = new Array<>();
-    Vector2 start = new Vector2(50, 50);
+    Vector2 start = new Vector2(100, 100);
 
-    public CorridorPathDemo() {
+    public RectanglePathDemo() {
         super();
-        init();
-    }
+        Array<RectanglePathStep> rectanglePathSteps = DemoPathUtils.pathStep();
 
-    public void init() {
-        Array<CorridorPathStep> rectanglePathSteps = DemoPathUtils.corridorPathStep();
-
-        CorridorPath corridorPath = new CorridorPath();
-        corridorPath.getArray().addAll(rectanglePathSteps);
-
-        Array<Rectangle> compute = corridorPath.compute(start);
-
-        for (int i = 0; i < compute.size; i += 2) {
+        RectanglePath path = new RectanglePath();
+        path.getArray().addAll(rectanglePathSteps);
+        int i = 0;
+        Array<Rectangle> compute = path.compute(start);
+        for (RectanglePathStep step : path.getArray()) {
             Color color = Randoms.color();
-            CorridorPathStep step = rectanglePathSteps.get(i / 2);
-            String format = StrFormat.format("Dir={}, length={}, size={}, wallSize={}", step.getDirection(), step.getLength(), step.getWalkSize(), step.getWallSize());
+            String format = StrFormat.format("Dir={}, length={}, size={}", step.getDirection(), step.getLength(), step.getSize());
             HudDebug.addTopRight(i + " ", format, color);
+
             colorRectArray.add(Pair.of(color, compute.get(i)));
-            colorRectArray.add(Pair.of(color, compute.get(i + 1)));
+
+            HudDebug.addBotRight(i + " ", DebugDisplayUtils.printRectangleSize(compute.get(i)), color);
+            i++;
         }
     }
 

@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.path.rectangle.corridor.rework;
+package com.github.fabiitch.nz.java.math.path.rectangle.corridor;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,15 +19,21 @@ public class CorridorPart {
 
     private Rectangle blockerRectA, blockerRectB;
 
+    private Rectangle totalRect;
+
     public Orientation getOrientation() {
         return direction.getOrientation();
+    }
+
+    public Orientation getOtherOrientation() {
+        return direction.getOtherOrientation();
     }
 
     public float getWallSize(Direction posWall) {
         return RectangleUtils.getSize(getWall(posWall), direction.getOtherOrientation());
     }
 
-    public float getWallLenght(Direction posWall) {
+    public float getWallLength(Direction posWall) {
         return RectangleUtils.getSize(getWall(posWall), direction.getOrientation());
     }
 
@@ -57,11 +63,51 @@ public class CorridorPart {
         return RectangleUtils.getSize(rectWallB, direction.getOtherOrientation());
     }
 
-    public float getLenghtWallA() {
+    public float getLengthWallA() {
         return RectangleUtils.getSize(rectWallA, direction.getOrientation());
     }
 
-    public float getLenghtWallB() {
+    public float getLengthWallB() {
         return RectangleUtils.getSize(rectWallB, direction.getOrientation());
+    }
+
+
+    public float getTotalSize() {
+        return getWalkSize() + getWallSizeA() + getWallSizeB();
+    }
+
+    public void setBlocker(Direction wallDir, Rectangle blockerRect) {
+        if (wallDir.getOrientation() == direction.getOrientation())
+            throw new IllegalArgumentException("blocker and corridor part cant have same orientation");
+
+        Rectangle wall = getWall(wallDir);
+        if (wall == rectWallA)
+            setBlockerRectA(blockerRect);
+        setBlockerRectB(blockerRect);
+    }
+
+
+    public float getDstFromCenter(Direction wallDirection){
+       return getWallSize(wallDirection) + getWalkSize()/2;
+    }
+
+    public Rectangle getTotalRect() {
+        if (totalRect == null)
+            computeTotalRect();
+        return totalRect;
+    }
+
+    public void computeTotalRect() {
+        if (rectWalk != null) {
+            totalRect = new Rectangle(rectWalk);
+            if (rectWallA != null)
+                totalRect.merge(rectWallA);
+            if (rectWallB != null)
+                totalRect.merge(rectWallB);
+        }
+    }
+
+    public boolean hasBlockers() {
+        return blockerRectA != null || blockerRectB != null;
     }
 }

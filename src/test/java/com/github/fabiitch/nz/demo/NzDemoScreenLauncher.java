@@ -4,7 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.github.fabiitch.nz.demo.internal.NzUniqueScreenDemo;
-import com.github.fabiitch.nz.demo.shapes.path.CorridorPathDemo;
+import com.github.fabiitch.nz.demo.screens.shapes.path.CorridorPathDemo;
 
 public class NzDemoScreenLauncher {
     private static final int WITDH = 800;

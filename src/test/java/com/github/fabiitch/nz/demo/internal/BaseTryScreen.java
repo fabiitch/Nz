@@ -1,13 +1,18 @@
 package com.github.fabiitch.nz.demo.internal;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.github.fabiitch.nz.demo.internal.huds.HudGlProfiler;
+import com.github.fabiitch.nz.demo.internal.inputs.KeyboardCameraController;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
@@ -15,24 +20,38 @@ import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
 public abstract class BaseTryScreen extends ScreenAdapter {
+
     protected NzStage nzStage;
     protected Skin skin;
     protected HudDebug hudDebug;
     protected DT_Tracker dt_tracker;
-    private GLProfiler glProfiler;
+    protected HudGlProfiler hudGlProfiler;
+
+    protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+    private KeyboardCameraController keyboardCameraController;
+    protected  Camera camera;
+
     public FPSLogger fpsLogger;
 
     protected SpriteBatch spriteBatch = new SpriteBatch();
     protected NzShapeRenderer shapeRenderer = new NzShapeRenderer();
 
     public BaseTryScreen() {
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         this.nzStage = new NzStage();
         this.skin = new Skin(Gdx.files.internal("skins/ui/uiskin.json"));
         this.hudDebug = new HudDebug(nzStage, skin);
         this.dt_tracker = new DT_Tracker(HudDebugPosition.TOP_LEFT, Color.WHITE);
         shapeRenderer.setAutoShapeType(true);
+        hudGlProfiler = new HudGlProfiler();
 
         fpsLogger = new FPSLogger(50);
+
+        keyboardCameraController = new KeyboardCameraController(camera);
+        inputMultiplexer.addProcessor(keyboardCameraController);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     public void hudMsg(String msg) {
@@ -57,27 +76,6 @@ public abstract class BaseTryScreen extends ScreenAdapter {
     }
 
 
-    public void hudGlProfiler() {
-        if (glProfiler == null) {
-            int positionOnStage = HudDebugPosition.TOP_RIGHT;
-            Color color = Color.RED;
-            this.glProfiler = new GLProfiler(Gdx.graphics);
-            glProfiler.enable();
-            HudDebug.add("GlListener enabled", glProfiler + "", positionOnStage, color);
-            HudDebug.add("getCalls", 100000, positionOnStage, color);
-            HudDebug.add("getDrawCalls", 100000, positionOnStage, color);
-            HudDebug.add("getShaderSwitches", 100000, positionOnStage, color);
-            HudDebug.add("getTextureBindings", 100000, positionOnStage, color);
-            HudDebug.add("getVertexCountAverage", 100000, positionOnStage, color);
-        } else {
-            HudDebug.update("GlListener enabled", glProfiler.isEnabled() + "");
-            HudDebug.update("getCalls", glProfiler.getCalls());
-            HudDebug.update("getDrawCalls", glProfiler.getDrawCalls());
-            HudDebug.update("getShaderSwitches", glProfiler.getShaderSwitches());
-            HudDebug.update("getTextureBindings", glProfiler.getTextureBindings());
-            HudDebug.update("getVertexCountAverage", glProfiler.getVertexCount().average);
-        }
-    }
 
     @Override
     public void render(float delta) {
@@ -87,12 +85,14 @@ public abstract class BaseTryScreen extends ScreenAdapter {
         ScreenUtils.clear(Color.BLACK, true);
         nzStage.act();
         nzStage.draw();
-        if (glProfiler != null) {
-            hudGlProfiler();
-            glProfiler.reset();
-        }
+        hudGlProfiler.update();
         dt_tracker.end();
         dt_tracker.updateHud();
+
+        keyboardCameraController.update();
+        camera.update();
+        spriteBatch.setProjectionMatrix(camera.combined);
+        shapeRenderer.setProjectionMatrix(camera.combined);
     }
 
     @Override
