@@ -130,6 +130,18 @@ public class IntRangeArray {
         }
     }
 
+    public boolean hasStart(int start) {
+        return start >= this.start;
+    }
+
+    public boolean hasEnd(int start, int end) {
+        return end <= this.end;
+    }
+
+    public boolean has(int start, int end) {
+        return start >= this.start && end <= this.end;
+    }
+
     public IntRangeArray removeValues(int start, int end) {
         IntRange rangeRemove = getRange(start, end);
         for (int i = 0; i < subRange.size; i++) {
