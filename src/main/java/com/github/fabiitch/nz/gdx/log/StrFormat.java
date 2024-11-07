@@ -5,12 +5,11 @@ package com.github.fabiitch.nz.gdx.log;
 public class StrFormat {
     static final String DELIM_STR = "{}";
 
-    private final static StringBuilder sb = new StringBuilder(0);
-    ;
+    private final static StringBuilder SB = new StringBuilder(0);
 
     //TODO coupe les messages voir com/nzt/mfl/engine/services/sort/OrderGameService.java:18
     public static String format(String message, Object... args) {
-        sb.setLength(0);
+        SB.setLength(0);
         int msgIndex = 0;
         int delimIndex;
 
@@ -21,13 +20,13 @@ public class StrFormat {
                 if (msgIndex == 0)
                     return message;
                 else
-                    sb.append(message, msgIndex, message.length());
+                    SB.append(message, msgIndex, message.length());
             } else {
-                sb.append(message, msgIndex, delimIndex);
-                sb.append(args[argsCount]);
+                SB.append(message, msgIndex, delimIndex);
+                SB.append(args[argsCount]);
                 msgIndex = delimIndex + 2;
             }
         }
-        return sb.toString();
+        return SB.toString();
     }
 }

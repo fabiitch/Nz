@@ -1,8 +1,10 @@
 package com.github.fabiitch.nz.gdx.debug;
 
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.github.fabiitch.nz.java.utils.CommonStrings;
 
@@ -10,6 +12,9 @@ import com.github.fabiitch.nz.java.utils.CommonStrings;
  * not thread safe //TODO thread local
  */
 public class DebugDisplayUtils {
+
+    private final static StringBuilder STRING_BUILDER = new StringBuilder();
+
 
     private static final Float nan = Float.valueOf(Float.NaN);//TODO ??
 
@@ -58,7 +63,7 @@ public class DebugDisplayUtils {
     public static String printFloat(float f, int maxDecimal) {
         String[] split = String.valueOf(f).split("\\.");
         int indexFloating = Math.min(split[1].length(), maxDecimal);
-        return split[0] + "," + split[1].substring(0, indexFloating);
+        return split[0] + "." + split[1].substring(0, indexFloating);
     }
 
     public static String printFloat(float f) {
@@ -73,8 +78,8 @@ public class DebugDisplayUtils {
             return split[0];
         if (split[0].length() > 5)
             return split[0];
-        int indexFloatting = Math.min(split[1].length(), 4);
-        return split[0] + "," + split[1].substring(0, indexFloatting);
+        int indexFloating = Math.min(split[1].length(), 4);
+        return split[0] + "." + split[1].substring(0, indexFloating);
     }
 
     public static String printVector2(Vector2 v) {
@@ -92,7 +97,22 @@ public class DebugDisplayUtils {
     public static String printFloatToInt(float f) {
         return String.valueOf((int) f);
     }
+
     public static String printRectangleSize(Rectangle r) {
         return "Rectangle, W=" + printFloatToInt(r.width) + ", H=" + printFloatToInt(r.height);
+    }
+
+    public static String polygon(Polygon polygon) {
+        float[] transformedVertices = polygon.getTransformedVertices();
+        STRING_BUILDER.clear();
+        for (int i = 0; i < transformedVertices.length ; i += 2) {
+            STRING_BUILDER.append("(").append(printFloat(transformedVertices[i], 1));
+            STRING_BUILDER.append(",").append(printFloat(transformedVertices[i + 1], 1));
+            STRING_BUILDER.append(")");
+            if (i < transformedVertices.length - 2)
+                STRING_BUILDER.append(" ");
+
+        }
+        return "Polygon[ " + STRING_BUILDER + " ]";
     }
 }
