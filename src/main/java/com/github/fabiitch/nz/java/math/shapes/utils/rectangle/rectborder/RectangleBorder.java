@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.java.data.Pair;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import lombok.AllArgsConstructor;
@@ -22,15 +23,25 @@ public class RectangleBorder {
     private final Vector2 tmpV2 = new Vector2();
 
     private Vector2 center;
-    private Orientation orientation;
+    private Orientation borderCloseOrientation;
 
     private float insideWidth, insideHeight;
     private float borderRight, borderLeft, borderTop, borderBottom;
 
-    public RectangleBorder(Vector2 center, Orientation orientation,
+    public RectangleBorder(Vector2 center, Orientation borderCloseOrientation,
+                           float insideWidth, float insideHeight,
+                           float horizontalBorderSize, float verticalBorderSize) {
+        this(center, borderCloseOrientation, insideWidth, insideHeight, horizontalBorderSize, horizontalBorderSize, verticalBorderSize, verticalBorderSize);
+    }
+
+    public RectangleBorder(Vector2 center, Orientation borderCloseOrientation,
                            float insideWidth, float insideHeight,
                            float allBorderSize) {
-        this(center, orientation, insideWidth, insideHeight, allBorderSize, allBorderSize, allBorderSize, allBorderSize);
+        this(center, borderCloseOrientation, insideWidth, insideHeight, allBorderSize, allBorderSize, allBorderSize, allBorderSize);
+    }
+
+    public Rectangle getInsideRect() {
+        return RectangleBuilder.fromCenter(center, insideWidth, insideHeight);
     }
 
     public Rectangle getTotal() {
@@ -47,7 +58,7 @@ public class RectangleBorder {
 
     public Rectangle getRight() {
         tmpV2.setZero();
-        if (orientation == Orientation.Vertical) {
+        if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderRight, getTotalHeight());
         } else {
@@ -58,7 +69,7 @@ public class RectangleBorder {
 
     public Rectangle getLeft() {
         tmpV2.setZero();
-        if (orientation == Orientation.Vertical) {
+        if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderLeft, getTotalHeight());
         } else {
@@ -69,7 +80,7 @@ public class RectangleBorder {
 
     public Rectangle getTop() {
         tmpV2.setZero();
-        if (orientation == Orientation.Vertical) {
+        if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2, insideHeight / 2);
             return RectangleBuilder.get(pos, insideWidth, borderTop);
         } else {
@@ -80,13 +91,18 @@ public class RectangleBorder {
 
     public Rectangle getBottom() {
         tmpV2.setZero();
-        if (orientation == Orientation.Vertical) {
+        if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, insideWidth, borderBottom);
         } else {
             Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, getTotalWidth(), borderBottom);
         }
+    }
+
+    public float getBorderSize(Direction direction) {
+        Rectangle border = getBorder(direction);
+        return RectangleUtils.getSize(border, direction);
     }
 
     public Rectangle getBorder(Direction direction) {

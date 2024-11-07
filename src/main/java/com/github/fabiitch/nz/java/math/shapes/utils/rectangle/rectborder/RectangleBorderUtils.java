@@ -28,7 +28,7 @@ public class RectangleBorderUtils {
 
     public static Rectangle getRectBorder(Rectangle rect, Orientation orientation, Direction borderDirection, float borderSize) {
         tmpBorder.setCenter(rect.getCenter(tmpV2));
-        tmpBorder.setOrientation(orientation);
+        tmpBorder.setBorderCloseOrientation(orientation);
         tmpBorder.setInsideWidth(rect.getWidth());
         tmpBorder.setInsideHeight(rect.getHeight());
         tmpBorder.setAllBorder(borderSize);

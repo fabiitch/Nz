@@ -8,6 +8,7 @@ import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.RectCenter;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
+import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.rectborder.RectangleBorder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
@@ -48,12 +49,13 @@ public class RectangleUtils {
         return getD(rect, result);
     }
 
-    public static Vector2 getTopLeft(Rectangle rect, Vector2 pos) {
-        return getD(rect, pos);
-    }
-
+    //CORNER METHOD
     public static Vector2 getTopRight(Rectangle rect, Vector2 pos) {
         return getC(rect, pos);
+    }
+
+    public static Vector2 getTopLeft(Rectangle rect, Vector2 pos) {
+        return getD(rect, pos);
     }
 
     public static Vector2 getBotRight(Rectangle rect, Vector2 pos) {
@@ -64,20 +66,38 @@ public class RectangleUtils {
         return getA(rect, pos);
     }
 
-    public static Vector2 getTopMiddle(RectCenter r, Vector2 pos) {
-        return pos.set(r.getX(), r.getY() + r.getHeight() / 2);
+    public static Vector2 getTopRight(Rectangle r) {
+        return new Vector2(r.x + r.width / 2, r.y + r.height / 2);
     }
 
-    public static Vector2 getBotMiddle(RectCenter r, Vector2 pos) {
-        return pos.set(r.getX(), r.getY() - r.getHeight() / 2);
+    public static Vector2 getTopLeft(Rectangle rect) {
+        return getD(rect, new Vector2());
     }
 
-    public static Vector2 getRightMiddle(RectCenter r, Vector2 pos) {
-        return pos.set(r.getX() + r.getWidth() / 2, r.getY());
+    public static Vector2 getBotRight(Rectangle rect) {
+        return getB(rect, new Vector2());
     }
 
-    public static Vector2 getLeftMiddle(RectCenter r, Vector2 pos) {
-        return pos.set(r.getX() - r.getWidth() / 2, r.getY());
+    public static Vector2 getBotLeft(Rectangle rect) {
+        return getA(rect, new Vector2());
+    }
+
+    // ============ MIDDLE METHOD
+
+    public static Vector2 getTopMiddle(Rectangle r) {
+        return new Vector2(r.x + r.width / 2, r.y + r.height);
+    }
+
+    public static Vector2 getBotMiddle(Rectangle r) {
+        return new Vector2(r.x + r.width / 2, r.y);
+    }
+
+    public static Vector2 getRightMiddle(Rectangle r) {
+        return new Vector2(r.x + r.width, r.y + r.height / 2);
+    }
+
+    public static Vector2 getLeftMiddle(Rectangle r) {
+        return new Vector2(r.x, r.y + r.height / 2);
     }
 
     /**
@@ -734,6 +754,12 @@ public class RectangleUtils {
         return rect.getHeight();
     }
 
+    public static float getSize(Rectangle rect, Direction direction) {
+        if (direction.getOrientation() == Orientation.Horizontal)
+            return rect.getWidth();
+        return rect.getHeight();
+    }
+
     public static Rectangle reverseWidthHeight(Rectangle rect) {
         float width = rect.width;
         float height = rect.height;
@@ -785,6 +811,20 @@ public class RectangleUtils {
     }
 
     public static String printSize(Rectangle rectangle) {
-        return "(w=" + rectangle.width + ", h=" + rectangle.getHeight()+")";
+        return "(w=" + rectangle.width + ", h=" + rectangle.getHeight() + ")";
+    }
+
+    public static Vector2 getDirectionMiddle(Rectangle rectangle, Direction edge) {
+        switch (edge) {
+            case Top:
+                return getTopMiddle(rectangle);
+            case Bot:
+                return getBotMiddle(rectangle);
+            case Left:
+                return getLeftMiddle(rectangle);
+            case Right:
+                return getRightMiddle(rectangle);
+        }
+        return null;
     }
 }
