@@ -9,10 +9,9 @@ public class DirectionUtils {
 
 
     /**
-     *
-     * @param currentPos actual wall position from path
+     * @param currentPos      actual wall position from path
      * @param actualDirection actual dir
-     * @param turnDir turn dir
+     * @param turnDir         turn dir
      * @return
      */
     public static Direction getNextDirOnTurn(Direction currentPos, Direction actualDirection, Direction turnDir) {

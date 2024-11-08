@@ -164,4 +164,13 @@ public class RectangleBuilder {
         Rectangle result = withOrientation(rectOrientation, centerTmp, RectangleUtils.getSize(rect, rectOrientation), directionSize, true);
         return result;
     }
+
+    public static Rectangle getSubRect(Rectangle rectangle, Direction directionStart, float startPos, float sizeOrientation) {
+        Vector2 rectCenter = RectangleUtils.getDirectionMiddle(rectangle, directionStart);
+
+        float sizeRect = RectangleUtils.getSize(rectangle, directionStart.getOtherOrientation());
+
+        directionStart.getReverse().addTo(rectCenter, startPos + sizeOrientation / 2);
+        return withOrientationCenter(directionStart.getOrientation(), rectCenter, sizeOrientation , sizeRect);
+    }
 }
