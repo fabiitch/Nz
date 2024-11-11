@@ -134,12 +134,12 @@ public class IntRangeArray {
         return start >= this.start;
     }
 
-    public boolean hasEnd(int start, int end) {
+    public boolean hasEnd(int end) {
         return end <= this.end;
     }
 
     public boolean has(int start, int end) {
-        return start >= this.start && end <= this.end;
+        return hasStart(start) && hasEnd(end);
     }
 
     public IntRangeArray removeValues(int start, int end) {
