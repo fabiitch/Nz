@@ -32,16 +32,26 @@ public class RectangleBuilderTest {
 
 
     @Test
-    public void getBorderRectTest(){
+    public void getBorderRectTest() {
         Rectangle r = r(0, 0, 50, 100);
 
-        assertEquals(r(50,0,40,100), RectangleBuilder.getBorderRect(r, Direction.Right, 40));
+        assertEquals(r(50, 0, 40, 100), RectangleBuilder.getBorderRect(r, Direction.Right, 40));
 
-        assertEquals(r(-40,0,40,100), RectangleBuilder.getBorderRect(r, Direction.Left, 40));
+        assertEquals(r(-40, 0, 40, 100), RectangleBuilder.getBorderRect(r, Direction.Left, 40));
 
-        assertEquals(r(0,100,50,40), RectangleBuilder.getBorderRect(r, Direction.Top, 40));
+        assertEquals(r(0, 100, 50, 40), RectangleBuilder.getBorderRect(r, Direction.Top, 40));
 
-        assertEquals(r(0,-40,50,40), RectangleBuilder.getBorderRect(r, Direction.Bot, 40));
+        assertEquals(r(0, -40, 50, 40), RectangleBuilder.getBorderRect(r, Direction.Bot, 40));
+    }
 
+    @Test
+    public void getSubRectTest() {
+        Rectangle r = r(500, 500, 500, 200);
+
+        assertEquals(r(550, 500, 50, 200), RectangleBuilder.getSubRect(r, Direction.Left, 50, 50));
+        assertEquals(r(900, 500, 50, 200), RectangleBuilder.getSubRect(r, Direction.Right, 50, 50));
+
+        assertEquals(r(500, 550, 500, 50), RectangleBuilder.getSubRect(r, Direction.Bot, 50, 50));
+        assertEquals(r(500, 600, 500, 50), RectangleBuilder.getSubRect(r, Direction.Top, 50, 50));
     }
 }
