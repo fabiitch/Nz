@@ -171,6 +171,6 @@ public class RectangleBuilder {
         float sizeRect = RectangleUtils.getSize(rectangle, directionStart.getOtherOrientation());
 
         directionStart.getReverse().addTo(rectCenter, startPos + sizeOrientation / 2);
-        return withOrientationCenter(directionStart.getOrientation(), rectCenter, sizeOrientation , sizeRect);
+        return withOrientationCenter(directionStart.getOrientation(), rectCenter, sizeOrientation, sizeRect);
     }
 }
