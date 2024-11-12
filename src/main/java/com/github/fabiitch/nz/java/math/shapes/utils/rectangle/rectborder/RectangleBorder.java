@@ -57,7 +57,7 @@ public class RectangleBorder {
     }
 
     public Rectangle getRight() {
-        tmpV2.setZero();
+        tmpV2.set(center);
         if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderRight, getTotalHeight());
@@ -68,7 +68,7 @@ public class RectangleBorder {
     }
 
     public Rectangle getLeft() {
-        tmpV2.setZero();
+        tmpV2.set(center);
         if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2 - borderLeft, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, borderLeft, getTotalHeight());
@@ -79,7 +79,7 @@ public class RectangleBorder {
     }
 
     public Rectangle getTop() {
-        tmpV2.setZero();
+        tmpV2.set(center);
         if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2, insideHeight / 2);
             return RectangleBuilder.get(pos, insideWidth, borderTop);
@@ -90,7 +90,7 @@ public class RectangleBorder {
     }
 
     public Rectangle getBottom() {
-        tmpV2.setZero();
+        tmpV2.set(center);
         if (borderCloseOrientation == Orientation.Vertical) {
             Vector2 pos = tmpV2.add(-insideWidth / 2, -insideHeight / 2 - borderBottom);
             return RectangleBuilder.get(pos, insideWidth, borderBottom);
@@ -103,6 +103,11 @@ public class RectangleBorder {
     public float getBorderSize(Direction direction) {
         Rectangle border = getBorder(direction);
         return RectangleUtils.getSize(border, direction);
+    }
+
+    public float getBorderLength(Direction direction) {
+        Rectangle border = getBorder(direction);
+        return RectangleUtils.getSize(border, direction.getOtherOrientation());
     }
 
     public Rectangle getBorder(Direction direction) {

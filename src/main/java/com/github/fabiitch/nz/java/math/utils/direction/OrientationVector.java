@@ -19,26 +19,22 @@ public class OrientationVector implements Pool.Poolable {
 
     public OrientationVector(Orientation orientation, Vector2 xy) {
         this.orientation = orientation;
-        addX(xy.x);
-        addY(xy.y);
+        addHorizontal(xy.x);
+        addVertical(xy.y);
     }
 
-    public OrientationVector tmp(Orientation orientation, float orientationValue, float otherOrientationValue) {
+    public static OrientationVector tmp(Orientation orientation, float orientationValue, float otherOrientationValue) {
         return TMP.set(orientation, orientationValue, otherOrientationValue);
     }
 
-    public OrientationVector cpy() {
-        return new OrientationVector(orientation, orientationValue, otherOrientationValue);
+
+    public float get(Orientation orientation) {
+        if (orientation == this.orientation)
+            return orientationValue;
+        return otherOrientationValue;
     }
 
-    public OrientationVector set(Orientation orientation, float orientationValue, float otherOrientationValue) {
-        this.orientation = orientation;
-        this.orientationValue = orientationValue;
-        this.otherOrientationValue = otherOrientationValue;
-        return this;
-    }
-
-    public OrientationVector addX(float x) {
+    public OrientationVector addHorizontal(float x) {
         if (orientation == Orientation.Horizontal)
             orientationValue += x;
         else
@@ -46,7 +42,7 @@ public class OrientationVector implements Pool.Poolable {
         return this;
     }
 
-    public OrientationVector addY(float y) {
+    public OrientationVector addVertical(float y) {
         if (orientation == Orientation.Horizontal)
             otherOrientationValue += y;
         else
@@ -54,23 +50,55 @@ public class OrientationVector implements Pool.Poolable {
         return this;
     }
 
-
     public OrientationVector add(float a, float b) {
         orientationValue += a;
         otherOrientationValue += b;
         return this;
     }
 
+    public OrientationVector add(Orientation orientation, float value) {
+        if (orientation == this.orientation)
+            orientationValue += value;
+        else
+            otherOrientationValue += value;
+        return this;
+    }
+
+    public Vector2 addToV2(Orientation orientation, Vector2 vector) {
+        float value = get(orientation);
+        if (orientation == Orientation.Horizontal)
+            vector.x += value;
+        else
+            vector.y = value;
+        return vector;
+    }
+
+    public Vector2 addToV2(Vector2 v) {
+        return v.add(get(Orientation.Horizontal), get(Orientation.Vertical));
+    }
+
     public Vector2 toV2() {
-        float x, y;
-        if (orientation == Orientation.Horizontal) {
-            x = orientationValue;
-            y = otherOrientationValue;
-        } else {
-            x = otherOrientationValue;
-            y = orientationValue;
-        }
+        float x = get(Orientation.Horizontal);
+        float y = get(Orientation.Vertical);
         return new Vector2(x, y);
+    }
+
+    public OrientationVector cpy() {
+        return new OrientationVector(orientation, orientationValue, otherOrientationValue);
+    }
+
+    public OrientationVector set(OrientationVector orientationVector) {
+        this.orientation = orientationVector.orientation;
+        this.orientationValue = orientationVector.orientationValue;
+        this.otherOrientationValue = orientationVector.otherOrientationValue;
+        return this;
+    }
+
+    public OrientationVector set(Orientation orientation, float orientationValue, float otherOrientationValue) {
+        this.orientation = orientation;
+        this.orientationValue = orientationValue;
+        this.otherOrientationValue = otherOrientationValue;
+        return this;
     }
 
     @Override

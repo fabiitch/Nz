@@ -14,7 +14,7 @@ import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorComputer
 import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPart;
 import com.github.fabiitch.nz.java.math.path.rectangle.corridor.CorridorPathStep;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
-import com.github.fabiitch.nz.java.utils.Randoms;
+import com.github.fabiitch.nz.java.utils.randoms.Randoms;
 
 @DemoScreen(group = "math.path")
 public class CorridorPathDemo extends BaseDemoScreen {

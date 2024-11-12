@@ -1,21 +1,27 @@
-package com.github.fabiitch.nz.java.utils;
+package com.github.fabiitch.nz.java.utils.randoms;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import lombok.experimental.UtilityClass;
 
 import java.util.List;
 
+@UtilityClass
 public class Randoms {
-    private Randoms() {
 
+    @SafeVarargs
+    public static <T> T get(T... tab) {
+        return tab[MathUtils.random(tab.length - 1)];
     }
-    public static <T> T rdm(List<T> list) {
-        return list.get(MathUtils.random(list.size()-1));
+
+    public static <T> T get(List<T> list) {
+        return list.get(MathUtils.random(list.size() - 1));
     }
-    public static <T> T rdm(Array<T> array) {
-        return array.get(MathUtils.random(array.size-1));
+
+    public static <T> T get(Array<T> array) {
+        return array.get(MathUtils.random(array.size - 1));
     }
 
     public static Vector2 v2(float maxX, float maxY) {

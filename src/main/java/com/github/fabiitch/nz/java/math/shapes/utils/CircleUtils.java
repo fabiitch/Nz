@@ -63,6 +63,7 @@ public class CircleUtils {
     public static Vector2 posWithAngleRad(Circle cirle, float angleRadian, Vector2 returnV) {
         return posWithAngleRad(cirle.x, cirle.y, cirle.radius, angleRadian, returnV);
     }
+
     public static Vector2 posWithAngleDeg(Vector2 center, float radius, float angleDeg, Vector2 returnV) {
         return posWithAngleRad(center.x, center.y, radius, MathUtils.degreesToRadians * angleDeg, returnV);
     }
@@ -98,12 +99,19 @@ public class CircleUtils {
         return rectangle;
     }
 
-    public static Vector2 getRandomPos(Circle circle, Vector2 pos) {
-        float r = (float) (circle.radius * Math.sqrt(MathUtils.random()));
+    public static Vector2 getRandomPos(Vector2 position, float radius, Vector2 result) {
+        return getRandomPos(position.x, position.y, radius, result);
+    }
+
+
+    public static Vector2 getRandomPos(float x, float y, float radius, Vector2 result) {
+        float r = (float) (radius * Math.sqrt(MathUtils.random()));
         float theta = MathUtils.random() * 2 * MathUtils.PI;
-        pos.x = circle.x + r * MathUtils.cos(theta);
-        pos.y = circle.y + r * MathUtils.sin(theta);
-        return pos;
+        return posWithAngleRad(x, y, r, theta, result);
+    }
+
+    public static Vector2 getRandomPos(Circle circle, Vector2 result) {
+        return getRandomPos(circle.x, circle.y, circle.radius, result);
     }
 
 //    public static float getAngleReflexionRad(Circle circle, float angleRad) {
