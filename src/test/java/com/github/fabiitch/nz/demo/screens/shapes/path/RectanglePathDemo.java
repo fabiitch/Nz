@@ -13,7 +13,7 @@ import com.github.fabiitch.nz.gdx.log.StrFormat;
 import com.github.fabiitch.nz.java.data.Pair;
 import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePath;
 import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePathStep;
-import com.github.fabiitch.nz.java.utils.Randoms;
+import com.github.fabiitch.nz.java.utils.randoms.Randoms;
 
 @DemoScreen(group = "math.path")
 public class RectanglePathDemo extends BaseDemoScreen {

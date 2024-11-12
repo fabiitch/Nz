@@ -18,7 +18,6 @@ public class MinMaxRandom {
         return MathUtils.random(max, max);
     }
 
-
     public float getPercentValue(float percent) {
         return Percentage.value(percent, max);
     }

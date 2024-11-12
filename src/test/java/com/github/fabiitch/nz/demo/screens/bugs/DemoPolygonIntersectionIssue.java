@@ -25,16 +25,9 @@ public class DemoPolygonIntersectionIssue extends BaseDemoScreen {
         p2.scale(100);
         overlap = new Polygon();
 
-        boolean b = Intersector.intersectPolygons(p1, p2, overlap);
+        boolean isOverlap = Intersector.intersectPolygons(p1, p2, overlap);
+        System.out.println("Overlap ="  + isOverlap);
         System.out.println("Number of overlap vertices: " + overlap.getVertexCount());
-        Polygon p3 = new Polygon(new float[]{1, -1, 2, -1, 1, -2});
-        Polygon p4 = new Polygon(new float[]{2, -1, 2, -2, 1, -2});
-        Polygon overlap2 = new Polygon();
-        Polygon overlap3 = new Polygon();
-        Intersector.intersectPolygons(p3, overlap, overlap2);
-        Intersector.intersectPolygons(p4, overlap, overlap3);
-        System.out.println("Number of overlap2 vertices: " + overlap2.getVertexCount());
-        System.out.println("Number of overlap3 vertices: " + overlap3.getVertexCount());
 
         HudDebug.addTopLeft("P1", DebugDisplayUtils.polygon(p1));
         HudDebug.addTopLeft("P2", DebugDisplayUtils.polygon(p2));
