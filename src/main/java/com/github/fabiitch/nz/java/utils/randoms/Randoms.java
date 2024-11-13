@@ -24,6 +24,18 @@ public class Randoms {
         return array.get(MathUtils.random(array.size - 1));
     }
 
+    public static Vector2 randomDir(Vector2 result) {
+        return result.set(1, 0).setToRandomDirection();
+    }
+
+    public static Vector2 randomDir() {
+        return new Vector2(1,0).setToRandomDirection();
+    }
+
+    public static Vector2 v2(float maxX, float maxY, Vector2 result) {
+        return v2(0, maxX, 0, maxY, result);
+    }
+
     public static Vector2 v2(float maxX, float maxY) {
         return v2(0, maxX, 0, maxY, new Vector2());
     }
@@ -32,10 +44,10 @@ public class Randoms {
         return v2(minX, maxX, minY, maxY, new Vector2());
     }
 
-    public static Vector2 v2(float minX, float maxX, float minY, float maxY, Vector2 vector) {
+    public static Vector2 v2(float minX, float maxX, float minY, float maxY, Vector2 result) {
         float randomX = MathUtils.random(minX, maxX);
         float randomY = MathUtils.random(minY, maxY);
-        return vector.set(randomX, randomY);
+        return result.set(randomX, randomY);
     }
 
     public static Color color() {
