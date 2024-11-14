@@ -5,6 +5,17 @@ public class TabUtils {
 
     }
 
+    /**
+     * @return -1 if not found
+     */
+    public static int indexOf(Object[] tab, Object o) {
+        for (int i = 0; i < tab.length; i++) {
+            if (tab[i] == o)
+                return i;
+        }
+        return -1;
+    }
+
     public static boolean contains(final Object[] tab, Object o) {
         for (Object object : tab)
             if (object == o)
