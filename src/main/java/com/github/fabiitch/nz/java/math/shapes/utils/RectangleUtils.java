@@ -6,9 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.NzMath;
 import com.github.fabiitch.nz.java.math.angle.AngleUtils;
-import com.github.fabiitch.nz.java.math.shapes.RectCenter;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
-import com.github.fabiitch.nz.java.math.shapes.utils.rectangle.rectborder.RectangleBorder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.vectors.V2;
@@ -642,6 +640,7 @@ public class RectangleUtils {
         return v.set(MathUtils.random(rect.x, rect.x + rect.width), MathUtils.random(rect.y, rect.y + rect.height));
     }
 
+
     public static float getXMax(Rectangle rectangle) {
         return rectangle.x + rectangle.width;
     }
@@ -668,6 +667,12 @@ public class RectangleUtils {
     public static Rectangle translate(Rectangle rect, float x, float y) {
         rect.x += x;
         rect.y += y;
+        return rect;
+    }
+
+    public static Rectangle translate(Rectangle rect, Vector2 vector2) {
+        rect.x += vector2.x;
+        rect.y += vector2.y;
         return rect;
     }
 

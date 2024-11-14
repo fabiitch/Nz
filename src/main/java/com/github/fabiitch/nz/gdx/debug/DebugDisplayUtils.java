@@ -34,7 +34,7 @@ public class DebugDisplayUtils {
         String floating = printFloat(f);
         int indexDot = floating.indexOf(",");
         int charAfterDot = floating.length() - indexDot;
-        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)).toString() + "s";
+        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)) + "s";
     }
 
     public static String printValue(Object o) {
