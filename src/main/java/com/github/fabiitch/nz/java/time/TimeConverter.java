@@ -1,5 +1,8 @@
 package com.github.fabiitch.nz.java.time;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class TimeConverter {
 
     public final static long MILLIS_IN_SECOND = 1_000;
