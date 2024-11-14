@@ -4,10 +4,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DirectionTest {
 
+    @Test
+    public void getClockwiseTest() {
+        Direction[] clockwiseFrom = Direction.getClockwiseFrom(Direction.Top);
+        Assertions.assertEquals(Direction.CLOCKWISE, clockwiseFrom);
+    }
 
     @Test
     public void findDirectionTest() {

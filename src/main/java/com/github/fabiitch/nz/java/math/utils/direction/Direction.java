@@ -2,66 +2,50 @@ package com.github.fabiitch.nz.java.math.utils.direction;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.nz.java.data.collections.utils.TabUtils;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 public enum Direction {
 
-    Top(new Vector2(0, 1)) {
-        @Override
-        public Orientation getOrientation() {
-            return Orientation.Vertical;
-        }
-
+    Top(new Vector2(0, 1), Orientation.Vertical) {
         @Override
         public Direction getReverse() {
             return Bot;
         }
     },
 
-    Bot(new Vector2(0, -1)) {
-        @Override
-        public Orientation getOrientation() {
-            return Orientation.Vertical;
-        }
-
-
+    Bot(new Vector2(0, -1), Orientation.Vertical) {
         @Override
         public Direction getReverse() {
             return Top;
         }
     },
 
-    Left(new Vector2(-1, 0)) {
-        @Override
-        public Orientation getOrientation() {
-            return Orientation.Horizontal;
-        }
-
+    Left(new Vector2(-1, 0), Orientation.Horizontal) {
         @Override
         public Direction getReverse() {
             return Right;
         }
     },
 
-    Right(new Vector2(1, 0)) {
-        @Override
-        public Orientation getOrientation() {
-            return Orientation.Horizontal;
-        }
-
+    Right(new Vector2(1, 0), Orientation.Horizontal) {
         @Override
         public Direction getReverse() {
             return Left;
         }
     };
 
+    public static final Direction[] VALUES = Direction.values();
+    public static final Direction[] CLOCKWISE = {Top, Right, Bot, Left};
+
     private final Vector2 vector;
+    @Getter
+    private final Orientation orientation;
 
-    public abstract Orientation getOrientation();
-
-    public  Orientation getOtherOrientation(){
-        return getOrientation().getOtherOrientation();
+    public Orientation getOtherOrientation() {
+        return orientation.getOtherOrientation();
     }
 
     public abstract Direction getReverse();
@@ -82,15 +66,13 @@ public enum Direction {
         return vector.cpy();
     }
 
-    public boolean isHorizontal(){
+    public boolean isHorizontal() {
         return getOrientation() == Orientation.Horizontal;
     }
-    public boolean isVertical(){
+
+    public boolean isVertical() {
         return getOrientation() == Orientation.Vertical;
     }
-
-    public static final Direction[] VALUES = Direction.values();
-
 
     public static Direction getPureDirection(Vector2 vector) {
         float angle = vector.angleRad();
@@ -119,5 +101,14 @@ public enum Direction {
         return closestDirection;
     }
 
+    public static Direction[] getClockwiseFrom(Direction start) {
+        int indexStart = TabUtils.indexOf(CLOCKWISE, start);
+        Direction[] res = new Direction[4];
+        for(int i = indexStart ; i < 4 ; i++)
+            res[i] = CLOCKWISE[i];
+        for(int i = 0 ; i < indexStart ; i++)
+            res[i] = CLOCKWISE[i];
+        return res;
+    }
 
 }
