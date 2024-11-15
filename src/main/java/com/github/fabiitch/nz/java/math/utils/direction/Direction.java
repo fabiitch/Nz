@@ -39,6 +39,7 @@ public enum Direction {
 
     public static final Direction[] VALUES = Direction.values();
     public static final Direction[] CLOCKWISE = {Top, Right, Bot, Left};
+    public static final Direction[] COUNTER_CLOCKWISE = {Top, Left, Bot, Right};
 
     private final Vector2 vector;
     @Getter
@@ -102,13 +103,22 @@ public enum Direction {
     }
 
     public static Direction[] getClockwiseFrom(Direction start) {
-        int indexStart = TabUtils.indexOf(CLOCKWISE, start);
         Direction[] res = new Direction[4];
-        for(int i = indexStart ; i < 4 ; i++)
-            res[i] = CLOCKWISE[i];
-        for(int i = 0 ; i < indexStart ; i++)
-            res[i] = CLOCKWISE[i];
+        int indexStart = TabUtils.indexOf(CLOCKWISE, start);
+
+        if (4 - indexStart >= 0) System.arraycopy(CLOCKWISE, indexStart, res, 0, 4 - indexStart);
+
+        if (indexStart > 0) System.arraycopy(CLOCKWISE, 0, res, 4 - indexStart, indexStart);
         return res;
     }
 
+    public static Direction[] getCounterClockwiseFrom(Direction start) {
+        Direction[] res = new Direction[4];
+        int indexStart = TabUtils.indexOf(COUNTER_CLOCKWISE, start);
+
+        if (4 - indexStart >= 0) System.arraycopy(COUNTER_CLOCKWISE, indexStart, res, 0, 4 - indexStart);
+
+        if (indexStart > 0) System.arraycopy(COUNTER_CLOCKWISE, 0, res, 4 - indexStart, indexStart);
+        return res;
+    }
 }

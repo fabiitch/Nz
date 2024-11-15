@@ -2,7 +2,7 @@ package com.github.fabiitch.nz.java.math.shape.builders;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.gdxunit.VTestUtils;
+import com.github.fabiitch.gdxunit.vectors.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.builders.PolygonBuilder;
 import com.github.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
 import com.github.fabiitch.nz.java.math.vectors.V2;

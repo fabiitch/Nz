@@ -1,14 +1,11 @@
 package com.github.fabiitch.nz.java.math.shape.builders;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.github.fabiitch.gdxunit.ShapeTestBuilder;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.ShapeTestBuilder.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.r;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.ShapeTestBuilder.r;
-import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.r;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.v2;
 
 
 //TODO cassé refaire le quadtree
