@@ -212,6 +212,12 @@ public class RectangleUtils {
         return rect;
     }
 
+    public static Rectangle setCenter(Rectangle r, float x, float y, float width, float height) {
+        setCenter(r, x, y);
+        r.width = width;
+        r.height = height;
+        return r;
+    }
 
     /**
      * return the closest point on edge
@@ -832,4 +838,5 @@ public class RectangleUtils {
         }
         return null;
     }
+
 }
