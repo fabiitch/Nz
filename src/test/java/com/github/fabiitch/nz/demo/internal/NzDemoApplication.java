@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreenScanner;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreenTree;
 import com.github.fabiitch.nz.demo.internal.selectors.TreeDemoSelectorScreen;

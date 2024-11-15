@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.*;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.r;
 import static com.github.fabiitch.nz.java.data.quadtree.QuadTreeUtils.*;
 
 public class QuadTreeUtilsTest {

@@ -6,7 +6,7 @@ import com.github.fabiitch.nz.java.math.shapes.Segment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.*;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.v2;
 import static com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
