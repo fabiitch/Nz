@@ -1,6 +1,7 @@
 package com.github.fabiitch.nz.java.math.shapes.intersectors;
 
 import com.badlogic.gdx.math.*;
+import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class IntersectorRectangle { //TODO group tmp
@@ -41,6 +42,18 @@ public class IntersectorRectangle { //TODO group tmp
             result.height = Math.min(rectangle1.y + rectangle1.height, rectangle2.y + rectangle2.height) - result.y;
             return true;
         }
+        return false;
+    }
+
+    public static boolean segment(Rectangle rectangle, Segment segment) {
+        if (IntersectorSegmentRectangle.intersectBotEdge(segment, rectangle, null))
+            return true;
+        if (IntersectorSegmentRectangle.intersectTopEdge(segment, rectangle, null))
+            return true;
+        if (IntersectorSegmentRectangle.intersectRightEdge(segment, rectangle, null))
+            return true;
+        if (IntersectorSegmentRectangle.intersectLeftEdge(segment, rectangle, null))
+            return true;
         return false;
     }
 }
