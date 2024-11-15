@@ -29,62 +29,62 @@ public class IntersectorSegmentRectangleTest {
 
 
     @Test
-    public void instersectHorizontalBot() {
+    public void intersectBotEdgeTest() {
         resetSegment(5, 5, 5, -5);
-        touch = IntersectorSegmentRectangle.instersectHorizontalBot(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectBotEdge(segment2D, rect, intersectionPoint);
         assertTouch(5, 0);
 
         resetSegment(5, 5, -1, -1);
-        touch = IntersectorSegmentRectangle.instersectHorizontalBot(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectBotEdge(segment2D, rect, intersectionPoint);
         assertTrue(touch);
 
         resetSegment(5, 5, 5, 1);
-        touch = IntersectorSegmentRectangle.instersectHorizontalBot(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectBotEdge(segment2D, rect, intersectionPoint);
         assertFalse(touch);
     }
 
     @Test
-    public void instersectHorizontalTop() {
+    public void intersectTopEdgeTest() {
         resetSegment(5, 5, 5, 15);
-        touch = IntersectorSegmentRectangle.instersectHorizontalTop(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectTopEdge(segment2D, rect, intersectionPoint);
         assertTouch(5, 10);
 
         resetSegment(5, 5, 0, 12);
-        touch = IntersectorSegmentRectangle.instersectHorizontalTop(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectTopEdge(segment2D, rect, intersectionPoint);
         assertTrue(touch);
 
         resetSegment(5, 5, 0, 9);
-        touch = IntersectorSegmentRectangle.instersectHorizontalTop(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectTopEdge(segment2D, rect, intersectionPoint);
         assertFalse(touch);
     }
 
     @Test
-    public void instersectVercticalRight() {
+    public void intersectRightEdgeTest() {
         resetSegment(5, 5, 15, 5);
-        touch = IntersectorSegmentRectangle.instersectVercticalRight(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectRightEdge(segment2D, rect, intersectionPoint);
         assertTouch(10, 5);
 
         resetSegment(5, 5, 15, 0.2f);
-        touch = IntersectorSegmentRectangle.instersectVercticalRight(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectRightEdge(segment2D, rect, intersectionPoint);
         assertTrue(touch);
 
         resetSegment(5, 5, 8, 0.2f);
-        touch = IntersectorSegmentRectangle.instersectVercticalRight(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectRightEdge(segment2D, rect, intersectionPoint);
         assertFalse(touch);
     }
 
     @Test
-    public void instersectVerticalLeft() {
+    public void intersectLeftEdgeTest() {
         resetSegment(5, 5, -5, 5);
-        touch = IntersectorSegmentRectangle.instersectVerticalLeft(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectLeftEdge(segment2D, rect, intersectionPoint);
         assertTouch(0, 5);
 
         resetSegment(5, 5, -5, 0.2f);
-        touch = IntersectorSegmentRectangle.instersectVerticalLeft(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectLeftEdge(segment2D, rect, intersectionPoint);
         assertTrue(touch);
 
         resetSegment(5, 5, 0.1f, 0.2f);
-        touch = IntersectorSegmentRectangle.instersectVerticalLeft(segment2D, rect, intersectionPoint);
+        touch = IntersectorSegmentRectangle.intersectLeftEdge(segment2D, rect, intersectionPoint);
         assertFalse(touch);
     }
 

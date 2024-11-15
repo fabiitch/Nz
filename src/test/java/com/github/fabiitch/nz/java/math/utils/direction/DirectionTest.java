@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
+import static com.github.fabiitch.nz.java.math.utils.direction.Direction.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -11,25 +12,28 @@ public class DirectionTest {
 
     @Test
     public void getClockwiseTest() {
-        Direction[] clockwiseFrom = Direction.getClockwiseFrom(Direction.Top);
-        Assertions.assertEquals(Direction.CLOCKWISE, clockwiseFrom);
+        Direction[] clockwiseFrom = getClockwiseFrom(Top);
+        Assertions.assertEquals(CLOCKWISE, clockwiseFrom);
+
+        clockwiseFrom = getClockwiseFrom(Bot);
+        Assertions.assertEquals(new Direction[]{Bot, Left, Top, Right}, clockwiseFrom);
     }
 
     @Test
     public void findDirectionTest() {
-        assertEquals(Direction.Right, Direction.getPureDirection(v2(1, 0)));
-        assertEquals(Direction.Left, Direction.getPureDirection(v2(-1, 0)));
-        assertEquals(Direction.Top, Direction.getPureDirection(v2(0, 1)));
-        assertEquals(Direction.Bot, Direction.getPureDirection(v2(0, -1)));
-        assertNull(Direction.getPureDirection(v2(1, 1)));
+        assertEquals(Right, getPureDirection(v2(1, 0)));
+        assertEquals(Left, getPureDirection(v2(-1, 0)));
+        assertEquals(Top, getPureDirection(v2(0, 1)));
+        assertEquals(Bot, getPureDirection(v2(0, -1)));
+        assertNull(getPureDirection(v2(1, 1)));
     }
 
 
     @Test
     public void findClosestDirTest() {
-        assertEquals(Direction.Right, Direction.getClosestDirection(v2(1, 0)));
-        assertEquals(Direction.Right, Direction.getClosestDirection(v2(1, 0.2f)));
+        assertEquals(Right, getClosestDirection(v2(1, 0)));
+        assertEquals(Right, getClosestDirection(v2(1, 0.2f)));
 
-        assertEquals(Direction.Top, Direction.getClosestDirection(v2(0, 1.1f)));
+        assertEquals(Top, getClosestDirection(v2(0, 1.1f)));
     }
 }
