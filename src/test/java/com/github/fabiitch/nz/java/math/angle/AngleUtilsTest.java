@@ -1,7 +1,6 @@
 package com.github.fabiitch.nz.java.math.angle;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

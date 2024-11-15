@@ -7,7 +7,7 @@ import com.github.fabiitch.nz.java.math.path.rectangle.RectanglePath;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.*;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.rCenter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RectanglePathTest {

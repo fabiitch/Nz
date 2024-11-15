@@ -1,6 +1,5 @@
 package com.github.fabiitch.nz.java.math.utils.range;
 
-import com.github.fabiitch.nz.java.math.utils.range.IntRange;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -1,10 +1,10 @@
 package com.github.fabiitch.nz.demo.screens.scene2D;
 
 import com.badlogic.gdx.graphics.Color;
+import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEvent;
 import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEventManager;
-import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.java.time.timers.TimeLocker;
 
 /**

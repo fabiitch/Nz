@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
+import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class QuadTreeRenderer {
 

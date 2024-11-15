@@ -1,15 +1,14 @@
 package com.github.fabiitch.nz.java.algo;
 
 import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.java.algo.DependantSorter;
-import com.github.fabiitch.nz.java.algo.DependencyLockException;
 import com.github.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DependantSorterTest {
 
