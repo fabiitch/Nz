@@ -4,13 +4,12 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.gdxunit.ArrayTestUtils;
+import com.github.fabiitch.gdxunit.tab.FloatTabTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.builders.PolygonBuilder;
-import com.github.fabiitch.nz.java.math.utils.Symmetry;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.ShapeTestBuilder.*;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SymmetryTest {
@@ -72,7 +71,7 @@ public class SymmetryTest {
         Vector2 symmetryPoint = new Vector2(10, 10);
 
         Polygon polygon = PolygonBuilder.rectangle(0, 0, 5, 5, true);
-        ArrayTestUtils.assertEquals(PolygonBuilder.rectangle(20, 20, 5, 5, true).getTransformedVertices(),
+        FloatTabTestUtils.assertEquals(PolygonBuilder.rectangle(20, 20, 5, 5, true).getTransformedVertices(),
                 Symmetry.withPoint(polygon, symmetryPoint).getTransformedVertices());
     }
 
@@ -81,7 +80,7 @@ public class SymmetryTest {
         Segment symmetrySegment = new Segment(-50, 0, 50, 0);
         Polygon polygon = PolygonBuilder.rectangle(0, -20, 5, 5, true);
 
-        ArrayTestUtils.assertEquals(PolygonBuilder.rectangle(0, 20, 5, 5, true).getTransformedVertices(),
+        FloatTabTestUtils.assertEquals(PolygonBuilder.rectangle(0, 20, 5, 5, true).getTransformedVertices(),
                 Symmetry.withSegment(polygon, symmetrySegment).getTransformedVertices());
     }
 }

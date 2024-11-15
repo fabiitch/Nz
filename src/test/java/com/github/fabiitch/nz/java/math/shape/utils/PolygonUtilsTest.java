@@ -2,7 +2,7 @@ package com.github.fabiitch.nz.java.math.shape.utils;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.gdxunit.VTestUtils;
+import com.github.fabiitch.gdxunit.vectors.VTestUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.Triangle;
 import com.github.fabiitch.nz.java.math.shapes.builders.TriangleBuilder;
@@ -10,7 +10,7 @@ import com.github.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.github.fabiitch.gdxunit.ShapeTestBuilder.v2;
+import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.v2;
 import static com.github.fabiitch.nz.java.math.shapes.utils.PolygonUtils.*;
 
 public class PolygonUtilsTest {
