@@ -94,7 +94,7 @@ dependencies {
 // from `api` to `testImplementation` .
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
-    testImplementation 'com.github.fabiitch:GdxUnit:1.2'
+    testImplementation 'com.github.fabiitch:GdxUnit:1.3'
     testImplementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
 
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
