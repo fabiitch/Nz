@@ -26,23 +26,23 @@ public class Frustum2D {
         RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
     }
 
-    public boolean inside(Segment segment) {
+    public boolean isInside(Segment segment) {
         return IntersectorRectangle.segment(rectangle, segment);
     }
 
-    public boolean inside(Vector2 vector2) {
+    public boolean isInside(Vector2 vector2) {
         return rectangle.contains(vector2);
     }
 
-    public boolean inside(Rectangle rectangle) {
+    public boolean isInside(Rectangle rectangle) {
         return this.rectangle.overlaps(rectangle);
     }
 
-    public boolean inside(Polygon polygon) {
+    public boolean isInside(Polygon polygon) {
         return IntersectorRectangle.polygon(rectangle, polygon);
     }
 
-    public boolean inside(Circle circle) {
+    public boolean isInside(Circle circle) {
         return IntersectorCircleRect.overlapStick(rectangle, circle);
     }
 }
