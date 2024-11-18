@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.github.fabiitch.nz.demo.NzDemoScreenLauncher;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
@@ -27,6 +28,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
         quadT.build(quadT.boundingRect, 500, 5);
 
         HudDebug.addTopMiddle("MaxDepth", Color.RED);
+        HudDebug.addTopMiddle("TimeUpdate", 0f, Color.RED);
     }
 
     @Override
@@ -62,7 +64,10 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             }
 
         }
+        long start = System.nanoTime();
         quadT.update();
+        long end = System.nanoTime();
+        HudDebug.update("TimeUpdate" , TimeUtils.nanosToMillis(end - start));
     }
 
     Rectangle rectBodyDestruction = null;
