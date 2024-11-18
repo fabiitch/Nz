@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shape;
+package com.github.fabiitch.nz.java.math.shapes;
 
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.Segment;

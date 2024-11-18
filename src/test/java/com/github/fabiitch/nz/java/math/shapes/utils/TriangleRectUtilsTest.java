@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shape.utils;
+package com.github.fabiitch.nz.java.math.shapes.utils;
 
 
 import org.junit.jupiter.api.Assertions;

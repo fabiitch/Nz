@@ -1,7 +1,6 @@
-package com.github.fabiitch.nz.java.math.shape.builders;
+package com.github.fabiitch.nz.java.math.shapes.builders;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import org.junit.jupiter.api.Test;
 

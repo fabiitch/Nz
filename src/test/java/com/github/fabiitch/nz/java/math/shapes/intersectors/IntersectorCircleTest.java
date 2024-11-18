@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shape.intersectors;
+package com.github.fabiitch.nz.java.math.shapes.intersectors;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
