@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.math.shape.utils;
+package com.github.fabiitch.nz.java.math.shapes.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.gdxunit.vectors.VTestUtils;
