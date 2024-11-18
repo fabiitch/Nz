@@ -25,7 +25,7 @@ public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
         super();
         quadRender = new QuadTreeRenderer();
 
-        quadT = new QuadTree<>(RectangleBuilder.screen(camera, true), 5, 5);
+        quadT = new QuadTree<>(RectangleBuilder.screen(camera, true), 2, 5);
 
         hudMsg("arrow for move, mouse for zoom");
         hudMsg("Left for create rect");

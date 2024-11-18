@@ -6,11 +6,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.github.fabiitch.nz.demo.NzDemoScreenLauncher;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
 
 @DemoScreen(group = "data.quadtree")
 public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
+
+    public static void main(String[] args) {
+        NzDemoScreenLauncher.startScreen(DemoQuadTreeAddRemove.class);
+    }
 
     public DemoQuadTreeAddRemove() {
         super();
@@ -66,7 +71,7 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
                 } else if (rectBodyDestruction != null) {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
-                    Array<Integer> result = quadT.query(new Array<>(), rectBodyDestruction);
+                    Array<Integer> result = quadT.query(rectBodyDestruction, new Array<>());
                     quadT.remove(result);
 
                     rectBodyDestruction = null;
