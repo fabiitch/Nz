@@ -1,6 +1,6 @@
 package com.github.fabiitch.nz.gdx.render.shape;
 
-import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,13 +18,17 @@ public class Frustum2D {
         rectangle = new Rectangle();
     }
 
-    public void update(Camera camera) {
-        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
+    public void update(OrthographicCamera camera) {
+        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y,
+                Math.abs(camera.viewportWidth * camera.zoom),
+                Math.abs(camera.viewportHeight * camera.zoom));
        // RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y);
     }
 
-    public void resize(Camera camera) {
-        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
+    public void resize(OrthographicCamera camera) {
+        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y,
+                Math.abs(camera.viewportWidth * camera.zoom),
+                Math.abs(camera.viewportHeight * camera.zoom));
     }
 
     public boolean isInside(Segment segment) {

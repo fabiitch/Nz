@@ -1,7 +1,7 @@
 package com.github.fabiitch.nz.java.data.quadtree;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -34,7 +34,7 @@ public class QuadTreeRenderer {
         this.bitmapFont = new BitmapFont();
     }
 
-    public void render(QuadTree<?> quad, Camera camera) {
+    public void render(QuadTree<?> quad, OrthographicCamera camera) {
         frustum2D.update(camera);
 
         if (drawQuads || drawRects) {
