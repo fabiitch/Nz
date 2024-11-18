@@ -7,27 +7,27 @@ import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 public class QuadTreeUtils {
 
     public static Rectangle getNW(Rectangle parent, Rectangle child) {
-        float halfWitdh = parent.width / 2;
+        float halfWidth = parent.width / 2;
         float halfHeight = parent.height / 2;
-        return child.set(parent.x, parent.y + halfHeight, halfWitdh, halfHeight);
+        return child.set(parent.x, parent.y + halfHeight, halfWidth, halfHeight);
     }
 
     public static Rectangle getSW(Rectangle parent, Rectangle child) {
-        float halfWitdh = parent.width / 2;
+        float halfWidth = parent.width / 2;
         float halfHeight = parent.height / 2;
-        return child.set(parent.x, parent.y, halfWitdh, halfHeight);
+        return child.set(parent.x, parent.y, halfWidth, halfHeight);
     }
 
     public static Rectangle getNE(Rectangle parent, Rectangle child) {
-        float halfWitdh = parent.width / 2;
+        float halfWidth = parent.width / 2;
         float halfHeight = parent.height / 2;
-        return child.set(parent.x + halfWitdh, parent.y + halfHeight, halfWitdh, halfHeight);
+        return child.set(parent.x + halfWidth, parent.y + halfHeight, halfWidth, halfHeight);
     }
 
     public static Rectangle getSE(Rectangle parent, Rectangle child) {
-        float halfWitdh = parent.width / 2;
+        float halfWidth = parent.width / 2;
         float halfHeight = parent.height / 2;
-        return child.set(parent.x + halfWitdh, parent.y, halfWitdh, halfHeight);
+        return child.set(parent.x + halfWidth, parent.y, halfWidth, halfHeight);
     }
 
     public static boolean childCanContainsRect(Rectangle container, Rectangle rectInside) {
@@ -50,7 +50,7 @@ public class QuadTreeUtils {
 
     public static int countUnsplittable(QuadTree quadTree) {
         int count = 0;
-        Array<Rectangle> rectValues = quadTree.rectValues;
+        Array<Rectangle> rectValues = quadTree.rectangles;
         for (int i = 0, n = quadTree.values.size; i < n; i++) {
             Rectangle rectangle = rectValues.get(i);
             if (!QuadTreeUtils.childCanContainsRect(quadTree.boundingRect, rectangle))

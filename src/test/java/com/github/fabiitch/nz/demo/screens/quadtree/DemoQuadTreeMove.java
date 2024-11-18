@@ -6,12 +6,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.github.fabiitch.nz.demo.NzDemoScreenLauncher;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+
 @DemoScreen(group = "data.quadtree")
 public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
+
+    public static void main(String[] args) {
+        NzDemoScreenLauncher.startScreen(DemoQuadTreeMove.class);
+    }
 
     public DemoQuadTreeMove() {
         super();
@@ -39,7 +45,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             Vector2 dir = (Vector2) quadData.data;
             Rectangle rectangle = quadT.getRectangle(quadData);
             Rectangle quadRect = quadT.boundingRect;
-            if(rectangle ==null)
+            if (rectangle == null)
                 rectangle = quadData.rectangle;
             RectangleUtils.translate(rectangle, dir.x, dir.y);
             if (RectangleUtils.getXMax(rectangle) > RectangleUtils.getXMax(quadRect)) {
@@ -97,7 +103,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
 
-                    Array<QuadData<Vector2>> result = quadT.query(new Array<>(), rectBodyDestruction);
+                    Array<QuadData<Vector2>> result = quadT.query(rectBodyDestruction, new Array<>());
                     quadRemove(result);
                     rectBodyDestruction = null;
                 }

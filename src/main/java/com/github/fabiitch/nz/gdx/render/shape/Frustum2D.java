@@ -19,7 +19,8 @@ public class Frustum2D {
     }
 
     public void update(Camera camera) {
-        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y);
+        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y, camera.viewportWidth, camera.viewportHeight);
+       // RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y);
     }
 
     public void resize(Camera camera) {

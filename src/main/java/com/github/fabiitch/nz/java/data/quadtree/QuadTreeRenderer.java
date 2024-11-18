@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.github.fabiitch.nz.gdx.render.shape.Frustum2D;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
@@ -20,9 +21,11 @@ public class QuadTreeRenderer {
     public boolean drawUserData = true;
     public boolean drawQuadData = true;
 
-    private NzShapeRenderer shapeRenderer;
-    private SpriteBatch spriteBatch;
-    private BitmapFont bitmapFont;
+    private final NzShapeRenderer shapeRenderer;
+    private final SpriteBatch spriteBatch;
+    private final BitmapFont bitmapFont;
+
+    private final Frustum2D frustum2D = new Frustum2D();
 
     public QuadTreeRenderer() {
         this.shapeRenderer = new NzShapeRenderer();
@@ -32,6 +35,8 @@ public class QuadTreeRenderer {
     }
 
     public void render(QuadTree<?> quad, Camera camera) {
+        frustum2D.update(camera);
+
         if (drawQuads || drawRects) {
             shapeRenderer.setProjectionMatrix(camera.combined);
             shapeRenderer.begin();
@@ -76,7 +81,7 @@ public class QuadTreeRenderer {
 
     protected void renderUserData(QuadTree<?> quad) {
         for (int i = 0, n = quad.values.size; i < n; i++) {
-            Rectangle rect = quad.rectValues.get(i);
+            Rectangle rect = quad.rectangles.get(i);
             Object o = quad.values.get(i);
             RectangleUtils.getCenter(rect, tmpV2);
             bitmapFont.draw(spriteBatch, o.toString(), tmpV2.x, tmpV2.y);
@@ -91,8 +96,9 @@ public class QuadTreeRenderer {
     }
 
     protected void renderRects(QuadTree<?> quad) {
-        for (Rectangle rectValue : quad.rectValues) {
-            shapeRenderer.rect(rectValue);
+        for (Rectangle rectValue : quad.rectangles) {
+            if (frustum2D.isInside(rectValue))
+                shapeRenderer.rect(rectValue);
         }
         if (quad.isSplit()) {
             renderRects(quad.ne);
@@ -109,7 +115,8 @@ public class QuadTreeRenderer {
             renderQuad(quad.se);
             renderQuad(quad.sw);
         } else {
-            shapeRenderer.rect(quad.boundingRect);
+            if (frustum2D.isInside(quad.boundingRect))
+                shapeRenderer.rect(quad.boundingRect);
         }
     }
 
