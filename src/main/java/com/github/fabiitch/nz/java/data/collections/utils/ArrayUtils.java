@@ -9,7 +9,6 @@ import java.util.List;
 public class ArrayUtils {
 
 
-
     public static <T> T getNextOf(Array<T> array, int index) {
         return ArrayUtils.isNotLast(array, index) ? array.get(index + 1) : null;
     }
