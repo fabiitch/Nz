@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public interface DependantSorter<T extends DependantSorter<?>> {
+public interface DependantSorter<T extends DependantSorter<T>> {
 
     List<T> dependencies();
 
