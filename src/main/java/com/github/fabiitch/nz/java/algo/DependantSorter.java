@@ -1,9 +1,11 @@
 package com.github.fabiitch.nz.java.algo;
 
 import com.badlogic.gdx.utils.StringBuilder;
+import com.github.fabiitch.nz.gdx.log.StrFormat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -34,11 +36,8 @@ public interface DependantSorter<T extends DependantSorter<T>> {
                 }
             }
             if (sequenceToInit == null) {
-                StringBuilder sb = new StringBuilder("");
-                for (DependantSorter sequence : notInits) {
-                    sb.append(sequence.name(), ", ");
-                }
-                throw new DependencyLockException("DependantSorter : " + sb);
+                Function<DependantSorter, String> toStr = DependantSorter::toString;
+                throw new DependencyLockException(StrFormat.join(", ", toStr, notInits));
             } else {
                 res.add(sequenceToInit);
                 notInits.remove(sequenceToInit);

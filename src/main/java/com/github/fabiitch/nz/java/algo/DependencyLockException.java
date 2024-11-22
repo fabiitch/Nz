@@ -9,16 +9,10 @@ import java.util.List;
 import java.util.function.Function;
 
 public class DependencyLockException extends RuntimeException {
-    private Array<DependantSorter<?>> blockers;
 
-    public DependencyLockException(String message, DependantSorter... blockers) {
+    public DependencyLockException(String message) {
         super(message);
-        this.blockers = new Array<>(blockers);
     }
 
-    private String getBlockers() {
-        Function<DependantSorter, String> function = DependantSorter::name;
-        return StrFormat.join(", ", function, blockers);
-    }
 
 }
