@@ -93,9 +93,13 @@ public class HudDebug {
         }
     }
 
-    public static void updateColor(String key, Color color) {
+    public static void changeColor(String key, Color color) {
         if (instance != null)
-            instance.container.updateColor(key, color);
+            instance.container.changeColor(key, color);
+    }
+    public static void changePosition(String key, HudDebugPosition position) {
+        if (instance != null)
+            instance.container.changePosition(key, position);
     }
 
     public static void update(String key, String name, Object value) {
@@ -118,7 +122,7 @@ public class HudDebug {
             instance.container.update(key, value);
     }
 
-    private static void addInitList(String key, String name, Object value, int positionOnStage, Color color) {
+    private static void addInitList(String key, String name, Object value, HudDebugPosition positionOnStage, Color color) {
         if (arrayBeforeInit == null)
             arrayBeforeInit = new Array<>();
 
@@ -219,7 +223,7 @@ public class HudDebug {
 
 
     public static void addMiddleRight(String key, String name, Object value, Color color) {
-        add(key, name, value, HudDebugPosition.MIDDLE_RIFHT, color);
+        add(key, name, value, HudDebugPosition.MIDDLE_RIGHT, color);
     }
 
     public static void addMiddleRight(String name, Object value, Color color) {
@@ -230,19 +234,19 @@ public class HudDebug {
         addMiddleRight(name, name, value, Color.WHITE);
     }
 
-    public static void add(String name, Object value, int positionOnstage) {
+    public static void add(String name, Object value, HudDebugPosition positionOnstage) {
         add(name, name, value, positionOnstage, Color.WHITE);
     }
 
-    public static void add(String name, Object value, int positionOnstage, Color color) {
+    public static void add(String name, Object value, HudDebugPosition positionOnstage, Color color) {
         add(name, name, value, positionOnstage, color);
     }
 
-    public static void add(String key, String name, Object value, int positionOnstage) {
+    public static void add(String key, String name, Object value, HudDebugPosition positionOnstage) {
         add(key, name, value, positionOnstage, Color.WHITE);
     }
 
-    public static void add(String key, String name, Object value, int positionOnstage, Color color) {
+    public static void add(String key, String name, Object value, HudDebugPosition positionOnstage, Color color) {
         if (instance == null) {
             addInitList(key, name, value, positionOnstage, color);
         } else {

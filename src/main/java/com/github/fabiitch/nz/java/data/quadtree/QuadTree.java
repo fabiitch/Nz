@@ -5,12 +5,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import lombok.Getter;
 
 public class QuadTree<T> implements Pool.Poolable {
 
     public QuadTree<T> parent, ne, nw, se, sw;
     public Rectangle boundingRect;
+    @Getter
     public int depth, maxDepth, maxValues;
+
     public final Array<T> values;
     public final Array<Rectangle> rectangles;
     public QuadPools<T> quadPools;
@@ -33,7 +36,7 @@ public class QuadTree<T> implements Pool.Poolable {
         this.values = new Array<>(maxValues);
         this.rectangles = new Array<>(maxValues);
         this.maxValues = Math.max(1, maxValues);
-        this.maxDepth = maxDepth;
+        this.maxDepth = Math.max(1, maxDepth);
         this.quadPools = quadPools;
     }
 
@@ -207,17 +210,19 @@ public class QuadTree<T> implements Pool.Poolable {
     }
 
     public Array<T> getValues(QuadQueryParams params, Array<T> result) {
-        if(params.isCurrent())
+        if (params.isCurrent())
             result.addAll(this.values);
-        if(params.isParentOverlap())
+        if (params.isParentOverlap())
             result.addAll(parent.query(this.boundingRect, result));
         return result;
     }
 
     public Array<T> getAllValuesAndParents(Array<T> valueResults) {
         getAllValues(valueResults);
-        while (parent != null) {
+        QuadTree<T> currentParent = parent;
+        while (currentParent != null) {
             valueResults.addAll(parent.values);
+            currentParent = currentParent.parent;
         }
         return valueResults;
     }
@@ -246,6 +251,10 @@ public class QuadTree<T> implements Pool.Poolable {
     }
 
 
+    public QuadTree update(T value) {
+        return update(value, getRectangle(value));
+    }
+
     public Rectangle getRectangle(T value) {
         for (int i = 0, n = values.size; i < n; i++) {
             if (values.get(i) == value)
@@ -269,20 +278,16 @@ public class QuadTree<T> implements Pool.Poolable {
         return null;
     }
 
-    public void update(T value) {
-        update(value, getRectangle(value));
-    }
-
-    public void update(T value, Rectangle rectangle) {
+    public QuadTree<T> update(T value, Rectangle rectangle) {
         QuadTree<T> quad = getQuad(rectangle);
         if (quad != this) {
             remove(value);
             add(value, rectangle);
         }
+        return quad;
     }
 
-    //reset pas un update
-    public void update() {
+    public void recompute() {
         Array<T> allValues = quadPools.getArray();
         Array<Rectangle> allRects = quadPools.getArrayRectangle();
 
@@ -295,6 +300,9 @@ public class QuadTree<T> implements Pool.Poolable {
     }
 
     public Array<T> query(Rectangle rectangle, Array<T> result) {
+        if (!RectangleUtils.overlapsStick(this.boundingRect, rectangle)) {
+            return result;
+        }
         for (int i = 0, n = this.values.size; i < n; i++) {
             if (RectangleUtils.overlapsStick(rectangles.get(i), rectangle)) {
                 result.add(values.get(i));
@@ -372,6 +380,39 @@ public class QuadTree<T> implements Pool.Poolable {
         }
     }
 
+    public int countAllValues() {
+        int count = this.values.size;
+        if (isSplit()) {
+            count += nw.countAllValues();
+            count += ne.countAllValues();
+            count += sw.countAllValues();
+            count += se.countAllValues();
+        }
+        return count;
+    }
+
+    public void setMaxDepth(int maxDepth) {
+        this.maxDepth = maxDepth;
+        if (isSplit()) {
+            nw.setMaxDepth(maxDepth);
+            ne.setMaxDepth(maxDepth);
+            sw.setMaxDepth(maxDepth);
+            se.setMaxDepth(maxDepth);
+        }
+        recompute();
+    }
+
+    public void setMaxValues(int maxValues) {
+        this.maxValues = maxValues;
+        if (isSplit()) {
+            nw.setMaxValues(maxValues);
+            ne.setMaxValues(maxValues);
+            sw.setMaxValues(maxValues);
+            se.setMaxValues(maxValues);
+        }
+        recompute();
+    }
+
     @Override
     public void reset() {
         this.parent = this.ne = this.nw = this.se = this.sw = null;
@@ -381,4 +422,6 @@ public class QuadTree<T> implements Pool.Poolable {
         this.maxValues = 0;
         this.maxDepth = 0;
     }
+
+
 }

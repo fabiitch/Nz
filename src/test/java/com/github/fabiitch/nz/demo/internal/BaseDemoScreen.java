@@ -11,10 +11,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.demo.internal.huds.HudGlProfiler;
-import com.github.fabiitch.nz.demo.internal.inputs.KeyboardCameraController;
+import com.github.fabiitch.nz.demo.internal.input.InputKeyBinder;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
+import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebugTracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
+import com.github.fabiitch.nz.gdx.input.KeyboardCameraController;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 
@@ -23,13 +25,16 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
     protected NzStage nzStage;
     protected Skin skin;
     protected HudDebug hudDebug;
+    protected HudDebugTracker hudDebugTracker;
     protected DT_Tracker dt_tracker;
     protected HudGlProfiler hudGlProfiler;
 
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
+    protected InputKeyBinder inputKeyBinder = new InputKeyBinder();
+
     private KeyboardCameraController keyboardCameraController;
-    protected  Camera camera;
+    protected Camera camera;
 
     public FPSLogger fpsLogger;
 
@@ -42,6 +47,7 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
         this.nzStage = new NzStage();
         this.skin = new Skin(Gdx.files.internal("skins/ui/uiskin.json"));
         this.hudDebug = new HudDebug(nzStage, skin);
+        this.hudDebugTracker = new HudDebugTracker();
         this.dt_tracker = new DT_Tracker(HudDebugPosition.TOP_LEFT, Color.WHITE);
         shapeRenderer.setAutoShapeType(true);
         hudGlProfiler = new HudGlProfiler();
@@ -50,6 +56,7 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
 
         keyboardCameraController = new KeyboardCameraController(camera);
         inputMultiplexer.addProcessor(keyboardCameraController);
+        inputMultiplexer.addProcessor(inputKeyBinder);
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -75,18 +82,20 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
     }
 
 
-
     @Override
     public void render(float delta) {
         dt_tracker.start();
         fpsLogger.log();
         Gdx.graphics.setTitle(this.getClass().getSimpleName() + " FPS:" + Gdx.graphics.getFramesPerSecond());
         ScreenUtils.clear(Color.BLACK, true);
-        nzStage.act();
-        nzStage.draw();
+
         hudGlProfiler.update();
         dt_tracker.end();
         dt_tracker.updateHud();
+        hudDebugTracker.update();
+        nzStage.act();
+        nzStage.draw();
+
 
         keyboardCameraController.update();
         camera.update();

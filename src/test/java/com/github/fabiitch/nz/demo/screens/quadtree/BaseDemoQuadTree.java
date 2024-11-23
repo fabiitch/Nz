@@ -1,12 +1,17 @@
 package com.github.fabiitch.nz.demo.screens.quadtree;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
+import com.github.fabiitch.nz.demo.internal.input.KeyBinderFunction;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
+import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTreeRenderer;
+import com.github.fabiitch.nz.java.function.DoIt;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 
 import java.util.ArrayList;
@@ -14,7 +19,7 @@ import java.util.ArrayList;
 
 public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
 
-    public QuadTree<QuadData<T>> quadT;
+    public QuadTree<QuadData<T>> quadTree;
     protected QuadTreeRenderer quadRender;
 
     public volatile int indexQuad = 1;
@@ -25,24 +30,35 @@ public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
         super();
         quadRender = new QuadTreeRenderer();
 
-        quadT = new QuadTree<>(RectangleBuilder.screen(camera, true), 2, 5);
+        quadTree = new QuadTree<>(RectangleBuilder.screen(camera, true), 2, 5);
 
         hudMsg("arrow for move, mouse for zoom");
         hudMsg("Left for create rect");
         hudMsg("Right Click destroy");
+        hudMsg("T/Y for max values changes");
+        hudMsg("G/H for max depth changes");
+
+        hudDebugTracker.track("Quad total",
+                () -> quadTree.countAllValues(), HudDebugPosition.TOP_MIDDLE, Color.RED);
+
+        inputKeyBinder.add(new KeyBinderFunction(Input.Keys.T, () ->
+                quadTree.setMaxValues(quadTree.getMaxValues() + 1)));
+        inputKeyBinder.add(new KeyBinderFunction(Input.Keys.Y, () ->
+                quadTree.setMaxValues(quadTree.getMaxValues() - 1)));
+        hudDebugTracker.track("Quad Max Values", () -> quadTree.getMaxValues());
+
+        inputKeyBinder.add(new KeyBinderFunction(Input.Keys.G, () ->
+                quadTree.setMaxDepth(quadTree.getMaxDepth() + 1)));
+        inputKeyBinder.add(new KeyBinderFunction(Input.Keys.H, () ->
+                quadTree.setMaxDepth(quadTree.getMaxDepth() - 1)));
+        hudDebugTracker.track("Quad Max Depth", () -> quadTree.getMaxDepth());
     }
 
-    @Override
-    public void show() {
-        super.show();
-        HudDebug.addTopMiddle("QuadEntryCount", "", Color.RED);
-    }
 
     @Override
     public void render(float dt) {
         super.render(dt);
-        HudDebug.update("QuadEntryCount", values.size());
-        quadRender.render(quadT, camera);
+        quadRender.render(quadTree, (OrthographicCamera) camera);
     }
 
     protected void quadRemove(Array<QuadData<T>> quadDatas) {
@@ -52,14 +68,14 @@ public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
 
     protected void quadRemove(QuadData<T> quadData) {
         this.values.remove(quadData);
-        quadT.remove(quadData);
+        quadTree.remove(quadData);
     }
 
     protected void quadAdd(T data, Rectangle rect) {
         indexQuad += 1;
         QuadData quadData = new QuadData(indexQuad, rect, data);
         this.values.add(quadData);
-        this.quadT.add(quadData, rect);
+        this.quadTree.add(quadData, rect);
     }
 
     class QuadData<T> {

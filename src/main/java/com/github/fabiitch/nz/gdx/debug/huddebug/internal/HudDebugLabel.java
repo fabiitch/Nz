@@ -19,11 +19,11 @@ public class HudDebugLabel<T> extends Label {
 
     public Array<Consumer<T>> consumers;
 
-    public int positionOnStage;
+    public HudDebugPosition positionOnStage;
     public int order;
     float maxWitdh; //only for right/mid
 
-    public HudDebugLabel(String name, int positionOnStage, int order, T value, Skin skin) {
+    public HudDebugLabel(String name, HudDebugPosition positionOnStage, int order, T value, Skin skin) {
         super(name + SEPARATOR + DebugDisplayUtils.printValue(value), skin);
         if (GdxUtils.isMobile()) {
             this.setWidth(this.getWidth() * 2);

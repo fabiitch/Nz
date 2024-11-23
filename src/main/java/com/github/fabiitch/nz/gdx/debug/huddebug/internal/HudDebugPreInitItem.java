@@ -14,9 +14,9 @@ public class HudDebugPreInitItem<T> {
     public T value;
     public Array<Consumer<T>> consumers;
     public Color color;
-    public int positionOnStage;
+    public HudDebugPosition positionOnStage;
 
-    public HudDebugPreInitItem(String key, String name, T value, int positionOnStage, Color color) {
+    public HudDebugPreInitItem(String key, String name, T value, HudDebugPosition positionOnStage, Color color) {
         this.key = key;
         this.name = name;
         if (key == null)

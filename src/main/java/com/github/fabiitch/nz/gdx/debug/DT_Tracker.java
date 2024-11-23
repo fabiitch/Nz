@@ -16,7 +16,7 @@ public class DT_Tracker {
     private final TimeLocker timeLocker = new TimeLocker(1);
 
 
-    public DT_Tracker(int positionOnStage, Color color) {
+    public DT_Tracker(HudDebugPosition positionOnStage, Color color) {
         removeFromHudDebug();//clean older
         HudDebug.add(RENDER_DURATION, 100000f, positionOnStage, color);
     }

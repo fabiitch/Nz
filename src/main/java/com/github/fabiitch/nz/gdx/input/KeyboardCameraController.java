@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.internal.inputs;
+package com.github.fabiitch.nz.gdx.input;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -12,6 +12,7 @@ import lombok.Setter;
 
 public class KeyboardCameraController extends InputAdapter {
     private final static int BASE_VELOCITY = 5;
+
     @Setter
     private float camVelocity;
 
@@ -37,6 +38,9 @@ public class KeyboardCameraController extends InputAdapter {
     }
 
     public void update() {
+        if(cameraVelocity.isZero())
+            return;
+
         if (camera2D != null)
             V3.add(camera2D.position, tmpVel.set(cameraVelocity).scl(camVelocity));
         else
