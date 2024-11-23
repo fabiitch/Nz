@@ -3,7 +3,6 @@ package com.github.fabiitch.nz.gdx.debug.huddebug.internal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 
@@ -18,14 +17,12 @@ public class HudDebugContainer {
 
     private int positionCounts[];
     private final Map<String, HudDebugLabel> mapLabels;
-    private final Array<HudDebugLabel>[] arrayLabel;
 
     public HudDebugContainer(Stage stage, Skin skin) {
         this.skin = skin;
         this.stage = stage;
         this.mapLabels = new HashMap<>();
-        positionCounts = new int[8];
-        arrayLabel = new Array[8];
+        this.positionCounts = new int[HudDebugPosition.values().length];
     }
 
     public HudDebugLabel get(String key) {
@@ -43,12 +40,12 @@ public class HudDebugContainer {
     public void remove(String key) {
         HudDebugLabel labelStage = mapLabels.get(key);
         if (labelStage != null) {
-            int positionOnStage = labelStage.positionOnStage;
+            HudDebugPosition positionOnStage = labelStage.positionOnStage;
             int positionLabel = labelStage.order;
             mapLabels.remove(key);
             labelStage.remove();
 
-            positionCounts[positionOnStage]--;
+            positionCounts[positionOnStage.ordinal()]--;
             HudContainerUtils.replaceLabels(positionOnStage, positionLabel, stage, mapLabels);
         }
     }
@@ -66,7 +63,7 @@ public class HudDebugContainer {
     }
 
     public void clear() {
-        positionCounts = new int[7];
+        positionCounts = new int[HudDebugPosition.values().length];
         for (HudDebugLabel hudDebugLabel : mapLabels.values()) {
             hudDebugLabel.remove();
         }
@@ -87,7 +84,7 @@ public class HudDebugContainer {
 
     public void update(String key, Object value, Color color) {
         update(key, value);
-        HudDebug.updateColor(key, color);
+        HudDebug.changeColor(key, color);
     }
 
     public void update(String key, Object value) {
@@ -96,14 +93,20 @@ public class HudDebugContainer {
             update(key, hudDebugLabel.name, DebugDisplayUtils.printValue(value));
     }
 
-    public void updateColor(String key, Color color) {
+    public void changeColor(String key, Color color) {
         HudContainerUtils.changeColor(key, color, mapLabels);
     }
+    public void changePosition(String key, HudDebugPosition position) {
+        HudDebugLabel hudDebugLabel = get(key);
+        if(hudDebugLabel != null){
+            remove(key);
+            createLabel(position, key, hudDebugLabel.name, hudDebugLabel.value, hudDebugLabel.getColor());
+        }
+    }
 
-
-    public HudDebugLabel createLabel(int positionOnstage, String key, String name, Object value,
+    public HudDebugLabel createLabel(HudDebugPosition positionOnstage, String key, String name, Object value,
                                      Color color) {
-        HudDebugLabel label = new HudDebugLabel(name, positionOnstage, positionCounts[positionOnstage]++, value, skin);
+        HudDebugLabel label = new HudDebugLabel(name, positionOnstage, positionCounts[positionOnstage.ordinal()]++, value, skin);
         if (key == null)
             key = name;
 

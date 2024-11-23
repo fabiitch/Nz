@@ -8,7 +8,7 @@ import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 
 public class HudGlProfiler {
     private GLProfiler glProfiler;
-    int STAGE_POSITION = HudDebugPosition.TOP_RIGHT;
+    HudDebugPosition STAGE_POSITION = HudDebugPosition.TOP_RIGHT;
     Color color = Color.RED;
 
     public HudGlProfiler() {

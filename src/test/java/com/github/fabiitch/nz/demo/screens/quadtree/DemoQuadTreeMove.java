@@ -23,9 +23,9 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
     public DemoQuadTreeMove() {
         super();
         inputMultiplexer.addProcessor(getInput());
-        quadRender.drawQuadData = false;
-        quadRender.drawUserData = false;
-        quadT.build(quadT.boundingRect, 500, 5);
+        quadRender.getConfig().drawQuadData(true);
+        quadRender.getConfig().drawValuesData(false);
+        quadTree.build(quadTree.boundingRect, 500, 5);
 
         HudDebug.addTopMiddle("MaxDepth", Color.RED);
         HudDebug.addTopMiddle("TimeUpdate", 0f, Color.RED);
@@ -34,7 +34,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
     @Override
     public void render(float dt) {
         super.render(dt);
-        HudDebug.update("MaxDepth", quadT.getCurrentMaxDepth(0));
+        HudDebug.update("MaxDepth", quadTree.getCurrentMaxDepth(0));
         if (rectBodyDestruction != null) {
             shapeRenderer.setProjectionMatrix(camera.combined);
             shapeRenderer.setColor(Color.RED);
@@ -45,8 +45,8 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
 
         for (QuadData quadData : values) {
             Vector2 dir = (Vector2) quadData.data;
-            Rectangle rectangle = quadT.getRectangle(quadData);
-            Rectangle quadRect = quadT.boundingRect;
+            Rectangle rectangle = quadTree.getRectangle(quadData);
+            Rectangle quadRect = quadTree.boundingRect;
             if (rectangle == null)
                 rectangle = quadData.rectangle;
             RectangleUtils.translate(rectangle, dir.x, dir.y);
@@ -62,12 +62,13 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             if (rectangle.y < quadRect.y) {
                 dir.y = -dir.y;
             }
+            quadTree.update(quadData);
 
         }
         long start = System.nanoTime();
-        quadT.update();
+      //  quadTree.update();
         long end = System.nanoTime();
-        HudDebug.update("TimeUpdate" , TimeUtils.nanosToMillis(end - start));
+        HudDebug.update("TimeUpdate", TimeUtils.nanosToMillis(end - start));
     }
 
     Rectangle rectBodyDestruction = null;
@@ -108,7 +109,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
 
-                    Array<QuadData<Vector2>> result = quadT.query(rectBodyDestruction, new Array<>());
+                    Array<QuadData<Vector2>> result = quadTree.query(rectBodyDestruction, new Array<>());
                     quadRemove(result);
                     rectBodyDestruction = null;
                 }

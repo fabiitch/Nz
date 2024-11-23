@@ -71,8 +71,8 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
                 } else if (rectBodyDestruction != null) {
                     rectBodyDestruction.set(startPositionRect.x, startPositionRect.y, 0, 0);
                     rectBodyDestruction.merge(clickPos);
-                    Array<Integer> result = quadT.query(rectBodyDestruction, new Array<>());
-                    quadT.remove(result);
+                    Array<Integer> result = quadTree.query(rectBodyDestruction, new Array<>());
+                    quadTree.remove(result);
 
                     rectBodyDestruction = null;
                 }

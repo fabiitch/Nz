@@ -22,13 +22,6 @@ public class Frustum2D {
         RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y,
                 Math.abs(camera.viewportWidth * camera.zoom),
                 Math.abs(camera.viewportHeight * camera.zoom));
-       // RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y);
-    }
-
-    public void resize(OrthographicCamera camera) {
-        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y,
-                Math.abs(camera.viewportWidth * camera.zoom),
-                Math.abs(camera.viewportHeight * camera.zoom));
     }
 
     public boolean isInside(Segment segment) {
