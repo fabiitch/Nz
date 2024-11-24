@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.data.quadtree;
+package com.github.fabiitch.nz.java.data.quadtree.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.github.fabiitch.nz.java.data.quadtree.utils.QuadTreeUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
@@ -49,7 +50,6 @@ public class QuadTree<T> implements Pool.Poolable {
         this.maxDepth = maxDepth;
         this.quadPools = quadPools;
     }
-
 
     public void build(Rectangle rect, int maxDepth, int maxValues) {
         this.boundingRect.set(rect);
@@ -209,13 +209,6 @@ public class QuadTree<T> implements Pool.Poolable {
         this.se = null;
     }
 
-    public Array<T> getValues(QuadQueryParams params, Array<T> result) {
-        if (params.isCurrent())
-            result.addAll(this.values);
-        if (params.isParentOverlap())
-            result.addAll(parent.query(this.boundingRect, result));
-        return result;
-    }
 
     public Array<T> getAllValuesAndParents(Array<T> valueResults) {
         getAllValues(valueResults);

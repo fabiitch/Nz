@@ -1,7 +1,6 @@
-package com.github.fabiitch.nz.java.data.quadtree;
+package com.github.fabiitch.nz.java.data.quadtree.utils;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class QuadTreeUtils {
@@ -44,29 +43,4 @@ public class QuadTreeUtils {
         return rectInside.width > container.width / 2 || rectInside.height > container.height / 2;
     }
 
-    public static int countSplittable(QuadTree quadTree) {
-        return quadTree.values.size - countUnsplittable(quadTree);
-    }
-
-    public static int countUnsplittable(QuadTree quadTree) {
-        int count = 0;
-        Array<Rectangle> rectValues = quadTree.rectangles;
-        for (int i = 0, n = quadTree.values.size; i < n; i++) {
-            Rectangle rectangle = rectValues.get(i);
-            if (!QuadTreeUtils.childCanContainsRect(quadTree.boundingRect, rectangle))
-                count++;
-
-        }
-        return count;
-    }
-
-//TODO
-//    public static QuadTree getBorders(QuadTree quadTree) {
-//        if (quadTree.isSplitted()) {
-//
-//        }else{
-//            return quadTree;
-//        }
-//
-//    }
 }

@@ -1,10 +1,9 @@
-package com.github.fabiitch.nz.java.data.quadtree;
+package com.github.fabiitch.nz.java.data.quadtree.render;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,6 @@ import java.util.function.Function;
 
 @Getter
 @NoArgsConstructor
-
 public class QuadTreeRenderConfig<T> {
 
     private boolean drawQuads = true;
@@ -22,8 +20,8 @@ public class QuadTreeRenderConfig<T> {
 
     private Color colorQuad = Color.PURPLE;
     private Color colorRects = Color.GREEN;
-    private Color colorValuesData = Color.WHITE;
-    private Color colorQuadsData = Color.WHITE;
+    private Color colorValuesData = Color.WHITE; //TODO not use
+    private Color colorQuadsData = Color.WHITE;//TODO not use   voir aussi coté boxdebugrenderer
 
 
     private Function<T, String> toStringFunction;
@@ -32,6 +30,7 @@ public class QuadTreeRenderConfig<T> {
     private SpriteBatch spriteBatch;
     private BitmapFont fontValuesData;
     private BitmapFont fontQuadsData;
+
 
     public QuadTreeRenderConfig<T> drawQuads(boolean drawQuads) {
         this.drawQuads = drawQuads;
