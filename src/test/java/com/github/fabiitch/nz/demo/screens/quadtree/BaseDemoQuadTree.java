@@ -7,11 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.input.KeyBinderFunction;
-import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
-import com.github.fabiitch.nz.java.data.quadtree.QuadTreeRenderer;
-import com.github.fabiitch.nz.java.function.DoIt;
+import com.github.fabiitch.nz.java.data.quadtree.render.QuadTreeRenderer;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
 
 import java.util.ArrayList;

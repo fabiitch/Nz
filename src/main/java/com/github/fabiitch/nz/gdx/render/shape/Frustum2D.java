@@ -9,7 +9,9 @@ import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorCircleRect;
 import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorRectangle;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
+import lombok.Getter;
 
+@Getter
 public class Frustum2D {
 
     private final Rectangle rectangle;

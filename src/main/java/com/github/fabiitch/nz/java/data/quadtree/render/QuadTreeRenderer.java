@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.java.data.quadtree;
+package com.github.fabiitch.nz.java.data.quadtree.render;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.gdx.render.shape.Frustum2D;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
+import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
@@ -18,13 +19,13 @@ public class QuadTreeRenderer<T> {
     private final SpriteBatch spriteBatch;
     private final BitmapFont fontValuesData, fontQuadsData;
     private final Frustum2D frustum2D = new Frustum2D();
-
     public QuadTreeRenderer(QuadTreeRenderConfig<T> config) {
         this.config = config;
         this.shapeRenderer = config.getShapeRenderer() != null ? config.getShapeRenderer() : new NzShapeRenderer();
         this.shapeRenderer.setAutoShapeType(true);
 
         this.spriteBatch = config.getSpriteBatch() != null ? config.getSpriteBatch() : new SpriteBatch();
+
         this.fontValuesData = config.getFontValuesData() != null ? config.getFontValuesData() : new BitmapFont();
         this.fontQuadsData = config.getFontQuadsData() != null ? config.getFontQuadsData() : new BitmapFont();
     }
@@ -62,48 +63,53 @@ public class QuadTreeRenderer<T> {
         }
     }
 
-
     protected void renderQuadData(QuadTree<?> quad) {
-        RectangleUtils.getCenter(quad.boundingRect, tmpV2);
-        fontQuadsData.draw(spriteBatch, "depth " + quad.depth, tmpV2.x, tmpV2.y - 20);
-        fontQuadsData.draw(spriteBatch, "total " + quad.countAllValues(), tmpV2.x, tmpV2.y);
-        fontQuadsData.draw(spriteBatch, "this " + quad.values.size, tmpV2.x, tmpV2.y + 20);
-        if (quad.isSplit()) {
-            renderQuadData(quad.ne);
-            renderQuadData(quad.nw);
-            renderQuadData(quad.se);
-            renderQuadData(quad.sw);
+        if (frustum2D.isInside(quad.boundingRect)) {
+            RectangleUtils.getCenter(quad.boundingRect, tmpV2);
+            fontQuadsData.draw(spriteBatch, "depth " + quad.depth, tmpV2.x, tmpV2.y - 20);
+            fontQuadsData.draw(spriteBatch, "total " + quad.countAllValues(), tmpV2.x, tmpV2.y);
+            fontQuadsData.draw(spriteBatch, "this " + quad.values.size, tmpV2.x, tmpV2.y + 20);
+            if (quad.isSplit()) {
+                renderQuadData(quad.ne);
+                renderQuadData(quad.nw);
+                renderQuadData(quad.se);
+                renderQuadData(quad.sw);
+            }
         }
     }
 
     private final Vector2 tmpV2 = new Vector2();
 
     protected void renderUserData(QuadTree<?> quad) {
-        for (int i = 0, n = quad.values.size; i < n; i++) {
-            Rectangle rect = quad.rectangles.get(i);
-            Object o = quad.values.get(i);
-            RectangleUtils.getCenter(rect, tmpV2);
-            fontValuesData.draw(spriteBatch, o.toString(), tmpV2.x, tmpV2.y);
-        }
+        if (frustum2D.isInside(quad.boundingRect)) {
+            for (int i = 0, n = quad.values.size; i < n; i++) {
+                Rectangle rect = quad.rectangles.get(i);
+                Object o = quad.values.get(i);
+                RectangleUtils.getCenter(rect, tmpV2);
+                fontValuesData.draw(spriteBatch, o.toString(), tmpV2.x, tmpV2.y);
+            }
 
-        if (quad.isSplit()) {
-            renderUserData(quad.ne);
-            renderUserData(quad.nw);
-            renderUserData(quad.se);
-            renderUserData(quad.sw);
+            if (quad.isSplit()) {
+                renderUserData(quad.ne);
+                renderUserData(quad.nw);
+                renderUserData(quad.se);
+                renderUserData(quad.sw);
+            }
         }
     }
 
     protected void renderRects(QuadTree<?> quad) {
-        for (Rectangle rectValue : quad.rectangles) {
-            if (frustum2D.isInside(rectValue))
-                shapeRenderer.rect(rectValue);
-        }
-        if (quad.isSplit()) {
-            renderRects(quad.ne);
-            renderRects(quad.nw);
-            renderRects(quad.se);
-            renderRects(quad.sw);
+        if (frustum2D.isInside(quad.boundingRect)) {
+            for (Rectangle rectValue : quad.rectangles) {
+                if (frustum2D.isInside(rectValue))
+                    shapeRenderer.rect(rectValue);
+            }
+            if (quad.isSplit()) {
+                renderRects(quad.ne);
+                renderRects(quad.nw);
+                renderRects(quad.se);
+                renderRects(quad.sw);
+            }
         }
     }
 
