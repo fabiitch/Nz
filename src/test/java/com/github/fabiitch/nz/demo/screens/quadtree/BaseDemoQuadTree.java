@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.input.KeyBinderFunction;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
+import com.github.fabiitch.nz.java.data.quadtree.QuadRectangleValue;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.data.quadtree.render.QuadTreeRenderer;
 import com.github.fabiitch.nz.java.math.shapes.builders.RectangleBuilder;
@@ -71,25 +72,35 @@ public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
 
     protected void quadAdd(T data, Rectangle rect) {
         indexQuad += 1;
-        QuadData quadData = new QuadData(indexQuad, rect, data);
+        QuadData<T> quadData = new QuadData<>(indexQuad, rect, data);
         this.values.add(quadData);
-        this.quadTree.add(quadData, rect);
+        this.quadTree.add(quadData);
     }
 
-    class QuadData<T> {
-        public int index;
+    public static class QuadData<T> implements QuadRectangleValue {
+        public int id;
         public Rectangle rectangle;
         public T data;
 
-        public QuadData(int index, Rectangle rectangle, T data) {
-            this.index = index;
+        public QuadData(int id, Rectangle rectangle, T data) {
+            this.id = id;
             this.rectangle = rectangle;
             this.data = data;
         }
 
         @Override
         public String toString() {
-            return "" + index;
+            return "" + id;
+        }
+
+        @Override
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public Rectangle getBounds() {
+            return rectangle;
         }
     }
 }

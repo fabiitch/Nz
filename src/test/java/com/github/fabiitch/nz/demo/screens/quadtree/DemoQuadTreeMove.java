@@ -43,31 +43,32 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
             shapeRenderer.end();
         }
 
+        long start = System.nanoTime();
         for (QuadData quadData : values) {
             Vector2 dir = (Vector2) quadData.data;
-            Rectangle rectangle = quadTree.getRectangle(quadData);
             Rectangle quadRect = quadTree.boundingRect;
-            if (rectangle == null)
-                rectangle = quadData.rectangle;
+            Rectangle rectangle = quadData.rectangle;
+
             RectangleUtils.translate(rectangle, dir.x, dir.y);
-            if (RectangleUtils.getXMax(rectangle) > RectangleUtils.getXMax(quadRect)) {
+
+            if (RectangleUtils.getXMax(rectangle) > RectangleUtils.getXMax(quadRect) - 1) {
                 dir.x = -dir.x;
             }
-            if (rectangle.x < quadRect.x) {
+            if (rectangle.x < quadRect.x + 1) {
                 dir.x = -dir.x;
             }
-            if (RectangleUtils.getYMax(rectangle) > RectangleUtils.getYMax(quadRect)) {
+            if (RectangleUtils.getYMax(rectangle) > RectangleUtils.getYMax(quadRect) - 1) {
                 dir.y = -dir.y;
             }
-            if (rectangle.y < quadRect.y) {
+            if (rectangle.y < quadRect.y + 1) {
                 dir.y = -dir.y;
             }
             quadTree.update(quadData);
 
         }
-        long start = System.nanoTime();
-      //  quadTree.update();
         long end = System.nanoTime();
+        //  quadTree.update();
+
         HudDebug.update("TimeUpdate", TimeUtils.nanosToMillis(end - start));
     }
 

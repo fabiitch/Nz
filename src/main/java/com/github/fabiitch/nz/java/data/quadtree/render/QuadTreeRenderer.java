@@ -3,15 +3,16 @@ package com.github.fabiitch.nz.java.data.quadtree.render;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.gdx.render.shape.Frustum2D;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
 import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
+import com.github.fabiitch.nz.java.data.quadtree.QuadRectangleValue;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
-public class QuadTreeRenderer<T> {
+public class QuadTreeRenderer<T extends QuadRectangleValue> {
 
     @Getter
     private final QuadTreeRenderConfig<T> config;
@@ -68,7 +69,7 @@ public class QuadTreeRenderer<T> {
             RectangleUtils.getCenter(quad.boundingRect, tmpV2);
             fontQuadsData.draw(spriteBatch, "depth " + quad.depth, tmpV2.x, tmpV2.y - 20);
             fontQuadsData.draw(spriteBatch, "total " + quad.countAllValues(), tmpV2.x, tmpV2.y);
-            fontQuadsData.draw(spriteBatch, "this " + quad.values.size, tmpV2.x, tmpV2.y + 20);
+            fontQuadsData.draw(spriteBatch, "this " + quad.countValues(), tmpV2.x, tmpV2.y + 20);
             if (quad.isSplit()) {
                 renderQuadData(quad.ne);
                 renderQuadData(quad.nw);
@@ -82,11 +83,9 @@ public class QuadTreeRenderer<T> {
 
     protected void renderUserData(QuadTree<?> quad) {
         if (frustum2D.isInside(quad.boundingRect)) {
-            for (int i = 0, n = quad.values.size; i < n; i++) {
-                Rectangle rect = quad.rectangles.get(i);
-                Object o = quad.values.get(i);
-                RectangleUtils.getCenter(rect, tmpV2);
-                fontValuesData.draw(spriteBatch, o.toString(), tmpV2.x, tmpV2.y);
+            for (QuadRectangleValue quadValue : quad.getAllValues(new Array<>())) {
+                RectangleUtils.getCenter(quadValue.getBounds(), tmpV2);
+                fontValuesData.draw(spriteBatch, quadValue.toString(), tmpV2.x, tmpV2.y);
             }
 
             if (quad.isSplit()) {
@@ -100,9 +99,8 @@ public class QuadTreeRenderer<T> {
 
     protected void renderRects(QuadTree<?> quad) {
         if (frustum2D.isInside(quad.boundingRect)) {
-            for (Rectangle rectValue : quad.rectangles) {
-                if (frustum2D.isInside(rectValue))
-                    shapeRenderer.rect(rectValue);
+            for (QuadRectangleValue quadValue : quad.getAllValues(new Array<>())) {
+                shapeRenderer.rect(quadValue.getBounds());
             }
             if (quad.isSplit()) {
                 renderRects(quad.ne);
