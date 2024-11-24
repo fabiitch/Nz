@@ -3,20 +3,21 @@ package com.github.fabiitch.nz.java.data.quadtree;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.data.quadtree.utils.QuadTreeUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
-public class QuadTree<T> implements Pool.Poolable {
+
+public class QuadTree<T extends QuadRectangleValue> implements Pool.Poolable {
 
     public QuadTree<T> parent, ne, nw, se, sw;
     public Rectangle boundingRect;
     @Getter
     public int depth, maxDepth, maxValues;
 
-    public final Array<T> values;
-    public final Array<Rectangle> rectangles;
+    public final IntMap<T> mapValues = new IntMap<>();
     public QuadPools<T> quadPools;
 
     public QuadTree() {
@@ -34,8 +35,6 @@ public class QuadTree<T> implements Pool.Poolable {
     protected QuadTree(QuadTree<T> parent, Rectangle rect, int maxValues, int maxDepth, QuadPools<T> quadPools) {
         this.parent = parent;
         this.boundingRect = new Rectangle(rect);
-        this.values = new Array<>(maxValues);
-        this.rectangles = new Array<>(maxValues);
         this.maxValues = Math.max(1, maxValues);
         this.maxDepth = Math.max(1, maxDepth);
         this.quadPools = quadPools;
@@ -44,8 +43,7 @@ public class QuadTree<T> implements Pool.Poolable {
     private void set(QuadTree<T> parent, Rectangle rectangle, int maxValues, int maxDepth, QuadPools<T> quadPools) {
         this.parent = parent;
         this.boundingRect.set(rectangle);
-        this.values.clear();
-        this.rectangles.clear();
+        this.mapValues.clear();
         this.maxValues = maxValues;
         this.maxDepth = maxDepth;
         this.quadPools = quadPools;
@@ -58,35 +56,39 @@ public class QuadTree<T> implements Pool.Poolable {
         rebuild();
     }
 
+    public int countValues() {
+        return mapValues.size;
+    }
+
     public void rebuild() {
         regroup();
         if (shouldSplit())
             split();
     }
 
-    public void add(Array<T> values, Array<Rectangle> rects) {
+    public void add(Array<T> values) {
         for (int i = 0; i < values.size; i++) {
-            add(values.get(i), rects.get(i));
+            add(values.get(i));
         }
     }
 
-    public QuadTree<T> add(T value, Rectangle rect) {
+    public QuadTree<T> add(T value) {
+        Rectangle rect = value.getBounds();
         QuadTree<T> quad = getQuad(rect);
         if (quad != null) {
             if (quad.shouldSplit()) {
                 quad.split();
-                return this.add(value, rect);
+                return this.add(value);
             }
-            quad.values.add(value);
-            quad.rectangles.add(rect);
+            quad.mapValues.put(value.getId(), value);
             return quad;
         } else {
             if (parent != null) {
-                return parent.add(value, rect);
+                return parent.add(value);
             } else {
                 RectangleUtils.mergeFloorCeil(this.boundingRect, rect);
                 this.rebuild();
-                return this.add(value, rect);
+                return this.add(value);
             }
         }
     }
@@ -103,17 +105,12 @@ public class QuadTree<T> implements Pool.Poolable {
     }
 
     public boolean remove(T value) {
-        for (int i = 0, n = values.size; i < n; i++) {
-            T curVal = values.get(i);
-            if (curVal == value) {
-                values.removeIndex(i);
-                rectangles.removeIndex(i);
-                if (shouldRegroup())
-                    regroup();
-                return true;
-            }
+        T remove = mapValues.remove(value.getId());
+        if (remove != null && shouldRegroup()) {
+            regroup();
+            return true;
         }
-        if (isSplit()) {
+        if (remove == null && isSplit()) {
             if (nw.remove(value))
                 return true;
             if (ne.remove(value))
@@ -133,14 +130,14 @@ public class QuadTree<T> implements Pool.Poolable {
     private boolean shouldSplit() {
         if (isSplit()
                 || this.depth >= maxDepth
-                || values.size < maxValues) {
+                || mapValues.size < maxValues) {
             return false;
         }
         return true;
     }
 
     private boolean shouldRegroup() {
-        return isSplit() && values.size < maxValues / 2;
+        return isSplit() && mapValues.size < maxValues / 2;
     }
 
     public QuadTree<T> split() {
@@ -165,38 +162,25 @@ public class QuadTree<T> implements Pool.Poolable {
         sw.depth = newDepth;
         se.depth = newDepth;
 
-        Array<T> allValues = quadPools.getArray();
-        Array<Rectangle> allRectValues = quadPools.getArrayRectangle();
+        Array<T> values = mapValues.values().toArray();
+        mapValues.clear();
 
-        allValues.addAll(this.values);
-        allRectValues.addAll(this.rectangles);
-
-        this.values.clear();
-        this.rectangles.clear();
-
-        for (int i = 0, n = allValues.size; i < n; i++) {
-            add(allValues.get(i), allRectValues.get(i));
+        for (T value : values) {
+            add(value);
         }
-        quadPools.free(allValues);
-        quadPools.freeArrayRect(allRectValues);
         return this;
     }
 
     public void regroup() {
         if (!isSplit())
             return;
+        Array<T> allValues = quadPools.getValuesArray();
+        this.getAllValues(allValues);
 
-        Array<T> allValues = quadPools.getArray();
-        Array<Rectangle> allRectangles = quadPools.getArrayRectangle();
-        this.getAllValues(allValues, allRectangles);
-
-        this.values.clear();
-        this.values.addAll(allValues);
-        this.rectangles.clear();
-        this.rectangles.addAll(allRectangles);
-
-        quadPools.free(allValues);
-        quadPools.freeArrayRect(allRectangles);
+        for (T value : allValues) {
+            mapValues.put(value.getId(), value);
+        }
+        quadPools.freeValuesArray(allValues);
 
         quadPools.free(nw);
         quadPools.free(ne);
@@ -209,19 +193,18 @@ public class QuadTree<T> implements Pool.Poolable {
         this.se = null;
     }
 
-
     public Array<T> getAllValuesAndParents(Array<T> valueResults) {
         getAllValues(valueResults);
         QuadTree<T> currentParent = parent;
         while (currentParent != null) {
-            valueResults.addAll(parent.values);
+            valueResults.addAll(parent.mapValues.values().toArray());
             currentParent = currentParent.parent;
         }
         return valueResults;
     }
 
     public Array<T> getAllValues(Array<T> valueResults) {
-        valueResults.addAll(this.values);
+        valueResults.addAll(this.mapValues.values().toArray());
         if (isSplit()) {
             this.nw.getAllValues(valueResults);
             this.ne.getAllValues(valueResults);
@@ -231,74 +214,35 @@ public class QuadTree<T> implements Pool.Poolable {
         return valueResults;
     }
 
-    public Array<T> getAllValues(Array<T> valueResults, Array<Rectangle> rectResults) {
-        valueResults.addAll(this.values);
-        rectResults.addAll(this.rectangles);
-        if (isSplit()) {
-            this.nw.getAllValues(valueResults, rectResults);
-            this.ne.getAllValues(valueResults, rectResults);
-            this.sw.getAllValues(valueResults, rectResults);
-            this.se.getAllValues(valueResults, rectResults);
-        }
-        return valueResults;
-    }
 
-
-    public QuadTree update(T value) {
-        return update(value, getRectangle(value));
-    }
-
-    public Rectangle getRectangle(T value) {
-        for (int i = 0, n = values.size; i < n; i++) {
-            if (values.get(i) == value)
-                return rectangles.get(i);
-        }
-        if (isSplit()) {
-            Rectangle rectangle;
-            rectangle = this.nw.getRectangle(value);
-            if (rectangle != null)
-                return rectangle;
-            rectangle = this.ne.getRectangle(value);
-            if (rectangle != null)
-                return rectangle;
-            rectangle = this.sw.getRectangle(value);
-            if (rectangle != null)
-                return rectangle;
-            rectangle = this.se.getRectangle(value);
-            if (rectangle != null)
-                return rectangle;
-        }
-        return null;
-    }
-
-    public QuadTree<T> update(T value, Rectangle rectangle) {
-        QuadTree<T> quad = getQuad(rectangle);
+    public QuadTree<T> update(T value) {
+        QuadTree<T> quad = getQuad(value.getBounds());
         if (quad != this) {
             remove(value);
-            add(value, rectangle);
+            add(value);
         }
         return quad;
     }
 
     public void recompute() {
-        Array<T> allValues = quadPools.getArray();
-        Array<Rectangle> allRects = quadPools.getArrayRectangle();
+        Array<T> allValues = quadPools.getValuesArray();
+        Array<Rectangle> allRects = quadPools.getRectangleArray();
 
-        getAllValues(allValues, allRects);
+        getAllValues(allValues);
         for (int i = 0; i < allValues.size; i++) {
-            update(allValues.get(i), allRects.get(i));
+            update(allValues.get(i));
         }
-        quadPools.free(allValues);
-        quadPools.freeArrayRect(allRects);
+        quadPools.freeValuesArray(allValues);
+        quadPools.freeRectangleArray(allRects);
     }
 
     public Array<T> query(Rectangle rectangle, Array<T> result) {
         if (!RectangleUtils.overlapsStick(this.boundingRect, rectangle)) {
             return result;
         }
-        for (int i = 0, n = this.values.size; i < n; i++) {
-            if (RectangleUtils.overlapsStick(rectangles.get(i), rectangle)) {
-                result.add(values.get(i));
+        for (T value : this.mapValues.values()) {
+            if (RectangleUtils.overlapsStick(value.getBounds(), rectangle)) {
+                result.add(value);
             }
         }
         if (isSplit()) {
@@ -310,7 +254,64 @@ public class QuadTree<T> implements Pool.Poolable {
         return result;
     }
 
+    private QuadTree<T> getQuad(QuadTreeRegion region) {
+        switch (region) {
+            case TopLeft:
+                return this.nw;
+            case TopRight:
+                return this.ne;
+            case BotLeft:
+                return this.sw;
+            case BotRight:
+                return this.se;
+            case Out:
+                return null;
+            case This:
+                return this;
+        }
+        return null;
+    }
+    private QuadTreeRegion getFastRegion(Rectangle rectangle) {
+        Rectangle quadRect = this.boundingRect;
+        if (RectangleUtils.containsStick(quadRect, rectangle)) {
+            if (!isSplit()) {
+                return QuadTreeRegion.This;
+            }
+            float halfQuadWidth = quadRect.width / 2;
+            float halfQuadHeight = quadRect.height / 2;
+
+            if (rectangle.width > halfQuadWidth ||rectangle.height > halfQuadHeight)
+                return QuadTreeRegion.This;
+
+            boolean rightRegionX = QuadTreeUtils.isSecondRegion(quadRect.x, halfQuadWidth, rectangle.x);
+            boolean rightRegionXMax = QuadTreeUtils.isSecondRegion(quadRect.x, halfQuadWidth, rectangle.x + rectangle.width);
+            if (rightRegionX ^ rightRegionXMax) {
+                return QuadTreeRegion.This;
+            }
+            boolean botRegionY = !QuadTreeUtils.isSecondRegion(quadRect.y, halfQuadHeight, rectangle.y);
+            boolean botRegionYMax = !QuadTreeUtils.isSecondRegion(quadRect.y, halfQuadHeight, rectangle.y + rectangle.height);
+            if (botRegionY ^ botRegionYMax) {
+                return QuadTreeRegion.This;
+            }
+            int index = rightRegionX ? 1 : 0;
+            if (botRegionY)
+                index += 2;
+
+            return QuadTreeRegion.VALUES[index];
+        }
+        return QuadTreeRegion.Out;
+    }
+
     public QuadTree<T> getQuad(Rectangle rectangle) {
+        QuadTreeRegion region = getFastRegion(rectangle);
+        QuadTree<T> result = getQuad(region);
+        if (region.isChild())
+            result = result.getQuad(rectangle);
+
+        return result;
+    }
+
+    private QuadTree<T> getOldQuad(Rectangle rectangle){
         if (RectangleUtils.containsStick(this.boundingRect, rectangle)) {
             if (!isSplit())
                 return this;
@@ -374,7 +375,7 @@ public class QuadTree<T> implements Pool.Poolable {
     }
 
     public int countAllValues() {
-        int count = this.values.size;
+        int count = this.mapValues.size;
         if (isSplit()) {
             count += nw.countAllValues();
             count += ne.countAllValues();
@@ -394,6 +395,15 @@ public class QuadTree<T> implements Pool.Poolable {
         }
         recompute();
     }
+    public int getCurrentMaxDepth(){
+        if (isSplit()) {
+            int max = Math.max(ne.getCurrentMaxDepth(), se.getCurrentMaxDepth());
+            max = Math.max(max, se.getCurrentMaxDepth());
+            max = Math.max(max, sw.getCurrentMaxDepth());
+            return max;
+        }
+        return this.depth;
+    }
 
     public void setMaxValues(int maxValues) {
         this.maxValues = maxValues;
@@ -410,8 +420,7 @@ public class QuadTree<T> implements Pool.Poolable {
     public void reset() {
         this.parent = this.ne = this.nw = this.se = this.sw = null;
         this.boundingRect.set(0, 0, 0, 0);
-        this.values.clear();
-        this.rectangles.clear();
+        this.mapValues.clear();
         this.maxValues = 0;
         this.maxDepth = 0;
     }

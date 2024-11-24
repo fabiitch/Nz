@@ -20,6 +20,7 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
     public DemoQuadTreeAddRemove() {
         super();
         inputMultiplexer.addProcessor(addRemoveController());
+        quadRender.getConfig().drawValuesData(true);
     }
 
     @Override

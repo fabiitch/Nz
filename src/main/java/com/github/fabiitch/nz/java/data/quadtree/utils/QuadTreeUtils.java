@@ -5,6 +5,7 @@ import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 public class QuadTreeUtils {
 
+
     public static Rectangle getNW(Rectangle parent, Rectangle child) {
         float halfWidth = parent.width / 2;
         float halfHeight = parent.height / 2;
@@ -28,6 +29,16 @@ public class QuadTreeUtils {
         float halfHeight = parent.height / 2;
         return child.set(parent.x + halfWidth, parent.y, halfWidth, halfHeight);
     }
+
+    public static boolean isSecondRegion(float parentValue, float parentHalfSize, float value) {
+        return value > parentValue + parentHalfSize;
+    }
+
+
+    /**
+     * 1  |  2
+     * 3  |  4
+     */
 
     public static boolean childCanContainsRect(Rectangle container, Rectangle rectInside) {
         Rectangle rectTmp = new Rectangle();

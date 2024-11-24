@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
 
-public class QuadPools<T> {
+public class QuadPools<T extends QuadRectangleValue> {
     private final Pool<QuadTree<T>> quadPool = new Pool<QuadTree<T>>() {
         @Override
         protected QuadTree<T> newObject() {
@@ -42,9 +42,7 @@ public class QuadPools<T> {
             quadPool.free(quadTree.se);
             quadPool.free(quadTree.sw);
         }
-
-        quadTree.values.clear();
-        quadTree.rectangles.clear();
+        quadTree.mapValues.clear();
         quadPool.free(quadTree);
     }
 
@@ -56,20 +54,20 @@ public class QuadPools<T> {
         rectPool.free(rectangle);
     }
 
-    public Array<T> getArray() {
+    public Array<T> getValuesArray() {
         return arrayPool.obtain();
     }
 
-    public void free(Array<T> array) {
+    public void freeValuesArray(Array<T> array) {
         array.clear();
         arrayPool.free(array);
     }
 
-    public Array<Rectangle> getArrayRectangle() {
+    public Array<Rectangle> getRectangleArray() {
         return arrayRectPool.obtain();
     }
 
-    public void freeArrayRect(Array<Rectangle> array) {
+    public void freeRectangleArray(Array<Rectangle> array) {
         array.clear();
         arrayRectPool.free(array);
     }
