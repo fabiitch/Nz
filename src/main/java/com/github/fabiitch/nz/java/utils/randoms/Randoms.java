@@ -29,7 +29,7 @@ public class Randoms {
     }
 
     public static Vector2 randomDir() {
-        return new Vector2(1,0).setToRandomDirection();
+        return new Vector2(1, 0).setToRandomDirection();
     }
 
     public static Vector2 v2(float maxX, float maxY, Vector2 result) {
@@ -66,5 +66,11 @@ public class Randoms {
         color.g = g;
         color.b = b;
         return color;
+    }
+
+    public static int randomInt(int start, int min, int max) {
+        boolean add = MathUtils.randomBoolean();
+        int rdm = MathUtils.random(min, max);
+        return add ? start + rdm : start - rdm;
     }
 }
