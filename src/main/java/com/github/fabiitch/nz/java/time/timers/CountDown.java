@@ -1,44 +1,28 @@
 package com.github.fabiitch.nz.java.time.timers;
 
-import com.github.fabiitch.nz.java.function.DoIt;
+import lombok.Getter;
+import lombok.Setter;
 
-//TODO utile ?
+@Getter
+@Setter
 public class CountDown {
-    public float duration;
-    public DoIt doIt;
-    public float internalTimer;
-
-    public CountDown(float duration, DoIt doIt) {
-        this.duration = duration;
-        this.doIt = doIt;
-    }
+    private float duration;
+    private float acc = 0;
 
     public CountDown(float duration) {
         this.duration = duration;
     }
 
-    /**
-     * return true if end
-     *
-     * @param dt
-     * @return
-     */
     public boolean update(float dt) {
-        if (internalTimer < duration) {
-            internalTimer += dt;
-            if (internalTimer >= duration) {
-                if (doIt != null)
-                    doIt.doIt();
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return true;
+        acc += dt;
+        return acc >= duration;
+    }
+
+    public boolean finish() {
+        return acc >= duration;
     }
 
     public void reset() {
-        internalTimer = 0;
+        acc = 0;
     }
 }
-
