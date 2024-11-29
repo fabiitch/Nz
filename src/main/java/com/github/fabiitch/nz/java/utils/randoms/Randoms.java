@@ -68,7 +68,7 @@ public class Randoms {
         return color;
     }
 
-    public static int randomInt(int start, int min, int max) {
+    public static int randomSignInt(int start, int min, int max) {
         boolean add = MathUtils.randomBoolean();
         int rdm = MathUtils.random(min, max);
         return add ? start + rdm : start - rdm;
