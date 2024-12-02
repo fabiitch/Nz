@@ -1,11 +1,14 @@
 package com.github.fabiitch.nz.java.data.quadtree;
 
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.data.quadtree.utils.QuadTreeUtils;
+import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorCircle;
+import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
@@ -236,24 +239,6 @@ public class QuadTree<T extends QuadRectangleValue> implements Pool.Poolable {
         quadPools.freeRectangleArray(allRects);
     }
 
-    public Array<T> query(Rectangle rectangle, Array<T> result) {
-        if (!RectangleUtils.overlapsStick(this.boundingRect, rectangle)) {
-            return result;
-        }
-        for (T value : this.mapValues.values()) {
-            if (RectangleUtils.overlapsStick(value.getBounds(), rectangle)) {
-                result.add(value);
-            }
-        }
-        if (isSplit()) {
-            this.nw.query(rectangle, result);
-            this.ne.query(rectangle, result);
-            this.sw.query(rectangle, result);
-            this.se.query(rectangle, result);
-        }
-        return result;
-    }
-
     private QuadTree<T> getQuad(QuadTreeRegion region) {
         switch (region) {
             case TopLeft:
@@ -414,6 +399,42 @@ public class QuadTree<T extends QuadRectangleValue> implements Pool.Poolable {
             se.setMaxValues(maxValues);
         }
         recompute();
+    }
+
+    public Array<T> query(Rectangle rectangle, Array<T> result) {
+        if (!RectangleUtils.overlapsStick(this.boundingRect, rectangle)) {
+            return result;
+        }
+        for (T value : this.mapValues.values()) {
+            if (RectangleUtils.overlapsStick(value.getBounds(), rectangle)) {
+                result.add(value);
+            }
+        }
+        if (isSplit()) {
+            this.nw.query(rectangle, result);
+            this.ne.query(rectangle, result);
+            this.sw.query(rectangle, result);
+            this.se.query(rectangle, result);
+        }
+        return result;
+    }
+
+    public Array<T> query(Circle circle, Array<T> result) {
+        if (!IntersectorCircle.overlapStickRectangle(circle, this.boundingRect)) {
+            return result;
+        }
+        for (T value : this.mapValues.values()) {
+            if (IntersectorCircle.overlapStickRectangle(circle, value.getBounds())) {
+                result.add(value);
+            }
+        }
+        if (isSplit()) {
+            this.nw.query(circle, result);
+            this.ne.query(circle, result);
+            this.sw.query(circle, result);
+            this.se.query(circle, result);
+        }
+        return result;
     }
 
     @Override
