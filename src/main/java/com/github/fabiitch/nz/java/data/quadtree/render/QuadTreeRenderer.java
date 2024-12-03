@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.gdx.render.shape.Frustum2D;
 import com.github.fabiitch.nz.gdx.render.shape.NzShapeRenderer;
-import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.data.quadtree.QuadRectangleValue;
+import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
@@ -20,6 +20,8 @@ public class QuadTreeRenderer<T extends QuadRectangleValue> {
     private final SpriteBatch spriteBatch;
     private final BitmapFont fontValuesData, fontQuadsData;
     private final Frustum2D frustum2D = new Frustum2D();
+
+
     public QuadTreeRenderer(QuadTreeRenderConfig<T> config) {
         this.config = config;
         this.shapeRenderer = config.getShapeRenderer() != null ? config.getShapeRenderer() : new NzShapeRenderer();

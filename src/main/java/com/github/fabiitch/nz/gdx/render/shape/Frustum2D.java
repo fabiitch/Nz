@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.github.fabiitch.nz.gdx.camera.CameraUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorCircleRect;
 import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorRectangle;
@@ -14,16 +15,30 @@ import lombok.Getter;
 @Getter
 public class Frustum2D {
 
-    private final Rectangle rectangle;
+    protected final Rectangle rectangle;
 
     public Frustum2D() {
         rectangle = new Rectangle();
     }
 
+    public void update(Rectangle rectangle) {
+        this.rectangle.set(rectangle);
+    }
+
+    public void update(Vector2 center) {
+        RectangleUtils.setCenter(rectangle, center);
+    }
+
+    public void update(float centerX, float centerY) {
+        RectangleUtils.setCenter(rectangle, centerX, centerY);
+    }
+
+    public void update(float centerX, float centerY, float width, float height) {
+        RectangleUtils.setCenter(rectangle, centerX, centerY, width, height);
+    }
+
     public void update(OrthographicCamera camera) {
-        RectangleUtils.setCenter(rectangle, camera.position.x, camera.position.y,
-                Math.abs(camera.viewportWidth * camera.zoom),
-                Math.abs(camera.viewportHeight * camera.zoom));
+        CameraUtils.toRectangle(camera, this.rectangle);
     }
 
     public boolean isInside(Segment segment) {
