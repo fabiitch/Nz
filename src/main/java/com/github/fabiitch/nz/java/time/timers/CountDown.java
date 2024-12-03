@@ -1,10 +1,12 @@
 package com.github.fabiitch.nz.java.time.timers;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class CountDown {
     private float duration;
     private float acc = 0;
