@@ -41,4 +41,7 @@ public class Percentage {
         return total - total * percent / 100;
     }
 
+    public static float alphaBound(float part, float total) {
+        return Math.min(1, part / total);
+    }
 }

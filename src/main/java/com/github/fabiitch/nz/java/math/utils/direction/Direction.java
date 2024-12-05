@@ -3,6 +3,7 @@ package com.github.fabiitch.nz.java.math.utils.direction;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.data.collections.utils.TabUtils;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -36,7 +37,7 @@ public enum Direction {
             return Left;
         }
     };
-
+    private final static Vector2 tmpV2 = new Vector2();
     public static final Direction[] VALUES = Direction.values();
     public static final Direction[] CLOCKWISE = {Top, Right, Bot, Left};
     public static final Direction[] COUNTER_CLOCKWISE = {Top, Left, Bot, Right};
@@ -102,23 +103,28 @@ public enum Direction {
         return closestDirection;
     }
 
+    public static Direction getDirection(Vector2 from, Vector2 to) {
+        Vector2 dir = V2.directionTo(from, to, tmpV2);
+        return getClosestDirection(dir);
+    }
+
     public static Direction[] getClockwiseFrom(Direction start) {
-        Direction[] res = new Direction[4];
-        int indexStart = TabUtils.indexOf(CLOCKWISE, start);
-
-        if (4 - indexStart >= 0) System.arraycopy(CLOCKWISE, indexStart, res, 0, 4 - indexStart);
-
-        if (indexStart > 0) System.arraycopy(CLOCKWISE, 0, res, 4 - indexStart, indexStart);
-        return res;
+        return getClockwiseFrom(start, VALUES);
     }
 
     public static Direction[] getCounterClockwiseFrom(Direction start) {
+        return getClockwiseFrom(start, COUNTER_CLOCKWISE);
+    }
+
+    private static Direction[] getClockwiseFrom(Direction start, Direction[] directions) {
         Direction[] res = new Direction[4];
-        int indexStart = TabUtils.indexOf(COUNTER_CLOCKWISE, start);
+        int indexStart = TabUtils.indexOf(directions, start);
 
-        if (4 - indexStart >= 0) System.arraycopy(COUNTER_CLOCKWISE, indexStart, res, 0, 4 - indexStart);
+        if (4 - indexStart >= 0) System.arraycopy(directions, indexStart, res, 0, 4 - indexStart);
 
-        if (indexStart > 0) System.arraycopy(COUNTER_CLOCKWISE, 0, res, 4 - indexStart, indexStart);
+        if (indexStart > 0) System.arraycopy(directions, 0, res, 4 - indexStart, indexStart);
         return res;
     }
+
+
 }

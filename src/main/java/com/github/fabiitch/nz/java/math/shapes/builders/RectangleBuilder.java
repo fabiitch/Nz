@@ -9,7 +9,7 @@ import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
 import com.github.fabiitch.nz.java.math.utils.direction.OrientationVector;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 /**
  * D3-----C2

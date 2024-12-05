@@ -1,15 +1,5 @@
 package com.github.fabiitch.nz.java.data.quad;
 
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
-import com.github.fabiitch.nz.java.data.quadtree.QuadTree;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
-import com.github.fabiitch.nz.java.math.vectors.V2;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
 import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.r;
 import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.v2;
 

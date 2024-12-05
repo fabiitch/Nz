@@ -9,7 +9,7 @@ import com.github.fabiitch.nz.java.math.angle.AngleUtils;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
 import com.github.fabiitch.nz.java.math.utils.direction.Direction;
 import com.github.fabiitch.nz.java.math.utils.direction.Orientation;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 //TODO groupé les math tmpV1 vector segment ect
 

@@ -1,7 +1,7 @@
 package com.github.fabiitch.nz.java.math.shapes.utils;
 
 import com.badlogic.gdx.math.*;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 public class CircleUtils {
 
