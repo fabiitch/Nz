@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.gdxunit.vectors.VTestUtils;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

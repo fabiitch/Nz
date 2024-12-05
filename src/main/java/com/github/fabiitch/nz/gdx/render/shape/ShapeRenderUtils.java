@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.github.fabiitch.nz.java.math.shapes.Triangle;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 public class ShapeRenderUtils {
     private final static Vector2 tmp1V2 = new Vector2();

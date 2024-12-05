@@ -9,7 +9,7 @@ import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.PolygonUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.SegmentUtils;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

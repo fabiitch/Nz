@@ -3,7 +3,7 @@ package com.github.fabiitch.nz.java.math.angle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.math.shapes.Segment;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 public class AngleUtils {
     private AngleUtils() {

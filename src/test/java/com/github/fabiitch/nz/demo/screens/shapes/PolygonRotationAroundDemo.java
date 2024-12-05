@@ -14,7 +14,7 @@ import com.github.fabiitch.nz.gdx.input.InputUtils;
 import com.github.fabiitch.nz.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.java.math.shapes.builders.PolygonBuilder;
 import com.github.fabiitch.nz.java.math.utils.Rotation;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 
 @DemoScreen(group = "math.shape2D.rotation.polygon")
 public class PolygonRotationAroundDemo extends BaseDemoScreen {

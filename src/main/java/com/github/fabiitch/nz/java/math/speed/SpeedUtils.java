@@ -1,7 +1,7 @@
 package com.github.fabiitch.nz.java.math.speed;
 
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.nz.java.math.vectors.V2;
+import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

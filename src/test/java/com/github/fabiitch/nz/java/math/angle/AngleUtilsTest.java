@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.github.fabiitch.nz.java.math.angle.AngleUtils.*;
-import static com.github.fabiitch.nz.java.math.vectors.V2.v;
+import static com.github.fabiitch.nz.java.math.vectors.v2.V2.v;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AngleUtilsTest {
@@ -29,10 +29,15 @@ public class AngleUtilsTest {
 
     @Test
     public void distanceSignedTest() {
-        float dst1 = distanceSigned(50, 100);
-        assertEquals(dst1, -50, DELTA_0);
-        float dst2 = distanceSigned(100, 50);
-        assertEquals(dst2, 50, DELTA_0);
+        assertEquals(-50, distanceSigned(50, 100));
+        assertEquals(50, distanceSigned(100, 50));
+
+        assertEquals(-50, distanceSigned(50, 100 + 360 * 5));
+        assertEquals(-50, distanceSigned(50 + 360 * 5, 100));
+
+        assertEquals(-50, distanceSigned(100, 50 + 360 * 5));
+        assertEquals(-50, distanceSigned(100 + 360 * 5, 50));
+
     }
 
     @Test
