@@ -23,7 +23,7 @@ public class DemoQuadTreeMove extends BaseDemoQuadTree<Vector2> {
     public DemoQuadTreeMove() {
         super();
         inputMultiplexer.addProcessor(getInput());
-        quadRender.getConfig().drawQuadData(true);
+        quadRender.getConfig().drawQuadData(false);
         quadRender.getConfig().drawValuesData(false);
         quadTree.build(quadTree.boundingRect, 500, 5);
 
