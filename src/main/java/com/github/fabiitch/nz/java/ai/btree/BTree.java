@@ -17,11 +17,31 @@ public abstract class BTree<E> implements BTaskExecutor<E> {
 
         if (context.getExecutor() != null) {
             saveEntityExecutor(entity, context.getExecutor());
-        }else{
+        } else {
             removeEntity(entity);
         }
-
+        freeContext(context);
         return context.getStatus();
+    }
+
+    @Override
+    public BTask<E> getTask() {
+        return getRootExecutor().getTask();
+    }
+
+    @Override
+    public BTaskExecutor<E> getParent() {
+        return null;
+    }
+
+    @Override
+    public void onStart(E entity) {
+        BTaskExecutor.super.onStart(entity);
+    }
+
+    @Override
+    public BTaskContext<E> execute(BTaskContext<E> context) {
+        return BTaskExecutor.super.execute(context);
     }
 
     public abstract void saveEntityExecutor(E entity, BTaskExecutor<E> executor);
