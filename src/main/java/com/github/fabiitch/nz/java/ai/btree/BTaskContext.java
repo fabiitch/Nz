@@ -8,7 +8,7 @@ public class BTaskContext<E> {
     private float dtLeft;
     private BTaskExecutor<E> executor;
 
-    private BTaskStatus status;
+    private BTaskStatus status = BTaskStatus.Run;
 
     public boolean isTickFinish() {
         return dtLeft == 0 || status.isFinish();
@@ -18,7 +18,10 @@ public class BTaskContext<E> {
         this.dtLeft = dtLeft;
         return this;
     }
-
+    public BTaskContext<E> setEntity(E entity) {
+        this.entity = entity;
+        return this;
+    }
     public BTaskContext<E> setExecutor(BTaskExecutor<E> executor) {
         this.executor = executor;
         return this;
