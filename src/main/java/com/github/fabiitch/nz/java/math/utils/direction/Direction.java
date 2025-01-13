@@ -109,7 +109,7 @@ public enum Direction {
     }
 
     public static Direction[] getClockwiseFrom(Direction start) {
-        return getClockwiseFrom(start, VALUES);
+        return getClockwiseFrom(start, CLOCKWISE);
     }
 
     public static Direction[] getCounterClockwiseFrom(Direction start) {
