@@ -2,7 +2,9 @@ package com.github.fabiitch.nz.gdx.render.g2d.utils;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class SpriteUtils {
     public static void size(Sprite sprite, Vector2 size) {
         sprite.setSize(size.x, size.y);
