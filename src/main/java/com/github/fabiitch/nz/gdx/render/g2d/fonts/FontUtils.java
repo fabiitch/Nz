@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.render.fonts;
+package com.github.fabiitch.nz.gdx.render.g2d.fonts;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
