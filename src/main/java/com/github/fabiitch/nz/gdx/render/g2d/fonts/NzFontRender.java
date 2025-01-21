@@ -1,5 +1,6 @@
 package com.github.fabiitch.nz.gdx.render.g2d.fonts;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,16 +16,6 @@ public class NzFontRender {
         this.font = font;
     }
 
-    public Vector2 toDrawCenter(Vector2 pos, String str, Vector2 result) {
-        layout.setText(font, str);
-        return result.set(pos.x - layout.width / 2, pos.y + layout.height / 2);
-    }
-
-    public Vector2 toDrawCenter(float x, float y, String str, Vector2 result) {
-        layout.setText(font, str);
-        return result.set(x - layout.width / 2, y + layout.height / 2);
-    }
-
     public void drawCenter(float x, float y, String str) {
         layout.setText(font, str);
         font.draw(sb, str,
@@ -34,6 +25,22 @@ public class NzFontRender {
     public void drawCenter(Vector2 position, String str) {
         drawCenter(position.x, position.y, str);
     }
+
+    public void drawCenter(Vector2 position, String str, Color color) {
+        drawCenter(position.x, position.y, str, color);
+    }
+
+    public void drawCenter(float x, float y, String str, Color color) {
+        Color oldColor = font.getColor();
+        font.setColor(color);
+
+        layout.setText(font, str);
+        font.draw(sb, str,
+                x - layout.width / 2, y + layout.height / 2);
+
+        font.setColor(oldColor);
+    }
+
 
     public float getTextWidth(String str) {
         layout.setText(font, str);
