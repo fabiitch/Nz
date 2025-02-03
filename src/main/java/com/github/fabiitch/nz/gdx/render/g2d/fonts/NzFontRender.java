@@ -47,4 +47,13 @@ public class NzFontRender {
         return layout.width;
     }
 
+    public float getTextHeight(String str) {
+        layout.setText(font, str);
+        return layout.height;
+    }
+
+    public Vector2 getTextSize(String str) {
+        layout.setText(font, str);
+        return new Vector2(layout.width, layout.height);
+    }
 }

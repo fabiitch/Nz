@@ -20,9 +20,14 @@ public class FontUtils {
         return result.set(x - glyphLayout.width / 2, y + glyphLayout.height / 2);
     }
 
+    public static void drawCenter(Vector2 center, String str, BitmapFont font, SpriteBatch sb) {
+        drawCenter(center.x, center.y, str, font, sb);
+    }
+
     public static void drawCenter(float x, float y, String str, BitmapFont font, SpriteBatch sb) {
         glyphLayout.setText(font, str);
         font.draw(sb, str,
                 x - glyphLayout.width / 2, y + glyphLayout.height / 2);
     }
+
 }
