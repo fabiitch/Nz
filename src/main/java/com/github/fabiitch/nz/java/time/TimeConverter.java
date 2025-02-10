@@ -17,6 +17,10 @@ public class TimeConverter {
         return (long) (seconds * MILLIS_IN_SECOND);
     }
 
+    public static long secondToMillis(double seconds) {
+        return (long) (seconds * MILLIS_IN_SECOND);
+    }
+
     public static long secondToNano(float seconds) {
         return (long) (seconds * NANO_IN_SECOND);
     }
