@@ -129,6 +129,23 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner squareHeightPercent(float percentHeight) {
+        setHeightPercent(percentHeight);
+        actor.setWidth(actor.getHeight());
+        return this;
+    }
+
+    public NzActorPositionner xFix(float x) {
+        actor.setX(x);
+        return this;
+    }
+
+    public NzActorPositionner squareWidthPercent(float percentWitdh) {
+        setWidthPercent(percentWitdh);
+        actor.setHeight(actor.getWidth());
+        return this;
+    }
+
     public NzActorPositionner setHeightPercent(float percentHeight) {
         actor.setHeight(Percentage.value(percentHeight, stage.getHeight()));
         return this;
