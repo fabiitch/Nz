@@ -3,7 +3,6 @@ package com.github.fabiitch.nz.gdx.scene2D.nz;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.github.fabiitch.nz.gdx.scene2D.data.PosSize;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
@@ -39,11 +38,6 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner set(PosSize posSize) {
-        setPosition(posSize.getX(), posSize.getY());
-        actor.setSize(posSize.getWitdh(), posSize.getHeight());
-        return this;
-    }
 
     public NzActorPositionner setPosition(float x, float y) {
         if (centerActor) {
@@ -68,12 +62,6 @@ public class NzActorPositionner {
     public NzActorPositionner setPositionByPercent(float percentWitdh, float percentHeight) {
         setXPercent(percentWitdh);
         setYPercent(percentHeight);
-        return this;
-    }
-
-    public NzActorPositionner setByPercent(PosSize posSize) {
-        setPositionByPercent(posSize.getX(), posSize.getY());
-        setSizePercent(posSize.getWitdh(), posSize.getHeight());
         return this;
     }
 
@@ -171,26 +159,6 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner set(NzPlacement placement) {
-        if (placement.sizePercent) {
-            if (placement.witdhAsSizePercentTotal)
-                setSizeByWitdhPercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
-            else if (placement.heightAsSizePercentTotal)
-                setSizeByHeightPercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
-            else
-                setSizePercent(placement.posSize.getWitdh(), placement.posSize.getHeight());
-
-        } else {
-            actor.setSize(placement.posSize.getWitdh(), placement.posSize.getHeight());
-        }
-
-        if (placement.posPercent)
-            setPositionByPercent(placement.posSize.getX(), placement.posSize.getY());
-        else
-            setPosition(placement.posSize.getX(), placement.posSize.getY());
-
-        return this;
-    }
 
     public NzActorPositionner glueRight() {
         if (centerActor)
