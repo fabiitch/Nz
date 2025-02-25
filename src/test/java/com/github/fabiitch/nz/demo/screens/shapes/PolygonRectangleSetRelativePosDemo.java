@@ -45,11 +45,15 @@ public class PolygonRectangleSetRelativePosDemo extends BaseDemoScreen {
     }
 
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void doRender(float dt) {
         shapeRenderer.begin();
         shapeRenderer.polygon(polygonRectangle);
         shapeRenderer.end();
+    }
+
+    @Override
+    public void doDispose() {
+
     }
 
 }

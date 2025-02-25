@@ -82,6 +82,7 @@ public class PolygonRotationAroundDemo extends BaseDemoScreen {
         });
     }
 
+
     public void changePolygon() {
         Vector2 centroid = polygon.getCentroid(new Vector2());
 
@@ -115,9 +116,9 @@ public class PolygonRotationAroundDemo extends BaseDemoScreen {
             replacePolygon(direction.angleDeg() - 10);
     }
 
+
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void doRender(float dt) {
         shapeRenderer.begin();
 
         shapeRenderer.setColor(Color.BLUE);
@@ -126,6 +127,10 @@ public class PolygonRotationAroundDemo extends BaseDemoScreen {
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.polygon(polygon);
         shapeRenderer.end();
+    }
+    @Override
+    public void doDispose() {
+
     }
 
 }

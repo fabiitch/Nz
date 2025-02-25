@@ -35,8 +35,7 @@ public class DemoPolygonIntersectionIssue extends BaseDemoScreen {
     }
 
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void doRender(float dt) {
         shapeRenderer.begin();
 
         shapeRenderer.setColor(Color.RED);
@@ -49,5 +48,10 @@ public class DemoPolygonIntersectionIssue extends BaseDemoScreen {
         shapeRenderer.polygon(overlap);
 
         shapeRenderer.end();
+    }
+
+    @Override
+    public void doDispose() {
+
     }
 }

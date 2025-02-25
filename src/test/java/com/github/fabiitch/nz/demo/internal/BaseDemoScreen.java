@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.fabiitch.nz.demo.internal.huds.HudGlProfiler;
 import com.github.fabiitch.nz.demo.internal.input.InputKeyBinder;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
@@ -30,11 +33,11 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
     protected HudGlProfiler hudGlProfiler;
 
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
-
     protected InputKeyBinder inputKeyBinder = new InputKeyBinder();
 
-    private KeyboardCameraController keyboardCameraController;
+    private final KeyboardCameraController keyboardCameraController;
     protected Camera camera;
+    protected Viewport viewport;
 
     public FPSLogger fpsLogger;
 
@@ -43,6 +46,8 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
 
     public BaseDemoScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new ScreenViewport(camera);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
 
         this.nzStage = new NzStage();
         this.skin = new Skin(Gdx.files.internal("skins/ui/uiskin.json"));
@@ -58,6 +63,12 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
         inputMultiplexer.addProcessor(keyboardCameraController);
         inputMultiplexer.addProcessor(inputKeyBinder);
         Gdx.input.setInputProcessor(inputMultiplexer);
+    }
+
+    private final Vector2 tmp = new Vector2();
+
+    public Vector2 project(float x, float y) {
+        return viewport.project(tmp.set(x, y));
     }
 
     public void hudMsg(String msg) {
@@ -82,26 +93,36 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
     }
 
 
+    public abstract void doRender(float dt);
+
     @Override
-    public void render(float delta) {
+    public void render(float dt) {
         dt_tracker.start();
         fpsLogger.log();
         Gdx.graphics.setTitle(this.getClass().getSimpleName() + " FPS:" + Gdx.graphics.getFramesPerSecond());
         ScreenUtils.clear(Color.BLACK, true);
-
-        hudGlProfiler.update();
-        dt_tracker.end();
         dt_tracker.updateHud();
         hudDebugTracker.update();
-        nzStage.act();
-        nzStage.draw();
-
 
         keyboardCameraController.update();
         camera.update();
+
+        nzStage.act();
+        nzStage.draw();
+
         spriteBatch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
+        doRender(dt);
+        dt_tracker.end();
+        hudGlProfiler.update();
     }
+
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height);
+    }
+
+    public abstract void doDispose();
 
     @Override
     public void dispose() {

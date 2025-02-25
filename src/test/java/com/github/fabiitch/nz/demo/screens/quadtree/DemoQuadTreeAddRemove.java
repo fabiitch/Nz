@@ -84,14 +84,10 @@ public class DemoQuadTreeAddRemove extends BaseDemoQuadTree {
             public boolean touchDragged(int screenX, int screenY, int pointer) {
                 Vector2 clickPos = InputUtils.getClickPos(camera, screenX, screenY);
                 Rectangle rect = rectBodyCreation != null ? rectBodyCreation : rectBodyDestruction;
-                rect.set(startPositionRect.x, startPositionRect.y, 0, 0);
-                rect.merge(clickPos);
-                if (rectBodyCreation != null) {
-
-                } else if (rectBodyDestruction != null) {
-
+                if(rect != null){
+                    rect.set(startPositionRect.x, startPositionRect.y, 0, 0);
+                    rect.merge(clickPos);
                 }
-
                 return false;
             }
         };

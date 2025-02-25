@@ -5,52 +5,72 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.nz.java.data.collections.utils.TabUtils;
 import com.github.fabiitch.nz.java.math.vectors.v2.V2;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public enum Direction {
 
-    Top(new Vector2(0, 1), Orientation.Vertical) {
+    Top(new Vector2(0, 1)) {
         @Override
         public Direction getReverse() {
             return Bot;
         }
+
+        @Override
+        public Orientation getOrientation() {
+            return Orientation.Vertical;
+        }
     },
 
-    Bot(new Vector2(0, -1), Orientation.Vertical) {
+    Bot(new Vector2(0, -1)) {
         @Override
         public Direction getReverse() {
             return Top;
         }
+
+        @Override
+        public Orientation getOrientation() {
+            return Orientation.Vertical;
+        }
     },
 
-    Left(new Vector2(-1, 0), Orientation.Horizontal) {
+    Left(new Vector2(-1, 0)) {
         @Override
         public Direction getReverse() {
             return Right;
         }
+
+        @Override
+        public Orientation getOrientation() {
+            return Orientation.Horizontal;
+        }
     },
 
-    Right(new Vector2(1, 0), Orientation.Horizontal) {
+    Right(new Vector2(1, 0)) {
         @Override
         public Direction getReverse() {
             return Left;
         }
+
+        @Override
+        public Orientation getOrientation() {
+            return Orientation.Horizontal;
+        }
     };
+    
     private final static Vector2 tmpV2 = new Vector2();
     public static final Direction[] VALUES = Direction.values();
     public static final Direction[] CLOCKWISE = {Top, Right, Bot, Left};
     public static final Direction[] COUNTER_CLOCKWISE = {Top, Left, Bot, Right};
 
     private final Vector2 vector;
-    @Getter
-    private final Orientation orientation;
 
     public Orientation getOtherOrientation() {
-        return orientation.getOtherOrientation();
+        return getOrientation().getOtherOrientation();
     }
 
     public abstract Direction getReverse();
+
+    public abstract Orientation getOrientation();
 
     public Vector2 addTo(Vector2 position, float dst) {
         return position.add(getAddTo(dst));

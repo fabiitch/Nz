@@ -37,16 +37,6 @@ public class KeyboardCameraController extends InputAdapter {
         this(camera, BASE_VELOCITY);
     }
 
-    public void update() {
-        if(cameraVelocity.isZero())
-            return;
-
-        if (camera2D != null)
-            V3.add(camera2D.position, tmpVel.set(cameraVelocity).scl(camVelocity));
-        else
-            V3.add(camera3D.position, tmpVel.set(cameraVelocity).scl(camVelocity));
-    }
-
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.UP) {
@@ -73,6 +63,16 @@ public class KeyboardCameraController extends InputAdapter {
             cameraVelocity.add(camVelocity, 0);
         }
         return false;
+    }
+
+    public void update() {
+        if(cameraVelocity.isZero())
+            return;
+
+        if (camera2D != null)
+            V3.add(camera2D.position, tmpVel.set(cameraVelocity).scl(camVelocity));
+        else
+            V3.add(camera3D.position, tmpVel.set(cameraVelocity).scl(camVelocity));
     }
 
     @Override

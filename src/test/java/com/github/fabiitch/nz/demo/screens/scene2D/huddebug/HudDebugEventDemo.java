@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.screens.scene2D;
+package com.github.fabiitch.nz.demo.screens.scene2D.huddebug;
 
 import com.badlogic.gdx.graphics.Color;
 import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
@@ -10,7 +10,7 @@ import com.github.fabiitch.nz.java.time.timers.TimeLocker;
 /**
  * Test Hud event display and remove well
  */
-@DemoScreen(group = "hud.hud_debug")
+@DemoScreen(group = "scene2D.hud_debug")
 public class HudDebugEventDemo extends BaseDemoScreen {
 
 
@@ -24,13 +24,16 @@ public class HudDebugEventDemo extends BaseDemoScreen {
     }
 
     @Override
-    public void render(float dt) {
-        super.render(dt);
-
+    public void doRender(float dt) {
         if (timeLocker.isOpen(dt)) {
             count++;
             hudDebugEventManager.addEvent(HudDebugEvent.get("toot " + count, "gogogo", 5, Color.BLUE));
         }
         hudDebugEventManager.update();
+    }
+
+    @Override
+    public void doDispose() {
+
     }
 }
