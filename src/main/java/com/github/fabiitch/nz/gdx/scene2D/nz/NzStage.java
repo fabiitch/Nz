@@ -28,6 +28,7 @@ public class NzStage extends Stage {
         super(viewport, batch);
         this.nzPositionner = new NzActorPositionner(this);
     }
+
     public NzStage(Viewport viewport) {
         super(viewport);
         this.nzPositionner = new NzActorPositionner(this);
@@ -49,7 +50,7 @@ public class NzStage extends Stage {
     }
 
     public NzActorPositionner add(Actor actor, boolean center) {
-        nzPositionner.giveActor(actor, center).add();
+        nzPositionner.giveActor(actor, center).addActor();
         return nzPositionner;
     }
 
@@ -89,19 +90,5 @@ public class NzStage extends Stage {
     }
 
     private void resizeAllActors(int width, int height) {
-        Array<Actor> actors = getActors();
-        float oldWidth = this.getWidth();
-        float oldheight = this.getHeight();
-
-        float percentWitdh = Percentage.percentage(oldWidth, width);
-        float percentHeight = Percentage.percentage(oldheight, height);
-
-        for (Actor actor : actors) {
-            actor.setWidth(actor.getWidth() / percentWitdh * 100);
-            actor.setHeight(actor.getHeight() / percentHeight * 100);
-
-            actor.setX(actor.getX() / percentWitdh * 100);
-            actor.setY(actor.getY() / percentHeight * 100);
-        }
     }
 }

@@ -1,17 +1,27 @@
 package com.github.fabiitch.nz.gdx.scene2D.nz;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
+import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
+import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
+import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
-    private Stage stage;
+    private NzStage stage;
 
     private Actor actor;
     private boolean centerActor;
 
-    public NzActorPositionner(Stage stage) {
+
+    private final NzStageResizer stageResizer = new NzStageResizer(this);
+
+    private final Vector2 tmp = new Vector2();
+
+    public NzActorPositionner(NzStage stage) {
         this.stage = stage;
     }
 
@@ -21,25 +31,80 @@ public class NzActorPositionner {
         return this;
     }
 
-    public Vector2 getPosition() {
-        return getPosition(new Vector2());
+    public Vector2 getPositionFix() {
+        return getPositionFix(new Vector2(), this.centerActor);
     }
 
-    public Vector2 getPosition(Vector2 pos) {
+    public Vector2 getPositionFix(Vector2 pos) {
+        return getPositionFix(pos, this.centerActor);
+    }
+
+    public Vector2 getPositionFix(Vector2 result, boolean centerActor) {
         if (centerActor) {
-            return pos.set(actor.getX() + actor.getWidth() / 2, actor.getY() + actor.getHeight() / 2);
+            return result.set(actor.getX() + actor.getWidth() / 2, actor.getY() + actor.getHeight() / 2);
         } else {
-            return pos.set(actor.getX(), actor.getY());
+            return result.set(actor.getX(), actor.getY());
         }
     }
 
-    public NzActorPositionner add() {
+    public Vector2 getPositionPercent() {
+        return getPositionPercent(new Vector2(), this.centerActor);
+    }
+
+    public Vector2 getPositionPercent(Vector2 result, boolean centerActor) {
+        Vector2 positionFix = getPositionFix();
+        return result.set(Percentage.percentage(positionFix.x, getParentWidth()), Percentage.percentage(positionFix.y, getParentHeight()));
+    }
+
+    private float getParentWidth() {
+        return actor.getParent() != null ? actor.getParent().getWidth() : stage.getWidth();
+    }
+
+    private float getParentHeight() {
+        return actor.getParent() != null ? actor.getParent().getHeight() : stage.getHeight();
+    }
+
+    public Vector2 getSizePercent(Vector2 pos) {
+        return pos.set(Percentage.percentage(actor.getWidth(), getParentWidth()), Percentage.percentage(actor.getHeight(), getParentHeight()));
+    }
+
+    public Vector2 getSizeFix(Vector2 pos) {
+        return pos.set(Percentage.percentage(actor.getWidth(), getParentWidth()), Percentage.percentage(actor.getHeight(), getParentHeight()));
+    }
+
+    public Rectangle getBoundsPercent(boolean centerActor) {
+        Rectangle rect = new Rectangle();
+
+        Vector2 positionPercent = getPositionPercent(tmp, centerActor);
+        rect.x = positionPercent.x;
+        rect.y = positionPercent.y;
+
+        Vector2 sizePercent = getSizePercent(tmp);
+        rect.width = sizePercent.x;
+        rect.height = sizePercent.y;
+        return rect;
+    }
+
+    public Rectangle getBoundsFix(boolean centerActor) {
+        Rectangle rect = new Rectangle();
+
+        Vector2 positionPercent = getPositionFix(tmp, centerActor);
+        rect.x = positionPercent.x;
+        rect.y = positionPercent.y;
+
+        Vector2 sizePercent = getSizeFix(tmp);
+        rect.width = sizePercent.x;
+        rect.height = sizePercent.y;
+        return rect;
+    }
+
+    public NzActorPositionner addActor() {
         stage.addActor(actor);
         return this;
     }
 
 
-    public NzActorPositionner setPosition(float x, float y) {
+    public NzActorPositionner setPositionFix(float x, float y) {
         if (centerActor) {
             StagePlacementUtils.placeCenter(actor, x, y);
         } else {
@@ -49,55 +114,55 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setPosition(Vector2 pos) {
-        setPosition(pos.x, pos.y);
+    public NzActorPositionner setPositionFix(Vector2 pos) {
+        setPositionFix(pos.x, pos.y);
         return this;
     }
 
-    public NzActorPositionner setPositionByPercent(Vector2 positionByPercent) {
-        setPositionByPercent(positionByPercent.x, positionByPercent.y);
+    public NzActorPositionner setPositionPercent(Vector2 positionByPercent) {
+        setPositionPercent(positionByPercent.x, positionByPercent.y);
         return this;
     }
 
-    public NzActorPositionner setPositionByPercent(float percentWitdh, float percentHeight) {
+    public NzActorPositionner setPositionPercent(float percentWitdh, float percentHeight) {
         setXPercent(percentWitdh);
         setYPercent(percentHeight);
         return this;
     }
 
-    public NzActorPositionner setSize(float witdh, float height) {
+    public NzActorPositionner setSizeFix(float witdh, float height) {
         actor.setSize(witdh, height);
         return this;
     }
 
-    public NzActorPositionner setSize(float size) {
+    public NzActorPositionner setSizeFix(float size) {
         actor.setSize(size, size);
         return this;
     }
 
-    public NzActorPositionner setSizeByWitdhPercent(float percentW, float percentH) {
+    public NzActorPositionner setSizeWidthPercent(float percentW, float percentH) {
         actor.setWidth(Percentage.value(percentW, stage.getWidth()));
         actor.setHeight(Percentage.value(percentH, stage.getWidth()));
         return this;
     }
 
-    public NzActorPositionner setSizeByWitdhPercent(float percentWitdh) {
+    public NzActorPositionner setSizeWidthPercent(float percentWitdh) {
         float value = Percentage.value(percentWitdh, stage.getWidth());
         actor.setWidth(value);
         actor.setHeight(value);
         return this;
     }
 
-    public NzActorPositionner setSizeByHeightPercent(float percentHeight) {
+    public NzActorPositionner setSizeHeightPercent(float percentHeight) {
         float value = Percentage.value(percentHeight, stage.getHeight());
         actor.setWidth(value);
         actor.setHeight(value);
         return this;
     }
 
-    public NzActorPositionner setSizeByHeightPercent(float percentW, float percentH) {
-        actor.setWidth(Percentage.value(percentW, stage.getHeight()));
-        actor.setHeight(Percentage.value(percentH, stage.getHeight()));
+    public NzActorPositionner setSizeHeightPercent(float percentW, float percentH) {
+        actor.setWidth(Percentage.value(percentW, getParentHeight()));
+        actor.setHeight(Percentage.value(percentH, getParentHeight()));
         return this;
     }
 
@@ -113,7 +178,7 @@ public class NzActorPositionner {
     }
 
     public NzActorPositionner setWidthPercent(float percentWitdh) {
-        actor.setWidth(Percentage.value(percentWitdh, stage.getWidth()));
+        actor.setWidth(Percentage.value(percentWitdh, getParentWidth()));
         return this;
     }
 
@@ -135,26 +200,26 @@ public class NzActorPositionner {
     }
 
     public NzActorPositionner setHeightPercent(float percentHeight) {
-        actor.setHeight(Percentage.value(percentHeight, stage.getHeight()));
+        actor.setHeight(Percentage.value(percentHeight, getParentHeight()));
         return this;
     }
 
     public NzActorPositionner setXPercent(float percentWitdh) {
         if (centerActor) {
-            float percentXValue = Percentage.value(percentWitdh, stage.getWidth());
+            float percentXValue = Percentage.value(percentWitdh, getParentWidth());
             StagePlacementUtils.placeCenterX(actor, percentXValue);
         } else {
-            actor.setX(Percentage.value(percentWitdh, stage.getWidth()));
+            actor.setX(Percentage.value(percentWitdh, getParentWidth()));
         }
         return this;
     }
 
     public NzActorPositionner setYPercent(float percentHeight) {
         if (centerActor) {
-            float percentYValue = Percentage.value(percentHeight, stage.getHeight());
+            float percentYValue = Percentage.value(percentHeight, getParentHeight());
             StagePlacementUtils.placeCenterY(actor, percentYValue);
         } else {
-            actor.setY(Percentage.value(percentHeight, stage.getHeight()));
+            actor.setY(Percentage.value(percentHeight, getParentHeight()));
         }
         return this;
     }
@@ -162,15 +227,15 @@ public class NzActorPositionner {
 
     public NzActorPositionner glueRight() {
         if (centerActor)
-            setXPercent(100 - Percentage.percentage(actor.getWidth(), stage.getWidth()) / 2);
+            setXPercent(100 - Percentage.percentage(actor.getWidth(), getParentWidth()) / 2);
         else
-            setXPercent(100 - Percentage.percentage(actor.getWidth(), stage.getWidth()));
+            setXPercent(100 - Percentage.percentage(actor.getWidth(), getParentWidth()));
         return this;
     }
 
     public NzActorPositionner glueLeft() {
         if (centerActor)
-            setXPercent(Percentage.percentage(actor.getWidth(), stage.getWidth()) / 2);
+            setXPercent(Percentage.percentage(actor.getWidth(), getParentWidth()) / 2);
         else
             setXPercent(0);
         return this;
@@ -178,7 +243,7 @@ public class NzActorPositionner {
 
     public NzActorPositionner glueBottom() {
         if (centerActor)
-            setYPercent(Percentage.percentage(actor.getHeight(), stage.getHeight()) / 2);
+            setYPercent(Percentage.percentage(actor.getHeight(), getParentHeight()) / 2);
         else
             setYPercent(0);
         return this;
@@ -186,29 +251,85 @@ public class NzActorPositionner {
 
     public NzActorPositionner glueTop() {
         if (centerActor)
-            setYPercent(100 - Percentage.percentage(actor.getHeight(), stage.getHeight()) / 2);
+            setYPercent(100 - Percentage.percentage(actor.getHeight(), getParentHeight()) / 2);
         else
-            setYPercent(100 - Percentage.percentage(actor.getHeight(), stage.getHeight()));
+            setYPercent(100 - Percentage.percentage(actor.getHeight(), getParentHeight()));
         return this;
     }
 
-    public NzActorPositionner addX(float percent) {
-        float posPercent = Percentage.percentage(actor.getX(), stage.getWidth());
+    public NzActorPositionner addXPercent(float percent) {
+        float posPercent = Percentage.percentage(actor.getX(), getParentWidth());
         setXPercent(posPercent + percent);
         return this;
     }
 
-    public NzActorPositionner addY(float percent) {
-        float posPercent = Percentage.percentage(actor.getY(), stage.getHeight());
+    public NzActorPositionner addYPercent(float percent) {
+        float posPercent = Percentage.percentage(actor.getY(), getParentHeight());
         setYPercent(posPercent + percent);
         return this;
     }
 
-    public NzActorPositionner add(float percentX, float percentY) {
-        return addX(percentX).addY(percentY);
+    public NzActorPositionner addPercent(float percentX, float percentY) {
+        return addXPercent(percentX).addYPercent(percentY);
     }
 
-    public void visible(boolean b) {
+    public NzActorPositionner visible(boolean b) {
         actor.setVisible(b);
+        return this;
+    }
+
+    public NzActorPositionner save() {
+        return save(NzPosType.Percent, this.centerActor);
+    }
+
+    public NzActorPositionner save(NzPosType posType) {
+        return save(posType, this.centerActor);
+    }
+
+    public NzActorPositionner save(NzPosType posType, boolean centerActor) {
+        Rectangle rectangle;
+        if (posType == NzPosType.Fix) {
+            rectangle = getBoundsPercent(centerActor);
+        } else {
+            rectangle = getBoundsFix(centerActor);
+        }
+        NzPosValue posValue = new NzPosValue(rectangle, centerActor, posType);
+        stageResizer.save(actor, posValue);
+        return this;
+    }
+
+    public NzActorPositionner saveAll(Group group) {
+        return saveAll(group, NzPosType.Percent, this.centerActor);
+    }
+
+    public NzActorPositionner saveAll(Group group, NzPosType posType) {
+        return saveAll(group, posType, this.centerActor);
+    }
+
+    public NzActorPositionner saveAll(Group group, NzPosType posType, boolean centerActor) {
+        StageUtils.fitSizeOnChildren(group);
+        for (Actor child : group.getChildren()) {
+            if (child instanceof Group) {
+                Group childGroup = (Group) child;
+                saveAll(childGroup, posType, centerActor);
+            } else {
+                giveActor(child, centerActor).save(posType, centerActor);
+            }
+        }
+        giveActor(group, centerActor).save(posType, centerActor);
+        return this;
+    }
+
+    public NzActorPositionner set(Actor actor, NzPosValue value) {
+        this.actor = actor;
+        this.centerActor = value.isCenter();
+        Rectangle bounds = value.getBounds();
+        if (value.getType() == NzPosType.Fix) {
+            actor.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
+        } else {
+            setSizePercent(bounds.width, bounds.height);
+            setPositionPercent(bounds.x, bounds.y);
+        }
+        return this;
     }
 }

@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.demo.internal.NzDemoApplication;
 import com.github.fabiitch.nz.gdx.scene2D.SimpleClickListener;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
-import com.github.fabiitch.nz.gdx.scene2D.nz.StagePlacementUtils;
+import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 
 public class TreeDemoSelectorScreen extends ScreenAdapter {
 

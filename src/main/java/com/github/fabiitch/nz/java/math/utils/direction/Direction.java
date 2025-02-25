@@ -56,7 +56,7 @@ public enum Direction {
             return Orientation.Horizontal;
         }
     };
-    
+
     private final static Vector2 tmpV2 = new Vector2();
     public static final Direction[] VALUES = Direction.values();
     public static final Direction[] CLOCKWISE = {Top, Right, Bot, Left};

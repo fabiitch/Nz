@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.SnapshotArray;
-import com.github.fabiitch.nz.gdx.scene2D.nz.StagePositionnerUtils;
-import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 
 public class StageUtils {
@@ -51,7 +49,7 @@ public class StageUtils {
         }
     }
 
-    public static void fitSizeOnChildren(WidgetGroup widgetGroup) {
+    public static void fitSizeOnChildren(Group widgetGroup) {
         SnapshotArray<Actor> children = widgetGroup.getChildren();
         Rectangle rectangle = null;
 
