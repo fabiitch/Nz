@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.scene2D.nz;
+package com.github.fabiitch.nz.gdx.scene2D.nz.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
