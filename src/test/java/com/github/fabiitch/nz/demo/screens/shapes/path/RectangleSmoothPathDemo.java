@@ -46,10 +46,8 @@ public class RectangleSmoothPathDemo extends BaseDemoScreen {
         }
     }
 
-
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void doRender(float dt) {
         shapeRenderer.begin();
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
@@ -61,5 +59,10 @@ public class RectangleSmoothPathDemo extends BaseDemoScreen {
         }
 
         shapeRenderer.end();
+    }
+
+    @Override
+    public void doDispose() {
+
     }
 }

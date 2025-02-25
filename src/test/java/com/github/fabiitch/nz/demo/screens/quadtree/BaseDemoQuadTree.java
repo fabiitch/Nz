@@ -55,9 +55,13 @@ public abstract class BaseDemoQuadTree<T> extends BaseDemoScreen {
 
 
     @Override
-    public void render(float dt) {
-        super.render(dt);
+    public void doRender(float dt) {
         quadRender.render(quadTree, (OrthographicCamera) camera);
+    }
+
+    @Override
+    public void doDispose() {
+
     }
 
     protected void quadRemove(Array<QuadData<T>> quadDatas) {

@@ -19,6 +19,8 @@ import com.github.fabiitch.nz.java.utils.randoms.Randoms;
 @DemoScreen(group = "math.path")
 public class CorridorPathDemo extends BaseDemoScreen {
 
+    Color white = ColorUtils.get(Color.WHITE, 0.2f);
+
     public static void main(String[] args) {
         NzDemoScreenLauncher.startScreen(CorridorPathDemo.class);
     }
@@ -47,11 +49,8 @@ public class CorridorPathDemo extends BaseDemoScreen {
         }
     }
 
-    Color white = ColorUtils.get(Color.WHITE, 0.2f);
-
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void doRender(float dt) {
 
         shapeRenderer.begin();
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -83,5 +82,11 @@ public class CorridorPathDemo extends BaseDemoScreen {
             shapeRenderer.rect(part.getRectWalk());
         }
         shapeRenderer.end();
+    }
+
+
+    @Override
+    public void doDispose() {
+
     }
 }
