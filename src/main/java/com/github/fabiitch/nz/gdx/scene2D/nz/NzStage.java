@@ -1,13 +1,16 @@
 package com.github.fabiitch.nz.gdx.scene2D.nz;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
+import lombok.Getter;
 
 /**
  * {@link Stage} extended with percent placement
@@ -15,28 +18,29 @@ import com.github.fabiitch.nz.java.math.percent.Percentage;
  * <p>
  * //TODO continue , do actions too
  */
+@Getter
 public class NzStage extends Stage {
 
     private NzActorPositionner nzPositionner;
-
-    public NzStage() {
-        super(new ScreenViewport());
-        this.nzPositionner = new NzActorPositionner(this);
-    }
+    private final NzStagePosSaver posSaver;
 
     public NzStage(Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.nzPositionner = new NzActorPositionner(this);
+        this.posSaver = new NzStagePosSaver(this);
     }
 
+    public NzStage() {
+        this(new ScreenViewport(), new SpriteBatch());
+    }
+
+
     public NzStage(Viewport viewport) {
-        super(viewport);
-        this.nzPositionner = new NzActorPositionner(this);
+        this(viewport, new SpriteBatch());
     }
 
     public NzStage(Batch batch) {
-        super(new ScreenViewport(), batch);
-        this.nzPositionner = new NzActorPositionner(this);
+        this(new ScreenViewport(), batch);
     }
 
     public NzActorPositionner getPositionner(Actor actor) {
@@ -89,6 +93,25 @@ public class NzStage extends Stage {
         this.getViewport().update(width, height, true);
     }
 
+    public void saveAll(Group group) {
+        getPositionner(group).save()
+    }
+
+
     private void resizeAllActors(int width, int height) {
+        Array<Actor> actors = getActors();
+        float oldWidth = this.getWidth();
+        float oldheight = this.getHeight();
+
+        float percentWitdh = Percentage.percentage(oldWidth, width);
+        float percentHeight = Percentage.percentage(oldheight, height);
+
+        for (Actor actor : actors) {
+            actor.setWidth(actor.getWidth() / percentWitdh * 100);
+            actor.setHeight(actor.getHeight() / percentHeight * 100);
+
+            actor.setX(actor.getX() / percentWitdh * 100);
+            actor.setY(actor.getY() / percentHeight * 100);
+        }
     }
 }

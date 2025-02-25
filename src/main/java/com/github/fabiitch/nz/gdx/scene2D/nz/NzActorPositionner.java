@@ -11,18 +11,17 @@ import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
-    private NzStage stage;
+    private final NzStage stage;
+    private final NzStagePosSaver posSaver;
 
     private Actor actor;
     private boolean centerActor;
-
-
-    private final NzStageResizer stageResizer = new NzStageResizer(this);
 
     private final Vector2 tmp = new Vector2();
 
     public NzActorPositionner(NzStage stage) {
         this.stage = stage;
+        this.posSaver = stage.getPosSaver();
     }
 
     public NzActorPositionner giveActor(Actor actor, boolean centerActor) {
@@ -72,6 +71,10 @@ public class NzActorPositionner {
         return pos.set(Percentage.percentage(actor.getWidth(), getParentWidth()), Percentage.percentage(actor.getHeight(), getParentHeight()));
     }
 
+    public Rectangle getBoundsPercent() {
+        return getBoundsPercent(this.centerActor);
+    }
+
     public Rectangle getBoundsPercent(boolean centerActor) {
         Rectangle rect = new Rectangle();
 
@@ -83,6 +86,10 @@ public class NzActorPositionner {
         rect.width = sizePercent.x;
         rect.height = sizePercent.y;
         return rect;
+    }
+
+    public Rectangle getBoundsFix() {
+        return getBoundsFix(this.centerActor);
     }
 
     public Rectangle getBoundsFix(boolean centerActor) {
@@ -278,10 +285,6 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner save() {
-        return save(NzPosType.Percent, this.centerActor);
-    }
-
     public NzActorPositionner save(NzPosType posType) {
         return save(posType, this.centerActor);
     }
@@ -294,7 +297,7 @@ public class NzActorPositionner {
             rectangle = getBoundsFix(centerActor);
         }
         NzPosValue posValue = new NzPosValue(rectangle, centerActor, posType);
-        stageResizer.save(actor, posValue);
+        posSaver.save(actor, posValue);
         return this;
     }
 
@@ -320,8 +323,7 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner set(Actor actor, NzPosValue value) {
-        this.actor = actor;
+    public NzActorPositionner set(NzPosValue value) {
         this.centerActor = value.isCenter();
         Rectangle bounds = value.getBounds();
         if (value.getType() == NzPosType.Fix) {
