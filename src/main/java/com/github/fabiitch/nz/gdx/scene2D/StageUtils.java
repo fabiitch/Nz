@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 
@@ -48,6 +47,21 @@ public class StageUtils {
 //            actor.setPosition(center.x + actor.getWidth() / 2, center.y + actor.getHeight() / 2);
         }
     }
+
+    public static Rectangle getChildrenBounds(Group group) {
+        SnapshotArray<Actor> children = group.getChildren();
+        Rectangle rectangle = new Rectangle(group.getX(), group.getY(), 0, 0);
+        float maxWidth = 0, maxHeight = 0;
+        if (children.size > 0) {
+            for (Actor child : children) {
+//                maxWidth = Math.max(maxWidth, child.getX() + child.getWidth());
+            }
+
+//
+        }
+    }
+
+
 
     public static void fitSizeOnChildren(Group widgetGroup) {
         SnapshotArray<Actor> children = widgetGroup.getChildren();
