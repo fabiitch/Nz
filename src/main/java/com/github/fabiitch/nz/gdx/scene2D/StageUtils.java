@@ -38,30 +38,6 @@ public class StageUtils {
         return tmp.set(actor.getX() + actor.getWidth() / 2, actor.getY() + actor.getHeight() / 2);
     }
 
-    public static void centerOnParent(Actor actor) {
-        Group parent = actor.getParent();
-        if (parent != null) {
-//            StagePositionnerUtils.center(actor);
-//            Vector2 center = getCenter(parent);
-//            actor.setPosition(center.x, center.y);
-//            actor.setPosition(center.x + actor.getWidth() / 2, center.y + actor.getHeight() / 2);
-        }
-    }
-
-    public static Rectangle getChildrenBounds(Group group) {
-        SnapshotArray<Actor> children = group.getChildren();
-        Rectangle rectangle = new Rectangle(group.getX(), group.getY(), 0, 0);
-        float maxWidth = 0, maxHeight = 0;
-        if (children.size > 0) {
-            for (Actor child : children) {
-//                maxWidth = Math.max(maxWidth, child.getX() + child.getWidth());
-            }
-
-//
-        }
-    }
-
-
 
     public static void fitSizeOnChildren(Group widgetGroup) {
         SnapshotArray<Actor> children = widgetGroup.getChildren();

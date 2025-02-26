@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.github.fabiitch.nz.gdx.scene2D.nz.sver.NzStagePosSaver;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 import lombok.Getter;
 
@@ -26,8 +26,9 @@ public class NzStage extends Stage {
 
     public NzStage(Viewport viewport, Batch batch) {
         super(viewport, batch);
-        this.nzPositionner = new NzActorPositionner(this);
+        this.getRoot().setSize(viewport.getWorldWidth(), viewport.getWorldHeight());
         this.posSaver = new NzStagePosSaver(this);
+        this.nzPositionner = new NzActorPositionner(this);
     }
 
     public NzStage() {
@@ -89,12 +90,13 @@ public class NzStage extends Stage {
     public void resize(int width, int height) {
         if (width == 0 || height == 0)
             return;
-        resizeAllActors(width, height);
+//        resizeAllActors(width, height);
         this.getViewport().update(width, height, true);
+//        posSaver.repack();
     }
 
-    public void saveAll(Group group) {
-        getPositionner(group).save()
+    public void savePos() {
+        posSaver.save(this.getRoot());
     }
 
 

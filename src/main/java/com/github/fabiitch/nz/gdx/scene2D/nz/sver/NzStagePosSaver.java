@@ -1,8 +1,10 @@
-package com.github.fabiitch.nz.gdx.scene2D.nz;
+package com.github.fabiitch.nz.gdx.scene2D.nz.sver;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.github.fabiitch.nz.gdx.scene2D.nz.NzActorPositionner;
+import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
 import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
 import lombok.Getter;
@@ -36,26 +38,45 @@ public class NzStagePosSaver {
         this.defaultCenter = center;
     }
 
-    private void putSave(Actor actor, NzPosValue posValue) {
+    public void save(Actor actor) {
+        save(actor, defaultType, defaultCenter);
+    }
+    public void saveOnly(Actor actor) {
+        saveOnly(actor, defaultType, defaultCenter);
+    }
+
+    public void update(Actor actor) {
+        NzPosValue posValue = repackMap.get(actor);
+        if(posValue != null) {
+            stage.getPositionner(actor).set(posValue);
+        }
+        if (actor instanceof Group) {
+            Group group = (Group) actor;
+            for (Actor child : group.getChildren()) {
+                update(child);
+            }
+        }
+    }
+
+    public void saveOnly(Actor actor, NzPosType posType, boolean centerActor) {
+        NzActorPositionner positionner = stage.getPositionner(actor, centerActor);
+        Rectangle rectangle;
+        if (posType == NzPosType.Fix) {
+            rectangle = positionner.getBoundsFix();
+        } else {
+            rectangle = positionner.getBoundsPercent();
+        }
+        NzPosValue posValue = new NzPosValue(rectangle, centerActor, posType);
         repackMap.put(actor, posValue);
     }
 
     public void save(Actor actor, NzPosType posType, boolean centerActor) {
-        NzActorPositionner positionner = stage.getPositionner(actor, centerActor);
-        Rectangle rectangle;
-        if (posType == NzPosType.Fix) {
-            rectangle = positionner.getBoundsPercent();
-        } else {
-            rectangle = positionner.getBoundsFix();
-        }
-        NzPosValue posValue = new NzPosValue(rectangle, centerActor, posType);
-        repackMap.put(actor, posValue);
-        if(actor instanceof  Group){
+        saveOnly(actor, posType, centerActor);
+        if (actor instanceof Group) {
             Group group = (Group) actor;
             for (Actor child : group.getChildren()) {
-                c
+                save(child, posType, centerActor);
             }
-
         }
     }
 
@@ -81,6 +102,4 @@ public class NzStagePosSaver {
         }
         alreadyPack.clear();
     }
-
-
 }

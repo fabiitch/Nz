@@ -3,8 +3,7 @@ package com.github.fabiitch.nz.gdx.scene2D.nz;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
+import com.github.fabiitch.nz.gdx.scene2D.nz.sver.NzStagePosSaver;
 import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
 import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
@@ -51,7 +50,7 @@ public class NzActorPositionner {
     }
 
     public Vector2 getPositionPercent(Vector2 result, boolean centerActor) {
-        Vector2 positionFix = getPositionFix();
+        Vector2 positionFix = getPositionFix(tmp, centerActor);
         return result.set(Percentage.percentage(positionFix.x, getParentWidth()), Percentage.percentage(positionFix.y, getParentHeight()));
     }
 
@@ -285,53 +284,26 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner save(NzPosType posType) {
-        return save(posType, this.centerActor);
-    }
-
-    public NzActorPositionner save(NzPosType posType, boolean centerActor) {
-        Rectangle rectangle;
-        if (posType == NzPosType.Fix) {
-            rectangle = getBoundsPercent(centerActor);
-        } else {
-            rectangle = getBoundsFix(centerActor);
-        }
-        NzPosValue posValue = new NzPosValue(rectangle, centerActor, posType);
-        posSaver.save(actor, posValue);
-        return this;
-    }
-
-    public NzActorPositionner saveAll(Group group) {
-        return saveAll(group, NzPosType.Percent, this.centerActor);
-    }
-
-    public NzActorPositionner saveAll(Group group, NzPosType posType) {
-        return saveAll(group, posType, this.centerActor);
-    }
-
-    public NzActorPositionner saveAll(Group group, NzPosType posType, boolean centerActor) {
-        StageUtils.fitSizeOnChildren(group);
-        for (Actor child : group.getChildren()) {
-            if (child instanceof Group) {
-                Group childGroup = (Group) child;
-                saveAll(childGroup, posType, centerActor);
-            } else {
-                giveActor(child, centerActor).save(posType, centerActor);
-            }
-        }
-        giveActor(group, centerActor).save(posType, centerActor);
-        return this;
-    }
-
     public NzActorPositionner set(NzPosValue value) {
         this.centerActor = value.isCenter();
         Rectangle bounds = value.getBounds();
         if (value.getType() == NzPosType.Fix) {
-            actor.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
+            setPositionFix(bounds.x, bounds.y);
+            setSizeFix(bounds.width, bounds.height);
         } else {
             setSizePercent(bounds.width, bounds.height);
             setPositionPercent(bounds.x, bounds.y);
         }
         return this;
+    }
+
+    public NzActorPositionner save(){
+        posSaver.save(actor);
+        return this;
+    }
+
+    public void update() {
+        posSaver.saveOnly(actor);
+        posSaver.update(actor);
     }
 }
