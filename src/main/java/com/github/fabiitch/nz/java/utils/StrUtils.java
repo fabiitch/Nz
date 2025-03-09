@@ -1,6 +1,13 @@
 package com.github.fabiitch.nz.java.utils;
 
+import java.text.Normalizer;
+
 public class StrUtils {
+
+    public static  String replaceAccent(String str){
+        String normalized = Normalizer.normalize(str, Normalizer.Form.NFD);
+        return normalized.replaceAll("\\p{M}", ""); // Supprime les marques diacritiques
+    }
     public static String replaceAllNonAlphanumeric(String str) {
         return str.replaceAll("[^A-Za-z0-9]", "");
     }
