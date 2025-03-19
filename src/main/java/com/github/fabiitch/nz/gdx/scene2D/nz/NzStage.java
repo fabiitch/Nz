@@ -44,6 +44,16 @@ public class NzStage extends Stage {
         this(new ScreenViewport(), batch);
     }
 
+    public NzActorPositionner getNewPositionner(Actor actor, boolean center) {
+        NzActorPositionner positionner = new NzActorPositionner(this);
+        positionner.giveActor(actor, center);
+        return positionner;
+    }
+
+    public NzActorPositionner getNewPositionner(Actor actor) {
+        return getNewPositionner(actor, true);
+    }
+
     public NzActorPositionner getPositionner(Actor actor) {
         nzPositionner.giveActor(actor, true);
         return nzPositionner;

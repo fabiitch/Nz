@@ -135,4 +135,10 @@ public class StageUtils {
             widgetGroup.setSize(rectangle.width, rectangle.height);
         }
     }
+    public static void printBounds(Actor actor) {
+        Rectangle bounds = getBounds(actor);
+        String name  = actor.getName() != null ? actor.getName() : actor.getClass().getSimpleName();
+        System.out.println(name+" "+ bounds);
+    }
+
 }
