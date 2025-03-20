@@ -62,8 +62,17 @@ public class NzActorPositionner {
         return actor.getParent() != null ? actor.getParent().getHeight() : stage.getHeight();
     }
 
+
+    public float getWidthPercent() {
+        return Percentage.percentage(actor.getWidth(), getParentWidth());
+    }
+
+    public float getHeightPercent() {
+        return Percentage.percentage(actor.getHeight(), getParentHeight());
+    }
+
     public Vector2 getSizePercent(Vector2 pos) {
-        return pos.set(Percentage.percentage(actor.getWidth(), getParentWidth()), Percentage.percentage(actor.getHeight(), getParentHeight()));
+        return pos.set(getWidthPercent(), getHeightPercent());
     }
 
     public Vector2 getSizeFix(Vector2 pos) {
