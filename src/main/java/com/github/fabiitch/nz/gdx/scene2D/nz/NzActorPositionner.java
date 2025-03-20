@@ -3,6 +3,8 @@ package com.github.fabiitch.nz.gdx.scene2D.nz;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.sver.NzStagePosSaver;
 import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
@@ -314,5 +316,13 @@ public class NzActorPositionner {
     public void update() {
         posSaver.saveOnly(actor);
         posSaver.update(actor);
+    }
+
+    public NzActorPositionner fitChildrenSize() {
+        if(actor instanceof Group){
+            Group g = (Group)actor;
+            StageUtils.fitSizeOnChildren(g);
+        }
+        return this;
     }
 }
