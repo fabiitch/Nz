@@ -205,8 +205,13 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner xFix(float x) {
+    public NzActorPositionner setXFix(float x) {
         actor.setX(x);
+        return this;
+    }
+
+    public NzActorPositionner setYFix(float y) {
+        actor.setY(y);
         return this;
     }
 
@@ -218,6 +223,16 @@ public class NzActorPositionner {
 
     public NzActorPositionner setHeightPercent(float percentHeight) {
         actor.setHeight(Percentage.value(percentHeight, getParentHeight()));
+        return this;
+    }
+
+    public NzActorPositionner setWidthFix(float widthFix) {
+        actor.setWidth(widthFix);
+        return this;
+    }
+
+    public NzActorPositionner setHeightFix(float heightFix) {
+        actor.setHeight(heightFix);
         return this;
     }
 
@@ -308,7 +323,7 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner save(){
+    public NzActorPositionner save() {
         posSaver.save(actor);
         return this;
     }
@@ -319,10 +334,11 @@ public class NzActorPositionner {
     }
 
     public NzActorPositionner fitChildrenSize() {
-        if(actor instanceof Group){
-            Group g = (Group)actor;
+        if (actor instanceof Group) {
+            Group g = (Group) actor;
             StageUtils.fitSizeOnChildren(g);
         }
         return this;
     }
+
 }
