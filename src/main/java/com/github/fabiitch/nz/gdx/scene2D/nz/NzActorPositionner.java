@@ -310,6 +310,34 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner setFull() {
+        return setSizePercent(100)
+                .setPositionPercent(0, 0);
+    }
+
+    public NzActorPositionner center() {
+        return centerX().centerY();
+    }
+
+    public NzActorPositionner centerX() {
+        boolean oldCenterActor = centerActor;
+        this.centerActor = true;
+        setXPercent(50);
+        this.centerActor = oldCenterActor;
+        return this;
+    }
+
+    public NzActorPositionner centerY() {
+        boolean oldCenterActor = centerActor;
+        this.centerActor = true;
+        setYPercent(50);
+        this.centerActor = oldCenterActor;
+        return this;
+    }
+
+
+    //=============================
+
     public NzActorPositionner set(NzPosValue value) {
         this.centerActor = value.isCenter();
         Rectangle bounds = value.getBounds();
@@ -340,5 +368,6 @@ public class NzActorPositionner {
         }
         return this;
     }
+
 
 }
