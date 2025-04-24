@@ -31,6 +31,11 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner centerActor(boolean centerActor){
+        this.centerActor = centerActor;
+        return this;
+    }
+
     public Vector2 getPositionFix() {
         return getPositionFix(new Vector2(), this.centerActor);
     }
@@ -311,8 +316,9 @@ public class NzActorPositionner {
     }
 
     public NzActorPositionner setFull() {
-        return setSizePercent(100)
-                .setPositionPercent(0, 0);
+        boolean oldCenter = this.centerActor;
+        return centerActor(false).setSizePercent(100)
+                .setPositionPercent(0, 0).centerActor(oldCenter);
     }
 
     public NzActorPositionner center() {
