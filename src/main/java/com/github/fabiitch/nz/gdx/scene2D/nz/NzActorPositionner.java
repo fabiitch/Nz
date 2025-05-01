@@ -36,6 +36,12 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner zIndex(int zIndex){
+        this.actor.setZIndex(zIndex);
+        return this;
+    }
+
+
     public Vector2 getPositionFix() {
         return getPositionFix(new Vector2(), this.centerActor);
     }
