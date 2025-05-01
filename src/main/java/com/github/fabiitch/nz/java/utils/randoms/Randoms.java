@@ -11,6 +11,10 @@ import java.util.List;
 @UtilityClass
 public class Randoms {
 
+    public static int get(int max) {
+        return MathUtils.random(max);
+    }
+
     @SafeVarargs
     public static <T> T get(T... tab) {
         return tab[MathUtils.random(tab.length - 1)];
