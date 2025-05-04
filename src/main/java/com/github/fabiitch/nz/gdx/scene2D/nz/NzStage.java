@@ -102,6 +102,7 @@ public class NzStage extends Stage {
             return;
 //        resizeAllActors(width, height);
         this.getViewport().update(width, height, true);
+        getRoot().setSize(width, height);
         posSaver.repack();
     }
 
@@ -126,4 +127,6 @@ public class NzStage extends Stage {
             actor.setY(actor.getY() / percentHeight * 100);
         }
     }
+
+
 }
