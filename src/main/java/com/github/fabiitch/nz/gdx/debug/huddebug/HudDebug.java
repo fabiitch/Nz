@@ -288,10 +288,4 @@ public class HudDebug {
         return null;
     }
 
-    public HudDebugEvent addEvent(HudDebugEvent event) {
-        if (instance != null) {
-            return instance.eventManager.addEvent(event);
-        }
-        return null;
-    }
 }

@@ -15,6 +15,14 @@ public class Randoms {
         return MathUtils.random(max);
     }
 
+    public static int get(int min, int max) {
+        return MathUtils.random(min, max);
+    }
+
+    public static boolean bool() {
+        return MathUtils.randomBoolean();
+    }
+
     @SafeVarargs
     public static <T> T get(T... tab) {
         return tab[MathUtils.random(tab.length - 1)];

@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class HudDebugEventManager extends Group {
     private final static String PREFIX_KEY = "HudDebugEvent##";
+    private final static float DEFAULT_DURATION_S = 5f;
 
     private final Array<HudDebugEvent> events = new Array<>();
     private final Array<HudDebugEvent> eventFilteredTmp = new Array<>();
@@ -21,7 +22,24 @@ public class HudDebugEventManager extends Group {
     private long idCount;
 
     private final Pool<HudDebugEvent> eventPool = new ReflectionPool<>(HudDebugEvent.class);
-
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        for (int i = 0; i < events.size; i++) {
+            HudDebugEvent event = events.get(i);
+            event.elapsedTime += delta;
+            if (event.elapsedTime >= event.duration) {
+                HudDebug.remove(PREFIX_KEY + event.id);
+                eventMap.remove(event.key);
+            } else {
+                HudDebug.update(PREFIX_KEY + event.id, event.value);
+                eventFilteredTmp.add(event);
+            }
+        }
+        events.clear();
+        events.addAll(eventFilteredTmp);
+        eventFilteredTmp.clear();
+    }
     public HudDebugEvent addEvent(String key, Object value, float duration, Color color, HudDebugPosition position) {
         HudDebugEvent event = eventMap.get(key);
         if (event != null) {
@@ -46,6 +64,8 @@ public class HudDebugEventManager extends Group {
             event.color = color;
             event.position = position;
             HudDebug.add(PREFIX_KEY + event.id, event.key, event.value, position, event.color);
+            events.add(event);
+            eventMap.put(event.key, event);
         }
 
         return event;
@@ -60,44 +80,10 @@ public class HudDebugEventManager extends Group {
     }
 
     public HudDebugEvent addEvent(String key, Object value) {
-        return this.addEvent(key, value, 10f, Color.WHITE, HudDebugPosition.TOP_RIGHT);
+        return this.addEvent(key, value, DEFAULT_DURATION_S, Color.WHITE, HudDebugPosition.TOP_RIGHT);
     }
 
-    public HudDebugEvent addEvent(HudDebugEvent event) {
-        HudDebugEvent existEvent = eventMap.get(event.key);
 
-        if (existEvent != null) {
-            existEvent.value = event.value;
-            HudDebug.update(PREFIX_KEY + existEvent.id, event.value);
-            eventPool.free(event);
-            return existEvent;
-        } else {
-            if (idCount == Long.MAX_VALUE)
-                idCount = 0;
-            event.id = idCount++;
-            HudDebug.add(PREFIX_KEY + event.id, event.key, event.value, HudDebugPosition.TOP_RIGHT, event.color);
-            events.add(event);
-            eventMap.put(event.key, event);
-        }
-        return event;
-    }
-
-    @Override
-    public void act(float delta) {
-        for (int i = 0; i < events.size; i++) {
-            HudDebugEvent event = events.get(i);
-            event.elapsedTime += delta;
-            if (event.elapsedTime >= event.duration) {
-                remove(event);
-            } else {
-                HudDebug.update(PREFIX_KEY + event.id, event.value);
-                eventFilteredTmp.add(event);
-            }
-        }
-        events.clear();
-        events.addAll(eventFilteredTmp);
-        eventFilteredTmp.clear();
-    }
 
     public void remove(HudDebugEvent event) {
         HudDebug.remove(PREFIX_KEY + event.id);
