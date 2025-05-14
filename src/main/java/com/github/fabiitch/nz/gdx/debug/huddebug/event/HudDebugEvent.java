@@ -2,32 +2,24 @@ package com.github.fabiitch.nz.gdx.debug.huddebug.event;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Pool;
+import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class HudDebugEvent implements Pool.Poolable {
-
-    public Color color;
+    public long id;
     public String key;
     public Object value;
     public float duration;//seconds
-    public long millisStart;
-    public long id;
+    public Color color;
 
-    private HudDebugEvent() {
+    public HudDebugPosition position;
+    public float elapsedTime;
 
-    }
-
-    public static HudDebugEvent get(String key, Object value, float duration, Color color) {
-        HudDebugEvent event = new HudDebugEvent(); //TODO pools
-        event.key = key;
-        event.value = value;
-        event.duration = duration;
-        event.color = color;
-        event.millisStart = System.currentTimeMillis(); //TODO
-        return event;
-    }
 
     @Override
     public void reset() {
-
+        elapsedTime = 0;
+        value = null;
     }
 }
