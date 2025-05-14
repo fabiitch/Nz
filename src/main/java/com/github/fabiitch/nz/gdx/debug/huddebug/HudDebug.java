@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
+import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEvent;
+import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEventManager;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugContainer;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugLabel;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
@@ -14,6 +16,7 @@ public class HudDebug {
     public static HudDebug instance;
     private static Array<HudDebugPreInitItem> arrayBeforeInit;
     private final HudDebugContainer container;
+    private final HudDebugEventManager eventManager;
 
     public HudDebug(Stage stage, Skin skin) {
         this.container = new HudDebugContainer(stage, skin);
@@ -26,6 +29,8 @@ public class HudDebug {
             HudDebug.arrayBeforeInit.clear();
             HudDebug.arrayBeforeInit = null;
         }
+        eventManager = new HudDebugEventManager();
+        stage.addActor(eventManager);
     }
 
     public static void clear() {
@@ -97,6 +102,7 @@ public class HudDebug {
         if (instance != null)
             instance.container.changeColor(key, color);
     }
+
     public static void changePosition(String key, HudDebugPosition position) {
         if (instance != null)
             instance.container.changePosition(key, position);
@@ -252,5 +258,40 @@ public class HudDebug {
         } else {
             instance.container.createLabel(positionOnstage, key, name, value, color);
         }
+    }
+
+    public static HudDebugEvent addEvent(String key, Object value, float duration, Color color, HudDebugPosition position) {
+        if (instance != null) {
+            return instance.eventManager.addEvent(key, value, duration, color, position);
+        }
+        return null;
+    }
+
+    public static HudDebugEvent addEvent(String key, Object value, float duration, Color color) {
+        if (instance != null) {
+            return instance.eventManager.addEvent(key, value, duration, color);
+        }
+        return null;
+    }
+
+    public static HudDebugEvent addEvent(String key, Object value, float duration) {
+        if (instance != null) {
+            return instance.eventManager.addEvent(key, value, duration);
+        }
+        return null;
+    }
+
+    public static HudDebugEvent addEvent(String key, Object value) {
+        if (instance != null) {
+            return instance.eventManager.addEvent(key, value);
+        }
+        return null;
+    }
+
+    public HudDebugEvent addEvent(HudDebugEvent event) {
+        if (instance != null) {
+            return instance.eventManager.addEvent(event);
+        }
+        return null;
     }
 }
