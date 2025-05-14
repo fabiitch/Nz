@@ -19,7 +19,12 @@ public class HudDebugEvent implements Pool.Poolable {
 
     @Override
     public void reset() {
-        elapsedTime = 0;
+        id = 0;
+        key =null;
         value = null;
+        duration =0f;
+        color = Color.WHITE;
+        position = null;
+        elapsedTime = 0;
     }
 }
