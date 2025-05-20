@@ -13,10 +13,8 @@ import java.util.HashMap;
 public class HudDebugEventManager extends Group {
     private final static String PREFIX_KEY = "HudDebugEvent##";
     private final static float DEFAULT_DURATION_S = 5f;
-
     private final Array<HudDebugEvent> events = new Array<>();
     private final Array<HudDebugEvent> eventFilteredTmp = new Array<>();
-
     private final HashMap<String, HudDebugEvent> eventMap = new HashMap<>();
 
     private long idCount;
@@ -58,6 +56,7 @@ public class HudDebugEventManager extends Group {
         } else {
             event = eventPool.obtain();
             event.key = key;
+            event.id = idCount++;
 
             event.value = value;
             event.duration = duration;
