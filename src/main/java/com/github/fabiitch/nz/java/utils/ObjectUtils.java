@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ObjectUtils {
 
-    public boolean isNotNull(Object... objects) {
+    public boolean allNotNull(Object... objects) {
         for (Object object : objects) {
             if (object == null)
                 return false;
@@ -13,7 +13,11 @@ public class ObjectUtils {
         return true;
     }
 
-    public boolean isNull(Object... objects) {
-        return !isNotNull(objects);
+    public boolean allNull(Object... objects) {
+        for (Object object : objects) {
+            if (object != null)
+                return false;
+        }
+        return true;
     }
 }
