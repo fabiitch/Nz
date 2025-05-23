@@ -12,4 +12,5 @@ public class Durations {
     public static float millisToSeconds(long startMillis, long endMillis) {
         return TimeConverter.nanoToSecond(endMillis - startMillis);
     }
+
 }
