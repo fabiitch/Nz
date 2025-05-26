@@ -9,6 +9,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TextureUtils {
 
+
+    //TODO reste en mémoire
     public static Texture getColorTexture(Color color) {
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);

@@ -91,6 +91,17 @@ public class NzStage extends Stage {
         return this;
     }
 
+    public NzStage removeActors(Actor... actors) {
+        for (Actor actor : actors)
+            removeActor(actor);
+        return this;
+    }
+
+    public NzStage removeActor(Actor actor) {
+        getRoot().removeActor(actor);
+        return this;
+    }
+
     @Override
     public void dispose() {
         super.dispose();
