@@ -15,6 +15,15 @@ public class StageUtils {
     private static final Vector2 tmpv2 = new Vector2();
     private static final Rectangle tmpRect = new Rectangle();
 
+    public static void debugPos(Actor actor) {
+    debugPos(actor,actor.getName());
+    }
+
+    public static void debugPos(Actor actor, String name) {
+        System.out.println("Actor[" + name + "] pos: " + actor.getX() + ", " + actor.getY());
+        System.out.println("Actor[" + name + "] size: " + actor.getWidth() + ", " + actor.getHeight());
+    }
+
     public static void buttonFullDisabled(Button button, boolean b) {
         button.setTouchable(b ? Touchable.disabled : Touchable.enabled);
         button.setDisabled(b);
@@ -135,10 +144,11 @@ public class StageUtils {
             widgetGroup.setSize(rectangle.width, rectangle.height);
         }
     }
+
     public static void printBounds(Actor actor) {
         Rectangle bounds = getBounds(actor);
-        String name  = actor.getName() != null ? actor.getName() : actor.getClass().getSimpleName();
-        System.out.println(name+" "+ bounds);
+        String name = actor.getName() != null ? actor.getName() : actor.getClass().getSimpleName();
+        System.out.println(name + " " + bounds);
     }
 
 }
