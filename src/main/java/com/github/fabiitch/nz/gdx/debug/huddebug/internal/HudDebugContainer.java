@@ -75,6 +75,8 @@ public class HudDebugContainer {
         if (label != null) {
             label.updateNameAndValue(name, value);
             HudContainerUtils.setDebugLabelPosition(stage, label);
+        }else{
+            createLabel(HudDebugPosition.TOP_RIGHT, key, name, value, Color.WHITE);
         }
     }
 

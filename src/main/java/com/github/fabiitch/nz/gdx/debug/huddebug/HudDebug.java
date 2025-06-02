@@ -126,6 +126,9 @@ public class HudDebug {
     public static void update(String key, String value) {
         if (instance != null)
             instance.container.update(key, value);
+        else{
+            add(key, value);
+        }
     }
 
     private static void addInitList(String key, String name, Object value, HudDebugPosition positionOnStage, Color color) {
@@ -240,6 +243,9 @@ public class HudDebug {
         addMiddleRight(name, name, value, Color.WHITE);
     }
 
+    public static void add(String name, Object value) {
+        add(name, name, value, HudDebugPosition.TOP_RIGHT, Color.WHITE);
+    }
     public static void add(String name, Object value, HudDebugPosition positionOnstage) {
         add(name, name, value, positionOnstage, Color.WHITE);
     }
