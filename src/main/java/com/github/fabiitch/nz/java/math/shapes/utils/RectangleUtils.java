@@ -27,6 +27,9 @@ public class RectangleUtils {
 
     private RectangleUtils() {
     }
+    public static Rectangle fromAwt(java.awt.Rectangle awtRect){
+        return new Rectangle(awtRect.x, awtRect.y, awtRect.width, awtRect.height);
+    }
 
 
     public static boolean isALine(Rectangle rectangle) {
