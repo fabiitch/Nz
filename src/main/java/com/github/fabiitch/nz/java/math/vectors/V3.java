@@ -15,6 +15,10 @@ public class V3 {
         return new Vector3();
     }
 
+    public static Vector3 v(Vector2 v2) {
+        return new Vector3(v2.x, v2.y, 0);
+    }
+
     public static Vector3 v(float x, float y, float z) {
         return new Vector3(x, y, z);
     }
@@ -36,6 +40,7 @@ public class V3 {
         v.y = values.y;
         return v;
     }
+
     public static Vector3 add(Vector3 v, Vector2 values) {
         v.x += values.x;
         v.y += values.y;
