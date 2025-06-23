@@ -173,4 +173,11 @@ public class RectangleBuilder {
         directionStart.getReverse().addTo(rectCenter, startPos + sizeOrientation / 2);
         return withOrientationCenter(directionStart.getOrientation(), rectCenter, sizeOrientation, sizeRect);
     }
+
+    public static java.awt.Rectangle toAwt(Rectangle bounds) {
+        return new java.awt.Rectangle((int) bounds.x,
+                (int) bounds.y, (int)
+                bounds.width, (int)
+                bounds.height);
+    }
 }
