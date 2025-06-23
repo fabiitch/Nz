@@ -472,6 +472,25 @@ public class RectangleUtils {
                 MathUtils.ceil(rect.width), MathUtils.ceil(rect.height));
     }
 
+    public static Rectangle merge(Rectangle rectangle, Circle circle) {
+        float circleLeft = circle.x - circle.radius;
+        float circleRight = circle.x + circle.radius;
+        float circleBottom = circle.y - circle.radius;
+        float circleTop = circle.y + circle.radius;
+
+        float newX = Math.min(rectangle.x, circleLeft);
+        float newY = Math.min(rectangle.y, circleBottom);
+        float newRight = Math.max(rectangle.x + rectangle.width, circleRight);
+        float newTop = Math.max(rectangle.y + rectangle.height, circleTop);
+
+        rectangle.x = newX;
+        rectangle.y = newY;
+        rectangle.width = newRight - newX;
+        rectangle.height = newTop - newY;
+
+        return rectangle;
+    }
+
     public static Rectangle mergeFloorCeil(Rectangle root, Rectangle other) {
         float minX = (float) Math.floor(Math.min(root.x, other.x));
         float maxX = (float) Math.ceil(Math.max(root.x + root.width, other.x + other.width));
