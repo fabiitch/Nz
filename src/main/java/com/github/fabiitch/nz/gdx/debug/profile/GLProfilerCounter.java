@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.debug;
+package com.github.fabiitch.nz.gdx.debug.profile;
 
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
@@ -17,21 +17,42 @@ public class GLProfilerCounter extends GLProfiler {
         super(graphics);
     }
 
-
-    private final IntCounter callCounter = new IntCounter();
-    private final IntCounter drawCallCounter = new IntCounter();
+    private final IntCounter callsCounter = new IntCounter();
+    private final IntCounter drawCallsCounter = new IntCounter();
     private final IntCounter shaderSwitchesCounter = new IntCounter();
     private final IntCounter textureBindingsCounter = new IntCounter();
 
     public void update() {
-        callCounter.put(getCalls());
-        drawCallCounter.put(getDrawCalls());
+        callsCounter.put(getCalls());
+        drawCallsCounter.put(getDrawCalls());
         shaderSwitchesCounter.put(getShaderSwitches());
         textureBindingsCounter.put(getTextureBindings());
     }
+
+
+    public float getCallsAverage() {
+        return callsCounter.average;
+    }
+
+    public float getDrawCallAverage() {
+        return drawCallsCounter.average;
+    }
+
+    public float getShaderSwitchesAverage() {
+        return shaderSwitchesCounter.average;
+    }
+
+    public float getTextureBindingsAverage() {
+        return textureBindingsCounter.average;
+    }
+
+    public float getVertexCountAverage() {
+        return getVertexCount().average;
+    }
+
     public void clear() {
-        callCounter.reset();
-        drawCallCounter.reset();
+        callsCounter.reset();
+        drawCallsCounter.reset();
         shaderSwitchesCounter.reset();
         textureBindingsCounter.reset();
     }
