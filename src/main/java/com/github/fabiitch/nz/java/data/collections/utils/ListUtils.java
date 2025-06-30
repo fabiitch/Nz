@@ -8,6 +8,20 @@ import java.util.List;
 
 @UtilityClass
 public class ListUtils {
+
+    public static <T> List<T> takeXLast(List<T> list, int xLast) {
+        int sizeList = list.size();
+        int take = Math.min(xLast, sizeList);
+
+        List<T> result = new ArrayList<>(take);
+        for (int i = 0; i < take; i++) {
+            T data = list.get(sizeList - i - 1);
+            result.add(data);
+        }
+        return result;
+    }
+
+
     public static <T> List<T> asList(T... values) {
         Arrays.asList(values);
         List<T> list = new ArrayList<>(Arrays.asList(values));
