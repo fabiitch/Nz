@@ -27,9 +27,10 @@ public class CameraUtils {
 
         return new Rectangle(x, y, width, height);
     }
+
     public static Circle project(Circle circle, Camera camera) {
         Vector3 center = new Vector3(circle.x, circle.y, 0);
-        Vector3 edge   = new Vector3(circle.x + circle.radius, circle.y, 0); // point à droite du centre
+        Vector3 edge = new Vector3(circle.x + circle.radius, circle.y, 0); // point à droite du centre
 
         camera.project(center);
         camera.project(edge);
