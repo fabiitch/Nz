@@ -4,10 +4,10 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class GdxUtils {
+
     public static long getHeapMb() {
         return Gdx.app.getJavaHeap() / (1024L * 1024L);
     }
-
     public static long getNativeHeapMb() {
         return Gdx.app.getNativeHeap() / (1024L * 1024L);
     }
