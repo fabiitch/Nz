@@ -21,8 +21,10 @@ import lombok.Getter;
 @Getter
 public class NzStage extends Stage {
 
-    private NzActorPositionner nzPositionner;
+    private NzActorPositionner  nzPositionner;
     private final NzStagePosSaver posSaver;
+
+    private Actor fakeActorIfNull = new Actor();
 
     public NzStage(Viewport viewport, Batch batch) {
         super(viewport, batch);
@@ -60,12 +62,14 @@ public class NzStage extends Stage {
     }
 
     public NzActorPositionner getPositionner(Actor actor, boolean center) {
+        if (actor == null)
+            actor = fakeActorIfNull;
         nzPositionner.giveActor(actor, center);
         return nzPositionner;
     }
 
     public NzActorPositionner add(Actor actor, boolean center) {
-        nzPositionner.giveActor(actor, center).addActor();
+        getPositionner(actor, center).addActor();
         return nzPositionner;
     }
 
