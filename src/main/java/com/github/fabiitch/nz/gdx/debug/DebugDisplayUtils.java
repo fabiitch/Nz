@@ -31,10 +31,13 @@ public class DebugDisplayUtils {
     }
 
     public static String printSeconds(float f) {
+        return "" + (int) f;
+    }
+    public static String printSeconds(float f, int maxDecimal) {
         String floating = printFloat(f);
         int indexDot = floating.indexOf(",");
         int charAfterDot = floating.length() - indexDot;
-        return floating.subSequence(0, indexDot + Math.min(charAfterDot, 3)) + "s";
+        return floating.subSequence(0, indexDot + Math.min(charAfterDot, maxDecimal)) + "s";
     }
 
     public static String printValue(Object o) {

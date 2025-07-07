@@ -262,4 +262,9 @@ public class IntVector2 implements Vector<IntVector2> {
         this.y = 0;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
 }
