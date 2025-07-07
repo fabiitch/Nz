@@ -347,6 +347,12 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner copy(Actor actor){
+        setSizeFix(actor.getWidth(), actor.getHeight());
+        setPositionFix(actor.getX(), actor.getY());
+        return this;
+    }
+
 
     //=============================
 

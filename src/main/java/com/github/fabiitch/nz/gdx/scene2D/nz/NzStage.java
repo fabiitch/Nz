@@ -21,7 +21,7 @@ import lombok.Getter;
 @Getter
 public class NzStage extends Stage {
 
-    private NzActorPositionner  nzPositionner;
+    private NzActorPositionner nzPositionner;
     private final NzStagePosSaver posSaver;
 
     private Actor fakeActorIfNull = new Actor();
@@ -90,14 +90,17 @@ public class NzStage extends Stage {
     }
 
     public NzStage addActors(Actor... actors) {
-        for (Actor actor : actors)
-            addActor(actor);
+        for (Actor actor : actors) {
+            if (actor != null)
+                addActor(actor);
+        }
         return this;
     }
 
     public NzStage removeActors(Actor... actors) {
         for (Actor actor : actors)
-            removeActor(actor);
+            if (actor != null)
+                removeActor(actor);
         return this;
     }
 

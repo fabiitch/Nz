@@ -9,6 +9,10 @@ public class ScreenUtils {
 
     }
 
+    public static Vector2 getScreenResolution(){
+        return new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
     public static Vector2 getScreenCenter(Vector2 pos) {
         return pos.set(getScreenCenterX(), getScreenCenterY());
     }
