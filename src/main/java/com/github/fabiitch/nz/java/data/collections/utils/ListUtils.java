@@ -9,6 +9,10 @@ import java.util.List;
 @UtilityClass
 public class ListUtils {
 
+    public static <T> T getLast(List<T> list) {
+        return list.get(list.size()-1);
+    }
+
     public static <T> List<T> takeXLast(List<T> list, int xLast) {
         int sizeList = list.size();
         int take = Math.min(xLast, sizeList);
