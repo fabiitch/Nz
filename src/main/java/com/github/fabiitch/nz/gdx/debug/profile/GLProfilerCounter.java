@@ -22,7 +22,8 @@ public class GLProfilerCounter extends GLProfiler {
     private final IntCounter shaderSwitchesCounter = new IntCounter();
     private final IntCounter textureBindingsCounter = new IntCounter();
 
-    public void update() {
+    @Override
+    public void reset() {
         callsCounter.put(getCalls());
         drawCallsCounter.put(getDrawCalls());
         shaderSwitchesCounter.put(getShaderSwitches());
