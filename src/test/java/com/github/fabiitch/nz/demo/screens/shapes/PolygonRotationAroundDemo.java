@@ -11,7 +11,7 @@ import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.input.InputUtils;
-import com.github.fabiitch.nz.gdx.utils.ScreenUtils;
+import com.github.fabiitch.nz.gdx.utils.GdxScreenUtils;
 import com.github.fabiitch.nz.java.math.shapes.builders.PolygonBuilder;
 import com.github.fabiitch.nz.java.math.utils.Rotation;
 import com.github.fabiitch.nz.java.math.vectors.v2.V2;
@@ -24,7 +24,7 @@ public class PolygonRotationAroundDemo extends BaseDemoScreen {
 
     private Polygon polygon;
 
-    private Vector2 rotationPosition = ScreenUtils.getScreenCenter(new Vector2());
+    private Vector2 rotationPosition = GdxScreenUtils.getScreenCenter(new Vector2());
 
     public PolygonRotationAroundDemo() {
         HudDebug.addTopLeft("NOT GOOD", "NOT GOOD", Color.RED);
