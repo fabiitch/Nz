@@ -2,12 +2,10 @@ package com.github.fabiitch.nz.gdx.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import lombok.experimental.UtilityClass;
 
-public class ScreenUtils {
-
-    private ScreenUtils() {
-
-    }
+@UtilityClass
+public class GdxScreenUtils {
 
     public static Vector2 getScreenResolution(){
         return new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
