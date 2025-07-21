@@ -1,9 +1,5 @@
 package com.github.fabiitch.nz.java.data.quad;
 
-import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.r;
-import static com.github.fabiitch.gdxunit.shape.ShapeTestBuilder.v2;
-
-
 //TODO cassé refaire le quadtree
 //@Disabled
 //public class QuadTreeTest {

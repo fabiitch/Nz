@@ -3,7 +3,10 @@ package com.github.fabiitch.nz.java.ai.btree.impl;
 import com.github.fabiitch.nz.java.ai.btree.impl.seletor.DownSelector;
 import com.github.fabiitch.nz.java.ai.btree.impl.seletor.MainSelector;
 import com.github.fabiitch.nz.java.ai.btree.impl.seletor.UpSelector;
-import com.github.fabiitch.nz.java.ai.btree.impl.task.*;
+import com.github.fabiitch.nz.java.ai.btree.impl.task.BFastDownTask;
+import com.github.fabiitch.nz.java.ai.btree.impl.task.BFastUpTask;
+import com.github.fabiitch.nz.java.ai.btree.impl.task.BSlowDownTask;
+import com.github.fabiitch.nz.java.ai.btree.impl.task.BSlowUpTask;
 
 public class BTestMain {
 

@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.Pool;
 import com.github.fabiitch.nz.java.data.quadtree.utils.QuadTreeUtils;
 import com.github.fabiitch.nz.java.math.shapes.intersectors.IntersectorCircle;
-import com.github.fabiitch.nz.java.math.shapes.utils.CircleUtils;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 import lombok.Getter;
 
