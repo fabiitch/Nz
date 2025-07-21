@@ -1,7 +1,6 @@
 package com.github.fabiitch.nz.gdx.debug.huddebug;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 

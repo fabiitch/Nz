@@ -3,7 +3,6 @@ package com.github.fabiitch.nz.java.math.shapes;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.github.fabiitch.gdxunit.vectors.VTestUtils;
-import com.github.fabiitch.nz.java.math.shapes.Triangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

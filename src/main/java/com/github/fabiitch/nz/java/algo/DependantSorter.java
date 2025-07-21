@@ -1,6 +1,5 @@
 package com.github.fabiitch.nz.java.algo;
 
-import com.badlogic.gdx.utils.StringBuilder;
 import com.github.fabiitch.nz.gdx.log.StrFormat;
 
 import java.util.ArrayList;

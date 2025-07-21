@@ -1,14 +1,11 @@
 package com.github.fabiitch.nz.demo.screens.scene2D.huddebug;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.github.fabiitch.nz.demo.internal.BaseDemoScreen;
 import com.github.fabiitch.nz.demo.internal.selectors.DemoScreen;
 import com.github.fabiitch.nz.gdx.debug.DebugDisplayUtils;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEvent;
-import com.github.fabiitch.nz.gdx.debug.huddebug.event.HudDebugEventManager;
 import com.github.fabiitch.nz.java.time.timers.TimeLocker;
 import com.github.fabiitch.nz.java.utils.randoms.Randoms;
 

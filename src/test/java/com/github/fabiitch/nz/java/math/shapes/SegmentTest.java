@@ -1,7 +1,6 @@
 package com.github.fabiitch.nz.java.math.shapes;
 
 import com.badlogic.gdx.math.Vector2;
-import com.github.fabiitch.nz.java.math.shapes.Segment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
