@@ -1,6 +1,8 @@
 package com.github.fabiitch.nz.java.time.timers;
 
 
+import lombok.Getter;
+
 /**
  * Locked during duration time
  */
@@ -10,6 +12,8 @@ public class TimeLocker {
     public boolean active = true;
 
     public float duration;
+
+    @Getter
     private float accumulator;
 
     public TimeLocker(float duration) {
@@ -42,6 +46,10 @@ public class TimeLocker {
             return end;
         }
         return false;
+    }
+
+    public float getReast() {
+        return duration - accumulator;
     }
 
     public TimeLocker config(boolean autoReset, boolean active) {
