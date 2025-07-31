@@ -120,7 +120,7 @@ public class NzStage extends Stage {
             return;
 //        resizeAllActors(width, height);
         this.getViewport().update(width, height, true);
-//        getRoot().setSize(width, height);
+        getRoot().setSize(width, height);
 //        posSaver.repack();
     }
 
