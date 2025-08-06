@@ -151,4 +151,13 @@ public class StageUtils {
         System.out.println(name + " " + bounds);
     }
 
+
+    public static float getSizeRatio(Actor actor) {
+        float height = actor.getHeight();
+        if (height == 0f) return 1f;
+
+        float ratio = actor.getWidth() / height;
+        return Math.round(ratio * 1000f) / 1000f; // ex: 1.777777 → 1.778
+    }
+
 }

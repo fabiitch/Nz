@@ -84,12 +84,12 @@ public enum Direction {
         return new Vector2(vector).scl(dst);
     }
 
-    public Vector2 getVector() {
-        return vector.cpy();
-    }
-
     public boolean isHorizontal() {
         return getOrientation() == Orientation.Horizontal;
+    }
+
+    public Vector2 getVector() {
+        return vector.cpy();
     }
 
     public boolean isVertical() {
