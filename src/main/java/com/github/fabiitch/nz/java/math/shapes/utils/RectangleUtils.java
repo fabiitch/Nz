@@ -30,8 +30,9 @@ public class RectangleUtils {
     public static Rectangle fromAwt(java.awt.Rectangle awtRect){
         return new Rectangle(awtRect.x, awtRect.y, awtRect.width, awtRect.height);
     }
-
-
+    public static boolean isEmpty(Rectangle rectangle) {
+        return rectangle.getWidth() == 0 && rectangle.getHeight() == 0;
+    }
     public static boolean isALine(Rectangle rectangle) {
         return rectangle.getWidth() == 0 || rectangle.getHeight() == 0;
     }
