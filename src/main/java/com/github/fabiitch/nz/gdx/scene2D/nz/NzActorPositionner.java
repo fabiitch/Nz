@@ -147,6 +147,10 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner setPositionPercent(float positionByPercent) {
+        setPositionPercent(positionByPercent, positionByPercent);
+        return this;
+    }
     public NzActorPositionner setPositionPercent(Vector2 positionByPercent) {
         setPositionPercent(positionByPercent.x, positionByPercent.y);
         return this;
