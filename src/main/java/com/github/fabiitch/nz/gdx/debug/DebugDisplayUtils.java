@@ -15,7 +15,6 @@ public class DebugDisplayUtils {
 
     private final static StringBuilder STRING_BUILDER = new StringBuilder();
 
-
     private static final Float nan = Float.valueOf(Float.NaN);//TODO ??
 
     public static String printNano(float f) {
