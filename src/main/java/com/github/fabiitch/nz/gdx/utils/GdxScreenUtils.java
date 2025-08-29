@@ -28,9 +28,13 @@ public class GdxScreenUtils {
         return Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
     }
 
-    public static Vector2 getPercentPos(float percentX, float percentY) {
+    public static Vector2 getPercentPos(float percentX, float percentY, Vector2 result) {
         float x = Percentage.value(percentX, Gdx.graphics.getWidth());
         float y = Percentage.value(percentY, Gdx.graphics.getHeight());
-        return new Vector2(x, y);
+        return result.set(x, y);
+    }
+
+    public static Vector2 getPercentPos(float percentX, float percentY) {
+        return  getPercentPos(percentX, percentY, new Vector2());
     }
 }
