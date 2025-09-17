@@ -145,6 +145,4 @@ public class NzStage extends Stage {
             actor.setY(actor.getY() / percentHeight * 100);
         }
     }
-
-
 }
