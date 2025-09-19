@@ -24,7 +24,7 @@ public class NzStage extends Stage {
     private NzActorPositionner nzPositionner;
     private final NzStagePosSaver posSaver;
 
-    private Actor fakeActorIfNull = new Actor();
+    private final Actor fakeActorIfNull = new Actor();
 
     public NzStage(Viewport viewport, Batch batch) {
         super(viewport, batch);
