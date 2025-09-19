@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.SnapshotArray;
+import com.github.fabiitch.nz.java.math.percent.Percentage;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 
@@ -16,7 +17,7 @@ public class StageUtils {
     private static final Rectangle tmpRect = new Rectangle();
 
     public static void debugPos(Actor actor) {
-    debugPos(actor,actor.getName());
+        debugPos(actor, actor.getName());
     }
 
     public static void debugPos(Actor actor, String name) {
@@ -49,7 +50,6 @@ public class StageUtils {
     public static Rectangle getBounds(Actor actor, Rectangle result) {
         return result.set(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
     }
-
 
     public static Vector2 getCenter(Actor actor) {
         return tmpv2.set(actor.getX() + actor.getWidth() / 2, actor.getY() + actor.getHeight() / 2);

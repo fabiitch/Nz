@@ -173,6 +173,13 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner setBoundsPercent(Rectangle bounds) {
+        setSizePercent(bounds.width, bounds.height);
+        setPositionPercent(bounds.x, bounds.y);
+        return this;
+    }
+
+
     public NzActorPositionner setBoundsFix(Rectangle bounds) {
         actor.setSize(bounds.width, bounds.height);
         setPositionFix(bounds.x, bounds.y);
