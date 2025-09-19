@@ -188,7 +188,7 @@ public class NzActorPositionner {
 
     public NzActorPositionner setSizeWidthPercent(float percentW, float percentH) {
         actor.setWidth(Percentage.value(percentW, stage.getWidth()));
-        actor.setHeight(Percentage.value(percentH, stage.getWidth()));
+        actor.setHeight(Percentage.value(percentH, stage.getHeight()));
         return this;
     }
 
