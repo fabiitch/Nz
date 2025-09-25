@@ -5,10 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
-import com.github.fabiitch.nz.gdx.scene2D.nz.sver.NzStagePosSaver;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
 import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
-import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
-import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosType;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosValue;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {

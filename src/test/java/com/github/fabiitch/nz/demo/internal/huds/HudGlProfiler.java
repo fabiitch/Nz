@@ -11,6 +11,12 @@ public class HudGlProfiler {
     HudDebugPosition STAGE_POSITION = HudDebugPosition.TOP_RIGHT;
     Color color = Color.RED;
 
+    public HudGlProfiler(HudDebugPosition stagePosition, Color color) {
+        this.STAGE_POSITION = stagePosition;
+        this.color = color;
+        start();
+    }
+
     public HudGlProfiler() {
         start();
     }

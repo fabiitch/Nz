@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.fabiitch.nz.gdx.scene2D.nz.sver.NzStagePosSaver;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 import lombok.Getter;
 

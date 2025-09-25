@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.scene2D.nz.value;
+package com.github.fabiitch.nz.gdx.scene2D.nz.saver.value;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
