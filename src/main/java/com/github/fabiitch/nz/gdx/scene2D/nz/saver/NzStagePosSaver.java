@@ -1,12 +1,12 @@
-package com.github.fabiitch.nz.gdx.scene2D.nz.sver;
+package com.github.fabiitch.nz.gdx.scene2D.nz.saver;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzActorPositionner;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
-import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosType;
-import com.github.fabiitch.nz.gdx.scene2D.nz.value.NzPosValue;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosType;
+import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosValue;
 import lombok.Getter;
 import lombok.Setter;
 
