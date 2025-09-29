@@ -9,7 +9,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TextureUtils {
 
-
     //TODO reste en mémoire
     public static Texture getColorTexture(Color color) {
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -21,10 +20,5 @@ public class TextureUtils {
     }
     public static Texture getColorTexture(Color color, float alpha) {
         return getColorTexture(ColorUtils.get(color, alpha));
-    }
-
-    public static  void drawCenter(float x, float y, Texture texture , SpriteBatch spriteBatch) {
-
-
     }
 }
