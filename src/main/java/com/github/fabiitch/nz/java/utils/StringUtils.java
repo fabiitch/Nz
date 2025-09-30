@@ -9,7 +9,7 @@ public class StringUtils {
             return false;
         }
         if (contains == null) {
-            return false
+            return false;
         }
        return str.toLowerCase().contains(contains.toLowerCase());
     }
