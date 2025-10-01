@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class StringUtils {
+
     public static boolean lowerContains(String str, String contains) {
         if (str == null) {
             return false;
