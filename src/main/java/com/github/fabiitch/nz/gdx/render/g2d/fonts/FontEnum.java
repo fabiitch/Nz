@@ -7,7 +7,13 @@ import lombok.Getter;
 @Getter
 public enum FontEnum {
     CD("OpenSans-Bold"),
-    Info("OpenSans-Bold");
+    Info("OpenSans-Bold"),
+
+    Title ("Exo2-Bold"),
+    SubTitle ("Exo2-SemiBold"),
+    Text ("Exo2-Regular"),
+
+    ;
 
     private final String fileName;
 
