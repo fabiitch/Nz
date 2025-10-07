@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
-import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosType;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosValue;
+import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
@@ -176,6 +176,12 @@ public class NzActorPositionner {
     public NzActorPositionner setBoundsPercent(Rectangle bounds) {
         setSizePercent(bounds.width, bounds.height);
         setPositionPercent(bounds.x, bounds.y);
+        return this;
+    }
+
+    public NzActorPositionner setBoundsPercent(float x, float y, float width, float height) {
+        setSizePercent(width, height);
+        setPositionPercent(x, y);
         return this;
     }
 
