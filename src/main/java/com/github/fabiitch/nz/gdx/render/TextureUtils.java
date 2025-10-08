@@ -5,10 +5,15 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TextureUtils {
+
+    public static TextureRegionDrawable getDrawable(Texture texture) {
+        return new TextureRegionDrawable(texture);
+    }
 
     public static Texture createVerticalGradient(int width, int height, Color top, Color bottom) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
