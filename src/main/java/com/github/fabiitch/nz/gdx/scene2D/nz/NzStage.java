@@ -148,4 +148,10 @@ public class NzStage extends Stage {
             actor.setY(actor.getY() / percentHeight * 100);
         }
     }
+
+    public void applySizePercent(float width, float height, Actor... actors) {
+        for (Actor actor : actors) {
+            getPositionner(actor).setSizePercent(width, height);
+        }
+    }
 }
