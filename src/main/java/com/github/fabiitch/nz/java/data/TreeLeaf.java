@@ -1,7 +1,6 @@
 package com.github.fabiitch.nz.java.data;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.StringBuilder;
 
 public class TreeLeaf<L, T extends TreeLeaf<L, ?>> {
     protected T parent;
