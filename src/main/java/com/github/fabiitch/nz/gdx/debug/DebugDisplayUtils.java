@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.StringBuilder;
+import com.badlogic.gdx.utils.CharArray;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.github.fabiitch.nz.java.utils.CommonStrings;
 
@@ -13,7 +13,7 @@ import com.github.fabiitch.nz.java.utils.CommonStrings;
  */
 public class DebugDisplayUtils {
 
-    private final static StringBuilder STRING_BUILDER = new StringBuilder();
+    private final static CharArray CHAR_ARRAY = new CharArray();
 
     private static final Float nan = Float.valueOf(Float.NaN);//TODO ??
 
@@ -106,15 +106,15 @@ public class DebugDisplayUtils {
 
     public static String polygon(Polygon polygon) {
         float[] transformedVertices = polygon.getTransformedVertices();
-        STRING_BUILDER.clear();
+        CHAR_ARRAY.clear();
         for (int i = 0; i < transformedVertices.length ; i += 2) {
-            STRING_BUILDER.append("(").append(printFloat(transformedVertices[i], 1));
-            STRING_BUILDER.append(",").append(printFloat(transformedVertices[i + 1], 1));
-            STRING_BUILDER.append(")");
+            CHAR_ARRAY.append("(").append(printFloat(transformedVertices[i], 1));
+            CHAR_ARRAY.append(",").append(printFloat(transformedVertices[i + 1], 1));
+            CHAR_ARRAY.append(")");
             if (i < transformedVertices.length - 2)
-                STRING_BUILDER.append(" ");
+                CHAR_ARRAY.append(" ");
 
         }
-        return "Polygon[ " + STRING_BUILDER + " ]";
+        return "Polygon[ " + CHAR_ARRAY + " ]";
     }
 }

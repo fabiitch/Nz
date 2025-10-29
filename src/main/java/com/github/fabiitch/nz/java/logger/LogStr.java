@@ -1,6 +1,7 @@
 package com.github.fabiitch.nz.java.logger;
 
-import com.badlogic.gdx.utils.StringBuilder;
+
+import com.badlogic.gdx.utils.CharArray;
 
 public class LogStr {
 
@@ -16,12 +17,12 @@ public class LogStr {
     }
 
     public static String separator(int n) {
-        StringBuilder sb = new StringBuilder(); //TODO pools ?
-        sb.append(SEPARATOR);
+        CharArray charArray = new CharArray(); //TODO pools ?
+        charArray.append(SEPARATOR);
         for (int i = 1; i < n; i++) {
-            sb.append("\n");
-            sb.append(SEPARATOR);
+            charArray.append("\n");
+            charArray.append(SEPARATOR);
         }
-        return sb.toString();
+        return charArray.toString();
     }
 }
