@@ -13,10 +13,11 @@ public class FileUtils {
         int inc = 1;
         String extension = getExtension(fileName);
         String baseName = getBaseName(fileName);
-        Path resolve = folder.toPath().resolve(baseName + "-" + inc + extension);
+        String suffix = extension.isEmpty() ? "" : "." + extension;
+        Path resolve = folder.toPath().resolve(baseName + "-" + inc + suffix);
         while (new File(resolve.toUri()).exists()) {
             inc++;
-            resolve = folder.toPath().resolve(baseName + "-" + inc + extension);
+            resolve = folder.toPath().resolve(baseName + "-" + inc + suffix);
         }
         return resolve.toFile();
     }
