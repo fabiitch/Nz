@@ -4,12 +4,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.github.fabiitch.nz.gdx.render.g2d.utils.SpriteUtils;
-import com.github.fabiitch.nz.gdx.scene2D.utils.StageUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosType;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosValue;
 import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
+import com.github.fabiitch.nz.gdx.scene2D.utils.StageUtils;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
@@ -270,11 +269,19 @@ public class NzActorPositionner {
         actor.setHeight(heightFix);
         return this;
     }
+
+    public NzActorPositionner squareMinPercent(float percentWidth, float percentHeight) {
+        float valueWidth = Percentage.value(percentWidth, getParentWidth());
+        float valueHeight = Percentage.value(percentHeight, getParentHeight());
+        return squareFix(Math.min(valueWidth, valueHeight));
+    }
+
     public NzActorPositionner squareFix(float sizeFix) {
         setWidthFix(sizeFix);
         setHeightFix(sizeFix);
         return this;
     }
+
     public NzActorPositionner setXPercent(float percentWitdh) {
         if (centerActor) {
             float percentXValue = Percentage.value(percentWitdh, getParentWidth());
@@ -328,15 +335,29 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner addXFix(float x) {
+        actor.setX(actor.getX() + x);
+        return this;
+    }
+
+    public NzActorPositionner addYFix(float y) {
+        actor.setY(actor.getY() + y);
+        return this;
+    }
+
+    public NzActorPositionner addFix(float x, float y) {
+        return addXFix(x).addYFix(y);
+    }
+
     public NzActorPositionner addXPercent(float percent) {
-        float posPercent = Percentage.percentage(actor.getX(), getParentWidth());
-        setXPercent(posPercent + percent);
+        float posPercent = Percentage.value(percent, getParentWidth());
+        actor.setX(actor.getX() + posPercent );
         return this;
     }
 
     public NzActorPositionner addYPercent(float percent) {
-        float posPercent = Percentage.percentage(actor.getY(), getParentHeight());
-        setYPercent(posPercent + percent);
+        float posPercent = Percentage.percentage(percent, getParentHeight());
+        actor.setY(actor.getY() + posPercent );
         return this;
     }
 
@@ -430,7 +451,5 @@ public class NzActorPositionner {
         }
         return this;
     }
-
-
 
 }
