@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.scene2D;
+package com.github.fabiitch.nz.gdx.scene2D.listener;
 
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;

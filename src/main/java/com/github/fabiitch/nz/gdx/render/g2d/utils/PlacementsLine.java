@@ -6,6 +6,10 @@ public class PlacementsLine {
 
     }
 
+    public static float[] posMiddle(int numberObject, float totalWidth) {
+      return posMiddle(numberObject, totalWidth, totalWidth/numberObject);
+    }
+
     /**
      * Remplit l'espace restant avec le spacebetween et margin
      */

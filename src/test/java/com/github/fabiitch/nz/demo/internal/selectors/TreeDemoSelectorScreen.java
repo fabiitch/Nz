@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.fabiitch.nz.demo.internal.NzDemoApplication;
-import com.github.fabiitch.nz.gdx.scene2D.SimpleClickListener;
+import com.github.fabiitch.nz.gdx.scene2D.listener.SimpleClickListener;
 import com.github.fabiitch.nz.gdx.scene2D.nz.NzStage;
 import com.github.fabiitch.nz.gdx.scene2D.nz.utils.StagePlacementUtils;
 
