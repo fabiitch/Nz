@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.gdx.scene2D;
+package com.github.fabiitch.nz.gdx.scene2D.utils;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.SnapshotArray;
-import com.github.fabiitch.nz.java.math.percent.Percentage;
 import com.github.fabiitch.nz.java.math.shapes.utils.RectangleUtils;
 
 

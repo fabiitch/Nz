@@ -28,19 +28,19 @@ public class StagePositionnerUtils {
     }
 
     public static void addXPercent(Actor actor, float xPercent) {
-        actor.setX(actor.getX() + getParentWitdhPercent(actor, xPercent));
+        actor.setX(actor.getX() + getWidthPercent(actor, xPercent));
     }
 
     public static void addYPercent(Actor actor, float yPercent) {
-        actor.setY(actor.getY() + getParentHeightPercent(actor, yPercent));
+        actor.setY(actor.getY() + getHeightPercent(actor, yPercent));
     }
 
     public static void subXPercent(Actor actor, float xPercent) {
-        actor.setX(actor.getX() - getParentWitdhPercent(actor, xPercent));
+        actor.setX(actor.getX() - getWidthPercent(actor, xPercent));
     }
 
     public static void subYPercent(Actor actor, float yPercent) {
-        actor.setY(actor.getY() - getParentWitdhPercent(actor, yPercent));
+        actor.setY(actor.getY() - getWidthPercent(actor, yPercent));
     }
 
 
@@ -54,7 +54,7 @@ public class StagePositionnerUtils {
     }
 
     public static void topPercent(Actor actor, float yPercent) {
-        actor.setY(getParentHeight(actor) - actor.getHeight() - getParentHeightPercent(actor, yPercent));
+        actor.setY(getParentHeight(actor) - actor.getHeight() - getHeightPercent(actor, yPercent));
     }
 
     public static void bottom(Actor actor) {
@@ -66,19 +66,19 @@ public class StagePositionnerUtils {
     }
 
     public static void bottomPercent(Actor actor, float yPercent) {
-        actor.setY(getParentHeightPercent(actor, yPercent));
+        actor.setY(getHeightPercent(actor, yPercent));
     }
 
     public static void right(Actor actor) {
-        actor.setX(getParentWitdh(actor) - actor.getHeight());
+        actor.setX(getParentWidth(actor) - actor.getHeight());
     }
 
     public static void right(Actor actor, float value) {
-        actor.setX(getParentWitdh(actor) - actor.getHeight() - value);
+        actor.setX(getParentWidth(actor) - actor.getHeight() - value);
     }
 
     public static void rightPercent(Actor actor, float xPercent) {
-        actor.setX(getParentWitdh(actor) - actor.getHeight() - getParentWitdhPercent(actor, xPercent));
+        actor.setX(getParentWidth(actor) - actor.getHeight() - getWidthPercent(actor, xPercent));
     }
 
     public static void left(Actor actor) {
@@ -90,11 +90,11 @@ public class StagePositionnerUtils {
     }
 
     public static void leftPercent(Actor actor, float xPercent) {
-        actor.setX(getParentWitdhPercent(actor, xPercent));
+        actor.setX(getWidthPercent(actor, xPercent));
     }
 
     public static void centerX(Actor actor) {
-        actor.setX(getParentWitdh(actor) / 2 - actor.getWidth() / 2);
+        actor.setX(getParentWidth(actor) / 2 - actor.getWidth() / 2);
     }
 
     public static void centerY(Actor actor) {
@@ -107,11 +107,11 @@ public class StagePositionnerUtils {
     }
 
     public static void centerXPercent(Actor actor, float xPercent) {
-        actor.setX(getParentWitdhPercent(actor, xPercent) - actor.getWidth() / 2);
+        actor.setX(getWidthPercent(actor, xPercent) - actor.getWidth() / 2);
     }
 
     public static void centerYPercent(Actor actor, float yPercent) {
-        actor.setY(getParentHeightPercent(actor, yPercent) - actor.getHeight() / 2);
+        actor.setY(getHeightPercent(actor, yPercent) - actor.getHeight() / 2);
     }
 
     public static void centerAt(Actor actor, float x, float y) {
@@ -132,7 +132,7 @@ public class StagePositionnerUtils {
     }
 
     //========================================================
-    private static float getParentWitdh(Actor actor) {
+    private static float getParentWidth(Actor actor) {
         Group parent = actor.getParent();
         if (parent == null || parent.getWidth() == 0)
             return Gdx.graphics.getWidth();
@@ -146,14 +146,14 @@ public class StagePositionnerUtils {
         return parent.getHeight();
     }
 
-    private static float getParentWitdhPercent(Actor actor, float percent) {
+    private static float getWidthPercent(Actor actor, float percent) {
         Group parent = actor.getParent();
         if (parent == null || parent.getWidth() == 0)
             return Percentage.value(percent, Gdx.graphics.getWidth());
         return Percentage.value(percent, parent.getWidth());
     }
 
-    private static float getParentHeightPercent(Actor actor, float percent) {
+    private static float getHeightPercent(Actor actor, float percent) {
         Group parent = actor.getParent();
         if (parent == null || parent.getHeight() == 0)
             return Percentage.value(percent, Gdx.graphics.getHeight());

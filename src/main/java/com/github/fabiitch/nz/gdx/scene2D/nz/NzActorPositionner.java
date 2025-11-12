@@ -4,7 +4,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.github.fabiitch.nz.gdx.scene2D.StageUtils;
+import com.github.fabiitch.nz.gdx.render.g2d.utils.SpriteUtils;
+import com.github.fabiitch.nz.gdx.scene2D.utils.StageUtils;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosType;
 import com.github.fabiitch.nz.gdx.scene2D.nz.saver.value.NzPosValue;
@@ -74,7 +75,6 @@ public class NzActorPositionner {
     private float getParentHeight() {
         return actor.getParent() != null ? actor.getParent().getHeight() : stage.getHeight();
     }
-
 
     public float getWidthPercent() {
         return Percentage.percentage(actor.getWidth(), getParentWidth());
@@ -270,7 +270,11 @@ public class NzActorPositionner {
         actor.setHeight(heightFix);
         return this;
     }
-
+    public NzActorPositionner squareFix(float sizeFix) {
+        setWidthFix(sizeFix);
+        setHeightFix(sizeFix);
+        return this;
+    }
     public NzActorPositionner setXPercent(float percentWitdh) {
         if (centerActor) {
             float percentXValue = Percentage.value(percentWitdh, getParentWidth());
@@ -355,20 +359,32 @@ public class NzActorPositionner {
         return centerX().centerY();
     }
 
-    public NzActorPositionner centerX() {
+    public NzActorPositionner center(float widthPercent, float heightPercent) {
+        return centerX(widthPercent).centerY(heightPercent);
+    }
+
+    public NzActorPositionner centerX(float percent) {
         boolean oldCenterActor = centerActor;
         this.centerActor = true;
-        setXPercent(50);
+        setXPercent(percent);
+        this.centerActor = oldCenterActor;
+        return this;
+    }
+
+    public NzActorPositionner centerX() {
+        return centerX(50);
+    }
+
+    public NzActorPositionner centerY(float percent) {
+        boolean oldCenterActor = centerActor;
+        this.centerActor = true;
+        setYPercent(percent);
         this.centerActor = oldCenterActor;
         return this;
     }
 
     public NzActorPositionner centerY() {
-        boolean oldCenterActor = centerActor;
-        this.centerActor = true;
-        setYPercent(50);
-        this.centerActor = oldCenterActor;
-        return this;
+        return centerY(50);
     }
 
     public NzActorPositionner copy(Actor actor) {
@@ -377,6 +393,10 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner glueRight(Actor target) {
+        actor.setX(target.getX() + target.getWidth());
+        return this;
+    }
 
     //=============================
 
@@ -410,6 +430,7 @@ public class NzActorPositionner {
         }
         return this;
     }
+
 
 
 }
