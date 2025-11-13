@@ -33,4 +33,9 @@ public class HudDebugTracker {
         HudDebug.remove(key);
         trackers.remove(key);
     }
+
+    public void clear(){
+        trackers.keys().forEach(HudDebug::remove);
+        trackers.clear();
+    }
 }

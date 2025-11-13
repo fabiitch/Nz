@@ -1,4 +1,4 @@
-package com.github.fabiitch.nz.demo.internal.huds;
+package com.github.fabiitch.nz.gdx.debug.huddebug.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -22,7 +22,7 @@ public class HudGlProfiler {
     }
 
     public void start() {
-        if (glProfiler != null) {
+        if (glProfiler == null) {
             this.glProfiler = new GLProfiler(Gdx.graphics);
             glProfiler.enable();
             HudDebug.add("GlListener enabled", glProfiler + "", STAGE_POSITION, color);
