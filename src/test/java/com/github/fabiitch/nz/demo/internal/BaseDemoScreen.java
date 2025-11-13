@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.fabiitch.nz.gdx.debug.huddebug.impl.HudGlProfiler;
+import com.github.fabiitch.nz.gdx.debug.huddebug.impl.HudDebugGLProfiler;
 import com.github.fabiitch.nz.demo.internal.input.InputKeyBinder;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
@@ -30,7 +30,7 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
     protected HudDebug hudDebug;
     protected HudDebugTracker hudDebugTracker;
     protected DT_Tracker dt_tracker;
-    protected HudGlProfiler hudGlProfiler;
+    protected HudDebugGLProfiler hudDebugGlProfiler;
 
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
     protected InputKeyBinder inputKeyBinder = new InputKeyBinder();
@@ -55,7 +55,7 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
         this.hudDebugTracker = new HudDebugTracker();
         this.dt_tracker = new DT_Tracker(HudDebugPosition.TOP_LEFT, Color.WHITE);
         shapeRenderer.setAutoShapeType(true);
-        hudGlProfiler = new HudGlProfiler();
+        hudDebugGlProfiler = new HudDebugGLProfiler();
 
         fpsLogger = new FPSLogger(50);
 
@@ -114,7 +114,7 @@ public abstract class BaseDemoScreen extends ScreenAdapter {
         shapeRenderer.setProjectionMatrix(camera.combined);
         doRender(dt);
         dt_tracker.end();
-        hudGlProfiler.update();
+        hudDebugGlProfiler.update();
     }
 
     @Override

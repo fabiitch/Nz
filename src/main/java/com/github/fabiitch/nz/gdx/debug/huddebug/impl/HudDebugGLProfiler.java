@@ -6,18 +6,18 @@ import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 
-public class HudGlProfiler {
+public class HudDebugGLProfiler {
     private GLProfiler glProfiler;
     HudDebugPosition STAGE_POSITION = HudDebugPosition.TOP_RIGHT;
     Color color = Color.RED;
 
-    public HudGlProfiler(HudDebugPosition stagePosition, Color color) {
+    public HudDebugGLProfiler(HudDebugPosition stagePosition, Color color) {
         this.STAGE_POSITION = stagePosition;
         this.color = color;
         start();
     }
 
-    public HudGlProfiler() {
+    public HudDebugGLProfiler() {
         start();
     }
 
