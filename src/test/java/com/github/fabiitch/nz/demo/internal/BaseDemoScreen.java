@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.fabiitch.nz.demo.internal.huds.HudGlProfiler;
+import com.github.fabiitch.nz.gdx.debug.huddebug.impl.HudGlProfiler;
 import com.github.fabiitch.nz.demo.internal.input.InputKeyBinder;
 import com.github.fabiitch.nz.gdx.debug.DT_Tracker;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
