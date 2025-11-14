@@ -6,8 +6,12 @@ public class PlacementsLine {
 
     }
 
+    public static float[] posMiddle(int numberObject) {
+        return posMiddle(numberObject, 100f, 100f / numberObject);
+    }
+
     public static float[] posMiddle(int numberObject, float totalWidth) {
-      return posMiddle(numberObject, totalWidth, totalWidth/numberObject);
+        return posMiddle(numberObject, totalWidth, totalWidth / numberObject);
     }
 
     /**
