@@ -26,7 +26,7 @@ public enum FontEnum {
     }
 
     public String getFileName() {
-        return "fonts/" + fileName + getExtension();
+        return "shared/fonts/" + fileName + getExtension();
     }
 
 }
