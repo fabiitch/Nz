@@ -351,13 +351,13 @@ public class NzActorPositionner {
 
     public NzActorPositionner addXPercent(float percent) {
         float posPercent = Percentage.value(percent, getParentWidth());
-        actor.setX(actor.getX() + posPercent );
+        actor.setX(actor.getX() + posPercent);
         return this;
     }
 
     public NzActorPositionner addYPercent(float percent) {
         float posPercent = Percentage.percentage(percent, getParentHeight());
-        actor.setY(actor.getY() + posPercent );
+        actor.setY(actor.getY() + posPercent);
         return this;
     }
 
@@ -416,6 +416,21 @@ public class NzActorPositionner {
 
     public NzActorPositionner glueRight(Actor target) {
         actor.setX(target.getX() + target.getWidth());
+        return this;
+    }
+
+    public NzActorPositionner glueLeft(Actor target) {
+        actor.setX(target.getX() - actor.getWidth());
+        return this;
+    }
+
+    public NzActorPositionner glueTop(Actor target) {
+        actor.setX(target.getY() + target.getWidth());
+        return this;
+    }
+
+    public NzActorPositionner glueBottom(Actor target) {
+        actor.setX(target.getY() - actor.getWidth());
         return this;
     }
 
