@@ -62,7 +62,7 @@ public class NzStagePosSaver {
         NzActorPositionner positionner = stage.getPositionner(actor, centerActor);
         Rectangle rectangle;
         if (posType == NzPosType.Fix) {
-            rectangle = positionner.getBoundsFix();
+            rectangle = positionner.getBounds();
         } else {
             rectangle = positionner.getBoundsPercent();
         }

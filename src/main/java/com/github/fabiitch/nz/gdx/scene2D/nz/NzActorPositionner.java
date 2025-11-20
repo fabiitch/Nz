@@ -42,15 +42,15 @@ public class NzActorPositionner {
     }
 
 
-    public Vector2 getPositionFix() {
-        return getPositionFix(new Vector2(), this.centerActor);
+    public Vector2 getPos() {
+        return getPos(new Vector2(), this.centerActor);
     }
 
-    public Vector2 getPositionFix(Vector2 pos) {
-        return getPositionFix(pos, this.centerActor);
+    public Vector2 getPos(Vector2 pos) {
+        return getPos(pos, this.centerActor);
     }
 
-    public Vector2 getPositionFix(Vector2 result, boolean centerActor) {
+    public Vector2 getPos(Vector2 result, boolean centerActor) {
         if (centerActor) {
             return result.set(actor.getX() + actor.getWidth() / 2, actor.getY() + actor.getHeight() / 2);
         } else {
@@ -58,12 +58,12 @@ public class NzActorPositionner {
         }
     }
 
-    public Vector2 getPositionPercent() {
-        return getPositionPercent(new Vector2(), this.centerActor);
+    public Vector2 getPosPercent() {
+        return getPosPercent(new Vector2(), this.centerActor);
     }
 
-    public Vector2 getPositionPercent(Vector2 result, boolean centerActor) {
-        Vector2 positionFix = getPositionFix(tmp, centerActor);
+    public Vector2 getPosPercent(Vector2 result, boolean centerActor) {
+        Vector2 positionFix = getPos(tmp, centerActor);
         return result.set(Percentage.percentage(positionFix.x, getParentWidth()), Percentage.percentage(positionFix.y, getParentHeight()));
     }
 
@@ -98,7 +98,7 @@ public class NzActorPositionner {
     public Rectangle getBoundsPercent(boolean centerActor) {
         Rectangle rect = new Rectangle();
 
-        Vector2 positionPercent = getPositionPercent(tmp, centerActor);
+        Vector2 positionPercent = getPosPercent(tmp, centerActor);
         rect.x = positionPercent.x;
         rect.y = positionPercent.y;
 
@@ -108,14 +108,14 @@ public class NzActorPositionner {
         return rect;
     }
 
-    public Rectangle getBoundsFix() {
-        return getBoundsFix(this.centerActor);
+    public Rectangle getBounds() {
+        return getBounds(this.centerActor);
     }
 
-    public Rectangle getBoundsFix(boolean centerActor) {
+    public Rectangle getBounds(boolean centerActor) {
         Rectangle rect = new Rectangle();
 
-        Vector2 positionPercent = getPositionFix(tmp, centerActor);
+        Vector2 positionPercent = getPos(tmp, centerActor);
         rect.x = positionPercent.x;
         rect.y = positionPercent.y;
 
@@ -131,7 +131,7 @@ public class NzActorPositionner {
     }
 
 
-    public NzActorPositionner setPositionFix(float x, float y) {
+    public NzActorPositionner setPosition(float x, float y) {
         if (centerActor) {
             StagePlacementUtils.placeCenter(actor, x, y);
         } else {
@@ -141,8 +141,8 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setPositionFix(Vector2 pos) {
-        setPositionFix(pos.x, pos.y);
+    public NzActorPositionner setPosition(Vector2 pos) {
+        setPosition(pos.x, pos.y);
         return this;
     }
 
@@ -162,12 +162,12 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setSizeFix(float witdh, float height) {
+    public NzActorPositionner setSize(float witdh, float height) {
         actor.setSize(witdh, height);
         return this;
     }
 
-    public NzActorPositionner setSizeFix(float size) {
+    public NzActorPositionner setSize(float size) {
         actor.setSize(size, size);
         return this;
     }
@@ -185,35 +185,9 @@ public class NzActorPositionner {
     }
 
 
-    public NzActorPositionner setBoundsFix(Rectangle bounds) {
+    public NzActorPositionner setBounds(Rectangle bounds) {
         actor.setSize(bounds.width, bounds.height);
-        setPositionFix(bounds.x, bounds.y);
-        return this;
-    }
-
-    public NzActorPositionner setSizeWidthPercent(float percentW, float percentH) {
-        actor.setWidth(Percentage.value(percentW, stage.getWidth()));
-        actor.setHeight(Percentage.value(percentH, stage.getHeight()));
-        return this;
-    }
-
-    public NzActorPositionner setSizeWidthPercent(float percentWitdh) {
-        float value = Percentage.value(percentWitdh, stage.getWidth());
-        actor.setWidth(value);
-        actor.setHeight(value);
-        return this;
-    }
-
-    public NzActorPositionner setSizeHeightPercent(float percentHeight) {
-        float value = Percentage.value(percentHeight, stage.getHeight());
-        actor.setWidth(value);
-        actor.setHeight(value);
-        return this;
-    }
-
-    public NzActorPositionner setSizeHeightPercent(float percentW, float percentH) {
-        actor.setWidth(Percentage.value(percentW, getParentHeight()));
-        actor.setHeight(Percentage.value(percentH, getParentHeight()));
+        setPosition(bounds.x, bounds.y);
         return this;
     }
 
@@ -243,12 +217,12 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setXFix(float x) {
+    public NzActorPositionner setX(float x) {
         actor.setX(x);
         return this;
     }
 
-    public NzActorPositionner setYFix(float y) {
+    public NzActorPositionner setY(float y) {
         actor.setY(y);
         return this;
     }
@@ -264,12 +238,12 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setWidthFix(float widthFix) {
+    public NzActorPositionner setWidth(float widthFix) {
         actor.setWidth(widthFix);
         return this;
     }
 
-    public NzActorPositionner setHeightFix(float heightFix) {
+    public NzActorPositionner setHeight(float heightFix) {
         actor.setHeight(heightFix);
         return this;
     }
@@ -277,12 +251,12 @@ public class NzActorPositionner {
     public NzActorPositionner squareMinPercent(float percentWidth, float percentHeight) {
         float valueWidth = Percentage.value(percentWidth, getParentWidth());
         float valueHeight = Percentage.value(percentHeight, getParentHeight());
-        return squareFix(Math.min(valueWidth, valueHeight));
+        return square(Math.min(valueWidth, valueHeight));
     }
 
-    public NzActorPositionner squareFix(float sizeFix) {
-        setWidthFix(sizeFix);
-        setHeightFix(sizeFix);
+    public NzActorPositionner square(float sizeFix) {
+        setWidth(sizeFix);
+        setHeight(sizeFix);
         return this;
     }
 
@@ -339,18 +313,18 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner addXFix(float x) {
+    public NzActorPositionner addX(float x) {
         actor.setX(actor.getX() + x);
         return this;
     }
 
-    public NzActorPositionner addYFix(float y) {
+    public NzActorPositionner addY(float y) {
         actor.setY(actor.getY() + y);
         return this;
     }
 
-    public NzActorPositionner addFix(float x, float y) {
-        return addXFix(x).addYFix(y);
+    public NzActorPositionner add(float x, float y) {
+        return addX(x).addY(y);
     }
 
     public NzActorPositionner addXPercent(float percent) {
@@ -412,9 +386,9 @@ public class NzActorPositionner {
         return centerY(50);
     }
 
-    public NzActorPositionner copy(Actor actor) {
-        setSizeFix(actor.getWidth(), actor.getHeight());
-        setPositionFix(actor.getX(), actor.getY());
+    public NzActorPositionner copyBounds(Actor actor) {
+        setSize(actor.getWidth(), actor.getHeight());
+        setPosition(actor.getX(), actor.getY());
         return this;
     }
 
@@ -444,8 +418,8 @@ public class NzActorPositionner {
         this.centerActor = value.isCenter();
         Rectangle bounds = value.getBounds();
         if (value.getType() == NzPosType.Fix) {
-            setPositionFix(bounds.x, bounds.y);
-            setSizeFix(bounds.width, bounds.height);
+            setPosition(bounds.x, bounds.y);
+            setSize(bounds.width, bounds.height);
         } else {
             setSizePercent(bounds.width, bounds.height);
             setPositionPercent(bounds.x, bounds.y);
