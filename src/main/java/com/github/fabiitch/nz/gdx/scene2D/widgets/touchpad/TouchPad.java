@@ -37,13 +37,13 @@ public abstract class TouchPad {
     private void init(TouchPadConfig config) {
         imageBase = new Image(config.getTextureBase());
         NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
-        positionner.setSizeFix(config.getSizeBase()).setPositionFix(config.getPosInactive());
-        positionner.getPositionFix(posBase);
+        positionner.setSize(config.getSizeBase()).setPosition(config.getPosInactive());
+        positionner.getPos(posBase);
         nzStage.addActor(imageBase);
 
         imageKnob = new Image(config.getTextureKnob());
         positionner = nzStage.getPositionner(imageKnob, true);
-        positionner.setSizeFix(config.getSizeKnob()).setPositionFix(config.getPosInactive());
+        positionner.setSize(config.getSizeKnob()).setPosition(config.getPosInactive());
         nzStage.addActor(imageKnob);
         touchUp();
     }
@@ -71,8 +71,8 @@ public abstract class TouchPad {
     public void resetPosition() {
         direction.setZero();
         intensity = 0;
-        nzStage.getPositionner(imageBase, true).setPositionFix(config.getPosInactive());
-        nzStage.getPositionner(imageKnob, true).setPositionFix(config.getPosInactive());
+        nzStage.getPositionner(imageBase, true).setPosition(config.getPosInactive());
+        nzStage.getPositionner(imageKnob, true).setPosition(config.getPosInactive());
     }
 
     public boolean touchDown(float x, float y) {
@@ -82,11 +82,11 @@ public abstract class TouchPad {
                 return false;
         } else {
             NzActorPositionner positionner = nzStage.getPositionner(imageBase, true);
-            positionner.setPositionFix(x, y);
+            positionner.setPosition(x, y);
         }
         pressed();
 
-        nzStage.getPositionner(imageBase, true).getPositionFix(posBase);
+        nzStage.getPositionner(imageBase, true).getPos(posBase);
         touchDragged(x, y);
         return true;
     }
@@ -95,17 +95,17 @@ public abstract class TouchPad {
         if (!pressed)
             return;
         NzActorPositionner positionner = nzStage.getPositionner(imageKnob, true);
-        positionner.setPositionFix(x, y);
-        positionner.getPositionFix(posKnob);
+        positionner.setPosition(x, y);
+        positionner.getPos(posKnob);
         float dstToBase = posKnob.dst(posBase);
         if (dstToBase > config.getSizeBase() / 2) {
             Vector2 directionTo = V.directionTo(posKnob, posBase, internalV2);
             if (config.isFixedOnDrag()) {
                 posKnob.set(posBase).add(directionTo.scl(config.getSizeBase() / 2));
-                nzStage.getPositionner(imageKnob, true).setPositionFix(posKnob);
+                nzStage.getPositionner(imageKnob, true).setPosition(posKnob);
             } else {
                 posBase.add(directionTo.scl(dstToBase - config.getSizeBase() / 2));
-                nzStage.getPositionner(imageBase, true).setPositionFix(posBase);
+                nzStage.getPositionner(imageBase, true).setPosition(posBase);
             }
         }
         this.updateDirForce();
