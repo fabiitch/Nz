@@ -222,14 +222,18 @@ public class NzActorPositionner {
         return this;
     }
 
-    public NzActorPositionner setSizePercent(float percentWitdh, float percentHeight) {
-        setWidthPercent(percentWitdh);
+    public NzActorPositionner setSizePercent(float percentWidth, float percentHeight) {
+        setWidthPercent(percentWidth);
         setHeightPercent(percentHeight);
         return this;
     }
 
-    public NzActorPositionner setWidthPercent(float percentWitdh) {
-        actor.setWidth(Percentage.value(percentWitdh, getParentWidth()));
+    public NzActorPositionner setSizePercent(Vector2 sizePercent) {
+        return setSizePercent(sizePercent.x, sizePercent.y);
+    }
+
+    public NzActorPositionner setWidthPercent(float percentWidth) {
+        actor.setWidth(Percentage.value(percentWidth, getParentWidth()));
         return this;
     }
 
