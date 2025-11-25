@@ -1,5 +1,6 @@
 package com.github.fabiitch.nz.java.file;
 
+import com.nz.nzj.file.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

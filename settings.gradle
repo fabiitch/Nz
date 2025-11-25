@@ -1,0 +1,2 @@
+include 'Nz-j'
+project(":Nz-j").projectDir = file("../Nz-j")
