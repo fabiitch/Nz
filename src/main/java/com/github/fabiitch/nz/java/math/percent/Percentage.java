@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Percentage {
 
+    public static final int ZERO = 0;
+    public static final int HUNDRED = 100;
+
     private Percentage() {
 
     }
@@ -19,6 +22,10 @@ public class Percentage {
         return part / total * 100;
     }
 
+    public static int percentageInt(float part, float total) {
+        return (int) (part / total * 100);
+    }
+
     public static float alpha(float part, float total) {
         return part / total;
     }
@@ -31,6 +38,18 @@ public class Percentage {
         result.x = value(percent.x, total);
         result.y = value(percent.y, total);
         return result;
+    }
+
+    public static float getPercentDiff(float a, float b) {
+        if (b == 0) {
+            if (a == 0) return 0;
+            return 100; // a > 0, b = 0 → +100%
+        }
+        return Percentage.percentage(a - b, b);
+    }
+
+    public static int getPercentDiffInt(float a, float b) {
+        return (int) getPercentDiff(a, b);
     }
 
     public static float addPercentage(float percent, float total) {
