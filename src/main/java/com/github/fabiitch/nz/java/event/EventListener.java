@@ -1,5 +1,7 @@
 package com.github.fabiitch.nz.java.event;
+
 @FunctionalInterface
-public interface Listener<T> {
-    void onEvent(T t);
+public interface EventListener {
+
+    void onEvent();
 }
