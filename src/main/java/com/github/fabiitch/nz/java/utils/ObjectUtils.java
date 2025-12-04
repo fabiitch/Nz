@@ -4,6 +4,13 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ObjectUtils {
+    public boolean oneNull(Object... objects) {
+        for (Object object : objects) {
+            if (object == null)
+                return true;
+        }
+        return false;
+    }
 
     public boolean allNotNull(Object... objects) {
         for (Object object : objects) {
