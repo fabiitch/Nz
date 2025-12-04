@@ -22,23 +22,27 @@ public class ColorUtils {
     }
 
     public static Color getGradientColor(
-            double value,
-            double min,
-            double max,
+            float value,
+            float min,
+            float max,
             Color startColor,
             Color endColor) {
 
         if (max == min) return startColor;
 
         // Clamp value
-        double ratio = (value - min) / (max - min);
-        ratio = Math.max(0.0, Math.min(1.0, ratio));
+        float ratio = (value - min) / (max - min);
+        ratio = Math.max(0.0f, Math.min(1.0f, ratio));
 
-        int r = (int) (startColor.r   + ratio * (endColor.r   - startColor.r));
-        int g = (int) (startColor.g + ratio * (endColor.g - startColor.g));
-        int b = (int) (startColor.b  + ratio * (endColor.b  - startColor.b));
-
-        return new Color(r, g, b, 1);
+        return lerp(startColor, endColor, ratio);
+    }
+    public static Color lerp(Color from, Color to, float t) {
+        t = Math.max(0f, Math.min(1f, t)); // clamp
+        float r = from.r + (to.r - from.r) * t;
+        float g = from.g + (to.g - from.g) * t;
+        float b = from.b + (to.b - from.b) * t;
+        float a = from.a + (to.a - from.a) * t;
+        return new Color(r, g, b, a);
     }
 
 }

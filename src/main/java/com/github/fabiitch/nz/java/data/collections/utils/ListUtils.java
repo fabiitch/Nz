@@ -33,11 +33,8 @@ public class ListUtils {
         return result;
     }
 
-
-    public static <T> List<T> asList(T... values) {
-        Arrays.asList(values);
-        List<T> list = new ArrayList<>(Arrays.asList(values));
-        return list;
+    public static <T> List<T> toArrayList(T... values) {
+        return new ArrayList<>(Arrays.asList(values));
     }
 
     public static boolean isEmpty(List<?> list) {
