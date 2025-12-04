@@ -1,5 +1,6 @@
 package com.github.fabiitch.nz.java.data.collections.utils;
 
+import com.github.fabiitch.nz.java.utils.ObjectUtils;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
@@ -8,7 +9,18 @@ import java.util.List;
 
 @UtilityClass
 public class ListUtils {
-
+    public static <T> boolean allEquals(List<T> listA,  List<T> listB ) {
+        if(ObjectUtils.oneNull(listA, listB)){
+            return false;
+        }
+        if(listA.size() != listB.size())
+            return false;
+      for(int i = 0; i < listA.size(); i++){
+          if(!listA.get(i).equals(listB.get(i)))
+            return false;
+      }
+        return true;
+    }
     public static <T> T getFirst(List<T> list) {
         if (list.isEmpty())
             return null;
