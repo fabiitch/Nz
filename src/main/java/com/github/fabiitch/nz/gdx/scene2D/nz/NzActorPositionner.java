@@ -12,21 +12,17 @@ import com.github.fabiitch.nz.gdx.scene2D.utils.StageUtils;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 
 public class NzActorPositionner {
-    private final NzStage stage;
-    private final NzStagePosSaver posSaver;
-
     private Actor actor;
+    private Actor fakeActor = new Actor();
     private boolean centerActor;
 
     private final Vector2 tmp = new Vector2();
 
-    public NzActorPositionner(NzStage stage) {
-        this.stage = stage;
-        this.posSaver = stage.getPosSaver();
+    public NzActorPositionner() {
     }
 
     public NzActorPositionner giveActor(Actor actor, boolean centerActor) {
-        this.actor = actor;
+        this.actor = actor != null ? actor : fakeActor;
         this.centerActor = centerActor;
         return this;
     }
@@ -68,11 +64,11 @@ public class NzActorPositionner {
     }
 
     private float getParentWidth() {
-        return actor.getParent() != null ? actor.getParent().getWidth() : stage.getWidth();
+        return actor.getParent() != null ? actor.getParent().getWidth() : 0;
     }
 
     private float getParentHeight() {
-        return actor.getParent() != null ? actor.getParent().getHeight() : stage.getHeight();
+        return actor.getParent() != null ? actor.getParent().getHeight() : 0;
     }
 
     public float getWidthPercent() {
@@ -123,11 +119,6 @@ public class NzActorPositionner {
         rect.width = sizePercent.x;
         rect.height = sizePercent.y;
         return rect;
-    }
-
-    public NzActorPositionner addActor() {
-        stage.addActor(actor);
-        return this;
     }
 
 
@@ -425,16 +416,6 @@ public class NzActorPositionner {
             setPositionPercent(bounds.x, bounds.y);
         }
         return this;
-    }
-
-    public NzActorPositionner save() {
-        posSaver.save(actor);
-        return this;
-    }
-
-    public void update() {
-        posSaver.saveOnly(actor);
-        posSaver.update(actor);
     }
 
     public NzActorPositionner fitChildrenSize() {

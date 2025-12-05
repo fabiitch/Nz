@@ -30,7 +30,7 @@ public class NzStage extends Stage {
         super(viewport, batch);
         this.getRoot().setSize(viewport.getWorldWidth(), viewport.getWorldHeight());
         this.posSaver = new NzStagePosSaver(this);
-        this.nzPositionner = new NzActorPositionner(this);
+        this.nzPositionner = new NzActorPositionner();
     }
 
     public NzStage() {
@@ -46,16 +46,6 @@ public class NzStage extends Stage {
         this(new ScreenViewport(), batch);
     }
 
-    public NzActorPositionner getNewPositionner(Actor actor, boolean center) {
-        NzActorPositionner positionner = new NzActorPositionner(this);
-        positionner.giveActor(actor, center);
-        return positionner;
-    }
-
-    public NzActorPositionner getNewPositionner(Actor actor) {
-        return getNewPositionner(actor, true);
-    }
-
     public NzActorPositionner getPositionner(Actor actor) {
         nzPositionner.giveActor(actor, true);
         return nzPositionner;
@@ -69,8 +59,8 @@ public class NzStage extends Stage {
     }
 
     public NzActorPositionner add(Actor actor, boolean center) {
-        getPositionner(actor, center).addActor();
-        return nzPositionner;
+        addActor(actor);
+        return getPositionner(actor, center);
     }
 
     public float getPosX(float percent) {
@@ -118,40 +108,10 @@ public class NzStage extends Stage {
     public void resize(int width, int height) {
         if (width == 0 || height == 0)
             return;
-
         this.getViewport().update(width, height, true);
         Viewport viewport = getViewport();
         this.getRoot().setSize(viewport.getWorldWidth(), viewport.getWorldHeight());
-
-        //        resizeAllActors(width, height);
-        //        posSaver.repack();
-    }
-
-    public void savePos() {
-        posSaver.save(this.getRoot());
     }
 
 
-    private void resizeAllActors(int width, int height) {
-        Array<Actor> actors = getActors();
-        float oldWidth = this.getWidth();
-        float oldheight = this.getHeight();
-
-        float percentWitdh = Percentage.percentage(oldWidth, width);
-        float percentHeight = Percentage.percentage(oldheight, height);
-
-        for (Actor actor : actors) {
-            actor.setWidth(actor.getWidth() / percentWitdh * 100);
-            actor.setHeight(actor.getHeight() / percentHeight * 100);
-
-            actor.setX(actor.getX() / percentWitdh * 100);
-            actor.setY(actor.getY() / percentHeight * 100);
-        }
-    }
-
-    public void applySizePercent(float width, float height, Actor... actors) {
-        for (Actor actor : actors) {
-            getPositionner(actor).setSizePercent(width, height);
-        }
-    }
 }
