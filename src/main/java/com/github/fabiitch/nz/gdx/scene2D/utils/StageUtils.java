@@ -16,7 +16,7 @@ public class StageUtils {
     private static final Rectangle tmpRect = new Rectangle();
 
     public static void debugPos(Actor actor) {
-        debugPos(actor, actor.getName());
+        debugPos(actor, actor.getName() != null ? actor.getName() : actor.getClass().getSimpleName());
     }
 
     public static void debugPos(Actor actor, String name) {
