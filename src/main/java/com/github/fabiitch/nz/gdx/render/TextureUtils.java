@@ -56,17 +56,21 @@ public class TextureUtils {
     }
 
     public static Texture screenshotActor(Actor actor, Stage stage) {
+        return screenshotActor(actor, stage, null);
+    }
+
+    public static Texture screenshotActor(Actor actor, Stage stage, Texture reuse) {
         Viewport viewport = stage.getViewport();
         Camera camera = stage.getCamera();
 
-        // 1) Coins en coordonnées STAGE (monde)
+        // 1) Convertir les coordonnées ACTOR -> STAGE
         Vector2 blStage = new Vector2(0, 0);
         actor.localToStageCoordinates(blStage);
 
         Vector2 trStage = new Vector2(actor.getWidth(), actor.getHeight());
         actor.localToStageCoordinates(trStage);
 
-        // 2) Projection en coordonnées ECRAN (pixels)
+        // 2) Projeter en coordonnées ECRAN
         Vector3 blScreen = new Vector3(blStage.x, blStage.y, 0);
         Vector3 trScreen = new Vector3(trStage.x, trStage.y, 0);
 
@@ -90,20 +94,36 @@ public class TextureUtils {
         int w = Math.max(1, Math.round(Math.abs(trScreen.x - blScreen.x)));
         int h = Math.max(1, Math.round(Math.abs(trScreen.y - blScreen.y)));
 
-        // 3) Flush du batch AVANT readPixels
-        Batch batch = stage.getBatch();
-        batch.flush();
+        // 3) FLUSH du batch avant le readPixels
+        stage.getBatch().flush();
 
-        // 4) Lire le framebuffer (origine bas-gauche)
+        // 4) Lire le framebuffer en Pixmap
         Pixmap pixmap = Pixmap.createFromFrameBuffer(x, y, w, h);
+
+        // 5) Flip vertical (obligatoire)
         Pixmap flipped = flipPixmapY(pixmap);
         pixmap.dispose();
 
-        // 5) Créer la texture
-        Texture texture = new Texture(flipped);
-        pixmap.dispose();
+        // 6) ===============================
+        //     REUSE DE LA TEXTURE SI POSSIBLE
+        //    ===============================
+        if (reuse != null) {
+            if (reuse.getWidth() == w && reuse.getHeight() == h) {
+                // Blit dans la texture existante
+                reuse.draw(flipped, 0, 0);
+                flipped.dispose();
+                return reuse;
+            }
 
-        return texture;
+            // Sinon → taille incompatible → recréer
+            reuse.dispose();
+        }
+
+        // 7) Créer une nouvelle texture
+        Texture tex = new Texture(flipped);
+        flipped.dispose();
+
+        return tex;
     }
 
     public static Pixmap flipPixmapY(Pixmap src) {
