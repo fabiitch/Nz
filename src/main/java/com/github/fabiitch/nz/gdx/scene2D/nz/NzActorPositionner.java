@@ -239,6 +239,10 @@ public class NzActorPositionner {
         return this;
     }
 
+    public NzActorPositionner squareMinPercent(float percentWidthHeight) {
+        return this.squareMinPercent(percentWidthHeight, percentWidthHeight);
+    }
+
     public NzActorPositionner squareMinPercent(float percentWidth, float percentHeight) {
         float valueWidth = Percentage.value(percentWidth, getParentWidth());
         float valueHeight = Percentage.value(percentHeight, getParentHeight());
