@@ -46,9 +46,6 @@ compileJava {
     // or higher if you expect anyone to build with Java 20 or higher.
     sourceCompatibility = 8
     targetCompatibility = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.release.set(8)
-    }
 }
 
 compileTestJava {
@@ -57,9 +54,6 @@ compileTestJava {
 	// including how NIO Buffers behave (which broke compatibility in Java 9).
     sourceCompatibility = 8
     targetCompatibility = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.release.set(8)
-    }
 }
 
 // JavaDocs will be published inside the docs/ folder, which you can easily put on GitHub Pages
