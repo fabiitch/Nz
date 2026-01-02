@@ -20,6 +20,10 @@ public class CountDown {
         return acc >= duration;
     }
 
+    public float getReast() {
+        return duration - acc;
+    }
+
     public boolean finish() {
         return acc >= duration;
     }
