@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class DTProfiler {
 
+    private String name;
+
     private final Array<Sample> samples = new Array<>(true, 256);
     private final float windowSeconds;
 
@@ -19,9 +21,13 @@ public class DTProfiler {
             return new Sample();
         }
     };
+    public DTProfiler(String name, float windowSeconds) {
+        this.name = name;
+        this.windowSeconds = windowSeconds;
+    }
 
     public DTProfiler(float windowSeconds) {
-        this.windowSeconds = windowSeconds;
+        this(null, windowSeconds);
     }
 
     public void begin() {
@@ -100,7 +106,7 @@ public class DTProfiler {
 
     @Override
     public String toString() {
-        return "[DTProfiler] "
+        return "[DTProfiler=" + name + "] "
                 + "avg=" + String.format("%.2f", getAvgMs()) + "ms"
                 + " p95=" + String.format("%.2f", getP95Ms()) + "ms"
                 + " p99=" + String.format("%.2f", getP99Ms()) + "ms"
