@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DefaultPool;
 import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.utils.ReflectionPool;
 import com.github.fabiitch.nz.gdx.debug.huddebug.HudDebug;
 import com.github.fabiitch.nz.gdx.debug.huddebug.internal.HudDebugPosition;
 
