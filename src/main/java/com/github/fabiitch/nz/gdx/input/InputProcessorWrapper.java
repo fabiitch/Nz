@@ -3,7 +3,6 @@ package com.github.fabiitch.nz.gdx.input;
 import com.badlogic.gdx.InputProcessor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
