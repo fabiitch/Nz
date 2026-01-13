@@ -2,7 +2,7 @@ package com.github.fabiitch.nz.java.event;
 
 import com.badlogic.gdx.utils.Array;
 
-public class MessageSenderThreadSafe<T> implements IMessageDispatcher<T> {
+public class MessageDispatcherTS<T> implements IMessageDispatcher<T> {
     private final Array<Listener<T>> listeners = new Array<>();
 
     @Override

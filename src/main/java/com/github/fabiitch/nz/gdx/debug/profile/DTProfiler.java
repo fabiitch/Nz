@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class DTProfiler {
 
-    private String name;
+    private final String name;
 
     private final Array<Sample> samples = new Array<>(true, 256);
     private final float windowSeconds;
