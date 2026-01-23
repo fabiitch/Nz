@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class DtLogProfiler {
 
-    private DTProfiler profiler;
-    private TimeLocker timeLocker;
+    private final DTProfiler profiler;
+    private final TimeLocker timeLocker;
 
     public DtLogProfiler(String name, float windowSeconds) {
         this.profiler = new DTProfiler(name, windowSeconds);

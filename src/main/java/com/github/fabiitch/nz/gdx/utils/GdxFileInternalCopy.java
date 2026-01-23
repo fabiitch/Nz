@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.Objects;
 
 @UtilityClass
-public final class GdxInternalCopy {
+public final class GdxFileInternalCopy {
 
     /**
      * Copy an INTERNAL folder/file (assets) to a real OS File location.
