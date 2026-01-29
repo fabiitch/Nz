@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DisposableContainer implements Disposable {
 
-    private ArrayList<Disposable> disposables = new ArrayList<>();
+    private final ArrayList<Disposable> disposables = new ArrayList<>();
 
     public void add(Disposable disposable) {
         disposables.add(disposable);
