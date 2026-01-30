@@ -19,10 +19,8 @@ public class DtLogProfiler {
         profiler.begin();
     }
 
-    public void end(float dt) {
+    public boolean endAndLog(float dt) {
         profiler.end();
-        if (timeLocker.isOpen(dt)) {
-            System.out.println(profiler);
-        }
+        return timeLocker.isOpen(dt);
     }
 }
