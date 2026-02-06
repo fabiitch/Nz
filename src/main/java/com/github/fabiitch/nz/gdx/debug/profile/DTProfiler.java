@@ -99,11 +99,6 @@ public class DTProfiler {
     public float getP95Ms() { return getPercentileMs(95); }
     public float getP99Ms() { return getPercentileMs(99); }
 
-    public int getFPS() {
-        float avg = getAvgMs();
-        return avg == 0f ? 0 : (int) (1000f / avg);
-    }
-
     @Override
     public String toString() {
         return "[DTProfiler=" + name + "] "
@@ -111,7 +106,6 @@ public class DTProfiler {
                 + " p95=" + String.format("%.2f", getP95Ms()) + "ms"
                 + " p99=" + String.format("%.2f", getP99Ms()) + "ms"
                 + " max=" + String.format("%.2f", getMaxMs()) + "ms"
-                + " FPS=" + getFPS()
                 + " samples=" + samples.size;
     }
 
