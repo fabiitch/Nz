@@ -20,4 +20,16 @@ public class GdxUtils {
     public static boolean isDesktop() {
         return !isMobile();
     }
+
+    public static String getHeapLog() {
+        Runtime rt = Runtime.getRuntime();
+        long total = rt.totalMemory();
+        long free = rt.freeMemory();
+        long used = total - free;
+        long max = rt.maxMemory();
+
+        return "Heap -> used=" + used / 1024 / 1024 + "MB"
+                + " / total=" + total / 1024 / 1024 + "MB"
+                + " / max=" + max / 1024 / 1024 + "MB";
+    }
 }
