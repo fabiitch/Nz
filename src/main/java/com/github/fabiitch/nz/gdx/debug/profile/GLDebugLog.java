@@ -15,6 +15,19 @@ public class GLDebugLog {
         glProfiler.reset();
     }
 
+    @Override
+    public String toString() {
+        return "GL2D["
+                + "drawCalls=" + glProfiler.getDrawCalls()
+                + ", texBindings=" + glProfiler.getTextureBindings()
+                + ", shaderSwitches=" + glProfiler.getShaderSwitches()
+                + ", vtx(total/max/min)="
+                + glProfiler.getVertexCount().total + "/"
+                + glProfiler.getVertexCount().max + "/"
+                + glProfiler.getVertexCount().min
+                + "]";
+    }
+
     public void log() {
         System.out.println("===== GL DEBUG =====");
         System.out.println("DrawCalls:        " + glProfiler.getDrawCalls());
