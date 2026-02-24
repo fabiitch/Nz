@@ -14,4 +14,8 @@ public class MultiplexerTS<T> {
     public void removeListener(T t) {
         listeners.remove(t);
     }
+
+    public void clear(){
+        listeners.clear();
+    }
 }
