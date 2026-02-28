@@ -100,7 +100,7 @@ public class V2 {
     }
 
     public static float[] toFloatArray(Array<Vector2> array) {
-        return toFloatArray(array.toArray(Vector2.class));
+        return toFloatArray(array.toArray());
     }
 
     public static float[] toFloatArray(Vector2[] array) {
