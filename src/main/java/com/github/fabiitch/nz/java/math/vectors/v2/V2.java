@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArraySupplier;
+import com.github.fabiitch.nz.java.data.collections.utils.ArrayUtils;
 
 /**
  * Static method for Vector2 using mathUtils (no jni)
@@ -100,7 +102,7 @@ public class V2 {
     }
 
     public static float[] toFloatArray(Array<Vector2> array) {
-        return toFloatArray(array.toArray());
+        return toFloatArray(ArrayUtils.toTab(array, Vector2.class));
     }
 
     public static float[] toFloatArray(Vector2[] array) {
