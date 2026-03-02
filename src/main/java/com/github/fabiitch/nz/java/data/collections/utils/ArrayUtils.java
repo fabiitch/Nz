@@ -81,6 +81,14 @@ public class ArrayUtils {
         }
         return true;
     }
+    public static <T> T[] toTab(Array<T> array, Class<T> type) {
+        @SuppressWarnings("unchecked")
+        T[] result = (T[]) java.lang.reflect.Array.newInstance(type, array.size);
+        for (int i = 0; i < array.size; i++) {
+            result[i] = array.get(i);
+        }
+        return result;
+    }
 
     public static <T> List<T> toList(Array<T> array) {
         List<T> list = new ArrayList<>(array.size);
