@@ -5,11 +5,9 @@ import lombok.Setter;
 
 public class DebounceAction {
 
-    @Getter
-    @Setter
-    private float timer;
+    private final float timer;
     private float accumulator;
-    public Runnable action;
+    public volatile Runnable action;
 
     public DebounceAction(float timer) {
         this.timer = timer;
