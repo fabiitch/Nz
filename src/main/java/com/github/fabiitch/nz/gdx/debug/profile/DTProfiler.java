@@ -30,10 +30,6 @@ public class DTProfiler {
         this(null, windowSeconds);
     }
 
-    public void begin() {
-        frameStart = System.nanoTime();
-    }
-
     public void end() {
         long now = System.nanoTime();
         float ms = (now - frameStart) / 1_000_000f;
@@ -49,6 +45,10 @@ public class DTProfiler {
             Sample old = samples.removeIndex(0);
             samplePool.free(old);
         }
+    }
+
+    public void begin() {
+        frameStart = System.nanoTime();
     }
 
     public float getAvgMs() {
