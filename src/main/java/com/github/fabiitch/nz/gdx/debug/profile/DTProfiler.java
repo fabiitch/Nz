@@ -9,13 +9,13 @@ public class DTProfiler {
 
     private final String name;
 
-    private final Array<Sample> samples = new Array<>(true, 256);
+    private final Array<Sample> samples = new Array<>(true, 512);
     private final float windowSeconds;
 
     private float[] sortBuffer = new float[0];
     private long frameStart;
 
-    private final Pool<Sample> samplePool = new Pool<Sample>(256) {
+    private final Pool<Sample> samplePool = new Pool<Sample>(512) {
         @Override
         protected Sample newObject() {
             return new Sample();
