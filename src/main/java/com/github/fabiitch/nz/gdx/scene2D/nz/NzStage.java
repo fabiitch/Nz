@@ -11,6 +11,7 @@ import com.github.fabiitch.nz.gdx.scene2D.nz.saver.NzStagePosSaver;
 import com.github.fabiitch.nz.java.math.percent.Percentage;
 import lombok.Getter;
 
+
 /**
  * {@link Stage} extended with percent placement
  * for scale with size of screen
