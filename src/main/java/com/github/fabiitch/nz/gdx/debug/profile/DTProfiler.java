@@ -4,23 +4,25 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class DTProfiler {
 
     private final String name;
-
-    private final Array<Sample> samples = new Array<>(true, 512);
     private final float windowSeconds;
 
-    private float[] sortBuffer = new float[0];
-    private long frameStart;
-
+    private final Array<Sample> samples = new Array<Sample>(true, 512);
     private final Pool<Sample> samplePool = new Pool<Sample>(512) {
         @Override
         protected Sample newObject() {
             return new Sample();
         }
     };
+
+    private float[] sortBuffer = new float[512];
+    private long frameStartNs;
+    private boolean running;
+
     public DTProfiler(String name, float windowSeconds) {
         this.name = name;
         this.windowSeconds = windowSeconds;
@@ -30,93 +32,222 @@ public class DTProfiler {
         this(null, windowSeconds);
     }
 
+    public void begin() {
+        frameStartNs = System.nanoTime();
+        running = true;
+    }
+
     public void end() {
-        long now = System.nanoTime();
-        float ms = (now - frameStart) / 1_000_000f;
+        if (!running) {
+            return;
+        }
 
-        Sample s = samplePool.obtain();
-        s.ms = ms;
-        s.time = now;
-        samples.add(s);
+        long nowNs = System.nanoTime();
+        float ms = (nowNs - frameStartNs) / 1_000_000f;
 
-        // purge fenêtre glissante
-        long minTime = now - (long) (windowSeconds * 1_000_000_000L);
-        while (samples.size > 0 && samples.first().time < minTime) {
-            Sample old = samples.removeIndex(0);
-            samplePool.free(old);
+        running = false;
+
+        Sample sample = samplePool.obtain();
+        sample.ms = ms;
+        sample.timeNs = nowNs;
+        samples.add(sample);
+
+        purgeOldSamples(nowNs);
+    }
+
+    private void purgeOldSamples(long nowNs) {
+        if (samples.size == 0) {
+            return;
+        }
+
+        long minTimeNs = nowNs - (long) (windowSeconds * 1_000_000_000L);
+
+        int removeCount = 0;
+        while (removeCount < samples.size && samples.get(removeCount).timeNs < minTimeNs) {
+            samplePool.free(samples.get(removeCount));
+            removeCount++;
+        }
+
+        if (removeCount > 0) {
+            samples.removeRange(0, removeCount - 1);
         }
     }
 
-    public void begin() {
-        frameStart = System.nanoTime();
+    public void clear() {
+        for (int i = 0; i < samples.size; i++) {
+            samplePool.free(samples.get(i));
+        }
+
+        samples.clear();
+        running = false;
+        frameStartNs = 0L;
+    }
+
+    public int getSampleCount() {
+        return samples.size;
     }
 
     public float getAvgMs() {
-        if (samples.size == 0) return 0f;
-        float sum = 0f;
-        for (int i = 0; i < samples.size; i++) {
-            sum += samples.get(i).ms;
-        }
-        return sum / samples.size;
+        return getStats().getAvgMs();
     }
 
     public float getMaxMs() {
-        float max = 0f;
-        for (int i = 0; i < samples.size; i++) {
-            float v = samples.get(i).ms;
-            if (v > max) max = v;
-        }
-        return max;
+        return getStats().getMaxMs();
     }
 
-    /** p en [0..100] */
-    public float getPercentileMs(int p) {
-        if (samples.size == 0) return 0f;
+    public float getP50Ms() {
+        return getStats().getP50Ms();
+    }
 
-        int pp = Math.max(0, Math.min(100, p));
+    public float getP95Ms() {
+        return getStats().getP95Ms();
+    }
+
+    public float getP99Ms() {
+        return getStats().getP99Ms();
+    }
+
+    public Stats getStats() {
         int n = samples.size;
 
-        if (sortBuffer.length < n) {
-            sortBuffer = new float[n];
+        if (n == 0) {
+            return Stats.empty();
         }
 
+        ensureSortBufferCapacity(n);
+
+        float sum = 0f;
+        float max = 0f;
+
         for (int i = 0; i < n; i++) {
-            sortBuffer[i] = samples.get(i).ms;
+            float ms = samples.get(i).ms;
+
+            sortBuffer[i] = ms;
+            sum += ms;
+
+            if (ms > max) {
+                max = ms;
+            }
         }
 
         Arrays.sort(sortBuffer, 0, n);
 
-        if (pp == 0) return sortBuffer[0];
-        if (pp == 100) return sortBuffer[n - 1];
-
-        int k = (int) Math.ceil((pp / 100.0) * n);
-        int idx = Math.max(0, Math.min(n - 1, k - 1));
-
-        return sortBuffer[idx];
+        return new Stats(
+                sum / n,
+                percentileFromSorted(sortBuffer, n, 50),
+                percentileFromSorted(sortBuffer, n, 95),
+                percentileFromSorted(sortBuffer, n, 99),
+                max,
+                n
+        );
     }
 
-    public float getP50Ms() { return getPercentileMs(50); }
-    public float getP95Ms() { return getPercentileMs(95); }
-    public float getP99Ms() { return getPercentileMs(99); }
+    private void ensureSortBufferCapacity(int requiredSize) {
+        if (sortBuffer.length >= requiredSize) {
+            return;
+        }
+
+        int newSize = sortBuffer.length;
+        while (newSize < requiredSize) {
+            newSize *= 2;
+        }
+
+        sortBuffer = new float[newSize];
+    }
+
+    private static float percentileFromSorted(float[] sorted, int n, int percentile) {
+        if (n == 0) {
+            return 0f;
+        }
+
+        int p = Math.max(0, Math.min(100, percentile));
+
+        if (p == 0) {
+            return sorted[0];
+        }
+
+        if (p == 100) {
+            return sorted[n - 1];
+        }
+
+        int k = (int) Math.ceil((p / 100.0) * n);
+        int index = Math.max(0, Math.min(n - 1, k - 1));
+
+        return sorted[index];
+    }
 
     @Override
     public String toString() {
+        Stats stats = getStats();
+
         return "[DTProfiler=" + name + "] "
-                + "avg=" + String.format("%.2f", getAvgMs()) + "ms"
-                + " p95=" + String.format("%.2f", getP95Ms()) + "ms"
-                + " p99=" + String.format("%.2f", getP99Ms()) + "ms"
-                + " max=" + String.format("%.2f", getMaxMs()) + "ms"
-                + " samples=" + samples.size;
+                + "avg=" + formatMs(stats.getAvgMs()) + "ms"
+                + " p50=" + formatMs(stats.getP50Ms()) + "ms"
+                + " p95=" + formatMs(stats.getP95Ms()) + "ms"
+                + " p99=" + formatMs(stats.getP99Ms()) + "ms"
+                + " max=" + formatMs(stats.getMaxMs()) + "ms"
+                + " samples=" + stats.getSamples();
+    }
+
+    private static String formatMs(float value) {
+        return String.format(Locale.US, "%.2f", value);
+    }
+
+    public static final class Stats {
+
+        private final float avgMs;
+        private final float p50Ms;
+        private final float p95Ms;
+        private final float p99Ms;
+        private final float maxMs;
+        private final int samples;
+
+        private Stats(float avgMs, float p50Ms, float p95Ms, float p99Ms, float maxMs, int samples) {
+            this.avgMs = avgMs;
+            this.p50Ms = p50Ms;
+            this.p95Ms = p95Ms;
+            this.p99Ms = p99Ms;
+            this.maxMs = maxMs;
+            this.samples = samples;
+        }
+
+        public static Stats empty() {
+            return new Stats(0f, 0f, 0f, 0f, 0f, 0);
+        }
+
+        public float getAvgMs() {
+            return avgMs;
+        }
+
+        public float getP50Ms() {
+            return p50Ms;
+        }
+
+        public float getP95Ms() {
+            return p95Ms;
+        }
+
+        public float getP99Ms() {
+            return p99Ms;
+        }
+
+        public float getMaxMs() {
+            return maxMs;
+        }
+
+        public int getSamples() {
+            return samples;
+        }
     }
 
     private static class Sample implements Pool.Poolable {
         float ms;
-        long time;
+        long timeNs;
 
         @Override
         public void reset() {
             ms = 0f;
-            time = 0L;
+            timeNs = 0L;
         }
     }
 }
