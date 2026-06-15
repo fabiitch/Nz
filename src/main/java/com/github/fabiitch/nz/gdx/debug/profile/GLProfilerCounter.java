@@ -30,20 +30,36 @@ public class GLProfilerCounter extends GLProfiler {
         textureBindingsCounter.put(getTextureBindings());
     }
 
+    public String getLog() {
+        return String.format(
+                "GLProfiler | " +
+                        "calls: avg=%d max=%d | " +
+                        "drawCalls: avg=%d max=%d | " +
+                        "shaderSwitches: avg=%d max=%d | " +
+                        "textureBindings: avg=%d max=%d | " +
+                        "vertices: avg=%f max=%f",
+                callsCounter.average, callsCounter.max,
+                drawCallsCounter.average, drawCallsCounter.max,
+                shaderSwitchesCounter.average, shaderSwitchesCounter.max,
+                textureBindingsCounter.average, textureBindingsCounter.max,
+                getVertexCount().average, getVertexCount().max
+        );
+    }
 
-    public float getCallsAverage() {
+
+    public int getCallsAverage() {
         return callsCounter.average;
     }
 
-    public float getDrawCallAverage() {
+    public int getDrawCallAverage() {
         return drawCallsCounter.average;
     }
 
-    public float getShaderSwitchesAverage() {
+    public int getShaderSwitchesAverage() {
         return shaderSwitchesCounter.average;
     }
 
-    public float getTextureBindingsAverage() {
+    public int getTextureBindingsAverage() {
         return textureBindingsCounter.average;
     }
 
