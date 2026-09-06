@@ -53,8 +53,19 @@ public class NzActorPositionner {
         }
     }
 
-    public Vector2 getPosPercent() {
-        return getPosPercent(new Vector2(), this.centerActor);
+    public Vector2 getPosPercent(Actor target, boolean centerActor) {
+        float x = target.getX();
+        float y = target.getY();
+
+        if (centerActor) {
+            x += target.getWidth() / 2f;
+            y += target.getHeight() / 2f;
+        }
+
+        return new Vector2(
+                Percentage.percentage(x, target.getParent().getWidth()),
+                Percentage.percentage(y, target.getParent().getHeight())
+        );
     }
 
     public Vector2 getPosPercent(Vector2 result, boolean centerActor) {
@@ -383,6 +394,12 @@ public class NzActorPositionner {
     public NzActorPositionner copyBounds(Actor actor) {
         setSize(actor.getWidth(), actor.getHeight());
         setPosition(actor.getX(), actor.getY());
+        return this;
+    }
+
+    public NzActorPositionner center(Actor target) {
+        Vector2 posPercent = getPosPercent(target, true);
+        center(posPercent.x, posPercent.y);
         return this;
     }
 
