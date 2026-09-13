@@ -1,2 +1,6 @@
+rootProject.name = 'Nz'
 include 'Nz-j'
 project(":Nz-j").projectDir = file("../Nz-j")
+
+include 'GdxUnit'
+project(':GdxUnit').projectDir = file('../GdxUnit')

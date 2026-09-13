@@ -18,7 +18,7 @@ def projectName = 'Nz'
 
 //Change this to whatever Maven Central group you might publish to,
 //which is probably not this one if you aren't Tommy Ettinger.
-group 'com.github.fabiitch'
+group 'com.fabiitch'
 version "$VERSION_NAME" // You can set the version in gradle.properties .
 
 [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
@@ -88,7 +88,7 @@ dependencies {
 // from `api` to `testImplementation` .
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
-    testImplementation 'com.github.fabiitch:GdxUnit:1.6'
+    testImplementation project(':GdxUnit')
     testImplementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
 
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
